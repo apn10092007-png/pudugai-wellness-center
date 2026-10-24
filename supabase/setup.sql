@@ -72,10 +72,14 @@ CREATE TABLE IF NOT EXISTS public.enquiries (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     customer_name TEXT NOT NULL,
     phone TEXT NOT NULL,
+    service TEXT,
     message TEXT NOT NULL,
     status TEXT NOT NULL DEFAULT 'new' CHECK (status IN ('new', 'contacted', 'completed')),
     created_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
+
+-- Ensure service column exists for any existing setups
+ALTER TABLE public.enquiries ADD COLUMN IF NOT EXISTS service TEXT;
 
 -- ==============================================================================
 -- 3. INDEXES FOR PERFORMANCE

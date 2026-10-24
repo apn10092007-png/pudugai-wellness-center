@@ -582,18 +582,18 @@ export const dataService = {
   // ==========================================
   // 5. ENQUIRIES API (Customer Contact Form)
   // ==========================================
-  async submitEnquiry({ customer_name, phone, message }) {
+  async submitEnquiry({ customer_name, phone, service, message }) {
     if (!customer_name?.trim()) throw new Error('Please enter your full name.');
     const cleanPhone = phone?.replace(/\D/g, '');
     if (!cleanPhone || cleanPhone.length < 10) {
       throw new Error('Please enter a valid 10-digit phone number.');
     }
-    if (!message?.trim()) throw new Error('Please share a brief message or your wellness goal.');
 
     const payload = {
       customer_name: customer_name.trim(),
       phone: phone.trim(),
-      message: message.trim(),
+      service: service?.trim() || null,
+      message: message?.trim() || 'Not provided',
       status: 'new'
     };
 
@@ -604,7 +604,24 @@ export const dataService = {
           .insert(payload)
           .select()
           .single();
-        if (error) throw error;
+
+        if (error) {
+          // If error is because 'service' column doesn't exist yet on an older table, fallback safely
+          if (error.message?.includes('service') || error.code === '42703') {
+            const fallbackPayload = {
+              customer_name: payload.customer_name,
+              phone: payload.phone,
+              message: payload.service
+                ? `[Service: ${payload.service}] ${payload.message}`
+                : payload.message,
+              status: 'new'
+            };
+            const retry = await supabase.from('enquiries').insert(fallbackPayload).select().single();
+            if (retry.error) throw retry.error;
+            return retry.data;
+          }
+          throw error;
+        }
         return data;
       } catch (err) {
         console.error('Supabase submitEnquiry error:', err);

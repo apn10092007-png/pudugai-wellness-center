@@ -139,6 +139,7 @@ export default function AdminEnquiriesPage() {
               <th>Status</th>
               <th>Customer Name</th>
               <th>Phone</th>
+              <th>Interested Service</th>
               <th>Message Snippet</th>
               <th>Date</th>
               <th style={{ textAlign: 'right' }}>Actions</th>
@@ -147,7 +148,7 @@ export default function AdminEnquiriesPage() {
           <tbody>
             {loading ? (
               <tr>
-                <td colSpan={6} style={{ textAlign: 'center', padding: '3rem' }}>
+                <td colSpan={7} style={{ textAlign: 'center', padding: '3rem' }}>
                   <div className="spinner" style={{ margin: '0 auto 0.5rem' }}></div>
                   <p>Loading enquiries...</p>
                 </td>
@@ -174,6 +175,11 @@ export default function AdminEnquiriesPage() {
                       <Phone size={13} />
                       <span>{enq.phone}</span>
                     </a>
+                  </td>
+                  <td>
+                    <span className="cat-pill" style={{ fontSize: '0.75rem' }}>
+                      {enq.service || 'General Consultation'}
+                    </span>
                   </td>
                   <td>
                     <p className="table-desc-truncate">{enq.message}</p>
@@ -212,7 +218,7 @@ export default function AdminEnquiriesPage() {
               ))
             ) : (
               <tr>
-                <td colSpan={6} style={{ textAlign: 'center', padding: '3.5rem' }}>
+                <td colSpan={7} style={{ textAlign: 'center', padding: '3.5rem' }}>
                   <p>No enquiries found for this filter.</p>
                 </td>
               </tr>
@@ -252,6 +258,13 @@ export default function AdminEnquiriesPage() {
               <div className="enquiry-field-card">
                 <span className="field-title">Customer Full Name</span>
                 <p className="field-val highlight">{selectedEnquiry.customer_name}</p>
+              </div>
+
+              <div className="enquiry-field-card">
+                <span className="field-title">Interested Service / Program</span>
+                <p className="field-val" style={{ color: 'var(--color-primary)', fontWeight: 600 }}>
+                  {selectedEnquiry.service || 'General Wellness Consultation'}
+                </p>
               </div>
 
               <div className="enquiry-field-card">

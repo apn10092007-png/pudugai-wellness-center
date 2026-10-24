@@ -8,12 +8,55 @@ import {
   Send,
   CheckCircle,
   AlertCircle,
-  ShieldCheck,
-  Clock
+  ShieldCheck
 } from 'lucide-react';
 import { InstagramIcon as Instagram } from '../components/Icons';
 import { dataService } from '../services/dataService';
+import { BUSINESS_CONFIG, getWhatsAppUrl } from '../config/business';
 import './ContactPage.css';
+
+// Verified PWC Service Categories for the dropdown
+const SERVICE_CATEGORIES = [
+  {
+    category: 'Weight Management',
+    services: ['Weight Loss', 'Weight Gain']
+  },
+  {
+    category: 'Health Screening',
+    services: [
+      'BMI (Body Mass Index)',
+      'BMR (Basal Metabolic Rate)',
+      'Body Fat Analysis',
+      'Metabolic Age',
+      'Skeletal Muscle Evaluation'
+    ]
+  },
+  {
+    category: 'Special Programs',
+    services: [
+      "Children's Health",
+      "Women's Health",
+      "Men's Health",
+      'Energy & Fitness',
+      'Eyes Health'
+    ]
+  },
+  {
+    category: 'Nutrition Guidance',
+    services: ['Personalized Diet Plans', 'Healthy Habits']
+  },
+  {
+    category: 'Wellness Solutions',
+    services: [
+      'Heart Health',
+      'Digestive Health',
+      'Bone & Joints',
+      'Skin & Hair',
+      'Immunity',
+      'Brain & Sleep'
+    ]
+  }
+];
 
 export default function ContactPage() {
   const [searchParams] = useSearchParams();
@@ -22,53 +65,115 @@ export default function ContactPage() {
   const [formData, setFormData] = useState({
     customer_name: '',
     phone: '',
-    message: initialService
-      ? `Hello Coach Pandian, I am interested in learning more about the "${initialService}" program.`
-      : ''
+    service: initialService || '',
+    message: ''
   });
 
+  const [fieldErrors, setFieldErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+  const [lastSubmittedData, setLastSubmittedData] = useState(null);
+
+  // Sync service if search params change
+  useEffect(() => {
+    if (initialService) {
+      setFormData((prev) => ({ ...prev, service: initialService }));
+    }
+  }, [initialService]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    if (fieldErrors[name]) {
+      setFieldErrors((prev) => ({ ...prev, [name]: '' }));
+    }
     if (errorMsg) setErrorMsg('');
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setErrorMsg('');
-
-    // Validation
+  // Form Validation
+  const validateForm = () => {
+    const errors = {};
     if (!formData.customer_name.trim()) {
-      setErrorMsg('Please enter your full name.');
-      return;
+      errors.customer_name = 'Please enter your full name.';
     }
 
     const cleanPhone = formData.phone.replace(/\D/g, '');
     if (!cleanPhone || cleanPhone.length < 10) {
-      setErrorMsg('Please enter a valid 10-digit phone number (e.g. 94434 43261).');
+      errors.phone = 'Please enter a valid 10-digit phone number.';
+    }
+
+    if (!formData.service.trim()) {
+      errors.service = 'Please select an interested service or consultation program.';
+    }
+
+    setFieldErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  // 1. WhatsApp Submission Flow (Opens prefilled WhatsApp message in a new tab)
+  const handleContinueToWhatsApp = async () => {
+    setErrorMsg('');
+    if (!validateForm()) {
+      setErrorMsg('Please complete all required fields before continuing to WhatsApp.');
       return;
     }
 
-    if (!formData.message.trim()) {
-      setErrorMsg('Please enter a brief note about your wellness goal.');
+    // Construct the WhatsApp link
+    const whatsappUrl = getWhatsAppUrl({
+      name: formData.customer_name,
+      phone: formData.phone,
+      service: formData.service,
+      message: formData.message,
+      recipientNumber: BUSINESS_CONFIG.whatsappNumber
+    });
+
+    // Optionally record enquiry to Supabase/dataService in the background
+    try {
+      await dataService.submitEnquiry({
+        customer_name: formData.customer_name,
+        phone: formData.phone,
+        service: formData.service,
+        message: formData.message?.trim() || 'Enquiry initiated via WhatsApp'
+      });
+    } catch (err) {
+      // Do not block customer or falsely claim save; WhatsApp will still open directly
+      console.warn('Background enquiry save note:', err.message);
+    }
+
+    // Open WhatsApp in a new tab
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+  };
+
+  // 2. Standard Web Submission Flow (Saves to Supabase with verification)
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setErrorMsg('');
+
+    if (!validateForm()) {
+      setErrorMsg('Please complete all required fields marked with *');
       return;
     }
 
     setSubmitting(true);
     try {
-      await dataService.submitEnquiry({
+      const saved = await dataService.submitEnquiry({
         customer_name: formData.customer_name,
         phone: formData.phone,
-        message: formData.message
+        service: formData.service,
+        message: formData.message?.trim() || 'Not provided'
       });
+
+      if (!saved || !saved.id) {
+        throw new Error('Database did not confirm enquiry submission. Please try again.');
+      }
+
+      setLastSubmittedData({ ...formData });
       setSuccess(true);
-      setFormData({ customer_name: '', phone: '', message: '' });
+      setFormData({ customer_name: '', phone: '', service: '', message: '' });
+      setFieldErrors({});
     } catch (err) {
-      setErrorMsg(err.message || 'Unable to submit enquiry. Please call or WhatsApp us directly.');
+      setErrorMsg(err.message || 'Unable to record enquiry. Please contact us directly via WhatsApp or phone call.');
     } finally {
       setSubmitting(false);
     }
@@ -103,23 +208,23 @@ export default function ContactPage() {
 
                 {/* Direct Action Buttons */}
                 <div className="action-buttons-stack">
-                  <a href="tel:9443443261" className="btn btn-primary btn-lg action-btn">
+                  <a href={`tel:${BUSINESS_CONFIG.phoneRaw}`} className="btn btn-primary btn-lg action-btn">
                     <Phone size={18} />
-                    <span>Call Coach: 94434 43261</span>
+                    <span>Call Coach: {BUSINESS_CONFIG.phoneDisplay}</span>
                   </a>
 
                   <a
-                    href="https://wa.me/919443443261"
+                    href={`https://wa.me/${BUSINESS_CONFIG.whatsappNumber}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn btn-whatsapp btn-lg action-btn"
                   >
                     <MessageSquare size={18} />
-                    <span>WhatsApp: 94434 43261</span>
+                    <span>WhatsApp: {BUSINESS_CONFIG.phoneDisplay}</span>
                   </a>
 
                   <a
-                    href="https://www.instagram.com/coach_pandian?exln=YmNsbjZkeXQ1dnc3"
+                    href={BUSINESS_CONFIG.instagram}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn btn-secondary btn-lg action-btn"
@@ -140,9 +245,8 @@ export default function ContactPage() {
                     <div className="address-lang-block">
                       <span className="address-lang-label">English:</span>
                       <p className="address-text en">
-                        Pudugai Wellness Center<br />
-                        E Main Rd, T Nagar, Buvaneswari Nagar,<br />
-                        Pudukkottai, Tamil Nadu 622001
+                        {BUSINESS_CONFIG.name}<br />
+                        {BUSINESS_CONFIG.addressEn}
                       </p>
                     </div>
 
@@ -150,13 +254,12 @@ export default function ContactPage() {
                       <span className="address-lang-label">தமிழ்:</span>
                       <p className="address-text ta">
                         புடுகை வெல்னஸ் சென்டர்<br />
-                        கிழக்கு முதன்மை சாலை, டி நகர்,<br />
-                        புவனேஸ்வரி நகர், புதுக்கோட்டை, தமிழ்நாடு 622001
+                        {BUSINESS_CONFIG.addressTa}
                       </p>
                     </div>
 
                     <a
-                      href="https://maps.app.goo.gl/JAdNVeq53M3PdrW1A"
+                      href={BUSINESS_CONFIG.googleMaps}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="btn btn-outline btn-sm maps-nav-btn"
@@ -169,14 +272,14 @@ export default function ContactPage() {
               </div>
             </div>
 
-            {/* Right: Enquiry Form */}
+            {/* Right: Enquiry Form with WhatsApp flow */}
             <div className="contact-form-column">
               <div className="form-card-box">
                 <div className="form-card-header">
                   <h2>Send an Assessment Enquiry</h2>
                   <p>
-                    Fill in your details below and Coach Thangapandian will review your enquiry and
-                    contact you directly.
+                    Share your goals below. You can send your enquiry directly to Coach Thangapandian
+                    via WhatsApp or submit through our web form.
                   </p>
                 </div>
 
@@ -185,17 +288,40 @@ export default function ContactPage() {
                     <div className="success-icon-wrap">
                       <CheckCircle size={40} />
                     </div>
-                    <h3>Enquiry Received Successfully!</h3>
+                    <h3>Enquiry Received & Verified!</h3>
                     <p>
                       Thank you for contacting Pudugai Wellness Center. Coach Thangapandian S will
                       review your request and get in touch with you shortly.
                     </p>
-                    <button
-                      className="btn btn-primary"
-                      onClick={() => setSuccess(false)}
-                    >
-                      <span>Submit Another Enquiry</span>
-                    </button>
+
+                    {lastSubmittedData && (
+                      <div className="enquiry-success-actions">
+                        <button
+                          type="button"
+                          className="btn btn-whatsapp"
+                          onClick={() => {
+                            const url = getWhatsAppUrl({
+                              name: lastSubmittedData.customer_name,
+                              phone: lastSubmittedData.phone,
+                              service: lastSubmittedData.service,
+                              message: lastSubmittedData.message,
+                              recipientNumber: BUSINESS_CONFIG.whatsappNumber
+                            });
+                            window.open(url, '_blank', 'noopener,noreferrer');
+                          }}
+                        >
+                          <MessageSquare size={16} />
+                          <span>Also Continue to WhatsApp ↗</span>
+                        </button>
+
+                        <button
+                          className="btn btn-secondary"
+                          onClick={() => setSuccess(false)}
+                        >
+                          <span>Submit Another Enquiry</span>
+                        </button>
+                      </div>
+                    )}
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="enquiry-form" noValidate>
@@ -206,9 +332,10 @@ export default function ContactPage() {
                       </div>
                     )}
 
+                    {/* 1. Full Name */}
                     <div className="form-group">
                       <label htmlFor="customer_name" className="form-label">
-                        Your Full Name *
+                        Full Name <span className="req-star">*</span>
                       </label>
                       <input
                         type="text"
@@ -217,14 +344,18 @@ export default function ContactPage() {
                         value={formData.customer_name}
                         onChange={handleChange}
                         placeholder="e.g. Ramesh Kumar"
-                        className="form-input"
+                        className={`form-input ${fieldErrors.customer_name ? 'input-error' : ''}`}
                         required
                       />
+                      {fieldErrors.customer_name && (
+                        <span className="field-error-text">{fieldErrors.customer_name}</span>
+                      )}
                     </div>
 
+                    {/* 2. Phone Number */}
                     <div className="form-group">
                       <label htmlFor="phone" className="form-label">
-                        Mobile Phone Number *
+                        Phone Number <span className="req-star">*</span>
                       </label>
                       <input
                         type="tel"
@@ -233,53 +364,107 @@ export default function ContactPage() {
                         value={formData.phone}
                         onChange={handleChange}
                         placeholder="e.g. 94434 43261 or 98765 43210"
-                        className="form-input"
+                        className={`form-input ${fieldErrors.phone ? 'input-error' : ''}`}
                         required
                       />
-                      <span className="form-help">
-                        We will reach out via call or WhatsApp.
-                      </span>
+                      {fieldErrors.phone ? (
+                        <span className="field-error-text">{fieldErrors.phone}</span>
+                      ) : (
+                        <span className="form-help">
+                          Coach Thangapandian will reach out via call or WhatsApp.
+                        </span>
+                      )}
                     </div>
 
+                    {/* 3. Interested Service */}
+                    <div className="form-group">
+                      <label htmlFor="service" className="form-label">
+                        Interested Service <span className="req-star">*</span>
+                      </label>
+                      <select
+                        id="service"
+                        name="service"
+                        value={formData.service}
+                        onChange={handleChange}
+                        className={`form-select ${fieldErrors.service ? 'input-error' : ''}`}
+                        required
+                      >
+                        <option value="">Select a wellness program or screening</option>
+                        <option value="General Wellness & Nutrition Consultation">
+                          General Wellness & Nutrition Consultation
+                        </option>
+                        {SERVICE_CATEGORIES.map((catGroup) => (
+                          <optgroup key={catGroup.category} label={`── ${catGroup.category} ──`}>
+                            {catGroup.services.map((item) => (
+                              <option key={item} value={item}>
+                                {item}
+                              </option>
+                            ))}
+                          </optgroup>
+                        ))}
+                      </select>
+                      {fieldErrors.service && (
+                        <span className="field-error-text">{fieldErrors.service}</span>
+                      )}
+                    </div>
+
+                    {/* 4. Message / Enquiry Details */}
                     <div className="form-group">
                       <label htmlFor="message" className="form-label">
-                        Your Wellness Goal or Message *
+                        Message / Enquiry Details
                       </label>
                       <textarea
                         id="message"
                         name="message"
                         value={formData.message}
                         onChange={handleChange}
-                        placeholder="Tell us what you'd like to achieve (e.g. Weight loss, BMI screening, diet plan, energy recovery)..."
+                        placeholder="Describe your goals (e.g., target weight loss, energy recovery, body fat screening, diet plan)..."
                         className="form-textarea"
-                        rows={4}
-                        required
+                        rows={3}
                       />
+                      <span className="form-help">
+                        Optional. If left blank, it will show as "Not provided" in WhatsApp.
+                      </span>
                     </div>
 
-                    <button
-                      type="submit"
-                      disabled={submitting}
-                      className="btn btn-primary btn-lg submit-btn"
-                    >
-                      {submitting ? (
-                        <>
-                          <div className="btn-spinner"></div>
-                          <span>Sending Enquiry...</span>
-                        </>
-                      ) : (
-                        <>
-                          <span>Submit Enquiry</span>
-                          <Send size={16} />
-                        </>
-                      )}
-                    </button>
+                    {/* Submit & WhatsApp Action Buttons */}
+                    <div className="form-actions-stack">
+                      {/* Primary WhatsApp Action Button */}
+                      <button
+                        type="button"
+                        onClick={handleContinueToWhatsApp}
+                        className="btn btn-whatsapp btn-lg whatsapp-enquiry-btn"
+                        title="Continue directly to WhatsApp with prefilled message"
+                      >
+                        <MessageSquare size={18} />
+                        <span>Continue to WhatsApp ↗</span>
+                      </button>
+
+                      {/* Web Form Submit Button */}
+                      <button
+                        type="submit"
+                        disabled={submitting}
+                        className="btn btn-outline btn-lg submit-btn"
+                      >
+                        {submitting ? (
+                          <>
+                            <div className="btn-spinner"></div>
+                            <span>Recording Web Enquiry...</span>
+                          </>
+                        ) : (
+                          <>
+                            <span>Submit Web Enquiry</span>
+                            <Send size={16} />
+                          </>
+                        )}
+                      </button>
+                    </div>
 
                     <div className="form-privacy-note">
                       <ShieldCheck size={16} className="privacy-icon" />
                       <span>
                         <strong>Privacy Notice:</strong> Your contact information is kept strictly
-                        confidential and is never shared or used for spam.
+                        confidential. We never share customer phone numbers or send spam.
                       </span>
                     </div>
                   </form>
