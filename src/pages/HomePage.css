@@ -1,0 +1,649 @@
+/* HomePage Styles */
+
+/* 1. Hero Section */
+.hero-section {
+  padding: 4.5rem 0 4rem;
+  background: linear-gradient(180deg, #f0f7f3 0%, #f8faf8 100%);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.hero-container {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 3.5rem;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.85rem;
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 1.25rem;
+}
+
+.badge-sparkle {
+  color: var(--color-teal);
+}
+
+.hero-title {
+  font-size: clamp(2.35rem, 4.5vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.15;
+  color: #0b2d1c;
+  letter-spacing: -0.025em;
+  margin-bottom: 1.25rem;
+}
+
+.highlight-text {
+  color: var(--color-primary);
+  position: relative;
+  display: inline-block;
+}
+
+.hero-description {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+  margin-bottom: 2rem;
+  max-width: 540px;
+}
+
+.hero-cta-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.25rem;
+  flex-wrap: wrap;
+}
+
+.hero-features-strip {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.925rem;
+  color: var(--color-text-main);
+  font-weight: 500;
+}
+
+.feature-icon {
+  color: var(--color-teal);
+}
+
+.hero-visual {
+  display: flex;
+  justify-content: center;
+}
+
+.hero-image-card {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  border: 4px solid #ffffff;
+}
+
+.hero-main-img {
+  width: 100%;
+  height: 480px;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-floating-badge {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  right: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1.15rem;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  box-shadow: var(--shadow-md);
+}
+
+.floating-badge-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.badge-title {
+  display: block;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.badge-sub {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--color-text-light);
+}
+
+/* 2. Intro & Pillars */
+.intro-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 3rem;
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+}
+
+.intro-badge {
+  display: inline-block;
+  color: var(--color-teal);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.75rem;
+}
+
+.intro-heading {
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1.25rem;
+}
+
+.intro-text {
+  max-width: 780px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin-bottom: 3rem;
+}
+
+.pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  text-align: left;
+}
+
+.pillar-card {
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1.75rem;
+}
+
+.pillar-icon-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+.pillar-icon-wrap.green {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.pillar-icon-wrap.teal {
+  background-color: var(--color-teal-light);
+  color: var(--color-teal);
+}
+
+.pillar-icon-wrap.amber {
+  background-color: var(--color-amber-light);
+  color: var(--color-amber);
+}
+
+.pillar-card h3 {
+  font-size: 1.15rem;
+  margin-bottom: 0.6rem;
+}
+
+.pillar-card p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+/* 3. Coach Preview */
+.coach-preview-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 3rem;
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  align-items: center;
+  gap: 3.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.coach-preview-img-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 340px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  border: 3px solid #ffffff;
+}
+
+.coach-preview-img {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  display: block;
+}
+
+.coach-avatar-placeholder {
+  width: 100%;
+  height: 380px;
+  background-color: var(--color-surface-alt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-light);
+}
+
+.coach-badge-overlay {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background-color: rgba(19, 78, 50, 0.9);
+  color: #ffffff;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.coach-name {
+  font-size: 2rem;
+  margin-bottom: 0.25rem;
+}
+
+.coach-role {
+  display: block;
+  color: var(--color-teal);
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 1.25rem;
+}
+
+.coach-bio-text {
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 1.75rem;
+}
+
+.coach-contact-pills {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.coach-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.4rem 0.85rem;
+  background-color: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  color: var(--color-text-main);
+  font-weight: 500;
+}
+
+.coach-pill:hover {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.coach-cta-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* 4. Services Grid */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+  margin-bottom: 2.5rem;
+}
+
+.service-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition-normal);
+}
+
+.service-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: #cbd5e1;
+}
+
+.service-category-tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-teal);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.65rem;
+}
+
+.service-card-title {
+  font-size: 1.25rem;
+  margin-bottom: 0.65rem;
+}
+
+.service-card-desc {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  flex: 1;
+  margin-bottom: 1.25rem;
+}
+
+.service-learn-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.service-learn-link:hover {
+  color: var(--color-primary-hover);
+  text-decoration: underline;
+}
+
+.services-footer-cta {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+/* 5. Stories Preview */
+.stories-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+}
+
+.story-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+}
+
+.story-card-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.story-card-body {
+  padding: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.story-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.35rem;
+}
+
+.story-client-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.story-lang-badge {
+  font-size: 0.72rem;
+  padding: 0.2rem 0.5rem;
+  background-color: var(--color-amber-light);
+  color: var(--color-amber);
+  border-radius: var(--radius-full);
+  font-weight: 700;
+}
+
+.story-duration {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+  color: var(--color-text-light);
+  margin-bottom: 0.75rem;
+}
+
+.story-title {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-text-main);
+}
+
+.story-text {
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.stories-empty-preview {
+  text-align: center;
+  background-color: var(--color-surface);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 3rem 1.5rem;
+  max-width: 580px;
+  margin: 0 auto;
+}
+
+.empty-icon {
+  color: var(--color-teal);
+  margin-bottom: 1rem;
+}
+
+.stories-empty-preview h3 {
+  margin-bottom: 0.5rem;
+}
+
+.stories-empty-preview p {
+  font-size: 0.925rem;
+  margin-bottom: 1.5rem;
+}
+
+/* 6. Journey */
+.journey-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.journey-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  position: relative;
+  box-shadow: var(--shadow-sm);
+}
+
+.journey-step-number {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: var(--color-border);
+  line-height: 1;
+}
+
+.journey-year {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-teal);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.journey-title {
+  font-size: 1.15rem;
+  margin-bottom: 0.65rem;
+}
+
+.journey-desc {
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+/* 7. CTA Banner */
+.cta-banner-section {
+  padding: 2rem 0 5rem;
+}
+
+.cta-banner-card {
+  background: linear-gradient(135deg, #134e32 0%, #0d3824 100%);
+  border-radius: var(--radius-lg);
+  padding: 4rem 3rem;
+  color: #ffffff;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+}
+
+.cta-banner-tag {
+  display: inline-block;
+  color: #86efac;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.75rem;
+}
+
+.cta-banner-title {
+  color: #ffffff;
+  font-size: clamp(1.85rem, 3.5vw, 2.5rem);
+  margin-bottom: 1rem;
+}
+
+.cta-banner-desc {
+  color: #cbd5e1;
+  font-size: 1.1rem;
+  max-width: 620px;
+  margin: 0 auto 2.25rem;
+  line-height: 1.65;
+}
+
+.cta-banner-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.cta-banner-buttons .btn-primary {
+  background-color: #ffffff;
+  color: var(--color-primary);
+}
+
+.cta-banner-buttons .btn-primary:hover {
+  background-color: #f1f5f9;
+}
+
+.cta-banner-buttons .btn-secondary {
+  background-color: transparent;
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.cta-banner-buttons .btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: #ffffff;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .hero-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .hero-description {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero-cta-group {
+    justify-content: center;
+  }
+  .hero-features-strip {
+    align-items: center;
+  }
+  .coach-preview-card {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .coach-preview-img-wrap {
+    margin: 0 auto;
+  }
+  .coach-contact-pills, .coach-cta-row {
+    justify-content: center;
+  }
+  .pillars-grid, .services-grid, .stories-grid, .journey-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .pillars-grid, .services-grid, .stories-grid, .journey-grid {
+    grid-template-columns: 1fr;
+  }
+  .intro-card, .coach-preview-card, .cta-banner-card {
+    padding: 1.75rem 1.25rem;
+  }
+}

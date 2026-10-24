@@ -1,0 +1,211 @@
+/* AdminSettingsPage Styles */
+
+.admin-settings-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.settings-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.settings-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.settings-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.card-icon {
+  color: var(--color-teal);
+  flex-shrink: 0;
+}
+
+.settings-card-header h2 {
+  font-size: 1.25rem;
+  margin-bottom: 0.2rem;
+}
+
+.settings-card-header span {
+  font-size: 0.8rem;
+  color: var(--color-text-light);
+}
+
+.status-indicator-box {
+  margin-bottom: 1.25rem;
+}
+
+.status-badge-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.status-badge-row.connected {
+  background-color: var(--color-success-bg);
+  color: var(--color-success);
+}
+
+.status-badge-row.demo {
+  background-color: var(--color-amber-light);
+  color: var(--color-amber);
+}
+
+.settings-card-text {
+  font-size: 0.925rem;
+  line-height: 1.65;
+  color: var(--color-text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.env-guide-box {
+  background-color: #1e293b;
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  color: #f8fafc;
+}
+
+.env-guide-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  font-size: 0.75rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.btn-copy-env {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background-color: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: #ffffff;
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.btn-copy-env:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+.env-code-block {
+  font-family: monospace;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: #38bdf8;
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+/* Checklist */
+.security-checklist {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.sec-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.sec-check {
+  color: var(--color-success);
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.sec-item strong {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--color-text-main);
+  margin-bottom: 0.2rem;
+}
+
+.sec-item p {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.sec-item code {
+  background-color: var(--color-surface-alt);
+  padding: 0.1rem 0.3rem;
+  border-radius: 4px;
+  font-size: 0.825rem;
+}
+
+/* Provisioning steps */
+.provisioning-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.prov-step-card {
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+}
+
+.step-num-pill {
+  display: inline-block;
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-full);
+  margin-bottom: 0.75rem;
+}
+
+.prov-step-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.prov-step-card p {
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.prov-step-card code {
+  background-color: #ffffff;
+  border: 1px solid var(--color-border);
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+}
+
+@media (max-width: 992px) {
+  .settings-grid, .provisioning-steps-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,149 @@
+/* AdminLoginPage Styles */
+
+.admin-login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f0f7f3 0%, #e2eee6 100%);
+  padding: 2rem 1.5rem;
+}
+
+.login-card-wrapper {
+  background-color: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 3rem;
+  max-width: 480px;
+  width: 100%;
+  box-shadow: var(--shadow-lg);
+}
+
+.login-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 2rem;
+}
+
+.login-logo-img {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+}
+
+.login-brand-title {
+  display: block;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.login-brand-sub {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--color-teal);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.login-header h2 {
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.login-header p {
+  font-size: 0.925rem;
+  margin-bottom: 2rem;
+}
+
+.login-alert-error {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background-color: var(--color-danger-bg);
+  color: var(--color-danger);
+  border: 1px solid #fca5a5;
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  margin-bottom: 1.5rem;
+}
+
+.input-with-icon {
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  left: 0.95rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-light);
+}
+
+.form-input.has-icon {
+  padding-left: 2.5rem;
+}
+
+.login-submit-btn {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+/* Guide box */
+.first-admin-guide-box {
+  background-color: var(--color-primary-subtle);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  margin-top: 2rem;
+  font-size: 0.825rem;
+  line-height: 1.55;
+  color: var(--color-text-muted);
+}
+
+.guide-header {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--color-primary);
+  margin-bottom: 0.35rem;
+}
+
+.guide-icon {
+  color: var(--color-teal);
+}
+
+.first-admin-guide-box code {
+  background-color: #ffffff;
+  padding: 0.15rem 0.35rem;
+  border-radius: 4px;
+  border: 1px solid var(--color-border);
+  font-family: monospace;
+}
+
+.login-footer-links {
+  text-align: center;
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+.back-to-site-link {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.back-to-site-link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 540px) {
+  .login-card-wrapper {
+    padding: 2rem 1.25rem;
+  }
+}

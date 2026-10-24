@@ -1,0 +1,175 @@
+/* AdminEnquiriesPage Styles */
+
+.admin-enquiries-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.status-tabs-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  overflow-x: auto;
+}
+
+.status-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: var(--radius-full);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.status-tab-btn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.status-tab-btn.active {
+  background-color: var(--color-primary);
+  color: #ffffff;
+  border-color: var(--color-primary);
+}
+
+.count-badge {
+  background-color: rgba(0, 0, 0, 0.08);
+  padding: 0.1rem 0.45rem;
+  border-radius: var(--radius-full);
+  font-size: 0.72rem;
+}
+
+.status-tab-btn.active .count-badge {
+  background-color: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+
+/* Status dropdown in table */
+.status-select {
+  padding: 0.25rem 0.65rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.status-select.new {
+  background-color: var(--color-amber-light);
+  color: var(--color-amber);
+  border-color: #fde68a;
+}
+
+.status-select.contacted {
+  background-color: var(--color-teal-light);
+  color: var(--color-teal);
+  border-color: #99f6e4;
+}
+
+.status-select.completed {
+  background-color: var(--color-success-bg);
+  color: var(--color-success);
+  border-color: #86efac;
+}
+
+.btn-action.whatsapp {
+  color: #16a34a;
+}
+
+.btn-action.whatsapp:hover {
+  background-color: #dcfce7;
+  border-color: #86efac;
+}
+
+.btn-action.view:hover {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+/* Modal details */
+.enquiry-modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.detail-status-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background-color: var(--color-bg);
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+}
+
+.detail-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.date-received {
+  margin-left: auto;
+  font-size: 0.8rem;
+  color: var(--color-text-light);
+}
+
+.enquiry-field-card {
+  background-color: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+}
+
+.field-title {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-light);
+  font-weight: 700;
+  margin-bottom: 0.35rem;
+}
+
+.field-val {
+  font-size: 1rem;
+  color: var(--color-text-main);
+}
+
+.field-val.highlight {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.phone-connect-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.connect-btn-group {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.field-val.message-box {
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}

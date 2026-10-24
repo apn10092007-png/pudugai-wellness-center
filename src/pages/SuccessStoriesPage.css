@@ -1,0 +1,227 @@
+/* SuccessStoriesPage Styles */
+
+.stories-header-section {
+  background-color: var(--color-primary-subtle);
+  border-bottom: 1px solid var(--color-border);
+  padding: 4rem 0 3rem;
+  text-align: center;
+}
+
+.stories-page-title {
+  font-size: clamp(2.25rem, 4vw, 3rem);
+  margin-bottom: 0.85rem;
+}
+
+.stories-page-lead {
+  font-size: 1.15rem;
+  color: var(--color-text-muted);
+  max-width: 660px;
+  margin: 0 auto;
+}
+
+.stories-disclaimer-wrap {
+  padding: 1.5rem 0 0;
+}
+
+/* Stories Cards Layout */
+.stories-grid-layout {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.story-full-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition-normal);
+}
+
+.story-full-card:hover {
+  transform: translateY(-2px);
+  border-color: #cbd5e1;
+  box-shadow: var(--shadow-md);
+}
+
+.story-photo-box {
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
+  background-color: var(--color-surface-alt);
+}
+
+.story-portrait {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.story-content-body {
+  padding: 2rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.story-meta-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.65rem;
+}
+
+.story-author-name {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.lang-pill {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-full);
+}
+
+.lang-pill.tamil {
+  background-color: var(--color-amber-light);
+  color: var(--color-amber);
+}
+
+.lang-pill.english {
+  background-color: var(--color-teal-light);
+  color: var(--color-teal);
+}
+
+.story-duration-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+  margin-bottom: 1rem;
+}
+
+.story-headline {
+  font-size: 1.15rem;
+  margin-bottom: 0.75rem;
+  color: var(--color-text-main);
+  line-height: 1.4;
+}
+
+.story-text-container p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+  white-space: pre-line;
+}
+
+/* Tamil font rendering styling */
+.tamil-font-scope {
+  font-family: 'Noto Sans Tamil', var(--font-family);
+}
+
+.tamil-font-scope .story-text-container p {
+  line-height: 1.8;
+  font-size: 1rem;
+}
+
+/* Empty State */
+.stories-empty-state-box {
+  background-color: var(--color-surface);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 4.5rem 2rem;
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.empty-state-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+}
+
+.empty-state-title {
+  font-size: 1.75rem;
+  margin-bottom: 0.85rem;
+}
+
+.empty-state-desc {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+  margin-bottom: 2.25rem;
+}
+
+.empty-state-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Encourage CTA */
+.stories-cta-section {
+  padding-top: 1rem;
+  padding-bottom: 5rem;
+}
+
+.stories-encourage-card {
+  background-color: var(--color-primary-subtle);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 3.5rem 2.5rem;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.encourage-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.25rem;
+}
+
+.stories-encourage-card h2 {
+  font-size: 1.85rem;
+  margin-bottom: 0.75rem;
+}
+
+.stories-encourage-card p {
+  font-size: 1.05rem;
+  max-width: 580px;
+  margin: 0 auto 2rem;
+}
+
+@media (max-width: 860px) {
+  .stories-grid-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .story-content-body {
+    padding: 1.5rem 1.25rem;
+  }
+  .stories-empty-state-box {
+    padding: 3rem 1.25rem;
+  }
+}
