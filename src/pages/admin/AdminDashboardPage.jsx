@@ -168,6 +168,11 @@ export default function AdminDashboardPage() {
                     <tr key={enq.id}>
                       <td>
                         <strong>{enq.customer_name}</strong>
+                        {enq.service && (
+                          <small style={{ display: 'block', color: 'var(--color-teal)', fontWeight: 600, fontSize: '0.75rem' }}>
+                            {enq.service}
+                          </small>
+                        )}
                       </td>
                       <td>
                         <a href={`tel:${enq.phone}`} className="phone-link">

@@ -599,11 +599,12 @@ export const dataService = {
 
     if (isSupabaseConfigured()) {
       try {
-        const { data, error } = await supabase
+        // PostgREST executes INSERT without RETURNING * when .select() is omitted.
+        // This avoids RLS 42501 errors because anonymous visitors have INSERT permission
+        // but not SELECT permission on the private enquiries table.
+        const { error } = await supabase
           .from('enquiries')
-          .insert(payload)
-          .select()
-          .single();
+          .insert(payload);
 
         if (error) {
           // If error is because 'service' column doesn't exist yet on an older table, fallback safely
@@ -616,13 +617,24 @@ export const dataService = {
                 : payload.message,
               status: 'new'
             };
-            const retry = await supabase.from('enquiries').insert(fallbackPayload).select().single();
+            const retry = await supabase.from('enquiries').insert(fallbackPayload);
             if (retry.error) throw retry.error;
-            return retry.data;
+          } else {
+            throw error;
           }
-          throw error;
         }
-        return data;
+
+        // Also persist to local storage for offline viewing and admin dashboard consistency
+        const current = getLocal(STORAGE_KEYS.ENQUIRIES, []);
+        const newEnquiry = {
+          ...payload,
+          id: 'enq-' + Date.now(),
+          created_at: new Date().toISOString()
+        };
+        current.unshift(newEnquiry);
+        setLocal(STORAGE_KEYS.ENQUIRIES, current);
+
+        return { success: true, ...newEnquiry };
       } catch (err) {
         console.error('Supabase submitEnquiry error:', err);
         throw new Error(err.message || 'Failed to submit enquiry. Please try again.');
@@ -638,17 +650,23 @@ export const dataService = {
     };
     current.unshift(newEnquiry);
     setLocal(STORAGE_KEYS.ENQUIRIES, current);
-    return newEnquiry;
+    return { success: true, ...newEnquiry };
   },
 
   async getAllEnquiries() {
     if (isSupabaseConfigured()) {
       try {
-        const { data, error } = await supabase
-          .from('enquiries')
-          .select('*')
-          .order('created_at', { ascending: false });
-        if (!error && data) return data;
+        const { data: sessionData } = await supabase.auth.getSession();
+        if (sessionData?.session) {
+          const { data, error } = await supabase
+            .from('enquiries')
+            .select('*')
+            .order('created_at', { ascending: false });
+          if (!error && data) {
+            setLocal(STORAGE_KEYS.ENQUIRIES, data);
+            return data;
+          }
+        }
       } catch (err) {
         console.error('Supabase getAllEnquiries error:', err);
       }

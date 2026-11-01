@@ -73,7 +73,6 @@ export default function ContactPage() {
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
-  const [lastSubmittedData, setLastSubmittedData] = useState(null);
 
   // Sync service if search params change
   useEffect(() => {
@@ -164,16 +163,15 @@ export default function ContactPage() {
         message: formData.message?.trim() || 'Not provided'
       });
 
-      if (!saved || !saved.id) {
+      if (!saved || !saved.success) {
         throw new Error('Database did not confirm enquiry submission. Please try again.');
       }
 
-      setLastSubmittedData({ ...formData });
       setSuccess(true);
       setFormData({ customer_name: '', phone: '', service: '', message: '' });
       setFieldErrors({});
     } catch (err) {
-      setErrorMsg(err.message || 'Unable to record enquiry. Please contact us directly via WhatsApp or phone call.');
+      setErrorMsg(err.message || 'Unable to record enquiry. Please contact us directly via phone call.');
     } finally {
       setSubmitting(false);
     }
@@ -288,40 +286,21 @@ export default function ContactPage() {
                     <div className="success-icon-wrap">
                       <CheckCircle size={40} />
                     </div>
-                    <h3>Enquiry Received & Verified!</h3>
+                    <h3>Enquiry Submitted Successfully!</h3>
                     <p>
-                      Thank you for contacting Pudugai Wellness Center. Coach Thangapandian S will
-                      review your request and get in touch with you shortly.
+                      Thank you for contacting Pudugai Wellness Center. Your enquiry has been saved and Coach Thangapandian S will
+                      review your details and get in touch with you shortly.
                     </p>
 
-                    {lastSubmittedData && (
-                      <div className="enquiry-success-actions">
-                        <button
-                          type="button"
-                          className="btn btn-whatsapp"
-                          onClick={() => {
-                            const url = getWhatsAppUrl({
-                              name: lastSubmittedData.customer_name,
-                              phone: lastSubmittedData.phone,
-                              service: lastSubmittedData.service,
-                              message: lastSubmittedData.message,
-                              recipientNumber: BUSINESS_CONFIG.whatsappNumber
-                            });
-                            window.open(url, '_blank', 'noopener,noreferrer');
-                          }}
-                        >
-                          <MessageSquare size={16} />
-                          <span>Also Continue to WhatsApp ↗</span>
-                        </button>
-
-                        <button
-                          className="btn btn-secondary"
-                          onClick={() => setSuccess(false)}
-                        >
-                          <span>Submit Another Enquiry</span>
-                        </button>
-                      </div>
-                    )}
+                    <div className="enquiry-success-actions">
+                      <button
+                        type="button"
+                        className="btn btn-primary"
+                        onClick={() => setSuccess(false)}
+                      >
+                        <span>Submit Another Enquiry</span>
+                      </button>
+                    </div>
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="enquiry-form" noValidate>
