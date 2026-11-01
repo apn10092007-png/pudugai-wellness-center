@@ -15,6 +15,7 @@ import ContactPage from './pages/ContactPage';
 // Admin Pages
 import AdminLoginPage from './pages/admin/AdminLoginPage';
 import AdminDashboardPage from './pages/admin/AdminDashboardPage';
+import AdminHomeSettingsPage from './pages/admin/AdminHomeSettingsPage';
 import AdminServicesPage from './pages/admin/AdminServicesPage';
 import AdminSuccessStoriesPage from './pages/admin/AdminSuccessStoriesPage';
 import AdminAboutPage from './pages/admin/AdminAboutPage';
@@ -57,6 +58,8 @@ export default function App() {
       <Route path="/admin" element={<AdminLayout />}>
         <Route index element={<Navigate to="/admin/dashboard" replace />} />
         <Route path="dashboard" element={<AdminDashboardPage />} />
+        <Route path="home-settings" element={<AdminHomeSettingsPage />} />
+        <Route path="content" element={<AdminHomeSettingsPage />} />
         <Route path="services" element={<AdminServicesPage />} />
         <Route path="success-stories" element={<AdminSuccessStoriesPage />} />
         <Route path="about" element={<AdminAboutPage />} />

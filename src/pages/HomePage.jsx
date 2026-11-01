@@ -21,23 +21,26 @@ export default function HomePage() {
   const [services, setServices] = useState([]);
   const [stories, setStories] = useState([]);
   const [content, setContent] = useState(null);
+  const [heroContent, setHeroContent] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     let mounted = true;
     async function loadData() {
       try {
-        const [coachData, servicesData, storiesData, contentData] = await Promise.all([
+        const [coachData, servicesData, storiesData, contentData, heroData] = await Promise.all([
           dataService.getCoachProfile(),
           dataService.getPublishedServices(),
           dataService.getPublishedSuccessStories(),
-          dataService.getSiteContent('about_page')
+          dataService.getSiteContent('about_page'),
+          dataService.getSiteContent('home_hero')
         ]);
         if (mounted) {
           setCoach(coachData);
           setServices(servicesData);
           setStories(storiesData);
           setContent(contentData);
+          setHeroContent(heroData);
           setLoading(false);
         }
       } catch (err) {
@@ -101,9 +104,12 @@ export default function HomePage() {
           <div className="hero-visual">
             <div className="hero-image-card">
               <img
-                src="/assets/hero-wellness.jpg"
+                src={heroContent?.hero_image_path || '/assets/hero-wellness.jpg'}
                 alt="Pudugai Wellness Center Lifestyle"
                 className="hero-main-img"
+                onError={(e) => {
+                  e.currentTarget.src = '/assets/hero-wellness.jpg';
+                }}
               />
               <div className="hero-floating-badge">
                 <div className="floating-badge-icon">

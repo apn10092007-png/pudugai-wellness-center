@@ -229,12 +229,20 @@ export const INITIAL_SITE_CONTENT = {
   ]
 };
 
+export const INITIAL_HERO_CONTENT = {
+  tagline: 'Nutrition • Fitness • Wellness',
+  headline: 'Real Wellness for Your Real Everyday Life',
+  subheadline: 'Personal health & nutrition coaching in Pudukkottai guided by Coach Thangapandian S. Build sustainable habits that last a lifetime.',
+  hero_image_path: '/assets/hero-wellness.jpg'
+};
+
 // Local storage helper keys for offline / preview mode fallback
 const STORAGE_KEYS = {
   SERVICES: 'pwc_services_v1',
   STORIES: 'pwc_stories_v1',
   COACH: 'pwc_coach_v1',
   CONTENT: 'pwc_content_v1',
+  HERO_CONTENT: 'pwc_hero_content_v1',
   ENQUIRIES: 'pwc_enquiries_v1'
 };
 
@@ -543,6 +551,10 @@ export const dataService = {
   // 4. SITE CONTENT API (About, Mission, Vision)
   // ==========================================
   async getSiteContent(sectionKey = 'about_page') {
+    const isHero = sectionKey === 'home_hero';
+    const fallbackDefault = isHero ? INITIAL_HERO_CONTENT : INITIAL_SITE_CONTENT;
+    const localKey = isHero ? STORAGE_KEYS.HERO_CONTENT : STORAGE_KEYS.CONTENT;
+
     if (isSupabaseConfigured()) {
       try {
         const { data, error } = await supabase
@@ -550,33 +562,106 @@ export const dataService = {
           .select('content')
           .eq('section_key', sectionKey)
           .single();
-        if (!error && data?.content) return data.content;
+        if (!error && data?.content) {
+          const resolved = isHero
+            ? { ...INITIAL_HERO_CONTENT, ...data.content, hero_image_path: data.content.hero_image_path || '/assets/hero-wellness.jpg' }
+            : data.content;
+          setLocal(localKey, resolved);
+          return resolved;
+        }
       } catch (err) {
-        console.warn('Supabase fetch site content failed:', err);
+        console.warn(`Supabase fetch site content (${sectionKey}) failed:`, err);
       }
     }
-    return getLocal(STORAGE_KEYS.CONTENT, INITIAL_SITE_CONTENT);
+    return getLocal(localKey, fallbackDefault);
   },
 
   async updateSiteContent(sectionKey, content) {
+    const isHero = sectionKey === 'home_hero';
+    const localKey = isHero ? STORAGE_KEYS.HERO_CONTENT : STORAGE_KEYS.CONTENT;
+
     if (isSupabaseConfigured()) {
       try {
         const { data, error } = await supabase
           .from('site_content')
-          .upsert({
-            section_key: sectionKey,
-            content,
-            updated_at: new Date().toISOString()
-          })
+          .upsert(
+            {
+              section_key: sectionKey,
+              content,
+              updated_at: new Date().toISOString()
+            },
+            { onConflict: 'section_key' }
+          )
           .select()
           .single();
-        if (!error && data) return data.content;
+
+        if (!error && data?.content) {
+          setLocal(localKey, data.content);
+          return data.content;
+        }
+        if (error) {
+          console.warn(`Supabase updateSiteContent (${sectionKey}) warning:`, error.message);
+        }
       } catch (err) {
-        console.error('Supabase updateSiteContent error:', err);
+        console.warn(`Supabase updateSiteContent (${sectionKey}) catch:`, err.message);
       }
     }
-    setLocal(STORAGE_KEYS.CONTENT, content);
+    setLocal(localKey, content);
     return content;
+  },
+
+  async getHomeHero() {
+    return this.getSiteContent('home_hero');
+  },
+
+  async updateHomeHero(content) {
+    return this.updateSiteContent('home_hero', content);
+  },
+
+  async uploadHeroImage(file) {
+    // Try dedicated 'site-images' bucket first, then fall back to 'service-images'
+    try {
+      return await this.uploadImage('site-images', file);
+    } catch (err) {
+      if (
+        err?.message?.includes('Bucket not found') ||
+        err?.error === 'Bucket not found' ||
+        err?.statusCode === '404'
+      ) {
+        return await this.uploadImage('service-images', file);
+      }
+      throw err;
+    }
+  },
+
+  async deleteHeroImage() {
+    const current = await this.getSiteContent('home_hero');
+    const oldUrl = current?.hero_image_path;
+
+    // Reset hero_image_path to default placeholder in database
+    const updated = {
+      ...current,
+      hero_image_path: '/assets/hero-wellness.jpg'
+    };
+    const saved = await this.updateSiteContent('home_hero', updated);
+
+    // Optionally attempt to remove old file from Supabase storage if it was stored there
+    if (oldUrl && isSupabaseConfigured()) {
+      try {
+        for (const bucket of ['site-images', 'service-images']) {
+          if (oldUrl.includes(`/${bucket}/`)) {
+            const fileName = oldUrl.split(`/${bucket}/`).pop().split('?')[0];
+            if (fileName) {
+              await supabase.storage.from(bucket).remove([fileName]);
+            }
+          }
+        }
+      } catch (cleanErr) {
+        console.warn('Storage cleanup non-critical error:', cleanErr);
+      }
+    }
+
+    return saved;
   },
 
   // ==========================================

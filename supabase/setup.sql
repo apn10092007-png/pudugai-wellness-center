@@ -212,32 +212,33 @@ INSERT INTO storage.buckets (id, name, public)
 VALUES 
     ('coach-images', 'coach-images', true),
     ('service-images', 'service-images', true),
-    ('story-images', 'story-images', true)
+    ('story-images', 'story-images', true),
+    ('site-images', 'site-images', true)
 ON CONFLICT (id) DO UPDATE SET public = true;
 
 -- Storage Policies: Public can read, authenticated admins can upload/delete
 DROP POLICY IF EXISTS "Public can view coach images" ON storage.objects;
 CREATE POLICY "Public can view coach images" 
     ON storage.objects FOR SELECT 
-    USING (bucket_id IN ('coach-images', 'service-images', 'story-images'));
+    USING (bucket_id IN ('coach-images', 'service-images', 'story-images', 'site-images'));
 
 DROP POLICY IF EXISTS "Admins can upload images" ON storage.objects;
 CREATE POLICY "Admins can upload images" 
     ON storage.objects FOR INSERT 
     TO authenticated 
-    WITH CHECK (bucket_id IN ('coach-images', 'service-images', 'story-images'));
+    WITH CHECK (bucket_id IN ('coach-images', 'service-images', 'story-images', 'site-images'));
 
 DROP POLICY IF EXISTS "Admins can update images" ON storage.objects;
 CREATE POLICY "Admins can update images" 
     ON storage.objects FOR UPDATE 
     TO authenticated 
-    USING (bucket_id IN ('coach-images', 'service-images', 'story-images'));
+    USING (bucket_id IN ('coach-images', 'service-images', 'story-images', 'site-images'));
 
 DROP POLICY IF EXISTS "Admins can delete images" ON storage.objects;
 CREATE POLICY "Admins can delete images" 
     ON storage.objects FOR DELETE 
     TO authenticated 
-    USING (bucket_id IN ('coach-images', 'service-images', 'story-images'));
+    USING (bucket_id IN ('coach-images', 'service-images', 'story-images', 'site-images'));
 
 -- ==============================================================================
 -- 6. INITIAL SEED DATA
@@ -290,7 +291,8 @@ VALUES
     '{
         "tagline": "Nutrition • Fitness • Wellness",
         "headline": "Real Wellness for Your Real Everyday Life",
-        "subheadline": "Personal health & nutrition coaching in Pudukkottai guided by Coach Thangapandian S. Build sustainable habits that last a lifetime."
+        "subheadline": "Personal health & nutrition coaching in Pudukkottai guided by Coach Thangapandian S. Build sustainable habits that last a lifetime.",
+        "hero_image_path": "/assets/hero-wellness.jpg"
     }'::jsonb
 )
 ON CONFLICT (section_key) DO UPDATE SET content = EXCLUDED.content;

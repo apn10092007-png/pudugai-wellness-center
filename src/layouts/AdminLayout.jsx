@@ -11,7 +11,8 @@ import {
   ExternalLink,
   Menu,
   X,
-  AlertTriangle
+  AlertTriangle,
+  Image as ImageIcon
 } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 import './AdminLayout.css';
@@ -37,6 +38,7 @@ export default function AdminLayout() {
 
   const navItems = [
     { label: 'Overview', path: '/admin/dashboard', icon: <LayoutDashboard size={18} /> },
+    { label: 'Home Page Settings', path: '/admin/home-settings', icon: <ImageIcon size={18} /> },
     { label: 'Services', path: '/admin/services', icon: <Layers size={18} /> },
     { label: 'Success Stories', path: '/admin/success-stories', icon: <Sparkles size={18} /> },
     { label: 'Coach & About', path: '/admin/about', icon: <UserCheck size={18} /> },

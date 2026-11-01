@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Upload,
   Trash2,
@@ -6,7 +7,8 @@ import {
   CheckCircle2,
   AlertTriangle,
   User,
-  Sparkles
+  Sparkles,
+  Image as ImageIcon
 } from 'lucide-react';
 import { dataService } from '../../services/dataService';
 import './AdminAboutPage.css';
@@ -171,6 +173,12 @@ export default function AdminAboutPage() {
           <p className="admin-page-subtitle">
             Manage Coach Thangapandian's verified photo, biography, and center mission/vision.
           </p>
+        </div>
+        <div className="admin-header-actions">
+          <Link to="/admin/home-settings" className="btn btn-outline btn-sm">
+            <ImageIcon size={15} />
+            <span>Manage Hero Image</span>
+          </Link>
         </div>
       </div>
 

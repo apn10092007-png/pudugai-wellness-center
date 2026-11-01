@@ -10,7 +10,8 @@ import {
   Clock,
   Phone,
   CheckCircle2,
-  ExternalLink
+  ExternalLink,
+  Image as ImageIcon
 } from 'lucide-react';
 import { dataService } from '../../services/dataService';
 import './AdminDashboardPage.css';
@@ -72,6 +73,10 @@ export default function AdminDashboardPage() {
           </p>
         </div>
         <div className="admin-header-actions">
+          <Link to="/admin/home-settings" className="btn btn-outline btn-sm">
+            <ImageIcon size={15} />
+            <span>Hero Image</span>
+          </Link>
           <Link to="/admin/services" className="btn btn-primary btn-sm">
             <Plus size={15} />
             <span>Add Service</span>
@@ -251,6 +256,10 @@ export default function AdminDashboardPage() {
           </div>
 
           <div className="quick-links-strip">
+            <Link to="/admin/home-settings" className="quick-link-item">
+              <ImageIcon size={16} />
+              <span>Hero Image Management</span>
+            </Link>
             <Link to="/admin/services" className="quick-link-item">
               <Layers size={16} />
               <span>Manage 18+ Programs</span>
