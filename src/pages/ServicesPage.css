@@ -272,3 +272,34 @@
     padding: 1.25rem 1rem;
   }
 }
+
+@media (max-width: 360px) {
+  .services-header-section {
+    padding: 1.75rem 0 1.25rem;
+  }
+  .services-main-title {
+    font-size: 1.6rem;
+  }
+  .services-main-lead {
+    font-size: 0.925rem;
+  }
+  .cat-tab-btn {
+    padding: 0.45rem 0.75rem;
+    font-size: 0.8rem;
+  }
+  .service-detail-card {
+    padding: 1.1rem 0.85rem;
+  }
+  .card-service-title {
+    font-size: 1.15rem;
+  }
+  .card-service-desc {
+    font-size: 0.875rem;
+  }
+  .services-consultation-banner {
+    padding: 1.25rem 0.85rem;
+  }
+  .services-consultation-banner h2 {
+    font-size: 1.4rem;
+  }
+}

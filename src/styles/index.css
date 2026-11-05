@@ -70,6 +70,8 @@ html {
   background-color: var(--color-bg);
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 body {
@@ -78,6 +80,7 @@ body {
   flex-direction: column;
   overflow-x: hidden;
   width: 100%;
+  max-width: 100%;
 }
 
 #root {
@@ -86,6 +89,16 @@ body {
   flex-direction: column;
   overflow-x: hidden;
   width: 100%;
+  max-width: 100%;
+}
+
+.public-layout-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 /* Typography Defaults */
@@ -93,11 +106,12 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-primary);
   font-weight: 700;
   line-height: 1.25;
+  word-break: break-word;
 }
 
-h1 { font-size: clamp(2rem, 4vw, 2.75rem); }
-h2 { font-size: clamp(1.6rem, 3vw, 2.15rem); }
-h3 { font-size: clamp(1.25rem, 2.2vw, 1.5rem); }
+h1 { font-size: clamp(1.85rem, 5vw, 2.75rem); }
+h2 { font-size: clamp(1.45rem, 4vw, 2.15rem); }
+h3 { font-size: clamp(1.2rem, 3vw, 1.5rem); }
 h4 { font-size: 1.15rem; }
 
 p {
@@ -132,6 +146,34 @@ button, input, textarea, select {
   padding-right: 1.5rem;
 }
 
+@media (max-width: 768px) {
+  .container {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .container {
+    padding-left: 0.85rem;
+    padding-right: 0.85rem;
+  }
+}
+
+@media (max-width: 330px) {
+  .container {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+}
+
 /* Buttons */
 .btn {
   display: inline-flex;
@@ -146,6 +188,9 @@ button, input, textarea, select {
   border: 1px solid transparent;
   transition: all var(--transition-fast);
   white-space: nowrap;
+  min-height: 44px; /* Accessible touch target */
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .btn-primary {
@@ -314,13 +359,14 @@ button, input, textarea, select {
 .form-input, .form-textarea, .form-select {
   width: 100%;
   padding: 0.75rem 0.95rem;
-  font-size: 0.95rem;
+  font-size: 16px; /* Crucial for iOS to prevent viewport auto-zoom */
   color: var(--color-text-main);
   background-color: #ffffff;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
   outline: none;
+  max-width: 100%;
 }
 
 .form-input:focus, .form-textarea:focus, .form-select:focus {
@@ -470,6 +516,21 @@ button, input, textarea, select {
 
 @media (max-width: 640px) {
   .grid-cols-4, .grid-cols-3, .grid-cols-2 { grid-template-columns: 1fr; }
-  .container { padding-left: 1rem; padding-right: 1rem; }
   .section { padding-top: 2.75rem; padding-bottom: 2.75rem; }
+}
+
+@media (max-width: 480px) {
+  .section { padding-top: 2.25rem; padding-bottom: 2.25rem; }
+  .btn-lg {
+    padding: 0.8rem 1.25rem;
+    font-size: 0.975rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .section { padding-top: 1.75rem; padding-bottom: 1.75rem; }
+  .btn {
+    padding: 0.65rem 1rem;
+    font-size: 0.88rem;
+  }
 }

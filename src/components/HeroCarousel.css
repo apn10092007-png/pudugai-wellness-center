@@ -125,6 +125,17 @@
   cursor: pointer;
   padding: 0;
   transition: all 250ms ease;
+  position: relative;
+}
+
+/* Expand touch target for touch screens without visual clutter */
+.hero-carousel-dot::after {
+  content: '';
+  position: absolute;
+  top: -10px;
+  bottom: -10px;
+  left: -8px;
+  right: -8px;
 }
 
 .hero-carousel-dot.active {
@@ -191,6 +202,20 @@
   }
   .hero-carousel-dots {
     bottom: 0.35rem;
+  }
+}
+
+@media (max-width: 330px) {
+  .hero-carousel-container {
+    height: 200px;
+  }
+  .hero-carousel-overlay {
+    bottom: 1.35rem;
+    padding: 0.35rem 0.5rem;
+  }
+  .hero-carousel-icon {
+    width: 24px;
+    height: 24px;
   }
 }
 

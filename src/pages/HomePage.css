@@ -524,13 +524,70 @@
 }
 
 @media (max-width: 360px) {
+  .hero-section {
+    padding: 1.75rem 0 1.25rem;
+  }
   .hero-title {
-    font-size: 1.75rem;
+    font-size: clamp(1.5rem, 7vw, 1.8rem);
+    line-height: 1.2;
+  }
+  .hero-description {
+    font-size: 0.925rem;
+    margin-bottom: 1.25rem;
+  }
+  .hero-features-strip {
+    align-items: flex-start;
+  }
+  .feature-item {
+    align-items: flex-start;
+    text-align: left;
+    font-size: 0.85rem;
+    gap: 0.5rem;
+  }
+  .feature-icon {
+    margin-top: 3px;
   }
   .pillar-item {
-    padding: 1.25rem 1rem;
+    padding: 1.25rem 0.85rem;
   }
   .service-card {
-    padding: 1.25rem 1rem;
+    padding: 1.25rem 0.85rem;
+  }
+  .coach-clean-layout {
+    padding: 1.25rem 0.75rem;
+  }
+  .coach-clean-img {
+    height: 250px;
+  }
+  .coach-title-name {
+    font-size: 1.5rem;
+  }
+  .coach-subtitle-role {
+    font-size: 0.85rem;
+  }
+  .coach-contact-pills {
+    gap: 0.45rem;
+  }
+  .coach-contact-pill {
+    font-size: 0.78rem;
+    padding: 0.35rem 0.6rem;
+  }
+  .home-cta-inner h2 {
+    font-size: 1.45rem;
+  }
+  .home-cta-inner p {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 330px) {
+  .hero-title {
+    font-size: 1.4rem;
+  }
+  .coach-clean-img {
+    height: 220px;
+  }
+  .pillar-item, .service-card {
+    padding: 1rem 0.75rem;
   }
 }

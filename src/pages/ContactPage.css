@@ -305,19 +305,69 @@
     width: 100%;
     font-size: 0.9rem;
     padding: 0.75rem 0.85rem;
+    white-space: normal;
   }
   .form-input, .form-select, .form-textarea {
     font-size: 16px; /* Prevents iOS auto-zoom */
     padding: 0.7rem 0.85rem;
   }
-  .form-actions-dual {
-    flex-direction: column;
+  .form-actions-stack {
     gap: 0.75rem;
   }
-  .form-actions-dual .btn {
+  .form-actions-stack .btn {
     width: 100%;
+    white-space: normal;
   }
   .map-frame-wrapper iframe {
     height: 280px;
+  }
+}
+
+@media (max-width: 360px) {
+  .contact-header-section {
+    padding: 1.75rem 0 1.25rem;
+  }
+  .contact-page-title {
+    font-size: 1.6rem;
+  }
+  .contact-page-lead {
+    font-size: 0.925rem;
+  }
+  .contact-card-box, .form-card-box {
+    padding: 1.25rem 0.75rem;
+  }
+  .info-box-title, .form-card-header h2 {
+    font-size: 1.35rem;
+  }
+  .action-btn {
+    font-size: 0.84rem;
+    padding: 0.7rem 0.65rem;
+    gap: 0.5rem;
+  }
+  .center-address-card {
+    padding: 1rem 0.75rem;
+  }
+  .address-text {
+    font-size: 0.875rem;
+    word-break: break-word;
+  }
+  .form-input, .form-select, .form-textarea {
+    padding: 0.65rem 0.75rem;
+  }
+  .whatsapp-enquiry-btn, .submit-btn {
+    font-size: 0.88rem;
+    padding: 0.75rem 0.75rem;
+  }
+  .map-frame-wrapper iframe {
+    height: 230px;
+  }
+}
+
+@media (max-width: 330px) {
+  .contact-page-title {
+    font-size: 1.45rem;
+  }
+  .action-btn {
+    font-size: 0.8rem;
   }
 }

@@ -240,3 +240,36 @@
     width: 100%;
   }
 }
+
+@media (max-width: 360px) {
+  .stories-header-section {
+    padding: 1.75rem 0 1.25rem;
+  }
+  .stories-page-title {
+    font-size: 1.6rem;
+  }
+  .stories-page-lead {
+    font-size: 0.925rem;
+  }
+  .story-photo-box {
+    height: 165px;
+  }
+  .story-content-body {
+    padding: 1.25rem 0.85rem;
+  }
+  .story-author-name {
+    font-size: 1.2rem;
+  }
+  .story-headline {
+    font-size: 1.05rem;
+  }
+  .story-text-container p {
+    font-size: 0.88rem;
+  }
+  .stories-encourage-card {
+    padding: 1.5rem 0.85rem;
+  }
+  .stories-encourage-card h2 {
+    font-size: 1.45rem;
+  }
+}

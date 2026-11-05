@@ -229,3 +229,63 @@
     font-size: 1.05rem;
   }
 }
+
+@media (max-width: 480px) {
+  .brand-logo {
+    gap: 0.55rem;
+  }
+  .brand-logo-img {
+    width: 36px;
+    height: 36px;
+  }
+  .brand-name {
+    font-size: 0.98rem;
+    line-height: 1.2;
+  }
+  .brand-subtitle {
+    font-size: 0.65rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .brand-logo {
+    gap: 0.45rem;
+  }
+  .brand-logo-img {
+    width: 32px;
+    height: 32px;
+  }
+  .brand-name {
+    font-size: 0.9rem;
+    line-height: 1.15;
+  }
+  .brand-subtitle {
+    font-size: 0.58rem;
+    letter-spacing: 0.02em;
+  }
+  .mobile-drawer {
+    padding: 1rem 0 1.25rem;
+  }
+  .mobile-drawer-footer .btn {
+    padding: 0.7rem 0.9rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 330px) {
+  .brand-logo-img {
+    width: 28px;
+    height: 28px;
+  }
+  .brand-name {
+    font-size: 0.84rem;
+  }
+  .brand-subtitle {
+    display: none; /* Hide subtitle on ultra-narrow <=330px screens to preserve clean single line */
+  }
+  .mobile-toggle {
+    min-width: 40px;
+    min-height: 40px;
+    padding: 0.25rem;
+  }
+}

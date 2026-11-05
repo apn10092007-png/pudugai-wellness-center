@@ -198,3 +198,43 @@
     height: 300px;
   }
 }
+
+@media (max-width: 360px) {
+  .about-header-section {
+    padding: 1.75rem 0 1.25rem;
+  }
+  .about-page-title {
+    font-size: 1.6rem;
+  }
+  .about-page-lead {
+    font-size: 0.9rem;
+  }
+  .about-coach-name {
+    font-size: 1.5rem;
+  }
+  .about-coach-role {
+    font-size: 0.85rem;
+  }
+  .about-coach-img {
+    height: 240px;
+  }
+  .about-coach-contact {
+    gap: 0.45rem;
+  }
+  .about-pill {
+    font-size: 0.78rem;
+    padding: 0.35rem 0.6rem;
+  }
+  .value-card {
+    padding: 1.25rem 0.85rem;
+  }
+}
+
+@media (max-width: 330px) {
+  .about-coach-img {
+    height: 210px;
+  }
+  .about-page-title {
+    font-size: 1.45rem;
+  }
+}
