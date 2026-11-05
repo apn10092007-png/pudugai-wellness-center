@@ -54,9 +54,13 @@ export default function Header() {
       <div className="container header-main">
         <Link to="/" className="brand-logo" onClick={closeMobile}>
           <img
-            src="/assets/pwc-logo.jpeg"
+            src="https://ggcsfegymkgrvwnexxay.supabase.co/storage/v1/object/public/pwc-public-assets/pwc-logo-transparent%20(1).png"
             alt="Pudugai Wellness Center Logo"
             className="brand-logo-img"
+            onError={(e) => {
+              e.currentTarget.onerror = null;
+              e.currentTarget.src = '/assets/pwc-logo.jpeg';
+            }}
           />
           <div className="brand-text">
             <span className="brand-name">Pudugai Wellness Center</span>
