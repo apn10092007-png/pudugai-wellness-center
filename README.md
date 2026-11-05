@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Pudugai Wellness Center (PWC) — Official Web Application
 
 A modern, responsive, full-stack web application built for **Pudugai Wellness Center (PWC)**, a health, nutrition, and wellness coaching center located in Pudukkottai, Tamil Nadu, led by **Wellness Coach Thangapandian S**.
@@ -164,3 +165,6 @@ Policies allow public viewing (`SELECT`) and restrict uploads, replacements, and
 - **Google Maps**: [https://maps.app.goo.gl/JAdNVeq53M3PdrW1A](https://maps.app.goo.gl/JAdNVeq53M3PdrW1A)
 - **Address (English)**: E Main Rd, T Nagar, Buvaneswari Nagar, Pudukkottai, Tamil Nadu 622001
 - **Address (Tamil)**: கிழக்கு முதன்மை சாலை, டி நகர், புவனேஸ்வரி நகர், புதுக்கோட்டை, தமிழ்நாடு 622001
+=======
+# pudugai-wellness-center
+>>>>>>> ab207aeef765a1117d20df87724a3b9197c39073
