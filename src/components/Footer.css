@@ -216,6 +216,13 @@
   color: var(--color-teal);
 }
 
+/* Mobile Footer Rule: Hide the entire footer on mobile screens (<= 768px), preserve desktop footer */
+@media (max-width: 768px) {
+  .site-footer {
+    display: none !important;
+  }
+}
+
 @media (max-width: 992px) {
   .footer-main {
     grid-template-columns: 1fr 1fr;

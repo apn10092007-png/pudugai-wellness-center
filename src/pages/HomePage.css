@@ -1,410 +1,328 @@
-/* HomePage Styles */
+/* HomePage.css - Clean, Professional, Natural Wellness Design */
+
+.home-page {
+  width: 100%;
+}
 
 /* 1. Hero Section */
 .hero-section {
-  padding: 4.5rem 0 4rem;
-  background: linear-gradient(180deg, #f0f7f3 0%, #f8faf8 100%);
+  padding: 3.5rem 0 3rem;
+  background-color: #f7faf8;
   border-bottom: 1px solid var(--color-border);
 }
 
 .hero-container {
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
+  grid-template-columns: 1.1fr 0.9fr;
   align-items: center;
-  gap: 3.5rem;
+  gap: 3rem;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
 }
 
 .hero-badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
-  padding: 0.35rem 0.85rem;
+  align-self: flex-start;
+  padding: 0.3rem 0.75rem;
   background-color: var(--color-primary-light);
   color: var(--color-primary);
   border-radius: var(--radius-full);
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  margin-bottom: 1.25rem;
-}
-
-.badge-sparkle {
-  color: var(--color-teal);
+  margin-bottom: 1rem;
 }
 
 .hero-title {
-  font-size: clamp(2.35rem, 4.5vw, 3.4rem);
+  font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 800;
-  line-height: 1.15;
-  color: #0b2d1c;
-  letter-spacing: -0.025em;
-  margin-bottom: 1.25rem;
-}
-
-.highlight-text {
-  color: var(--color-primary);
-  position: relative;
-  display: inline-block;
+  line-height: 1.2;
+  color: #0d3824;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
 }
 
 .hero-description {
-  font-size: 1.125rem;
-  line-height: 1.7;
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  line-height: 1.65;
   color: var(--color-text-muted);
-  margin-bottom: 2rem;
-  max-width: 540px;
+  margin-bottom: 1.75rem;
+  max-width: 520px;
 }
 
 .hero-cta-group {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  margin-bottom: 2.25rem;
+  gap: 0.85rem;
+  margin-bottom: 1.75rem;
   flex-wrap: wrap;
 }
 
 .hero-features-strip {
   display: flex;
   flex-direction: column;
-  gap: 0.65rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--color-border-subtle);
+  gap: 0.6rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--color-border);
 }
 
 .feature-item {
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  font-size: 0.925rem;
+  font-size: 0.9rem;
   color: var(--color-text-main);
   font-weight: 500;
 }
 
 .feature-icon {
   color: var(--color-teal);
+  flex-shrink: 0;
 }
 
 .hero-visual {
   display: flex;
   justify-content: center;
-}
-
-.hero-image-card {
-  position: relative;
   width: 100%;
-  max-width: 440px;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: var(--shadow-lg);
-  border: 4px solid #ffffff;
 }
 
-.hero-main-img {
-  width: 100%;
-  height: 480px;
-  object-fit: cover;
-  display: block;
-}
-
-.hero-floating-badge {
-  position: absolute;
-  bottom: 1.5rem;
-  left: 1.5rem;
-  right: 1.5rem;
-  background-color: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(8px);
-  border-radius: var(--radius-md);
-  padding: 0.85rem 1.15rem;
-  display: flex;
-  align-items: center;
-  gap: 0.85rem;
-  box-shadow: var(--shadow-md);
-}
-
-.floating-badge-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-full);
-  background-color: var(--color-primary-light);
-  color: var(--color-primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.badge-title {
-  display: block;
-  font-size: 0.92rem;
-  font-weight: 700;
-  color: var(--color-primary);
-}
-
-.badge-sub {
-  display: block;
-  font-size: 0.75rem;
-  color: var(--color-text-light);
-}
-
-/* 2. Intro & Pillars */
-.intro-card {
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: 3rem;
-  box-shadow: var(--shadow-sm);
+/* 2. Compact Section Headers */
+.section-header-compact {
   text-align: center;
+  max-width: 680px;
+  margin: 0 auto 2.5rem;
 }
 
-.intro-badge {
+.section-tag {
   display: inline-block;
-  color: var(--color-teal);
-  font-size: 0.85rem;
+  font-size: 0.775rem;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin-bottom: 0.75rem;
-}
-
-.intro-heading {
-  max-width: 720px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 1.25rem;
-}
-
-.intro-text {
-  max-width: 780px;
-  margin-left: auto;
-  margin-right: auto;
-  font-size: 1.05rem;
-  line-height: 1.7;
-  margin-bottom: 3rem;
-}
-
-.pillars-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  text-align: left;
-}
-
-.pillar-card {
-  background-color: var(--color-bg);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  padding: 1.75rem;
-}
-
-.pillar-icon-wrap {
-  width: 48px;
-  height: 48px;
-  border-radius: var(--radius-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1.25rem;
-}
-
-.pillar-icon-wrap.green {
-  background-color: var(--color-primary-light);
-  color: var(--color-primary);
-}
-
-.pillar-icon-wrap.teal {
-  background-color: var(--color-teal-light);
   color: var(--color-teal);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.5rem;
 }
 
-.pillar-icon-wrap.amber {
-  background-color: var(--color-amber-light);
-  color: var(--color-amber);
+.section-title {
+  font-size: clamp(1.6rem, 3vw, 2.25rem);
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 0.75rem;
+  line-height: 1.25;
 }
 
-.pillar-card h3 {
-  font-size: 1.15rem;
-  margin-bottom: 0.6rem;
-}
-
-.pillar-card p {
-  font-size: 0.9rem;
+.section-subtitle {
+  font-size: 0.975rem;
+  color: var(--color-text-muted);
   line-height: 1.6;
 }
 
-/* 3. Coach Preview */
-.coach-preview-card {
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: 3rem;
-  display: grid;
-  grid-template-columns: 0.8fr 1.2fr;
-  align-items: center;
-  gap: 3.5rem;
-  box-shadow: var(--shadow-sm);
-}
-
-.coach-preview-img-wrap {
-  position: relative;
-  width: 100%;
-  max-width: 340px;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: var(--shadow-md);
-  border: 3px solid #ffffff;
-}
-
-.coach-preview-img {
-  width: 100%;
-  height: 380px;
-  object-fit: cover;
-  display: block;
-}
-
-.coach-avatar-placeholder {
-  width: 100%;
-  height: 380px;
-  background-color: var(--color-surface-alt);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-text-light);
-}
-
-.coach-badge-overlay {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  background-color: rgba(19, 78, 50, 0.9);
-  color: #ffffff;
-  padding: 0.35rem 0.75rem;
-  border-radius: var(--radius-full);
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.coach-name {
-  font-size: 2rem;
-  margin-bottom: 0.25rem;
-}
-
-.coach-role {
-  display: block;
-  color: var(--color-teal);
-  font-weight: 600;
-  font-size: 0.95rem;
-  margin-bottom: 1.25rem;
-}
-
-.coach-bio-text {
-  font-size: 1rem;
-  line-height: 1.7;
-  margin-bottom: 1.75rem;
-}
-
-.coach-contact-pills {
-  display: flex;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-  margin-bottom: 2rem;
-}
-
-.coach-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  padding: 0.4rem 0.85rem;
-  background-color: var(--color-surface-alt);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-full);
-  font-size: 0.85rem;
-  color: var(--color-text-main);
-  font-weight: 500;
-}
-
-.coach-pill:hover {
-  background-color: var(--color-primary-light);
-  color: var(--color-primary);
-  border-color: var(--color-primary);
-}
-
-.coach-cta-row {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-/* 4. Services Grid */
-.services-grid {
+/* 3. Three Pillars (Simple, Natural) */
+.pillars-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.75rem;
-  margin-bottom: 2.5rem;
+}
+
+.pillar-item {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1.75rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.pillar-icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pillar-item h3 {
+  font-size: 1.15rem;
+  color: var(--color-primary);
+}
+
+.pillar-item p {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* 4. Services Grid */
+.services-overview-section {
+  background-color: #fafcfb;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2.25rem;
 }
 
 .service-card {
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  padding: 1.75rem;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  transition: all var(--transition-normal);
+  gap: 0.65rem;
+  transition: border-color var(--transition-fast);
 }
 
 .service-card:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-md);
-  border-color: #cbd5e1;
+  border-color: var(--color-teal);
 }
 
 .service-category-tag {
-  font-size: 0.75rem;
+  align-self: flex-start;
+  font-size: 0.72rem;
   font-weight: 700;
-  color: var(--color-teal);
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  margin-bottom: 0.65rem;
+  color: var(--color-teal);
+  background-color: var(--color-teal-light);
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-sm);
 }
 
 .service-card-title {
-  font-size: 1.25rem;
-  margin-bottom: 0.65rem;
+  font-size: 1.125rem;
+  color: var(--color-primary);
+  margin: 0;
 }
 
 .service-card-desc {
-  font-size: 0.9rem;
-  line-height: 1.6;
-  flex: 1;
-  margin-bottom: 1.25rem;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  line-height: 1.55;
+  margin: 0;
+  flex-grow: 1;
 }
 
 .service-learn-link {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  font-size: 0.875rem;
+  font-size: 0.85rem;
   font-weight: 600;
   color: var(--color-primary);
+  margin-top: 0.5rem;
 }
 
 .service-learn-link:hover {
-  color: var(--color-primary-hover);
-  text-decoration: underline;
+  color: var(--color-teal);
 }
 
-.services-footer-cta {
+.section-center-action {
   text-align: center;
-  margin-top: 1.5rem;
 }
 
-/* 5. Stories Preview */
+/* 5. Clean Coach Section */
+.coach-clean-layout {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 3rem;
+  align-items: center;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+}
+
+.coach-image-col {
+  display: flex;
+  justify-content: center;
+}
+
+.coach-clean-img {
+  width: 100%;
+  max-width: 340px;
+  height: 400px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+}
+
+.coach-details-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.coach-title-name {
+  font-size: clamp(1.75rem, 3.5vw, 2.25rem);
+  color: var(--color-primary);
+  margin-bottom: 0.2rem;
+}
+
+.coach-subtitle-role {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-teal);
+  margin-bottom: 1.25rem;
+}
+
+.coach-description-text {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  line-height: 1.65;
+  margin-bottom: 1.5rem;
+}
+
+.coach-contact-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-bottom: 1.75rem;
+}
+
+.coach-contact-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  background-color: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  font-size: 0.825rem;
+  font-weight: 500;
+  color: var(--color-text-main);
+}
+
+.coach-contact-pill:hover {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.coach-buttons-row {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+/* 6. Success Stories Preview */
 .stories-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.75rem;
+  gap: 1.5rem;
 }
 
 .story-card {
@@ -412,7 +330,6 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   overflow: hidden;
-  box-shadow: var(--shadow-sm);
   display: flex;
   flex-direction: column;
 }
@@ -424,195 +341,123 @@
 }
 
 .story-card-body {
-  padding: 1.5rem;
-  flex: 1;
+  padding: 1.25rem;
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
+  flex-grow: 1;
 }
 
 .story-header-row {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.35rem;
+  justify-content: space-between;
 }
 
 .story-client-name {
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-weight: 700;
   color: var(--color-primary);
 }
 
 .story-lang-badge {
-  font-size: 0.72rem;
-  padding: 0.2rem 0.5rem;
-  background-color: var(--color-amber-light);
-  color: var(--color-amber);
-  border-radius: var(--radius-full);
+  font-size: 0.7rem;
   font-weight: 700;
+  color: var(--color-teal);
+  background-color: var(--color-teal-light);
+  padding: 0.15rem 0.45rem;
+  border-radius: var(--radius-sm);
 }
 
 .story-duration {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  font-size: 0.8rem;
+  font-size: 0.775rem;
   color: var(--color-text-light);
-  margin-bottom: 0.75rem;
 }
 
 .story-title {
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
   color: var(--color-text-main);
+  margin-top: 0.25rem;
 }
 
 .story-text {
-  font-size: 0.88rem;
-  line-height: 1.6;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  line-height: 1.55;
+  margin: 0;
 }
 
-.stories-empty-preview {
+/* 7. Home Bottom CTA Section */
+.home-contact-cta {
+  background-color: #f2f7f4;
+  border-top: 1px solid var(--color-border);
+}
+
+.home-cta-inner {
   text-align: center;
-  background-color: var(--color-surface);
-  border: 1px dashed var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: 3rem 1.5rem;
-  max-width: 580px;
+  max-width: 640px;
   margin: 0 auto;
 }
 
-.empty-icon {
-  color: var(--color-teal);
-  margin-bottom: 1rem;
-}
-
-.stories-empty-preview h3 {
-  margin-bottom: 0.5rem;
-}
-
-.stories-empty-preview p {
-  font-size: 0.925rem;
-  margin-bottom: 1.5rem;
-}
-
-/* 6. Journey */
-.journey-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-}
-
-.journey-card {
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  padding: 2rem;
-  position: relative;
-  box-shadow: var(--shadow-sm);
-}
-
-.journey-step-number {
-  position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
-  font-size: 1.85rem;
-  font-weight: 800;
-  color: var(--color-border);
-  line-height: 1;
-}
-
-.journey-year {
-  display: inline-block;
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: var(--color-teal);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 0.5rem;
-}
-
-.journey-title {
-  font-size: 1.15rem;
-  margin-bottom: 0.65rem;
-}
-
-.journey-desc {
-  font-size: 0.9rem;
-  line-height: 1.6;
-}
-
-/* 7. CTA Banner */
-.cta-banner-section {
-  padding: 2rem 0 5rem;
-}
-
-.cta-banner-card {
-  background: linear-gradient(135deg, #134e32 0%, #0d3824 100%);
-  border-radius: var(--radius-lg);
-  padding: 4rem 3rem;
-  color: #ffffff;
-  text-align: center;
-  box-shadow: var(--shadow-lg);
-}
-
-.cta-banner-tag {
-  display: inline-block;
-  color: #86efac;
-  font-size: 0.85rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+.home-cta-inner h2 {
+  font-size: clamp(1.6rem, 3vw, 2.15rem);
+  color: var(--color-primary);
   margin-bottom: 0.75rem;
 }
 
-.cta-banner-title {
-  color: #ffffff;
-  font-size: clamp(1.85rem, 3.5vw, 2.5rem);
-  margin-bottom: 1rem;
+.home-cta-inner p {
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin-bottom: 1.75rem;
 }
 
-.cta-banner-desc {
-  color: #cbd5e1;
-  font-size: 1.1rem;
-  max-width: 620px;
-  margin: 0 auto 2.25rem;
-  line-height: 1.65;
-}
-
-.cta-banner-buttons {
+.home-cta-actions {
   display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 1rem;
+  align-items: center;
+  gap: 0.85rem;
   flex-wrap: wrap;
 }
 
-.cta-banner-buttons .btn-primary {
-  background-color: #ffffff;
-  color: var(--color-primary);
+/* Responsive Breakpoints */
+@media (max-width: 1024px) {
+  .hero-container {
+    gap: 2rem;
+  }
+  .pillars-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .stories-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .coach-clean-layout {
+    gap: 2rem;
+    padding: 2rem;
+  }
 }
 
-.cta-banner-buttons .btn-primary:hover {
-  background-color: #f1f5f9;
-}
-
-.cta-banner-buttons .btn-secondary {
-  background-color: transparent;
-  color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.4);
-}
-
-.cta-banner-buttons .btn-secondary:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-color: #ffffff;
-}
-
-/* Responsive */
-@media (max-width: 992px) {
+@media (max-width: 860px) {
+  .hero-section {
+    padding: 2.5rem 0 2rem;
+  }
   .hero-container {
     grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .hero-content {
     text-align: center;
+    align-items: center;
+  }
+  .hero-badge {
+    align-self: center;
   }
   .hero-description {
     margin-left: auto;
@@ -624,26 +469,68 @@
   .hero-features-strip {
     align-items: center;
   }
-  .coach-preview-card {
+  .pillars-grid {
+    grid-template-columns: 1fr;
+  }
+  .coach-clean-layout {
     grid-template-columns: 1fr;
     text-align: center;
   }
-  .coach-preview-img-wrap {
-    margin: 0 auto;
+  .coach-image-col {
+    order: -1;
   }
-  .coach-contact-pills, .coach-cta-row {
+  .coach-contact-pills {
     justify-content: center;
   }
-  .pillars-grid, .services-grid, .stories-grid, .journey-grid {
-    grid-template-columns: 1fr 1fr;
+  .coach-buttons-row {
+    justify-content: center;
+  }
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+  .stories-grid {
+    grid-template-columns: 1fr;
   }
 }
 
-@media (max-width: 640px) {
-  .pillars-grid, .services-grid, .stories-grid, .journey-grid {
-    grid-template-columns: 1fr;
+@media (max-width: 480px) {
+  .hero-cta-group {
+    flex-direction: column;
+    width: 100%;
   }
-  .intro-card, .coach-preview-card, .cta-banner-card {
-    padding: 1.75rem 1.25rem;
+  .hero-cta-group .btn {
+    width: 100%;
+  }
+  .coach-buttons-row {
+    flex-direction: column;
+    width: 100%;
+  }
+  .coach-buttons-row .btn {
+    width: 100%;
+  }
+  .home-cta-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .home-cta-actions .btn {
+    width: 100%;
+  }
+  .coach-clean-layout {
+    padding: 1.5rem 1rem;
+  }
+  .coach-clean-img {
+    height: 300px;
+  }
+}
+
+@media (max-width: 360px) {
+  .hero-title {
+    font-size: 1.75rem;
+  }
+  .pillar-item {
+    padding: 1.25rem 1rem;
+  }
+  .service-card {
+    padding: 1.25rem 1rem;
   }
 }

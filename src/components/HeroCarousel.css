@@ -1,0 +1,205 @@
+/* HeroCarousel.css - Professional, subtle, high-performance carousel */
+
+.hero-carousel-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  user-select: none;
+}
+
+.hero-carousel-container {
+  position: relative;
+  width: 100%;
+  height: 440px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background-color: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-md);
+  touch-action: pan-y pinch-zoom;
+}
+
+/* Individual Slides with Smooth 700ms Fade */
+.hero-carousel-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 700ms ease-in-out, visibility 700ms ease-in-out;
+  pointer-events: none;
+}
+
+.hero-carousel-slide.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.hero-carousel-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+  display: block;
+}
+
+/* Optional Overlay Caption / Badge */
+.hero-carousel-overlay {
+  position: absolute;
+  bottom: 1.25rem;
+  left: 1rem;
+  right: 1rem;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(226, 232, 240, 0.85);
+  border-radius: var(--radius-md);
+  padding: 0.65rem 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+  pointer-events: none;
+}
+
+.hero-carousel-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.hero-carousel-caption-text {
+  min-width: 0;
+}
+
+.hero-carousel-caption-title {
+  display: block;
+  font-size: 0.825rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hero-carousel-caption-desc {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Subtle Navigation Dots */
+.hero-carousel-dots {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.45rem;
+  z-index: 10;
+  pointer-events: auto;
+}
+
+.hero-carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  border: none;
+  background-color: rgba(255, 255, 255, 0.65);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  padding: 0;
+  transition: all 250ms ease;
+}
+
+.hero-carousel-dot.active {
+  width: 22px;
+  border-radius: 9999px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(19, 78, 50, 0.4);
+}
+
+.hero-carousel-dot:hover:not(.active) {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* Fallback Single Image */
+.hero-carousel-fallback {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Responsive Scaling for All Breakpoints */
+@media (max-width: 1024px) {
+  .hero-carousel-container {
+    height: 380px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-carousel-wrapper {
+    max-width: 100%;
+  }
+  .hero-carousel-container {
+    height: 320px;
+    border-radius: var(--radius-md);
+  }
+  .hero-carousel-overlay {
+    bottom: 1.75rem;
+    left: 0.75rem;
+    right: 0.75rem;
+    padding: 0.5rem 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-carousel-container {
+    height: 270px;
+  }
+  .hero-carousel-overlay {
+    bottom: 1.6rem;
+    padding: 0.45rem 0.65rem;
+  }
+  .hero-carousel-caption-title {
+    font-size: 0.775rem;
+  }
+  .hero-carousel-caption-desc {
+    display: none; /* Keep super clean on small phones */
+  }
+}
+
+@media (max-width: 360px) {
+  .hero-carousel-container {
+    height: 230px;
+  }
+  .hero-carousel-dots {
+    bottom: 0.35rem;
+  }
+}
+
+/* Accessibility: Respect Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .hero-carousel-slide {
+    transition: none !important;
+  }
+  .hero-carousel-dot {
+    transition: none !important;
+  }
+}

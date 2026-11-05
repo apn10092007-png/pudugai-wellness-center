@@ -290,6 +290,34 @@
 
 @media (max-width: 640px) {
   .contact-card-box, .form-card-box {
-    padding: 1.75rem 1.25rem;
+    padding: 1.5rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-header-section {
+    padding: 2.5rem 0 2rem;
+  }
+  .action-buttons-stack {
+    gap: 0.65rem;
+  }
+  .action-btn {
+    width: 100%;
+    font-size: 0.9rem;
+    padding: 0.75rem 0.85rem;
+  }
+  .form-input, .form-select, .form-textarea {
+    font-size: 16px; /* Prevents iOS auto-zoom */
+    padding: 0.7rem 0.85rem;
+  }
+  .form-actions-dual {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .form-actions-dual .btn {
+    width: 100%;
+  }
+  .map-frame-wrapper iframe {
+    height: 280px;
   }
 }

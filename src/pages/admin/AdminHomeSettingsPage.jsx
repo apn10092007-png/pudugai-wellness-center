@@ -7,64 +7,86 @@ import {
   CheckCircle2,
   AlertTriangle,
   ExternalLink,
-  Activity,
   Image as ImageIcon,
-  RotateCcw,
+  ArrowUp,
+  ArrowDown,
+  RefreshCw,
   Sparkles,
-  FileCheck,
-  X
+  Edit2,
+  X,
+  Plus,
+  Eye,
+  EyeOff,
+  RotateCcw
 } from 'lucide-react';
-import { dataService, INITIAL_HERO_CONTENT } from '../../services/dataService';
+import HeroCarousel from '../../components/HeroCarousel';
+import { dataService, INITIAL_HERO_CONTENT, INITIAL_HERO_GALLERY } from '../../services/dataService';
 import './AdminHomeSettingsPage.css';
 
 export default function AdminHomeSettingsPage() {
   const [heroData, setHeroData] = useState(null);
+  const [gallery, setGallery] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Editable fields for hero section
+  // Editable text fields
   const [tagline, setTagline] = useState('');
   const [headline, setHeadline] = useState('');
   const [subheadline, setSubheadline] = useState('');
-  const [activeImagePath, setActiveImagePath] = useState('/assets/hero-wellness.jpg');
 
-  // Preview before saving state
+  // Upload staging state
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
-  const [fileMeta, setFileMeta] = useState(null);
+  const [newTitle, setNewTitle] = useState('');
+  const [newDescription, setNewDescription] = useState('');
+  const [uploading, setUploading] = useState(false);
 
-  // Status and feedback
-  const [savingImage, setSavingImage] = useState(false);
-  const [savingText, setSavingText] = useState(false);
-  const [deletingImage, setDeletingImage] = useState(false);
+  // Replace single item state
+  const [replaceTargetId, setReplaceTargetId] = useState(null);
+
+  // Edit details modal state
+  const [editingItem, setEditingItem] = useState(null);
+  const [editTitle, setEditTitle] = useState('');
+  const [editDesc, setEditDesc] = useState('');
+
+  // Delete modal state
+  const [deletingId, setDeletingId] = useState(null);
+  const [processingDelete, setProcessingDelete] = useState(false);
+
+  // Feedback alerts
   const [successMsg, setSuccessMsg] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [savingText, setSavingText] = useState(false);
 
   const fileInputRef = useRef(null);
+  const replaceInputRef = useRef(null);
 
   useEffect(() => {
     let mounted = true;
-    async function loadHeroContent() {
+    async function loadData() {
       try {
-        const data = await dataService.getHomeHero();
+        const hero = await dataService.getHomeHero();
         if (mounted) {
-          const resolved = { ...INITIAL_HERO_CONTENT, ...data };
+          const resolved = { ...INITIAL_HERO_CONTENT, ...hero };
           setHeroData(resolved);
           setTagline(resolved.tagline || '');
           setHeadline(resolved.headline || '');
           setSubheadline(resolved.subheadline || '');
-          setActiveImagePath(resolved.hero_image_path || '/assets/hero-wellness.jpg');
+
+          const rawGallery = Array.isArray(resolved.gallery) && resolved.gallery.length > 0
+            ? resolved.gallery
+            : INITIAL_HERO_GALLERY;
+          setGallery(rawGallery.slice().sort((a, b) => (a.display_order || 0) - (b.display_order || 0)));
           setLoading(false);
         }
       } catch (err) {
-        console.error('Failed to load hero content:', err);
+        console.error('Failed to load hero settings:', err);
         if (mounted) {
           setErrorMsg('Could not load current hero settings. Showing default configuration.');
           setLoading(false);
         }
       }
     }
-    loadHeroContent();
+    loadData();
     return () => {
       mounted = false;
       if (previewUrl && previewUrl.startsWith('blob:')) {
@@ -73,7 +95,7 @@ export default function AdminHomeSettingsPage() {
     };
   }, []);
 
-  // Format file size for user display
+  // Format file size
   const formatFileSize = (bytes) => {
     if (!bytes) return '0 B';
     const k = 1024;
@@ -82,168 +104,246 @@ export default function AdminHomeSettingsPage() {
     return `${(bytes / Math.pow(k, i)).toFixed(1)} ${sizes[i]}`;
   };
 
-  // Handle local file selection and generate preview before saving
+  // Validate image file
+  const validateFile = (file) => {
+    const validTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/jpg'];
+    if (!validTypes.includes(file.type)) {
+      throw new Error('Please upload a valid image file (JPG, PNG, or WebP).');
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      throw new Error(`File "${file.name}" exceeds the 5MB limit (${formatFileSize(file.size)}). Please choose a smaller photo.`);
+    }
+  };
+
+  // 1. Handle New Upload Selection
   const handleFileSelect = (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    // Validate type
-    const validTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/jpg'];
-    if (!validTypes.includes(file.type)) {
-      setErrorMsg('Please upload a valid image file (JPG, PNG, or WebP).');
+    try {
+      validateFile(file);
+      if (previewUrl && previewUrl.startsWith('blob:')) {
+        URL.revokeObjectURL(previewUrl);
+      }
+      const objectUrl = URL.createObjectURL(file);
+      setSelectedFile(file);
+      setPreviewUrl(objectUrl);
+      setNewTitle(file.name.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' '));
+      setNewDescription('');
+      setErrorMsg('');
+      setSuccessMsg('Photo selected for preview. Add optional details below and click "Save & Add to Gallery".');
+    } catch (err) {
+      setErrorMsg(err.message);
       setSuccessMsg('');
       if (fileInputRef.current) fileInputRef.current.value = '';
-      return;
     }
-
-    // Validate size (max 5MB)
-    if (file.size > 5 * 1024 * 1024) {
-      setErrorMsg('Image size exceeds 5MB limit. Please choose a smaller photo.');
-      setSuccessMsg('');
-      if (fileInputRef.current) fileInputRef.current.value = '';
-      return;
-    }
-
-    // Revoke previous blob if exists
-    if (previewUrl && previewUrl.startsWith('blob:')) {
-      URL.revokeObjectURL(previewUrl);
-    }
-
-    const objectUrl = URL.createObjectURL(file);
-    setSelectedFile(file);
-    setPreviewUrl(objectUrl);
-    setFileMeta({
-      name: file.name,
-      size: formatFileSize(file.size),
-      type: file.type
-    });
-    setErrorMsg('');
-    setSuccessMsg('Image ready for review. Click "Save & Apply to Home Page" to publish.');
   };
 
-  // Discard previewed image
-  const handleDiscardPreview = () => {
+  const handleDiscardStaging = () => {
     if (previewUrl && previewUrl.startsWith('blob:')) {
       URL.revokeObjectURL(previewUrl);
     }
     setSelectedFile(null);
     setPreviewUrl(null);
-    setFileMeta(null);
+    setNewTitle('');
+    setNewDescription('');
     if (fileInputRef.current) fileInputRef.current.value = '';
     setErrorMsg('');
     setSuccessMsg('');
   };
 
-  // Upload image to Supabase Storage and update site_content home_hero
-  const handleSaveHeroImage = async () => {
-    if (!selectedFile) {
-      setErrorMsg('Please select an image file first.');
-      return;
-    }
+  // 2. Save New Staged Image to Gallery
+  const handleSaveNewGalleryImage = async () => {
+    if (!selectedFile) return;
 
-    setSavingImage(true);
-    setErrorMsg('');
-    setSuccessMsg('');
-
-    try {
-      // 1. Upload to Supabase Storage (site-images or service-images bucket)
-      const publicUrl = await dataService.uploadHeroImage(selectedFile);
-
-      // 2. Save active hero image URL in Supabase site_content table
-      const updatedHero = {
-        ...heroData,
-        tagline: tagline.trim() || INITIAL_HERO_CONTENT.tagline,
-        headline: headline.trim() || INITIAL_HERO_CONTENT.headline,
-        subheadline: subheadline.trim() || INITIAL_HERO_CONTENT.subheadline,
-        hero_image_path: publicUrl
-      };
-
-      await dataService.updateHomeHero(updatedHero);
-
-      setHeroData(updatedHero);
-      setActiveImagePath(publicUrl);
-      setSelectedFile(null);
-      setPreviewUrl(null);
-      setFileMeta(null);
-      if (fileInputRef.current) fileInputRef.current.value = '';
-      setSuccessMsg('Hero image uploaded and published successfully! The live Home Page has been updated.');
-    } catch (err) {
-      console.error('Error saving hero image:', err);
-      setErrorMsg(err.message || 'Failed to upload hero image. Please try again.');
-    } finally {
-      setSavingImage(false);
-    }
-  };
-
-  // Delete custom hero image and reset to default
-  const handleConfirmDeleteImage = async () => {
-    setDeletingImage(true);
+    setUploading(true);
     setErrorMsg('');
     setSuccessMsg('');
     try {
-      await dataService.deleteHeroImage();
-      const defaultPath = '/assets/hero-wellness.jpg';
-      const updatedHero = {
-        ...heroData,
-        hero_image_path: defaultPath
-      };
-      setHeroData(updatedHero);
-      setActiveImagePath(defaultPath);
-      setShowDeleteModal(false);
-      handleDiscardPreview();
-      setSuccessMsg('Hero image reset to default successfully. The live Home Page now displays the default image.');
+      const newItem = await dataService.addHeroGalleryItem({
+        file: selectedFile,
+        title: newTitle,
+        description: newDescription
+      });
+
+      const updatedList = await dataService.getAllHeroGallery();
+      setGallery(updatedList);
+      handleDiscardStaging();
+      setSuccessMsg('New photo successfully uploaded and added to the hero gallery! Live website updated.');
     } catch (err) {
-      console.error('Error resetting hero image:', err);
-      setErrorMsg(err.message || 'Failed to reset hero image.');
+      console.error('Error adding gallery image:', err);
+      setErrorMsg(err.message || 'Failed to upload and save image.');
     } finally {
-      setDeletingImage(false);
+      setUploading(false);
     }
   };
 
-  // Save text settings (Headline, Tagline, Subheadline)
-  const handleSaveHeroText = async (e) => {
+  // 3. Replace an Existing Gallery Item
+  const handleTriggerReplace = (id) => {
+    setReplaceTargetId(id);
+    if (replaceInputRef.current) {
+      replaceInputRef.current.value = '';
+      replaceInputRef.current.click();
+    }
+  };
+
+  const handleExecuteReplace = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file || !replaceTargetId) return;
+
+    setUploading(true);
+    setErrorMsg('');
+    setSuccessMsg('');
+    try {
+      validateFile(file);
+      const publicUrl = await dataService.uploadHeroImage(file);
+      await dataService.updateHeroGalleryItem(replaceTargetId, { image_path: publicUrl });
+      const updatedList = await dataService.getAllHeroGallery();
+      setGallery(updatedList);
+      setSuccessMsg('Photo replaced successfully! Live website updated.');
+    } catch (err) {
+      console.error('Error replacing image:', err);
+      setErrorMsg(err.message || 'Failed to replace image.');
+    } finally {
+      setUploading(false);
+      setReplaceTargetId(null);
+    }
+  };
+
+  // 4. Toggle Active / Inactive
+  const handleToggleActive = async (id) => {
+    setErrorMsg('');
+    setSuccessMsg('');
+    try {
+      await dataService.toggleHeroGalleryItemActive(id);
+      const updatedList = await dataService.getAllHeroGallery();
+      setGallery(updatedList);
+      setSuccessMsg('Image status updated. Public carousel immediately reflects active items.');
+    } catch (err) {
+      console.error('Error toggling active:', err);
+      setErrorMsg(err.message || 'Failed to update image status.');
+    }
+  };
+
+  // 5. Reorder: Move Up / Down
+  const handleMoveOrder = async (index, direction) => {
+    const targetIndex = direction === 'up' ? index - 1 : index + 1;
+    if (targetIndex < 0 || targetIndex >= gallery.length) return;
+
+    setErrorMsg('');
+    setSuccessMsg('');
+    try {
+      const updatedList = await dataService.reorderHeroGallery(index, targetIndex);
+      setGallery(updatedList);
+      setSuccessMsg('Gallery order saved successfully! The public carousel now follows this order.');
+    } catch (err) {
+      console.error('Error reordering gallery:', err);
+      setErrorMsg(err.message || 'Failed to save new order.');
+    }
+  };
+
+  // 6. Delete Item with Confirmation
+  const handleConfirmDelete = async () => {
+    if (!deletingId) return;
+
+    setProcessingDelete(true);
+    setErrorMsg('');
+    setSuccessMsg('');
+    try {
+      await dataService.deleteHeroGalleryItem(deletingId);
+      const updatedList = await dataService.getAllHeroGallery();
+      setGallery(updatedList);
+      setDeletingId(null);
+      setSuccessMsg('Image removed from gallery. Public carousel updated.');
+    } catch (err) {
+      console.error('Error deleting image:', err);
+      setErrorMsg(err.message || 'Failed to delete image.');
+    } finally {
+      setProcessingDelete(false);
+    }
+  };
+
+  // 7. Edit Optional Details (Title & Description)
+  const handleOpenEdit = (item) => {
+    setEditingItem(item);
+    setEditTitle(item.title || '');
+    setEditDesc(item.description || '');
+  };
+
+  const handleSaveEdit = async (e) => {
+    e.preventDefault();
+    if (!editingItem) return;
+
+    setErrorMsg('');
+    setSuccessMsg('');
+    try {
+      await dataService.updateHeroGalleryItem(editingItem.id, {
+        title: editTitle.trim(),
+        description: editDesc.trim()
+      });
+      const updatedList = await dataService.getAllHeroGallery();
+      setGallery(updatedList);
+      setEditingItem(null);
+      setSuccessMsg('Image details updated successfully!');
+    } catch (err) {
+      console.error('Error updating details:', err);
+      setErrorMsg(err.message || 'Failed to update details.');
+    }
+  };
+
+  // 8. Save Headlines Text
+  const handleSaveHeadlines = async (e) => {
     e.preventDefault();
     setSavingText(true);
     setErrorMsg('');
     setSuccessMsg('');
     try {
-      const updatedHero = {
+      const updated = {
         ...heroData,
         tagline: tagline.trim() || INITIAL_HERO_CONTENT.tagline,
         headline: headline.trim() || INITIAL_HERO_CONTENT.headline,
         subheadline: subheadline.trim() || INITIAL_HERO_CONTENT.subheadline,
-        hero_image_path: activeImagePath
+        gallery
       };
-      await dataService.updateHomeHero(updatedHero);
-      setHeroData(updatedHero);
-      setSuccessMsg('Home page text updated successfully!');
+      await dataService.updateHomeHero(updated);
+      setHeroData(updated);
+      setSuccessMsg('Hero headlines saved successfully! Public Home Page updated.');
     } catch (err) {
-      console.error('Error updating hero text:', err);
-      setErrorMsg(err.message || 'Failed to update hero text.');
+      console.error('Error saving headlines:', err);
+      setErrorMsg(err.message || 'Failed to save hero headlines.');
     } finally {
       setSavingText(false);
     }
   };
 
-  const isCustomActive = activeImagePath && activeImagePath !== '/assets/hero-wellness.jpg';
+  const activeCount = gallery.filter((g) => g.active).length;
 
   if (loading) {
     return (
       <div className="admin-page-loading">
         <div className="spinner"></div>
-        <p>Loading Home Page Settings...</p>
+        <p>Loading Hero Gallery Settings...</p>
       </div>
     );
   }
 
   return (
     <div className="admin-home-settings-page">
-      {/* Header */}
+      {/* Hidden file input for Replace action */}
+      <input
+        ref={replaceInputRef}
+        type="file"
+        accept="image/jpeg,image/png,image/webp"
+        onChange={handleExecuteReplace}
+        style={{ display: 'none' }}
+      />
+
+      {/* Page Header */}
       <div className="admin-page-header">
         <div>
-          <h1 className="admin-page-title">Home Page Settings & Website Content</h1>
+          <h1 className="admin-page-title">Home Page Settings & Hero Gallery</h1>
           <p className="admin-page-subtitle">
-            Manage the primary hero photograph, marketing statements, and visual elements on the public Home Page.
+            Manage the dynamic hero image carousel, image order, active/inactive visibility, and marketing headlines.
           </p>
         </div>
         <div className="admin-header-actions">
@@ -268,239 +368,374 @@ export default function AdminHomeSettingsPage() {
         </div>
       )}
 
-      {/* Main Grid */}
+      {/* Main Grid: Gallery List + Live Preview Sticky Side */}
       <div className="home-settings-grid">
-        {/* CARD 1: HERO IMAGE MANAGEMENT */}
+        {/* LEFT COLUMN: HERO GALLERY MANAGEMENT */}
         <div className="management-card">
           <div className="card-header-strip">
             <ImageIcon size={22} className="strip-icon" />
             <div>
-              <h2>Hero Image Management</h2>
-              <span>Upload, preview, replace, or reset the main Home Page showcase photo</span>
+              <h2>Hero Gallery Management</h2>
+              <span>Upload, reorder, enable/disable, and replace images for the Home Page carousel</span>
             </div>
           </div>
 
-          {/* Status Row */}
-          <div className="hero-status-row">
+          {/* Top Actions: Upload Button & Counter */}
+          <div className="gallery-top-actions">
+            <div className="gallery-count-badge">
+              <span>{activeCount} of {gallery.length} Images Active on Live Site</span>
+            </div>
+
             <div>
-              <strong style={{ fontSize: '0.85rem' }}>Active Display Status:</strong>
-            </div>
-            <div>
-              {isCustomActive ? (
-                <span className="hero-status-badge custom">
-                  <CheckCircle2 size={13} />
-                  <span>Custom Hero Photo Active</span>
-                </span>
-              ) : (
-                <span className="hero-status-badge default">
-                  <Sparkles size={13} />
-                  <span>Default Lifestyle Photo Active</span>
-                </span>
-              )}
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/jpeg,image/png,image/webp"
+                onChange={handleFileSelect}
+                style={{ display: 'none' }}
+                id="gallery-file-upload"
+              />
+              <label htmlFor="gallery-file-upload" className="btn btn-primary btn-sm">
+                <Plus size={15} />
+                <span>Add Image to Gallery</span>
+              </label>
             </div>
           </div>
 
-          {/* Currently Displayed Image Preview (Mirrors HomePage layout) */}
-          <div className="hero-display-preview-wrap">
-            <img
-              src={activeImagePath || '/assets/hero-wellness.jpg'}
-              alt="Active Home Page Hero Preview"
-              className="hero-display-preview-img"
-              onError={(e) => {
-                e.currentTarget.src = '/assets/hero-wellness.jpg';
-              }}
-            />
-            <div className="hero-preview-badge-overlay">
-              <div className="hero-preview-badge-icon">
-                <Activity size={18} />
-              </div>
-              <div className="hero-preview-badge-text">
-                <span className="title">Personalized Guidance</span>
-                <span className="subtitle">Pudukkottai Center</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Upload, Replace, Delete Buttons */}
-          <div className="hero-main-actions">
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept="image/jpeg,image/png,image/webp"
-              onChange={handleFileSelect}
-              className="file-input-hidden"
-              id="hero-file-input"
-            />
-
-            <label htmlFor="hero-file-input" className="btn btn-primary">
-              <Upload size={16} />
-              <span>{isCustomActive ? 'Replace Hero Photo' : 'Upload New Hero Photo'}</span>
-            </label>
-
-            {isCustomActive && (
-              <button
-                type="button"
-                onClick={() => setShowDeleteModal(true)}
-                className="btn btn-danger"
-                disabled={deletingImage}
-              >
-                <Trash2 size={16} />
-                <span>Reset to Default</span>
-              </button>
-            )}
-
-            <Link to="/" target="_blank" className="btn btn-outline">
-              <ExternalLink size={15} />
-              <span>Preview Live Site</span>
-            </Link>
-          </div>
-
-          {/* Staging / Interactive Preview Area when a new file is chosen */}
+          {/* Unsaved Preview / Staging Box */}
           {previewUrl && (
-            <div className="unsaved-preview-card">
-              <div className="unsaved-header">
+            <div className="unsaved-staging-box">
+              <div className="unsaved-staging-header">
                 <span className="unsaved-badge">
-                  <FileCheck size={14} />
-                  <span>New Photo Selected (Unsaved Preview)</span>
+                  <Upload size={14} />
+                  <span>New Image Preview (Unsaved)</span>
                 </span>
                 <button
                   type="button"
-                  onClick={handleDiscardPreview}
+                  onClick={handleDiscardStaging}
                   className="btn btn-outline btn-sm"
-                  title="Discard this preview"
+                  title="Discard"
                 >
                   <X size={14} />
-                  <span>Discard</span>
+                  <span>Cancel</span>
                 </button>
               </div>
-
-              {fileMeta && (
-                <div className="unsaved-file-info">
-                  <strong>{fileMeta.name}</strong> • {fileMeta.size} • {fileMeta.type}
-                </div>
-              )}
 
               <img
                 src={previewUrl}
-                alt="Unsaved New Hero Preview"
-                className="unsaved-preview-media"
+                alt="New upload preview"
+                className="unsaved-staging-img"
               />
 
-              <div className="unsaved-action-buttons">
+              <div className="unsaved-form-row">
+                <div className="form-group" style={{ margin: 0 }}>
+                  <label className="form-label" style={{ fontSize: '0.8rem' }}>Optional Title</label>
+                  <input
+                    type="text"
+                    value={newTitle}
+                    onChange={(e) => setNewTitle(e.target.value)}
+                    placeholder="e.g. Personalized Nutrition Guidance"
+                    className="form-input"
+                    style={{ padding: '0.5rem 0.75rem', fontSize: '0.85rem' }}
+                  />
+                </div>
+                <div className="form-group" style={{ margin: 0 }}>
+                  <label className="form-label" style={{ fontSize: '0.8rem' }}>Optional Short Description</label>
+                  <input
+                    type="text"
+                    value={newDescription}
+                    onChange={(e) => setNewDescription(e.target.value)}
+                    placeholder="e.g. Body screening & healthy habits"
+                    className="form-input"
+                    style={{ padding: '0.5rem 0.75rem', fontSize: '0.85rem' }}
+                  />
+                </div>
+              </div>
+
+              <div className="unsaved-actions">
                 <button
                   type="button"
-                  onClick={handleSaveHeroImage}
-                  disabled={savingImage}
-                  className="btn btn-primary"
+                  onClick={handleSaveNewGalleryImage}
+                  disabled={uploading}
+                  className="btn btn-primary btn-sm"
                 >
-                  <Save size={16} />
-                  <span>{savingImage ? 'Uploading & Publishing...' : 'Save & Apply to Home Page'}</span>
+                  <Save size={15} />
+                  <span>{uploading ? 'Uploading to Storage...' : 'Save & Add to Gallery'}</span>
                 </button>
                 <button
                   type="button"
-                  onClick={handleDiscardPreview}
-                  disabled={savingImage}
-                  className="btn btn-secondary"
+                  onClick={handleDiscardStaging}
+                  disabled={uploading}
+                  className="btn btn-secondary btn-sm"
                 >
-                  Cancel
+                  Discard
                 </button>
               </div>
             </div>
           )}
 
-          {/* Quick upload instructions */}
-          <ul className="guidance-list">
-            <li>Supported formats: JPG, PNG, or WebP.</li>
-            <li>Maximum file size: 5MB.</li>
-            <li>Recommended resolution: 1200 x 900 px or vertical portrait aspect ratio.</li>
-            <li>Uploaded photos are stored securely in Supabase Storage with authenticated permissions.</li>
-          </ul>
-        </div>
+          {/* List of Gallery Items */}
+          <div className="gallery-items-stack" style={{ marginTop: '1rem' }}>
+            {gallery.map((item, index) => {
+              const isFirst = index === 0;
+              const isLast = index === gallery.length - 1;
 
-        {/* CARD 2: HOME PAGE HERO TEXT (TAGLINE, HEADLINE) */}
-        <div className="management-card">
-          <div className="card-header-strip">
-            <Sparkles size={22} className="strip-icon" />
-            <div>
-              <h2>Home Page Headlines</h2>
-              <span>Primary headlines and messaging displayed alongside the hero photo</span>
-            </div>
+              return (
+                <div
+                  key={item.id || index}
+                  className={`gallery-item-card ${item.active ? 'active' : 'inactive'}`}
+                >
+                  <span className="gallery-order-num">#{item.display_order || index + 1}</span>
+
+                  <div className="gallery-thumb-box">
+                    <img
+                      src={item.image_path || '/assets/hero-wellness.jpg'}
+                      alt={item.title || 'Gallery item'}
+                      className="gallery-thumb-img"
+                      onError={(e) => {
+                        e.currentTarget.src = '/assets/hero-wellness.jpg';
+                      }}
+                    />
+                  </div>
+
+                  <div className="gallery-item-info">
+                    <span className="gallery-item-title">{item.title || 'Untitled Photo'}</span>
+                    <span className="gallery-item-desc">
+                      {item.description || 'No caption provided'}
+                    </span>
+                  </div>
+
+                  {/* Active / Inactive Pill Toggle */}
+                  <button
+                    type="button"
+                    onClick={() => handleToggleActive(item.id)}
+                    className={`gallery-status-btn ${item.active ? 'active' : 'inactive'}`}
+                    title={item.active ? 'Click to deactivate (hide from carousel)' : 'Click to activate (show on carousel)'}
+                  >
+                    {item.active ? <Eye size={12} /> : <EyeOff size={12} />}
+                    <span>{item.active ? 'Active' : 'Inactive'}</span>
+                  </button>
+
+                  {/* Reorder and Item Actions */}
+                  <div className="gallery-item-actions">
+                    <button
+                      type="button"
+                      onClick={() => handleMoveOrder(index, 'up')}
+                      disabled={isFirst}
+                      className="icon-ctrl-btn"
+                      title="Move Up"
+                    >
+                      <ArrowUp size={15} />
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => handleMoveOrder(index, 'down')}
+                      disabled={isLast}
+                      className="icon-ctrl-btn"
+                      title="Move Down"
+                    >
+                      <ArrowDown size={15} />
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => handleOpenEdit(item)}
+                      className="icon-ctrl-btn"
+                      title="Edit Title & Description"
+                    >
+                      <Edit2 size={14} />
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => handleTriggerReplace(item.id)}
+                      className="icon-ctrl-btn"
+                      title="Replace Photo"
+                    >
+                      <RefreshCw size={14} />
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setDeletingId(item.id)}
+                      className="icon-ctrl-btn delete"
+                      title="Delete Photo"
+                    >
+                      <Trash2 size={14} />
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
           </div>
 
-          <form onSubmit={handleSaveHeroText}>
-            <div className="form-group">
-              <label className="form-label">Hero Badge / Tagline</label>
-              <input
-                type="text"
-                value={tagline}
-                onChange={(e) => setTagline(e.target.value)}
-                placeholder="Nutrition • Fitness • Wellness"
-                className="form-input"
-              />
-              <span className="form-helper">Displayed above the main headline</span>
+          <div style={{ marginTop: '1.5rem', fontSize: '0.8rem', color: 'var(--color-text-light)' }}>
+            <p><strong>Note:</strong> Reordering or toggling status saves automatically and syncs directly to the live website.</p>
+          </div>
+        </div>
+
+        {/* RIGHT COLUMN: STICKY LIVE CAROUSEL PREVIEW + HEADLINES */}
+        <div className="preview-sticky-wrap">
+          <div className="carousel-preview-card">
+            <div className="carousel-preview-header">
+              <h3>Live Public Carousel Preview</h3>
+              <span className="gallery-count-badge" style={{ fontSize: '0.75rem', padding: '0.2rem 0.5rem' }}>
+                Preview Mode
+              </span>
             </div>
 
-            <div className="form-group">
-              <label className="form-label">Main Headline</label>
-              <input
-                type="text"
-                value={headline}
-                onChange={(e) => setHeadline(e.target.value)}
-                placeholder="Real Wellness for Your Real Life."
-                className="form-input"
-                required
-              />
+            {/* Live Interactive Preview */}
+            <HeroCarousel
+              items={gallery.filter((g) => g.active)}
+              fallbackImage="/assets/hero-wellness.jpg"
+            />
+
+            <p className="carousel-preview-note">
+              Shows only active gallery images in saved display order. Cycles every 4.5 seconds with touch swipe enabled.
+            </p>
+          </div>
+
+          {/* HEADLINES EDITOR CARD */}
+          <div className="management-card" style={{ padding: '1.5rem' }}>
+            <div className="card-header-strip" style={{ marginBottom: '1rem', paddingBottom: '0.75rem' }}>
+              <Sparkles size={18} className="strip-icon" />
+              <div>
+                <h3 style={{ fontSize: '1.1rem', margin: 0, color: 'var(--color-primary)' }}>Hero Headlines</h3>
+                <span style={{ fontSize: '0.775rem' }}>Text alongside carousel on Home Page</span>
+              </div>
             </div>
 
-            <div className="form-group">
-              <label className="form-label">Subheadline / Introduction Paragraph</label>
-              <textarea
-                value={subheadline}
-                onChange={(e) => setSubheadline(e.target.value)}
-                rows={5}
-                className="form-textarea"
-                placeholder="Personalized health, nutrition, and lifestyle coaching in Pudukkottai..."
-                required
-              />
-            </div>
+            <form onSubmit={handleSaveHeadlines}>
+              <div className="form-group" style={{ marginBottom: '0.85rem' }}>
+                <label className="form-label" style={{ fontSize: '0.825rem' }}>Tagline Badge</label>
+                <input
+                  type="text"
+                  value={tagline}
+                  onChange={(e) => setTagline(e.target.value)}
+                  className="form-input"
+                  style={{ padding: '0.55rem 0.75rem', fontSize: '0.85rem' }}
+                />
+              </div>
 
-            <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1rem' }}>
-              <button
-                type="submit"
-                disabled={savingText}
-                className="btn btn-secondary btn-lg"
-              >
-                <Save size={16} />
-                <span>{savingText ? 'Saving Text...' : 'Update Hero Headlines'}</span>
-              </button>
+              <div className="form-group" style={{ marginBottom: '0.85rem' }}>
+                <label className="form-label" style={{ fontSize: '0.825rem' }}>Main Headline</label>
+                <input
+                  type="text"
+                  value={headline}
+                  onChange={(e) => setHeadline(e.target.value)}
+                  className="form-input"
+                  style={{ padding: '0.55rem 0.75rem', fontSize: '0.85rem' }}
+                  required
+                />
+              </div>
 
-              <button
-                type="button"
-                onClick={() => {
-                  setTagline(INITIAL_HERO_CONTENT.tagline);
-                  setHeadline(INITIAL_HERO_CONTENT.headline);
-                  setSubheadline(INITIAL_HERO_CONTENT.subheadline);
-                }}
-                className="btn btn-outline"
-                title="Reset text fields to defaults"
-              >
-                <RotateCcw size={15} />
-                <span>Reset Text</span>
-              </button>
-            </div>
-          </form>
+              <div className="form-group" style={{ marginBottom: '1rem' }}>
+                <label className="form-label" style={{ fontSize: '0.825rem' }}>Supporting Description</label>
+                <textarea
+                  value={subheadline}
+                  onChange={(e) => setSubheadline(e.target.value)}
+                  rows={3}
+                  className="form-textarea"
+                  style={{ padding: '0.55rem 0.75rem', fontSize: '0.85rem' }}
+                  required
+                />
+              </div>
+
+              <div style={{ display: 'flex', gap: '0.65rem' }}>
+                <button
+                  type="submit"
+                  disabled={savingText}
+                  className="btn btn-primary btn-sm"
+                  style={{ flex: 1 }}
+                >
+                  <Save size={14} />
+                  <span>{savingText ? 'Saving...' : 'Save Headlines'}</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    setTagline(INITIAL_HERO_CONTENT.tagline);
+                    setHeadline(INITIAL_HERO_CONTENT.headline);
+                    setSubheadline(INITIAL_HERO_CONTENT.subheadline);
+                  }}
+                  className="btn btn-outline btn-sm"
+                  title="Reset to Defaults"
+                >
+                  <RotateCcw size={14} />
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
 
-      {/* Confirmation Modal for Resetting / Deleting Hero Image */}
-      {showDeleteModal && (
+      {/* Edit Details Modal */}
+      {editingItem && (
         <div className="modal-backdrop">
-          <div className="modal-content" style={{ maxWidth: '440px' }}>
-            <div className="delete-modal-body" style={{ textAlign: 'center', padding: '1.5rem' }}>
+          <div className="modal-content">
+            <div className="modal-header-strip">
+              <h3>Edit Image Details</h3>
+              <button
+                type="button"
+                onClick={() => setEditingItem(null)}
+                className="modal-close-btn"
+              >
+                <X size={18} />
+              </button>
+            </div>
+            <form onSubmit={handleSaveEdit} className="modal-body">
+              <div className="form-group">
+                <label className="form-label">Image Title</label>
+                <input
+                  type="text"
+                  value={editTitle}
+                  onChange={(e) => setEditTitle(e.target.value)}
+                  placeholder="e.g. Body Composition & Screenings"
+                  className="form-input"
+                />
+              </div>
+              <div className="form-group">
+                <label className="form-label">Short Description / Subtitle</label>
+                <input
+                  type="text"
+                  value={editDesc}
+                  onChange={(e) => setEditDesc(e.target.value)}
+                  placeholder="e.g. Scientific BMI and metabolic assessments"
+                  className="form-input"
+                />
+              </div>
+              <div className="modal-actions-bar">
+                <button
+                  type="button"
+                  onClick={() => setEditingItem(null)}
+                  className="btn btn-secondary btn-sm"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="btn btn-primary btn-sm"
+                >
+                  <Save size={14} />
+                  <span>Save Changes</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Delete Confirmation Modal */}
+      {deletingId && (
+        <div className="modal-backdrop">
+          <div className="modal-content" style={{ maxWidth: '420px' }}>
+            <div className="modal-body" style={{ textAlign: 'center', padding: '1.75rem 1.25rem' }}>
               <div
                 style={{
-                  width: '56px',
-                  height: '56px',
+                  width: '52px',
+                  height: '52px',
                   borderRadius: '50%',
                   backgroundColor: '#fee2e2',
                   color: '#dc2626',
@@ -510,31 +745,30 @@ export default function AdminHomeSettingsPage() {
                   margin: '0 auto 1rem'
                 }}
               >
-                <AlertTriangle size={30} />
+                <AlertTriangle size={28} />
               </div>
-              <h3 style={{ fontSize: '1.25rem', marginBottom: '0.5rem' }}>
-                Reset Hero Image to Default?
+              <h3 style={{ fontSize: '1.2rem', marginBottom: '0.5rem', color: 'var(--color-primary)' }}>
+                Delete this image?
               </h3>
-              <p style={{ fontSize: '0.9rem', color: 'var(--color-text-light)', marginBottom: '1.5rem' }}>
-                This will remove the current custom hero image from the public Home Page and restore the
-                default PWC wellness lifestyle photograph. You can upload a new photo anytime.
+              <p style={{ fontSize: '0.875rem', color: 'var(--color-text-muted)', marginBottom: '1.5rem' }}>
+                This image will be permanently removed from your Home Page carousel. This action cannot be undone.
               </p>
               <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center' }}>
                 <button
                   type="button"
-                  onClick={() => setShowDeleteModal(false)}
-                  className="btn btn-secondary"
-                  disabled={deletingImage}
+                  onClick={() => setDeletingId(null)}
+                  className="btn btn-secondary btn-sm"
+                  disabled={processingDelete}
                 >
                   Cancel
                 </button>
                 <button
                   type="button"
-                  onClick={handleConfirmDeleteImage}
-                  className="btn btn-danger"
-                  disabled={deletingImage}
+                  onClick={handleConfirmDelete}
+                  className="btn btn-danger btn-sm"
+                  disabled={processingDelete}
                 >
-                  {deletingImage ? 'Resetting...' : 'Yes, Reset to Default'}
+                  {processingDelete ? 'Deleting...' : 'Yes, Delete Image'}
                 </button>
               </div>
             </div>

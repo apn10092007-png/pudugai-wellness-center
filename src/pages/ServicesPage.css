@@ -244,7 +244,31 @@
     flex-direction: column;
     align-items: stretch;
   }
+  .search-box-wrap {
+    min-width: 0;
+    width: 100%;
+  }
+  .category-tabs-scroll {
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+  }
   .services-consultation-banner {
     padding: 1.75rem 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .services-header-section {
+    padding: 2.5rem 0 2rem;
+  }
+  .consult-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+  .consult-buttons .btn {
+    width: 100%;
+  }
+  .service-detail-card {
+    padding: 1.25rem 1rem;
   }
 }

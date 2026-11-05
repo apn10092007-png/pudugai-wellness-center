@@ -225,3 +225,18 @@
     padding: 3rem 1.25rem;
   }
 }
+
+@media (max-width: 480px) {
+  .stories-header-section {
+    padding: 2.5rem 0 2rem;
+  }
+  .story-photo-box {
+    height: 190px;
+  }
+  .stories-encourage-card {
+    padding: 2rem 1.25rem;
+  }
+  .stories-encourage-card .btn {
+    width: 100%;
+  }
+}

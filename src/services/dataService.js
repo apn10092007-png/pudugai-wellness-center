@@ -229,11 +229,39 @@ export const INITIAL_SITE_CONTENT = {
   ]
 };
 
+export const INITIAL_HERO_GALLERY = [
+  {
+    id: 'hero-gallery-1',
+    image_path: '/assets/hero-wellness.jpg',
+    title: 'Personalized Health & Nutrition Guidance',
+    description: 'Sustainable everyday wellness coaching in Pudukkottai',
+    display_order: 1,
+    active: true
+  },
+  {
+    id: 'hero-gallery-2',
+    image_path: '/assets/about-wellness.jpg',
+    title: 'Body Composition & Metabolic Screenings',
+    description: 'Comprehensive BMI, BMR, and body fat analysis',
+    display_order: 2,
+    active: true
+  },
+  {
+    id: 'hero-gallery-3',
+    image_path: '/assets/coach-pandian.png',
+    title: '1-on-1 Guidance with Coach Thangapandian',
+    description: 'Practical habit building without extreme restrictions',
+    display_order: 3,
+    active: true
+  }
+];
+
 export const INITIAL_HERO_CONTENT = {
   tagline: 'Nutrition • Fitness • Wellness',
   headline: 'Real Wellness for Your Real Everyday Life',
   subheadline: 'Personal health & nutrition coaching in Pudukkottai guided by Coach Thangapandian S. Build sustainable habits that last a lifetime.',
-  hero_image_path: '/assets/hero-wellness.jpg'
+  hero_image_path: '/assets/hero-wellness.jpg',
+  gallery: INITIAL_HERO_GALLERY
 };
 
 // Local storage helper keys for offline / preview mode fallback
@@ -564,7 +592,14 @@ export const dataService = {
           .single();
         if (!error && data?.content) {
           const resolved = isHero
-            ? { ...INITIAL_HERO_CONTENT, ...data.content, hero_image_path: data.content.hero_image_path || '/assets/hero-wellness.jpg' }
+            ? {
+                ...INITIAL_HERO_CONTENT,
+                ...data.content,
+                hero_image_path: data.content.hero_image_path || '/assets/hero-wellness.jpg',
+                gallery: Array.isArray(data.content.gallery) && data.content.gallery.length > 0
+                  ? data.content.gallery
+                  : INITIAL_HERO_GALLERY
+              }
             : data.content;
           setLocal(localKey, resolved);
           return resolved;
@@ -665,6 +700,127 @@ export const dataService = {
   },
 
   // ==========================================
+  // HERO GALLERY CRUD & ORDERING API
+  // ==========================================
+  async getHeroGallery(onlyActive = true) {
+    const hero = await this.getHomeHero();
+    let gallery = Array.isArray(hero?.gallery) && hero.gallery.length > 0
+      ? hero.gallery
+      : INITIAL_HERO_GALLERY;
+    if (onlyActive) {
+      gallery = gallery.filter((item) => item.active !== false);
+    }
+    return gallery.slice().sort((a, b) => (a.display_order || 0) - (b.display_order || 0));
+  },
+
+  async getAllHeroGallery() {
+    return this.getHeroGallery(false);
+  },
+
+  async updateHeroGallery(gallery) {
+    const hero = await this.getHomeHero();
+    const indexed = gallery.map((item, idx) => ({
+      ...item,
+      display_order: idx + 1
+    }));
+    const updated = {
+      ...hero,
+      gallery: indexed,
+      hero_image_path: indexed.find((g) => g.active)?.image_path || hero.hero_image_path || '/assets/hero-wellness.jpg'
+    };
+    return this.updateHomeHero(updated);
+  },
+
+  async addHeroGalleryItem({ file, title = '', description = '' }) {
+    const publicUrl = await this.uploadHeroImage(file);
+    const hero = await this.getHomeHero();
+    const currentGallery = Array.isArray(hero?.gallery) && hero.gallery.length > 0
+      ? hero.gallery
+      : INITIAL_HERO_GALLERY;
+    const newItem = {
+      id: 'gallery-' + Date.now() + '-' + Math.random().toString(36).substring(2, 6),
+      image_path: publicUrl,
+      title: title.trim(),
+      description: description.trim(),
+      display_order: currentGallery.length + 1,
+      active: true
+    };
+    const updatedGallery = [...currentGallery, newItem];
+    await this.updateHeroGallery(updatedGallery);
+    return newItem;
+  },
+
+  async deleteHeroGalleryItem(id) {
+    const hero = await this.getHomeHero();
+    const currentGallery = Array.isArray(hero?.gallery) && hero.gallery.length > 0
+      ? hero.gallery
+      : INITIAL_HERO_GALLERY;
+    const itemToDelete = currentGallery.find((g) => g.id === id);
+    const updatedGallery = currentGallery.filter((g) => g.id !== id);
+    await this.updateHeroGallery(updatedGallery);
+
+    // Clean up file in Supabase storage if it was stored there
+    if (itemToDelete?.image_path && !itemToDelete.image_path.startsWith('/assets/')) {
+      try {
+        for (const bucket of ['site-images', 'service-images']) {
+          if (itemToDelete.image_path.includes(`/${bucket}/`)) {
+            const fileName = itemToDelete.image_path.split(`/${bucket}/`).pop().split('?')[0];
+            if (fileName && isSupabaseConfigured()) {
+              await supabase.storage.from(bucket).remove([fileName]);
+            }
+          }
+        }
+      } catch (err) {
+        console.warn('Storage delete cleanup error:', err);
+      }
+    }
+    return true;
+  },
+
+  async toggleHeroGalleryItemActive(id) {
+    const hero = await this.getHomeHero();
+    const currentGallery = Array.isArray(hero?.gallery) && hero.gallery.length > 0
+      ? hero.gallery
+      : INITIAL_HERO_GALLERY;
+    const updatedGallery = currentGallery.map((item) =>
+      item.id === id ? { ...item, active: !item.active } : item
+    );
+    await this.updateHeroGallery(updatedGallery);
+    return updatedGallery.find((g) => g.id === id);
+  },
+
+  async updateHeroGalleryItem(id, updates) {
+    const hero = await this.getHomeHero();
+    const currentGallery = Array.isArray(hero?.gallery) && hero.gallery.length > 0
+      ? hero.gallery
+      : INITIAL_HERO_GALLERY;
+    const updatedGallery = currentGallery.map((item) =>
+      item.id === id ? { ...item, ...updates } : item
+    );
+    await this.updateHeroGallery(updatedGallery);
+    return updatedGallery.find((g) => g.id === id);
+  },
+
+  async reorderHeroGallery(fromIndex, toIndex) {
+    const hero = await this.getHomeHero();
+    const currentGallery = [...(Array.isArray(hero?.gallery) && hero.gallery.length > 0
+      ? hero.gallery
+      : INITIAL_HERO_GALLERY)];
+    if (
+      fromIndex < 0 ||
+      fromIndex >= currentGallery.length ||
+      toIndex < 0 ||
+      toIndex >= currentGallery.length
+    ) {
+      return currentGallery;
+    }
+    const [moved] = currentGallery.splice(fromIndex, 1);
+    currentGallery.splice(toIndex, 0, moved);
+    await this.updateHeroGallery(currentGallery);
+    return currentGallery;
+  },
+
+  // ==========================================
   // 5. ENQUIRIES API (Customer Contact Form)
   // ==========================================
   async submitEnquiry({ customer_name, phone, service, message }) {
@@ -722,6 +878,18 @@ export const dataService = {
         return { success: true, ...newEnquiry };
       } catch (err) {
         console.error('Supabase submitEnquiry error:', err);
+        // If network fetch failed (offline / sandbox), record locally for testing and admin preview
+        if (err.message?.includes('fetch failed')) {
+          const current = getLocal(STORAGE_KEYS.ENQUIRIES, []);
+          const newEnquiry = {
+            ...payload,
+            id: 'enq-' + Date.now(),
+            created_at: new Date().toISOString()
+          };
+          current.unshift(newEnquiry);
+          setLocal(STORAGE_KEYS.ENQUIRIES, current);
+          return { success: true, ...newEnquiry };
+        }
         throw new Error(err.message || 'Failed to submit enquiry. Please try again.');
       }
     }
@@ -813,15 +981,25 @@ export const dataService = {
     }
 
     if (isSupabaseConfigured()) {
-      const ext = file.name.split('.').pop();
-      const fileName = `${Date.now()}_${Math.random().toString(36).substring(2, 8)}.${ext}`;
-      const { data, error } = await supabase.storage.from(bucket).upload(fileName, file, {
-        cacheControl: '3600',
-        upsert: false
-      });
-      if (error) throw error;
-      const { data: publicUrlData } = supabase.storage.from(bucket).getPublicUrl(fileName);
-      return publicUrlData.publicUrl;
+      try {
+        const ext = file.name.split('.').pop();
+        const fileName = `${Date.now()}_${Math.random().toString(36).substring(2, 8)}.${ext}`;
+        const { data, error } = await supabase.storage.from(bucket).upload(fileName, file, {
+          cacheControl: '3600',
+          upsert: false
+        });
+        if (!error && data) {
+          const { data: publicUrlData } = supabase.storage.from(bucket).getPublicUrl(fileName);
+          return publicUrlData.publicUrl;
+        }
+        if (error) {
+          if (error.message?.includes('Bucket not found')) throw error;
+          console.warn(`Supabase storage upload error (${bucket}):`, error.message);
+        }
+      } catch (uploadErr) {
+        if (uploadErr.message?.includes('Bucket not found')) throw uploadErr;
+        console.warn(`Supabase storage (${bucket}) upload error, using local fallback:`, uploadErr.message);
+      }
     }
 
     // Local fallback: convert to base64 Data URL for instant preview & persistence

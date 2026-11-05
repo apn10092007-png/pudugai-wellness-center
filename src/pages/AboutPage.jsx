@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  Compass,
-  Target,
-  Heart,
-  CheckCircle2,
   Phone,
   MapPin,
-  Calendar,
-  Sparkles,
-  Award,
-  Users
+  ArrowRight,
+  Target,
+  Compass,
+  CheckCircle2
 } from 'lucide-react';
-import { InstagramIcon as Instagram } from '../components/Icons';
+import { InstagramIcon as Instagram, WhatsAppIcon } from '../components/Icons';
 import { dataService } from '../services/dataService';
+import { BUSINESS_CONFIG } from '../config/business';
 import './AboutPage.css';
 
 export default function AboutPage() {
@@ -51,139 +48,80 @@ export default function AboutPage() {
           <span className="section-tag">About Our Center</span>
           <h1 className="about-page-title">Pudugai Wellness Center</h1>
           <p className="about-page-lead">
-            A dedicated center for lifestyle, nutrition, and holistic vitality in Pudukkottai,
-            guided by Wellness Coach Thangapandian S.
+            Dedicated health, nutrition, and lifestyle guidance in Pudukkottai, led by
+            Wellness Coach Thangapandian S.
           </p>
         </div>
       </section>
 
-      {/* 2. Mission & Vision */}
-      <section className="section mission-vision-section">
+      {/* 2. Coach Profile (Verified & Concise) */}
+      <section className="section about-coach-section">
         <div className="container">
-          <div className="mission-vision-grid">
-            <div className="card mv-card">
-              <div className="mv-icon-wrap mission">
-                <Target size={28} />
-              </div>
-              <span className="mv-tag">Our Mission</span>
-              <h2 className="mv-title">Empowering Everyday Health</h2>
-              <p className="mv-text">
-                {content?.mission ||
-                  'To empower people of all ages to achieve their highest vitality through personalized nutrition plans, body composition analysis, and consistent, supportive coaching.'}
-              </p>
+          <div className="about-coach-grid">
+            <div className="about-coach-media">
+              <img
+                src={coach?.image_path || '/assets/coach-pandian.png'}
+                alt={coach?.coach_name || 'Coach Thangapandian S'}
+                className="about-coach-img"
+                onError={(e) => {
+                  e.currentTarget.src = '/assets/coach-pandian.png';
+                }}
+              />
             </div>
 
-            <div className="card mv-card">
-              <div className="mv-icon-wrap vision">
-                <Compass size={28} />
-              </div>
-              <span className="mv-tag">Our Vision</span>
-              <h2 className="mv-title">A Thriving Community</h2>
-              <p className="mv-text">
-                {content?.vision ||
-                  "To become Pudukkottai's most trusted and compassionate wellness community, where healthy living is accessible, sustainable, and joyful."}
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+            <div className="about-coach-info">
+              <span className="section-tag">Founder & Wellness Coach</span>
+              <h2 className="about-coach-name">{coach?.coach_name || 'Thangapandian S'}</h2>
+              <p className="about-coach-role">{coach?.title || 'Wellness Coach & Founder'}</p>
 
-      {/* 3. DYNAMIC COACH PROFILE SECTION */}
-      <section className="section coach-detail-section">
-        <div className="container">
-          <div className="coach-profile-wrapper">
-            <div className="coach-image-column">
-              <div className="coach-portrait-card">
-                {coach?.image_path ? (
-                  <img
-                    src={coach.image_path}
-                    alt={coach.coach_name}
-                    className="coach-portrait-img"
-                    onError={(e) => {
-                      // Fallback if network or invalid URL
-                      e.currentTarget.src = '/assets/coach-pandian.png';
-                    }}
-                  />
-                ) : (
-                  <div className="coach-portrait-empty">
-                    <Users size={64} className="placeholder-icon" />
-                    <span>Coach Profile Photograph</span>
-                  </div>
-                )}
-                <div className="coach-seal-badge">
-                  <Award size={16} />
-                  <span>Founder & Coach</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="coach-bio-column">
-              <span className="section-tag">Leadership & Coaching</span>
-              <h2 className="coach-full-name">{coach?.coach_name || 'Thangapandian S'}</h2>
-              <p className="coach-official-role">
-                {coach?.title || 'Wellness Coach & Founder'}
-              </p>
-
-              <div className="coach-bio-content">
+              <div className="about-coach-bio">
                 <p>
                   {coach?.biography ||
-                    'Thangapandian S is dedicated to guiding individuals and families toward healthier, more active, and balanced lifestyles. At Pudugai Wellness Center, the coaching philosophy is rooted in sustainable daily habits, wholesome nutrition, and gradual, realistic progress without extreme or unsustainable restrictions.'}
+                    'Thangapandian S is dedicated to guiding individuals and families in Pudukkottai toward sustainable, healthy lifestyle habits.'}
                 </p>
                 <p>
-                  Coach Thangapandian works closely with each individual, starting with a
-                  thorough body composition evaluation to understand baseline parameters such as
-                  BMI, body fat, muscle ratio, and metabolic age. Every program is then calibrated
-                  to the individual’s daily routine, culinary preferences, and personal goals.
+                  At Pudugai Wellness Center, coaching begins with a detailed body composition
+                  assessment (BMI, BMR, visceral fat, muscle mass). Nutrition plans are then tailored
+                  around your daily routine and food preferences without extreme restrictions.
                 </p>
               </div>
 
-              {/* Verified Coach Details */}
-              <div className="coach-meta-box">
-                <div className="meta-row">
-                  <Phone size={18} className="meta-icon" />
-                  <div>
-                    <span className="meta-label">Direct Phone:</span>
-                    <a href="tel:9443443261" className="meta-val highlight">
-                      94434 43261
-                    </a>
-                  </div>
-                </div>
-
-                <div className="meta-row">
-                  <Instagram size={18} className="meta-icon" />
-                  <div>
-                    <span className="meta-label">Instagram:</span>
-                    <a
-                      href={coach?.instagram_url || 'https://www.instagram.com/coach_pandian?exln=YmNsbjZkeXQ1dnc3'}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="meta-val"
-                    >
-                      @coach_pandian
-                    </a>
-                  </div>
-                </div>
-
-                <div className="meta-row">
-                  <MapPin size={18} className="meta-icon" />
-                  <div>
-                    <span className="meta-label">Center Address (Pudukkottai):</span>
-                    <p className="meta-val">
-                      {coach?.address_en || 'E Main Rd, T Nagar, Buvaneswari Nagar, Pudukkottai, Tamil Nadu 622001'}
-                    </p>
-                    <p className="meta-val tamil-text">
-                      {coach?.address_ta || 'கிழக்கு முதன்மை சாலை, டி நகர், புவனேஸ்வரி நகர், புதுக்கோட்டை, தமிழ்நாடு 622001'}
-                    </p>
-                  </div>
+              <div className="about-coach-contact">
+                <a href={`tel:${BUSINESS_CONFIG.phoneRaw}`} className="about-pill">
+                  <Phone size={14} />
+                  <span>Call: {BUSINESS_CONFIG.phoneDisplay}</span>
+                </a>
+                <a
+                  href={`https://wa.me/${BUSINESS_CONFIG.whatsappNumber}?text=Hello%20Coach%20Thangapandian!%20I%20would%20like%20to%20learn%20more%20about%20PWC.`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="about-pill whatsapp"
+                >
+                  <WhatsAppIcon size={14} />
+                  <span>WhatsApp Coach</span>
+                </a>
+                <a
+                  href={BUSINESS_CONFIG.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="about-pill"
+                >
+                  <Instagram size={14} />
+                  <span>@coach_pandian</span>
+                </a>
+                <div className="about-pill location">
+                  <MapPin size={14} />
+                  <span>Pudukkottai Center</span>
                 </div>
               </div>
 
-              <div className="coach-action-buttons">
-                <Link to="/contact" className="btn btn-primary btn-lg">
-                  <span>Connect with Coach</span>
+              <div className="about-action-row">
+                <Link to="/contact" className="btn btn-primary">
+                  <span>Schedule Consultation</span>
+                  <ArrowRight size={16} />
                 </Link>
-                <Link to="/services" className="btn btn-secondary btn-lg">
-                  <span>Browse Programs</span>
+                <Link to="/services" className="btn btn-secondary">
+                  <span>Explore Programs</span>
                 </Link>
               </div>
             </div>
@@ -191,96 +129,34 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 4. Wellness Approach */}
-      <section className="section approach-section">
+      {/* 3. Mission & Practical Approach */}
+      <section className="section about-values-section">
         <div className="container">
-          <div className="section-header">
-            <span className="section-tag">Our Methodology</span>
-            <h2 className="section-title">The PWC Wellness Philosophy</h2>
-            <p className="section-subtitle">
-              {content?.approach_intro ||
-                'We do not believe in quick-fix crash diets or exhausting extremes. Our wellness model focuses on balanced daily nutrition, hydration, restorative sleep, gentle active movement, and habit accountability.'}
-            </p>
-          </div>
-
-          <div className="approach-grid">
-            <div className="approach-step-card">
-              <span className="step-num">01</span>
-              <h3>Assess First</h3>
+          <div className="about-values-grid">
+            <div className="value-card">
+              <div className="value-icon">
+                <Target size={22} />
+              </div>
+              <h3>Our Center Mission</h3>
               <p>
-                We begin with a scientific body composition scan to measure muscle, visceral fat,
-                and resting metabolic rate.
+                {content?.mission ||
+                  'To empower individuals and families to achieve better vitality through personalized nutrition plans, body composition analysis, and consistent, supportive coaching.'}
               </p>
             </div>
 
-            <div className="approach-step-card">
-              <span className="step-num">02</span>
-              <h3>Personalize Nutrition</h3>
+            <div className="value-card">
+              <div className="value-icon">
+                <Compass size={22} />
+              </div>
+              <h3>Our Philosophy</h3>
               <p>
-                A tailored eating plan designed around realistic, local foods you enjoy and can
-                comfortably prepare.
-              </p>
-            </div>
-
-            <div className="approach-step-card">
-              <span className="step-num">03</span>
-              <h3>Daily Habits</h3>
-              <p>
-                Building daily consistency with hydration, physical activity, restful sleep, and
-                stress mindfulness.
-              </p>
-            </div>
-
-            <div className="approach-step-card">
-              <span className="step-num">04</span>
-              <h3>Track & Refine</h3>
-              <p>
-                Regular check-ins with Coach Thangapandian S to adjust plans as your body adapts
-                and improves.
+                {content?.approach_intro ||
+                  'We do not believe in quick-fix crash diets or extreme workouts. Our model emphasizes balanced daily nutrition, restorative sleep, gentle movement, and sustainable habit accountability.'}
               </p>
             </div>
           </div>
         </div>
       </section>
-
-      {/* 5. Business Journey Milestones */}
-      {content?.journey_milestones && (
-        <section className="section timeline-section">
-          <div className="container">
-            <div className="section-header">
-              <span className="section-tag">Milestones</span>
-              <h2 className="section-title">Our Growth & Community Journey</h2>
-            </div>
-
-            <div className="timeline-container">
-              {content.journey_milestones.map((item, index) => (
-                <div key={index} className="timeline-item">
-                  <div className="timeline-marker">
-                    <div className="marker-dot"></div>
-                  </div>
-                  <div className="timeline-card">
-                    <span className="timeline-phase">{item.year}</span>
-                    <h3 className="timeline-title">{item.title}</h3>
-                    <p className="timeline-desc">{item.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Medical Disclaimer Alert */}
-      <div className="container" style={{ marginBottom: '4rem' }}>
-        <div className="disclaimer-banner">
-          <p>
-            <strong>Official Center Notice:</strong> Pudugai Wellness Center provides nutritional
-            and lifestyle coaching. Our services are not intended as medical prescriptions, clinical
-            diagnoses, or treatments for chronic medical conditions. Always consult your personal
-            physician for medical concerns.
-          </p>
-        </div>
-      </div>
     </div>
   );
 }
