@@ -9,14 +9,19 @@
 
 .contact-page-title {
   font-size: clamp(2.25rem, 4vw, 3rem);
+  color: #0d3824;
+  font-weight: 800;
+  letter-spacing: -0.02em;
   margin-bottom: 0.85rem;
 }
 
 .contact-page-lead {
   font-size: 1.15rem;
-  color: var(--color-text-muted);
+  color: #374151;
+  font-weight: 500;
   max-width: 660px;
   margin: 0 auto;
+  line-height: 1.65;
 }
 
 .contact-grid {
@@ -37,13 +42,17 @@
 
 .info-box-title {
   font-size: 1.6rem;
+  color: #0d3824;
+  font-weight: 800;
+  letter-spacing: -0.01em;
   margin-bottom: 0.5rem;
 }
 
 .info-box-sub {
-  font-size: 0.95rem;
-  color: var(--color-text-muted);
-  line-height: 1.6;
+  font-size: 1rem;
+  color: #374151;
+  font-weight: 450;
+  line-height: 1.65;
   margin-bottom: 1.75rem;
 }
 
@@ -75,11 +84,13 @@
 }
 
 .address-pin-icon {
-  color: var(--color-teal);
+  color: #0f766e;
 }
 
 .address-header h3 {
-  font-size: 1.15rem;
+  font-size: 1.2rem;
+  font-weight: 750;
+  color: #0d3824;
 }
 
 .address-body {
@@ -96,22 +107,26 @@
 .address-lang-label {
   display: block;
   font-size: 0.75rem;
-  font-weight: 700;
+  font-weight: 750;
   text-transform: uppercase;
-  color: var(--color-teal);
+  color: #0f766e;
   letter-spacing: 0.05em;
   margin-bottom: 0.25rem;
 }
 
 .address-text {
-  font-size: 0.925rem;
+  font-size: 0.975rem;
+  color: #111827;
+  font-weight: 500;
   line-height: 1.6;
 }
 
 .address-text.ta {
   font-family: 'Noto Sans Tamil', var(--font-family);
-  color: var(--color-text-muted);
-  font-size: 0.95rem;
+  color: #1f2937;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.65;
 }
 
 .maps-nav-btn {
@@ -130,11 +145,17 @@
 
 .form-card-header h2 {
   font-size: 1.6rem;
+  color: #0d3824;
+  font-weight: 800;
+  letter-spacing: -0.01em;
   margin-bottom: 0.5rem;
 }
 
 .form-card-header p {
-  font-size: 0.95rem;
+  font-size: 1rem;
+  color: #374151;
+  font-weight: 450;
+  line-height: 1.6;
   margin-bottom: 2rem;
 }
 
@@ -211,13 +232,14 @@
   align-items: flex-start;
   gap: 0.6rem;
   margin-top: 1.5rem;
-  font-size: 0.8rem;
-  color: var(--color-text-light);
+  font-size: 0.85rem;
+  color: #374151;
+  font-weight: 450;
   line-height: 1.5;
 }
 
 .privacy-icon {
-  color: var(--color-teal);
+  color: #0f766e;
   flex-shrink: 0;
   margin-top: 2px;
 }
@@ -242,11 +264,16 @@
 
 .enquiry-success-state h3 {
   font-size: 1.45rem;
+  color: #0d3824;
+  font-weight: 750;
   margin-bottom: 0.75rem;
 }
 
 .enquiry-success-state p {
-  font-size: 0.95rem;
+  font-size: 1rem;
+  color: #374151;
+  font-weight: 450;
+  line-height: 1.6;
   max-width: 480px;
   margin: 0 auto 1.75rem;
 }
@@ -331,7 +358,7 @@
     font-size: 1.6rem;
   }
   .contact-page-lead {
-    font-size: 0.925rem;
+    font-size: 0.95rem;
   }
   .contact-card-box, .form-card-box {
     padding: 1.25rem 0.75rem;
@@ -348,7 +375,7 @@
     padding: 1rem 0.75rem;
   }
   .address-text {
-    font-size: 0.875rem;
+    font-size: 0.9rem;
     word-break: break-word;
   }
   .form-input, .form-select, .form-textarea {

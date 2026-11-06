@@ -9,14 +9,19 @@
 
 .services-main-title {
   font-size: clamp(2.25rem, 4vw, 3rem);
+  color: #0d3824;
+  font-weight: 800;
+  letter-spacing: -0.02em;
   margin-bottom: 0.85rem;
 }
 
 .services-main-lead {
   font-size: 1.15rem;
-  color: var(--color-text-muted);
+  color: #374151;
+  font-weight: 500;
   max-width: 650px;
   margin: 0 auto;
+  line-height: 1.65;
 }
 
 /* Disclaimer section */
@@ -51,26 +56,26 @@
   align-items: center;
   gap: 0.4rem;
   padding: 0.55rem 1rem;
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   font-weight: 600;
   border-radius: var(--radius-full);
   background-color: #ffffff;
-  border: 1px solid var(--color-border);
-  color: var(--color-text-muted);
+  border: 1px solid #cbd5e1;
+  color: #374151;
   cursor: pointer;
   white-space: nowrap;
   transition: all var(--transition-fast);
 }
 
 .cat-tab-btn:hover {
-  border-color: var(--color-primary);
-  color: var(--color-primary);
+  border-color: #0d3824;
+  color: #0d3824;
 }
 
 .cat-tab-btn.active {
-  background-color: var(--color-primary);
+  background-color: #0d3824;
   color: #ffffff;
-  border-color: var(--color-primary);
+  border-color: #0d3824;
 }
 
 .cat-icon {
@@ -138,23 +143,28 @@
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  padding: 0.3rem 0.65rem;
-  background-color: var(--color-primary-light);
-  color: var(--color-primary);
+  padding: 0.35rem 0.75rem;
+  background-color: #ccfbf1;
+  color: #0f766e;
   border-radius: var(--radius-full);
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 750;
+  letter-spacing: 0.02em;
 }
 
 .card-service-title {
-  font-size: 1.3rem;
+  font-size: 1.25rem;
+  font-weight: 750;
+  color: #0d3824;
+  letter-spacing: -0.01em;
   margin-bottom: 0.75rem;
 }
 
 .card-service-desc {
-  font-size: 0.925rem;
+  font-size: 0.975rem;
   line-height: 1.65;
-  color: var(--color-text-muted);
+  color: #374151;
+  font-weight: 450;
   flex: 1;
   margin-bottom: 1.5rem;
 }
@@ -215,11 +225,17 @@
 
 .services-consultation-banner h2 {
   font-size: 1.75rem;
+  color: #0d3824;
+  font-weight: 800;
+  letter-spacing: -0.01em;
   margin-bottom: 0.5rem;
 }
 
 .services-consultation-banner p {
   font-size: 1.05rem;
+  color: #374151;
+  font-weight: 450;
+  line-height: 1.65;
   max-width: 580px;
 }
 
@@ -281,11 +297,12 @@
     font-size: 1.6rem;
   }
   .services-main-lead {
-    font-size: 0.925rem;
+    font-size: 0.95rem;
   }
   .cat-tab-btn {
     padding: 0.45rem 0.75rem;
-    font-size: 0.8rem;
+    font-size: 0.825rem;
+    font-weight: 600;
   }
   .service-detail-card {
     padding: 1.1rem 0.85rem;
@@ -294,7 +311,8 @@
     font-size: 1.15rem;
   }
   .card-service-desc {
-    font-size: 0.875rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
   }
   .services-consultation-banner {
     padding: 1.25rem 0.85rem;

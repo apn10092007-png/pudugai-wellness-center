@@ -48,11 +48,12 @@
 }
 
 .hero-description {
-  font-size: clamp(1rem, 2vw, 1.125rem);
-  line-height: 1.65;
-  color: var(--color-text-muted);
+  font-size: clamp(1.05rem, 2.2vw, 1.15rem);
+  line-height: 1.7;
+  color: #374151;
+  font-weight: 450;
   margin-bottom: 1.75rem;
-  max-width: 520px;
+  max-width: 540px;
 }
 
 .hero-cta-group {
@@ -66,7 +67,7 @@
 .hero-features-strip {
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 0.65rem;
   padding-top: 1.25rem;
   border-top: 1px solid var(--color-border);
 }
@@ -74,14 +75,14 @@
 .feature-item {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  font-size: 0.9rem;
-  color: var(--color-text-main);
-  font-weight: 500;
+  gap: 0.65rem;
+  font-size: 0.975rem;
+  color: #111827;
+  font-weight: 600;
 }
 
 .feature-icon {
-  color: var(--color-teal);
+  color: #0f766e;
   flex-shrink: 0;
 }
 
@@ -100,26 +101,27 @@
 
 .section-tag {
   display: inline-block;
-  font-size: 0.775rem;
-  font-weight: 700;
-  color: var(--color-teal);
+  font-size: 0.825rem;
+  font-weight: 750;
+  color: #0f766e;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   margin-bottom: 0.5rem;
 }
 
 .section-title {
-  font-size: clamp(1.6rem, 3vw, 2.25rem);
-  font-weight: 700;
-  color: var(--color-primary);
+  font-size: clamp(1.65rem, 3.2vw, 2.3rem);
+  font-weight: 800;
+  color: #0d3824;
   margin-bottom: 0.75rem;
   line-height: 1.25;
 }
 
 .section-subtitle {
-  font-size: 0.975rem;
-  color: var(--color-text-muted);
-  line-height: 1.6;
+  font-size: 1.05rem;
+  color: #374151;
+  line-height: 1.65;
+  font-weight: 450;
 }
 
 /* 3. Three Pillars (Simple, Natural) */
@@ -144,21 +146,23 @@
   height: 44px;
   border-radius: var(--radius-md);
   background-color: var(--color-primary-light);
-  color: var(--color-primary);
+  color: #0d3824;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .pillar-item h3 {
-  font-size: 1.15rem;
-  color: var(--color-primary);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #0d3824;
 }
 
 .pillar-item p {
-  font-size: 0.9rem;
-  color: var(--color-text-muted);
-  line-height: 1.55;
+  font-size: 0.975rem;
+  color: #374151;
+  line-height: 1.62;
+  font-weight: 450;
   margin: 0;
 }
 
@@ -188,31 +192,33 @@
 }
 
 .service-card:hover {
-  border-color: var(--color-teal);
+  border-color: #0f766e;
 }
 
 .service-category-tag {
   align-self: flex-start;
-  font-size: 0.72rem;
-  font-weight: 700;
+  font-size: 0.75rem;
+  font-weight: 750;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--color-teal);
-  background-color: var(--color-teal-light);
-  padding: 0.2rem 0.55rem;
+  color: #0f766e;
+  background-color: #ccfbf1;
+  padding: 0.25rem 0.6rem;
   border-radius: var(--radius-sm);
 }
 
 .service-card-title {
-  font-size: 1.125rem;
-  color: var(--color-primary);
+  font-size: 1.2rem;
+  font-weight: 750;
+  color: #0d3824;
   margin: 0;
 }
 
 .service-card-desc {
-  font-size: 0.875rem;
-  color: var(--color-text-muted);
-  line-height: 1.55;
+  font-size: 0.975rem;
+  color: #374151;
+  line-height: 1.62;
+  font-weight: 450;
   margin: 0;
   flex-grow: 1;
 }
@@ -221,14 +227,14 @@
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--color-primary);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #0d3824;
   margin-top: 0.5rem;
 }
 
 .service-learn-link:hover {
-  color: var(--color-teal);
+  color: #0f766e;
 }
 
 .section-center-action {
@@ -267,22 +273,24 @@
 }
 
 .coach-title-name {
-  font-size: clamp(1.75rem, 3.5vw, 2.25rem);
-  color: var(--color-primary);
+  font-size: clamp(1.8rem, 3.5vw, 2.3rem);
+  font-weight: 800;
+  color: #0d3824;
   margin-bottom: 0.2rem;
 }
 
 .coach-subtitle-role {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--color-teal);
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f766e;
   margin-bottom: 1.25rem;
 }
 
 .coach-description-text {
-  font-size: 0.95rem;
-  color: var(--color-text-muted);
-  line-height: 1.65;
+  font-size: 1.025rem;
+  color: #374151;
+  line-height: 1.7;
+  font-weight: 450;
   margin-bottom: 1.5rem;
 }
 
@@ -296,19 +304,20 @@
 .coach-contact-pill {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.4rem 0.8rem;
+  gap: 0.45rem;
+  padding: 0.45rem 0.85rem;
   background-color: var(--color-surface-alt);
-  border: 1px solid var(--color-border);
+  border: 1px solid #cbd5e1;
   border-radius: var(--radius-full);
-  font-size: 0.825rem;
-  font-weight: 500;
-  color: var(--color-text-main);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #111827;
 }
 
 .coach-contact-pill:hover {
   background-color: var(--color-primary-light);
-  color: var(--color-primary);
+  color: #0d3824;
+  border-color: #0d3824;
 }
 
 .coach-buttons-row {
@@ -355,16 +364,16 @@
 }
 
 .story-client-name {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--color-primary);
+  font-size: 1.05rem;
+  font-weight: 750;
+  color: #0d3824;
 }
 
 .story-lang-badge {
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   font-weight: 700;
-  color: var(--color-teal);
-  background-color: var(--color-teal-light);
+  color: #0f766e;
+  background-color: #ccfbf1;
   padding: 0.15rem 0.45rem;
   border-radius: var(--radius-sm);
 }
@@ -373,20 +382,23 @@
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  font-size: 0.775rem;
-  color: var(--color-text-light);
+  font-size: 0.825rem;
+  font-weight: 600;
+  color: #4b5563;
 }
 
 .story-title {
-  font-size: 0.95rem;
-  color: var(--color-text-main);
+  font-size: 1rem;
+  font-weight: 700;
+  color: #111827;
   margin-top: 0.25rem;
 }
 
 .story-text {
-  font-size: 0.875rem;
-  color: var(--color-text-muted);
-  line-height: 1.55;
+  font-size: 0.95rem;
+  color: #374151;
+  line-height: 1.65;
+  font-weight: 450;
   margin: 0;
 }
 
@@ -403,15 +415,17 @@
 }
 
 .home-cta-inner h2 {
-  font-size: clamp(1.6rem, 3vw, 2.15rem);
-  color: var(--color-primary);
+  font-size: clamp(1.7rem, 3.2vw, 2.25rem);
+  font-weight: 800;
+  color: #0d3824;
   margin-bottom: 0.75rem;
 }
 
 .home-cta-inner p {
-  font-size: 1rem;
-  color: var(--color-text-muted);
-  line-height: 1.6;
+  font-size: 1.05rem;
+  color: #374151;
+  line-height: 1.65;
+  font-weight: 450;
   margin-bottom: 1.75rem;
 }
 

@@ -6,27 +6,30 @@
 :root {
   /* Brand Palette inspired by the official 3-leaf PWC logo */
   --color-primary: #134e32;        /* Dark Forest Green */
+  --color-primary-dark: #0d3824;   /* Deepest Forest Green */
   --color-primary-hover: #0d3824;
   --color-primary-light: #e8f3ed;
   --color-primary-subtle: #f0f7f3;
 
-  --color-teal: #0d9488;           /* Leaf Teal accent */
+  --color-teal: #0f766e;           /* Deep Teal accent (accessible contrast on light backgrounds) */
   --color-teal-light: #ccfbf1;
 
-  --color-amber: #d97706;          /* Leaf Amber / Gold accent */
+  --color-amber: #b45309;          /* Deep Amber / Gold accent */
   --color-amber-light: #fef3c7;
 
   /* Neutrals & Surfaces */
   --color-bg: #f8faf8;            /* Warm off-white */
   --color-surface: #ffffff;        /* Pure white cards */
   --color-surface-alt: #f1f5f2;
-  --color-border: #e2e8f0;         /* Subtle borders */
-  --color-border-subtle: #edf2ee;
+  --color-border: #cbd5e1;         /* Crisp clean borders */
+  --color-border-subtle: #e2e8f0;
 
-  /* Typography */
-  --color-text-main: #1a221e;      /* Deep neutral text */
-  --color-text-muted: #4b5563;     /* Readable gray */
-  --color-text-light: #6b7280;
+  /* Typography - High Contrast & Substantial Weights */
+  --color-text-main: #111827;      /* Deep dark neutral text for titles */
+  --color-text-body: #374151;      /* Dark charcoal body text (high readability) */
+  --color-text-muted: #374151;     /* Highly readable charcoal for descriptions */
+  --color-text-secondary: #4b5563; /* Medium-dark gray, never pale */
+  --color-text-light: #4b5563;     /* Supporting gray (never washed-out) */
 
   /* Status Colors */
   --color-success: #15803d;
@@ -103,20 +106,22 @@ body {
 
 /* Typography Defaults */
 h1, h2, h3, h4, h5, h6 {
-  color: var(--color-primary);
-  font-weight: 700;
+  color: var(--color-primary-dark);
+  font-weight: 800;
   line-height: 1.25;
   word-break: break-word;
 }
 
-h1 { font-size: clamp(1.85rem, 5vw, 2.75rem); }
-h2 { font-size: clamp(1.45rem, 4vw, 2.15rem); }
-h3 { font-size: clamp(1.2rem, 3vw, 1.5rem); }
-h4 { font-size: 1.15rem; }
+h1 { font-size: clamp(1.9rem, 5vw, 2.75rem); letter-spacing: -0.02em; }
+h2 { font-size: clamp(1.5rem, 4vw, 2.2rem); letter-spacing: -0.015em; font-weight: 750; }
+h3 { font-size: clamp(1.22rem, 3vw, 1.5rem); letter-spacing: -0.01em; font-weight: 700; }
+h4 { font-size: 1.15rem; font-weight: 700; color: var(--color-text-main); }
 
 p {
-  color: var(--color-text-muted);
-  line-height: 1.65;
+  color: var(--color-text-body);
+  line-height: 1.68;
+  font-size: 1rem;
+  font-weight: 450;
 }
 
 a {
@@ -206,19 +211,22 @@ button, input, textarea, select {
 
 .btn-secondary {
   background-color: var(--color-surface);
-  color: var(--color-primary);
-  border-color: var(--color-border);
+  color: var(--color-primary-dark);
+  border-color: #94a3b8;
+  font-weight: 600;
 }
 
 .btn-secondary:hover {
   background-color: var(--color-primary-subtle);
   border-color: var(--color-primary);
+  color: var(--color-primary-hover);
 }
 
 .btn-outline {
   background: transparent;
-  color: var(--color-primary);
+  color: var(--color-primary-dark);
   border-color: var(--color-primary);
+  font-weight: 600;
 }
 
 .btn-outline:hover {
@@ -227,12 +235,13 @@ button, input, textarea, select {
 }
 
 .btn-whatsapp {
-  background-color: #25d366;
+  background-color: #15803d;
   color: #ffffff;
+  font-weight: 650;
 }
 
 .btn-whatsapp:hover {
-  background-color: #1ebc59;
+  background-color: #0f622d;
   box-shadow: var(--shadow-md);
 }
 
@@ -277,22 +286,26 @@ button, input, textarea, select {
 
 .badge-green {
   background-color: var(--color-primary-light);
-  color: var(--color-primary);
+  color: var(--color-primary-dark);
+  font-weight: 700;
 }
 
 .badge-teal {
   background-color: var(--color-teal-light);
-  color: var(--color-teal);
+  color: #0f766e;
+  font-weight: 700;
 }
 
 .badge-amber {
   background-color: var(--color-amber-light);
-  color: var(--color-amber);
+  color: #b45309;
+  font-weight: 700;
 }
 
 .badge-gray {
   background-color: var(--color-surface-alt);
-  color: var(--color-text-muted);
+  color: #374151;
+  font-weight: 600;
 }
 
 /* Cards */
@@ -306,7 +319,7 @@ button, input, textarea, select {
 }
 
 .card:hover {
-  border-color: #cbd5e1;
+  border-color: #94a3b8;
   box-shadow: var(--shadow-md);
 }
 
@@ -326,9 +339,9 @@ button, input, textarea, select {
 
 .section-tag {
   display: inline-block;
-  color: var(--color-teal);
+  color: #0f766e;
   font-size: 0.85rem;
-  font-weight: 700;
+  font-weight: 750;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   margin-bottom: 0.5rem;
@@ -336,11 +349,15 @@ button, input, textarea, select {
 
 .section-title {
   margin-bottom: 1rem;
+  color: var(--color-primary-dark);
+  font-weight: 800;
 }
 
 .section-subtitle {
-  font-size: 1.05rem;
-  color: var(--color-text-muted);
+  font-size: 1.075rem;
+  color: #374151;
+  line-height: 1.65;
+  font-weight: 450;
 }
 
 /* Form Styles */
@@ -350,10 +367,10 @@ button, input, textarea, select {
 
 .form-label {
   display: block;
-  font-size: 0.875rem;
-  font-weight: 600;
+  font-size: 0.925rem;
+  font-weight: 650;
   color: var(--color-text-main);
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.45rem;
 }
 
 .form-input, .form-textarea, .form-select {

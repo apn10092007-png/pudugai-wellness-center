@@ -9,14 +9,19 @@
 
 .stories-page-title {
   font-size: clamp(2.25rem, 4vw, 3rem);
+  color: #0d3824;
+  font-weight: 800;
+  letter-spacing: -0.02em;
   margin-bottom: 0.85rem;
 }
 
 .stories-page-lead {
   font-size: 1.15rem;
-  color: var(--color-text-muted);
+  color: #374151;
+  font-weight: 500;
   max-width: 660px;
   margin: 0 auto;
+  line-height: 1.65;
 }
 
 .stories-disclaimer-wrap {
@@ -76,8 +81,9 @@
 
 .story-author-name {
   font-size: 1.35rem;
-  font-weight: 700;
-  color: var(--color-primary);
+  font-weight: 750;
+  color: #0d3824;
+  letter-spacing: -0.01em;
 }
 
 .lang-pill {
@@ -101,22 +107,25 @@
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  font-size: 0.85rem;
-  color: var(--color-text-light);
+  font-size: 0.875rem;
+  color: #4b5563;
+  font-weight: 600;
   margin-bottom: 1rem;
 }
 
 .story-headline {
-  font-size: 1.15rem;
+  font-size: 1.175rem;
+  font-weight: 700;
   margin-bottom: 0.75rem;
-  color: var(--color-text-main);
-  line-height: 1.4;
+  color: #111827;
+  line-height: 1.45;
 }
 
 .story-text-container p {
-  font-size: 0.95rem;
+  font-size: 1rem;
   line-height: 1.7;
-  color: var(--color-text-muted);
+  color: #374151;
+  font-weight: 450;
   white-space: pre-line;
 }
 
@@ -127,7 +136,9 @@
 
 .tamil-font-scope .story-text-container p {
   line-height: 1.8;
-  font-size: 1rem;
+  font-size: 1.05rem;
+  color: #1f2937;
+  font-weight: 500;
 }
 
 /* Empty State */
@@ -155,13 +166,17 @@
 
 .empty-state-title {
   font-size: 1.75rem;
+  color: #0d3824;
+  font-weight: 800;
+  letter-spacing: -0.01em;
   margin-bottom: 0.85rem;
 }
 
 .empty-state-desc {
   font-size: 1.05rem;
   line-height: 1.7;
-  color: var(--color-text-muted);
+  color: #374151;
+  font-weight: 450;
   margin-bottom: 2.25rem;
 }
 
@@ -202,11 +217,17 @@
 
 .stories-encourage-card h2 {
   font-size: 1.85rem;
+  color: #0d3824;
+  font-weight: 800;
+  letter-spacing: -0.01em;
   margin-bottom: 0.75rem;
 }
 
 .stories-encourage-card p {
   font-size: 1.05rem;
+  color: #374151;
+  font-weight: 450;
+  line-height: 1.65;
   max-width: 580px;
   margin: 0 auto 2rem;
 }
@@ -249,7 +270,7 @@
     font-size: 1.6rem;
   }
   .stories-page-lead {
-    font-size: 0.925rem;
+    font-size: 0.95rem;
   }
   .story-photo-box {
     height: 165px;
@@ -264,7 +285,8 @@
     font-size: 1.05rem;
   }
   .story-text-container p {
-    font-size: 0.88rem;
+    font-size: 0.925rem;
+    line-height: 1.65;
   }
   .stories-encourage-card {
     padding: 1.5rem 0.85rem;

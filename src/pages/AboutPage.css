@@ -13,16 +13,19 @@
 
 .about-page-title {
   font-size: clamp(2rem, 4vw, 2.75rem);
-  color: var(--color-primary);
+  color: #0d3824;
+  font-weight: 800;
+  letter-spacing: -0.02em;
   margin-bottom: 0.75rem;
 }
 
 .about-page-lead {
-  font-size: 1.05rem;
-  color: var(--color-text-muted);
+  font-size: 1.1rem;
+  color: #374151;
+  font-weight: 500;
   max-width: 600px;
   margin: 0 auto;
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
 /* Coach Section */
@@ -59,14 +62,16 @@
 
 .about-coach-name {
   font-size: clamp(1.75rem, 3.5vw, 2.35rem);
-  color: var(--color-primary);
-  margin-bottom: 0.2rem;
+  color: #0d3824;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.25rem;
 }
 
 .about-coach-role {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--color-teal);
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f766e;
   margin-bottom: 1.25rem;
 }
 
@@ -74,9 +79,10 @@
   display: flex;
   flex-direction: column;
   gap: 0.85rem;
-  font-size: 0.95rem;
-  color: var(--color-text-muted);
-  line-height: 1.65;
+  font-size: 1.025rem;
+  color: #374151;
+  line-height: 1.7;
+  font-weight: 450;
   margin-bottom: 1.5rem;
 }
 
@@ -91,13 +97,13 @@
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  padding: 0.4rem 0.85rem;
+  padding: 0.45rem 0.85rem;
   background-color: var(--color-surface-alt);
-  border: 1px solid var(--color-border);
+  border: 1px solid #cbd5e1;
   border-radius: var(--radius-full);
-  font-size: 0.825rem;
-  font-weight: 500;
-  color: var(--color-text-main);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #111827;
   transition: all var(--transition-fast);
 }
 
@@ -151,14 +157,16 @@
 }
 
 .value-card h3 {
-  font-size: 1.2rem;
-  color: var(--color-primary);
+  font-size: 1.25rem;
+  font-weight: 750;
+  color: #0d3824;
 }
 
 .value-card p {
-  font-size: 0.925rem;
-  color: var(--color-text-muted);
-  line-height: 1.6;
+  font-size: 0.975rem;
+  color: #374151;
+  line-height: 1.65;
+  font-weight: 450;
   margin: 0;
 }
 
@@ -207,13 +215,15 @@
     font-size: 1.6rem;
   }
   .about-page-lead {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
+    line-height: 1.55;
   }
   .about-coach-name {
     font-size: 1.5rem;
   }
   .about-coach-role {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
+    font-weight: 700;
   }
   .about-coach-img {
     height: 240px;
@@ -222,11 +232,14 @@
     gap: 0.45rem;
   }
   .about-pill {
-    font-size: 0.78rem;
-    padding: 0.35rem 0.6rem;
+    font-size: 0.825rem;
+    padding: 0.35rem 0.65rem;
   }
   .value-card {
     padding: 1.25rem 0.85rem;
+  }
+  .value-card p {
+    font-size: 0.925rem;
   }
 }
 
