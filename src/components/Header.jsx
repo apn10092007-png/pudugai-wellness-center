@@ -81,18 +81,24 @@ export default function Header() {
           ))}
         </nav>
 
-        {/* Desktop CTA */}
+        {/* Desktop CTA & Mobile Actions */}
         <div className="header-cta-group">
-          <a href="tel:9443443261" className="btn btn-primary btn-sm header-call-btn">
-            <Phone size={15} />
-            <span>94434 43261</span>
+          <a
+            href="tel:9443443261"
+            className="btn btn-primary header-call-btn"
+            aria-label="Call Coach at 94434 43261"
+            title="Call: 94434 43261"
+          >
+            <Phone size={16} className="call-btn-icon" />
+            <span className="call-btn-text">94434 43261</span>
           </a>
           <button
             className="mobile-toggle"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle navigation menu"
+            aria-expanded={mobileOpen}
           >
-            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </div>
