@@ -14,7 +14,7 @@ export default function PublicLayout() {
   return (
     <div className="public-layout-root">
       <Header />
-      <main id="main-content" style={{ flex: 1 }}>
+      <main id="main-content" style={{ flex: 1, width: '100%', maxWidth: '100%', overflowX: 'clip' }}>
         <Outlet />
       </main>
       <Footer />
