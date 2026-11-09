@@ -232,6 +232,8 @@ export const INITIAL_SITE_CONTENT = {
 export const INITIAL_HERO_GALLERY = [
   {
     id: 'hero-gallery-1',
+    media_type: 'image',
+    media_url: '/assets/hero-wellness.jpg',
     image_path: '/assets/hero-wellness.jpg',
     title: 'Personalized Health & Nutrition Guidance',
     description: 'Sustainable everyday wellness coaching in Pudukkottai',
@@ -240,6 +242,8 @@ export const INITIAL_HERO_GALLERY = [
   },
   {
     id: 'hero-gallery-2',
+    media_type: 'image',
+    media_url: '/assets/about-wellness.jpg',
     image_path: '/assets/about-wellness.jpg',
     title: 'Body Composition & Metabolic Screenings',
     description: 'Comprehensive BMI, BMR, and body fat analysis',
@@ -248,6 +252,8 @@ export const INITIAL_HERO_GALLERY = [
   },
   {
     id: 'hero-gallery-3',
+    media_type: 'image',
+    media_url: '/assets/coach-pandian.png',
     image_path: '/assets/coach-pandian.png',
     title: '1-on-1 Guidance with Coach Thangapandian',
     description: 'Practical habit building without extreme restrictions',
@@ -255,6 +261,25 @@ export const INITIAL_HERO_GALLERY = [
     active: true
   }
 ];
+
+// Helper to determine media type (image vs video) safely
+export const getMediaType = (item) => {
+  if (!item) return 'image';
+  if (item.media_type === 'video' || item.media_type === 'image') {
+    return item.media_type;
+  }
+  const url = item.media_url || item.video_path || item.image_path || '';
+  if (url.match(/\.(mp4|webm|mov|mkv)($|\?)/i)) {
+    return 'video';
+  }
+  return 'image';
+};
+
+// Helper to resolve media URL safely across new and legacy items
+export const getMediaUrl = (item, fallback = '/assets/hero-wellness.jpg') => {
+  if (!item) return fallback;
+  return item.media_url || item.video_path || item.image_path || fallback;
+};
 
 export const INITIAL_HERO_CONTENT = {
   tagline: 'Nutrition • Fitness • Wellness',
@@ -653,20 +678,24 @@ export const dataService = {
     return this.updateSiteContent('home_hero', content);
   },
 
-  async uploadHeroImage(file) {
+  async uploadHeroMedia(file) {
     // Try dedicated 'site-images' bucket first, then fall back to 'service-images'
     try {
-      return await this.uploadImage('site-images', file);
+      return await this.uploadMediaFile('site-images', file);
     } catch (err) {
       if (
         err?.message?.includes('Bucket not found') ||
         err?.error === 'Bucket not found' ||
         err?.statusCode === '404'
       ) {
-        return await this.uploadImage('service-images', file);
+        return await this.uploadMediaFile('service-images', file);
       }
       throw err;
     }
+  },
+
+  async uploadHeroImage(file) {
+    return this.uploadHeroMedia(file);
   },
 
   async deleteHeroImage() {
@@ -700,7 +729,7 @@ export const dataService = {
   },
 
   // ==========================================
-  // HERO GALLERY CRUD & ORDERING API
+  // HERO GALLERY / MEDIA SLIDESHOW CRUD & ORDERING API
   // ==========================================
   async getHeroGallery(onlyActive = true) {
     const hero = await this.getHomeHero();
@@ -721,30 +750,46 @@ export const dataService = {
     const hero = await this.getHomeHero();
     const indexed = gallery.map((item, idx) => ({
       ...item,
+      media_type: getMediaType(item),
+      media_url: getMediaUrl(item),
+      image_path: getMediaUrl(item), // preserve backward compatibility
       display_order: idx + 1
     }));
+
+    const activeItem = indexed.find((g) => g.active);
+    const activeMediaUrl = activeItem ? getMediaUrl(activeItem) : (hero.hero_image_path || '/assets/hero-wellness.jpg');
+
     const updated = {
       ...hero,
       gallery: indexed,
-      hero_image_path: indexed.find((g) => g.active)?.image_path || hero.hero_image_path || '/assets/hero-wellness.jpg'
+      hero_image_path: activeMediaUrl
     };
     return this.updateHomeHero(updated);
   },
 
-  async addHeroGalleryItem({ file, title = '', description = '' }) {
-    const publicUrl = await this.uploadHeroImage(file);
+  async addHeroGalleryItem({ file, title = '', description = '', media_type }) {
+    const isVideo = file.type?.startsWith('video/') ||
+      media_type === 'video' ||
+      /\.(mp4|webm|mov|mkv)$/i.test(file.name || '');
+
+    const publicUrl = await this.uploadHeroMedia(file);
     const hero = await this.getHomeHero();
     const currentGallery = Array.isArray(hero?.gallery) && hero.gallery.length > 0
       ? hero.gallery
       : INITIAL_HERO_GALLERY;
+
     const newItem = {
       id: 'gallery-' + Date.now() + '-' + Math.random().toString(36).substring(2, 6),
-      image_path: publicUrl,
+      media_type: isVideo ? 'video' : 'image',
+      media_url: publicUrl,
+      image_path: publicUrl, // backward compatibility
+      video_path: isVideo ? publicUrl : null,
       title: title.trim(),
       description: description.trim(),
       display_order: currentGallery.length + 1,
       active: true
     };
+
     const updatedGallery = [...currentGallery, newItem];
     await this.updateHeroGallery(updatedGallery);
     return newItem;
@@ -760,11 +805,12 @@ export const dataService = {
     await this.updateHeroGallery(updatedGallery);
 
     // Clean up file in Supabase storage if it was stored there
-    if (itemToDelete?.image_path && !itemToDelete.image_path.startsWith('/assets/')) {
+    const targetUrl = itemToDelete ? getMediaUrl(itemToDelete) : null;
+    if (targetUrl && !targetUrl.startsWith('/assets/')) {
       try {
         for (const bucket of ['site-images', 'service-images']) {
-          if (itemToDelete.image_path.includes(`/${bucket}/`)) {
-            const fileName = itemToDelete.image_path.split(`/${bucket}/`).pop().split('?')[0];
+          if (targetUrl.includes(`/${bucket}/`)) {
+            const fileName = targetUrl.split(`/${bucket}/`).pop().split('?')[0];
             if (fileName && isSupabaseConfigured()) {
               await supabase.storage.from(bucket).remove([fileName]);
             }
@@ -967,31 +1013,44 @@ export const dataService = {
   },
 
   // ==========================================
-  // 6. STORAGE UPLOAD HELPER
+  // 6. STORAGE UPLOAD HELPERS (IMAGES & VIDEOS)
   // ==========================================
-  async uploadImage(bucket, file) {
-    // Validate file type
-    const validTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/jpg'];
-    if (!validTypes.includes(file.type)) {
-      throw new Error('Please upload a valid image file (JPG, PNG, or WebP).');
+  async uploadMediaFile(bucket, file) {
+    const validImageTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/jpg'];
+    const validVideoTypes = ['video/mp4', 'video/webm', 'video/quicktime', 'video/x-m4v'];
+
+    const isImage = validImageTypes.includes(file.type) || /\.(jpe?g|png|webp)$/i.test(file.name || '');
+    const isVideo = validVideoTypes.includes(file.type) || /\.(mp4|webm|mov|m4v)$/i.test(file.name || '');
+
+    if (!isImage && !isVideo) {
+      throw new Error('Please upload a valid image (JPG, PNG, WebP) or video (MP4, WebM).');
     }
-    // Validate file size (max 5MB)
-    if (file.size > 5 * 1024 * 1024) {
-      throw new Error('Image size exceeds 5MB limit. Please upload a smaller photo.');
+
+    // Size limit: 10MB for images, 60MB for videos
+    if (isImage && file.size > 10 * 1024 * 1024) {
+      throw new Error('Image size exceeds 10MB limit. Please upload an optimized photo.');
+    }
+    if (isVideo && file.size > 60 * 1024 * 1024) {
+      throw new Error('Video size exceeds 60MB limit. Please upload a compressed MP4 or WebM video.');
     }
 
     if (isSupabaseConfigured()) {
       try {
-        const ext = file.name.split('.').pop();
+        const ext = file.name.split('.').pop() || (isVideo ? 'mp4' : 'jpg');
         const fileName = `${Date.now()}_${Math.random().toString(36).substring(2, 8)}.${ext}`;
+        const contentType = file.type || (isVideo ? 'video/mp4' : 'image/jpeg');
+
         const { data, error } = await supabase.storage.from(bucket).upload(fileName, file, {
           cacheControl: '3600',
-          upsert: false
+          upsert: false,
+          contentType
         });
+
         if (!error && data) {
           const { data: publicUrlData } = supabase.storage.from(bucket).getPublicUrl(fileName);
           return publicUrlData.publicUrl;
         }
+
         if (error) {
           if (error.message?.includes('Bucket not found')) throw error;
           console.warn(`Supabase storage upload error (${bucket}):`, error.message);
@@ -1009,5 +1068,9 @@ export const dataService = {
       reader.onerror = reject;
       reader.readAsDataURL(file);
     });
+  },
+
+  async uploadImage(bucket, file) {
+    return this.uploadMediaFile(bucket, file);
   }
 };

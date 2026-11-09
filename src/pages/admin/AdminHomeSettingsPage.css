@@ -103,6 +103,24 @@
   border-radius: var(--radius-full);
 }
 
+.gallery-upload-btn-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.btn-teal {
+  background-color: var(--color-teal);
+  color: #ffffff;
+  border: 1px solid transparent;
+}
+
+.btn-teal:hover:not(:disabled) {
+  background-color: #0d7b6c;
+  color: #ffffff;
+}
+
 /* Gallery Item Cards / Rows */
 .gallery-items-stack {
   display: flex;
@@ -148,6 +166,7 @@
   background-color: var(--color-surface-alt);
   border: 1px solid var(--color-border);
   flex-shrink: 0;
+  position: relative;
 }
 
 .gallery-thumb-img {
@@ -157,20 +176,85 @@
   display: block;
 }
 
+.gallery-thumb-video-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #0f172a;
+}
+
+.gallery-thumb-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.gallery-thumb-video-badge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: rgba(15, 23, 42, 0.75);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
+
 .gallery-item-info {
   flex: 1;
   min-width: 0;
 }
 
+.gallery-item-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.2rem;
+  flex-wrap: wrap;
+}
+
 .gallery-item-title {
-  display: block;
+  display: inline-block;
   font-size: 0.95rem;
   font-weight: 600;
   color: var(--color-primary);
-  margin-bottom: 0.2rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  max-width: 260px;
+}
+
+.media-type-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.15rem 0.45rem;
+  border-radius: var(--radius-sm);
+  line-height: 1.2;
+}
+
+.media-type-pill.photo,
+.media-type-pill.image {
+  background-color: #f0fdf4;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
+}
+
+.media-type-pill.video {
+  background-color: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
 }
 
 .gallery-item-desc {
@@ -257,13 +341,26 @@
   border-radius: var(--radius-md);
   padding: 1.25rem;
   background-color: #f0fdfa;
+  transition: all var(--transition-fast);
+}
+
+.unsaved-staging-box.is-video {
+  border-color: #0d9488;
+  background-color: #f0fdfa;
+}
+
+.unsaved-staging-box.is-image {
+  border-color: #16a34a;
+  background-color: #f0fdf4;
 }
 
 .unsaved-staging-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 0.75rem;
   margin-bottom: 1rem;
+  flex-wrap: wrap;
 }
 
 .unsaved-badge {
@@ -272,19 +369,52 @@
   gap: 0.35rem;
   font-size: 0.775rem;
   font-weight: 700;
-  color: #0d9488;
-  background-color: #ccfbf1;
-  padding: 0.25rem 0.6rem;
+  padding: 0.25rem 0.65rem;
   border-radius: var(--radius-full);
+}
+
+.unsaved-badge.badge-video {
+  color: #0f766e;
+  background-color: #ccfbf1;
+  border: 1px solid #99f6e4;
+}
+
+.unsaved-badge.badge-image {
+  color: #15803d;
+  background-color: #dcfce7;
+  border: 1px solid #bbf7d0;
+}
+
+.unsaved-filesize {
+  font-size: 0.775rem;
+  color: var(--color-text-muted);
+  font-family: monospace;
+}
+
+.unsaved-preview-media-wrap {
+  width: 100%;
+  margin-bottom: 1rem;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background-color: #0f172a;
+  border: 1px solid var(--color-border);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.unsaved-staging-video {
+  width: 100%;
+  max-height: 280px;
+  display: block;
+  background-color: #000;
+  outline: none;
 }
 
 .unsaved-staging-img {
   width: 100%;
-  max-height: 240px;
+  max-height: 280px;
   object-fit: cover;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--color-border);
-  margin-bottom: 1rem;
   display: block;
 }
 
@@ -402,6 +532,20 @@
 
 /* Responsive adjustments */
 @media (max-width: 640px) {
+  .gallery-top-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+  .gallery-upload-btn-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    width: 100%;
+  }
+  .gallery-upload-btn-group .btn {
+    justify-content: center;
+  }
   .gallery-item-card {
     flex-wrap: wrap;
     gap: 0.75rem;
@@ -409,6 +553,9 @@
   .gallery-item-info {
     width: 100%;
     order: 3;
+  }
+  .gallery-item-title {
+    max-width: 100%;
   }
   .gallery-status-btn {
     order: 2;
