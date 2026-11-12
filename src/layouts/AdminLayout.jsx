@@ -6,7 +6,6 @@ import {
   Sparkles,
   UserCheck,
   Mail,
-  Settings,
   LogOut,
   ExternalLink,
   Menu,
@@ -42,8 +41,7 @@ export default function AdminLayout() {
     { label: 'Services', path: '/admin/services', icon: <Layers size={18} /> },
     { label: 'Success Stories', path: '/admin/success-stories', icon: <Sparkles size={18} /> },
     { label: 'Coach & About', path: '/admin/about', icon: <UserCheck size={18} /> },
-    { label: 'Enquiries', path: '/admin/enquiries', icon: <Mail size={18} /> },
-    { label: 'Settings & DB', path: '/admin/settings', icon: <Settings size={18} /> }
+    { label: 'Enquiries', path: '/admin/enquiries', icon: <Mail size={18} /> }
   ];
 
   const handleLogout = async () => {

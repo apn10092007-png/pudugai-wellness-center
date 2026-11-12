@@ -9,7 +9,6 @@ import {
   Plus,
   Clock,
   Phone,
-  CheckCircle2,
   ExternalLink,
   Image as ImageIcon
 } from 'lucide-react';
@@ -134,8 +133,10 @@ export default function AdminDashboardPage() {
             <UserCheck size={22} />
           </div>
           <div className="metric-info">
-            <span className="metric-label">Wellness Coach</span>
-            <span className="metric-value-text">{coach?.coach_name || 'Thangapandian S'}</span>
+            <span className="metric-label">Wellness Coaches</span>
+            <span className="metric-value-text">
+              {coaches.length > 0 ? coaches.map((c) => c.coach_name).join(' & ') : 'Thangapandian S'}
+            </span>
             <span className="metric-sub">Pudukkottai Center</span>
           </div>
         </div>
@@ -278,9 +279,9 @@ export default function AdminDashboardPage() {
               <Sparkles size={16} />
               <span>Tamil & English Story Form</span>
             </Link>
-            <Link to="/admin/settings" className="quick-link-item">
-              <CheckCircle2 size={16} />
-              <span>Database & RLS Status</span>
+            <Link to="/admin/enquiries" className="quick-link-item">
+              <Mail size={16} />
+              <span>Customer Enquiries</span>
             </Link>
           </div>
         </div>

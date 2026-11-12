@@ -21,7 +21,6 @@ import AdminServicesPage from './pages/admin/AdminServicesPage';
 import AdminSuccessStoriesPage from './pages/admin/AdminSuccessStoriesPage';
 import AdminAboutPage from './pages/admin/AdminAboutPage';
 import AdminEnquiriesPage from './pages/admin/AdminEnquiriesPage';
-import AdminSettingsPage from './pages/admin/AdminSettingsPage';
 
 function NotFoundPage() {
   return (
@@ -67,7 +66,7 @@ export default function App() {
         <Route path="success-stories" element={<AdminSuccessStoriesPage />} />
         <Route path="about" element={<AdminAboutPage />} />
         <Route path="enquiries" element={<AdminEnquiriesPage />} />
-        <Route path="settings" element={<AdminSettingsPage />} />
+        <Route path="settings" element={<Navigate to="/admin/dashboard" replace />} />
       </Route>
     </Routes>
   );

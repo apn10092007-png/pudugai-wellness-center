@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
-import { Lock, Mail, ArrowRight, AlertCircle, ShieldCheck, Info } from 'lucide-react';
+import { Lock, Mail, ArrowRight, AlertCircle } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
 import './AdminLoginPage.css';
 
@@ -10,7 +10,7 @@ export default function AdminLoginPage() {
   const [submitting, setSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
 
-  const { login, isDemoMode } = useAuth();
+  const { login } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -109,25 +109,6 @@ export default function AdminLoginPage() {
             )}
           </button>
         </form>
-
-        {/* Documentation notice for creating first admin */}
-        <div className="first-admin-guide-box">
-          <div className="guide-header">
-            <Info size={16} className="guide-icon" />
-            <strong>First Administrator Setup Guide</strong>
-          </div>
-          <p>
-            {isDemoMode ? (
-              <>
-                Currently running in <strong>Local Preview Mode</strong>. You can sign in with any email (e.g. <code>admin@pwc.com</code>) and any password (min 6 characters) to preview all dashboard CRUD operations.
-              </>
-            ) : (
-              <>
-                To create your first admin user in Supabase: Go to your Supabase Project &rarr; <strong>Authentication</strong> &rarr; <strong>Users</strong> &rarr; <strong>Add User</strong>. Then sign in with that email & password.
-              </>
-            )}
-          </p>
-        </div>
 
         <div className="login-footer-links">
           <Link to="/" className="back-to-site-link">&larr; Return to Public Website</Link>
