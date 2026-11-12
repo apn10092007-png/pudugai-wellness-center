@@ -5,29 +5,28 @@ import {
   MapPin,
   ArrowRight,
   Target,
-  Compass,
-  CheckCircle2
+  Compass
 } from 'lucide-react';
-import { InstagramIcon as Instagram, WhatsAppIcon } from '../components/Icons';
+import { InstagramIcon as Instagram } from '../components/Icons';
 import { dataService } from '../services/dataService';
 import { BUSINESS_CONFIG } from '../config/business';
 import './AboutPage.css';
 
 export default function AboutPage() {
-  const [coach, setCoach] = useState(null);
+  const [coaches, setCoaches] = useState([]);
   const [content, setContent] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [_loading, setLoading] = useState(true);
 
   useEffect(() => {
     let mounted = true;
     async function fetchAboutData() {
       try {
-        const [coachData, contentData] = await Promise.all([
-          dataService.getCoachProfile(),
+        const [coachesData, contentData] = await Promise.all([
+          dataService.getAllCoaches(),
           dataService.getSiteContent('about_page')
         ]);
         if (mounted) {
-          setCoach(coachData);
+          setCoaches(coachesData || []);
           setContent(contentData);
           setLoading(false);
         }
@@ -49,82 +48,84 @@ export default function AboutPage() {
           <h1 className="about-page-title">Pudugai Wellness Center</h1>
           <p className="about-page-lead">
             Dedicated health, nutrition, and lifestyle guidance in Pudukkottai, led by
-            Wellness Coach Thangapandian S.
+            Wellness Coaches Thangapandian S and Thenmozhi.
           </p>
         </div>
       </section>
 
-      {/* 2. Coach Profile (Verified & Concise) */}
+      {/* 2. Coach Profiles (Both Coaches) */}
       <section className="section about-coach-section">
         <div className="container">
-          <div className="about-coach-grid">
-            <div className="about-coach-media">
-              <img
-                src={coach?.image_path || '/assets/coach-pandian.png'}
-                alt={coach?.coach_name || 'Coach Thangapandian S'}
-                className="about-coach-img"
-                onError={(e) => {
-                  e.currentTarget.src = '/assets/coach-pandian.png';
-                }}
-              />
-            </div>
+          <div className="section-header-compact">
+            <span className="section-tag">Leadership & Guidance</span>
+            <h2 className="section-title">Our Dedicated Wellness Coaches</h2>
+            <p className="section-subtitle">
+              Personalized health, nutrition, and lifestyle mentoring led by Coach Thangapandian S & Coach Thenmozhi.
+            </p>
+          </div>
 
-            <div className="about-coach-info">
-              <span className="section-tag">Founder & Wellness Coach</span>
-              <h2 className="about-coach-name">{coach?.coach_name || 'Thangapandian S'}</h2>
-              <p className="about-coach-role">{coach?.title || 'Wellness Coach & Founder'}</p>
+          <div className="about-coaches-grid">
+            {coaches.map((c) => (
+              <div key={c.id || c.coach_name} className="about-coach-card">
+                <div className="about-coach-media">
+                  <img
+                    src={c.image_path || (c.coach_name.includes('Thenmozhi') ? '/assets/avatar-thenmozhi.svg' : '/assets/coach-pandian.png')}
+                    alt={c.coach_name}
+                    className="about-coach-img"
+                    onError={(e) => {
+                      e.currentTarget.src = c.coach_name.includes('Thenmozhi') ? '/assets/avatar-thenmozhi.svg' : '/assets/coach-pandian.png';
+                    }}
+                  />
+                </div>
 
-              <div className="about-coach-bio">
-                <p>
-                  {coach?.biography ||
-                    'Thangapandian S is dedicated to guiding individuals and families in Pudukkottai toward sustainable, healthy lifestyle habits.'}
-                </p>
-                <p>
-                  At Pudugai Wellness Center, coaching begins with a detailed body composition
-                  assessment (BMI, BMR, visceral fat, muscle mass). Nutrition plans are then tailored
-                  around your daily routine and food preferences without extreme restrictions.
-                </p>
-              </div>
+                <div className="about-coach-info">
+                  <span className="section-tag">{c.title || 'Wellness Coach'}</span>
+                  <h3 className="about-coach-name">{c.coach_name}</h3>
+                  <p className="about-coach-role">{c.title}</p>
 
-              <div className="about-coach-contact">
-                <a href={`tel:${BUSINESS_CONFIG.phoneRaw}`} className="about-pill">
-                  <Phone size={14} />
-                  <span>Call: {BUSINESS_CONFIG.phoneDisplay}</span>
-                </a>
-                <a
-                  href={`https://wa.me/${BUSINESS_CONFIG.whatsappNumber}?text=Hello%20Coach%20Thangapandian!%20I%20would%20like%20to%20learn%20more%20about%20PWC.`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="about-pill whatsapp"
-                >
-                  <WhatsAppIcon size={14} />
-                  <span>WhatsApp Coach</span>
-                </a>
-                <a
-                  href={BUSINESS_CONFIG.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="about-pill"
-                >
-                  <Instagram size={14} />
-                  <span>@coach_pandian</span>
-                </a>
-                <div className="about-pill location">
-                  <MapPin size={14} />
-                  <span>Pudukkottai Center</span>
+                  <div className="about-coach-bio">
+                    <p>{c.biography}</p>
+                  </div>
+
+                  <div className="about-coach-contact">
+                    <a href={`tel:${BUSINESS_CONFIG.phoneRaw}`} className="about-pill">
+                      <Phone size={14} />
+                      <span>{BUSINESS_CONFIG.phoneDisplay}</span>
+                    </a>
+                    {c.instagram_url ? (
+                      <a
+                        href={c.instagram_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="about-pill"
+                      >
+                        <Instagram size={14} />
+                        <span>Instagram</span>
+                      </a>
+                    ) : null}
+                    <div className="about-pill location">
+                      <MapPin size={14} />
+                      <span>Pudukkottai Center</span>
+                    </div>
+                  </div>
                 </div>
               </div>
+            ))}
+          </div>
 
-              <div className="about-action-row">
-                <Link to="/contact" className="btn btn-primary">
-                  <span>Schedule Consultation</span>
-                  <ArrowRight size={16} />
-                </Link>
-                <Link to="/services" className="btn btn-secondary">
-                  <span>Explore Programs</span>
-                </Link>
-              </div>
+          {/* Dedicated Coaches' Story Banner */}
+          <div className="about-story-banner">
+            <div className="about-story-text">
+              <span className="section-tag">Coaches' Journey</span>
+              <h3>Our Journey of Transformation and Growth</h3>
+              <p>
+                From starting part-time in December 2019 to opening their Nutrition Club and achieving the Global Expansion Team (GET) Pin in September 2026.
+              </p>
             </div>
+            <Link to="/our-story" className="btn btn-primary btn-lg">
+              <span>Read Our Full Story</span>
+              <ArrowRight size={17} />
+            </Link>
           </div>
         </div>
       </section>

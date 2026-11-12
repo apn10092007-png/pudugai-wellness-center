@@ -1,0 +1,368 @@
+/* OurStoryPage.css - Clean, Professional, Inspiring PWC Story Design */
+
+.our-story-page {
+  width: 100%;
+  background-color: var(--color-bg);
+}
+
+/* 1. Header Section */
+.story-header-section {
+  background: linear-gradient(180deg, #f0f7f3 0%, #f7faf8 100%);
+  border-bottom: 1px solid var(--color-border);
+  padding: 3.5rem 0 2.5rem;
+  text-align: center;
+}
+
+.story-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-teal);
+  margin-bottom: 1rem;
+  transition: color var(--transition-fast);
+}
+
+.story-back-link:hover {
+  color: var(--color-primary-dark);
+}
+
+.story-main-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: #0d3824;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.75rem;
+  line-height: 1.25;
+}
+
+.story-subtitle-lead {
+  font-size: 1.1rem;
+  color: #374151;
+  font-weight: 450;
+  max-width: 680px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* 2. Milestones Summary Track */
+.story-milestones-bar {
+  background-color: #ffffff;
+  border-bottom: 1px solid var(--color-border);
+  padding: 1.25rem 0;
+}
+
+.milestones-track {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+.milestone-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  background-color: var(--color-surface-alt);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+}
+
+.milestone-chip:hover {
+  border-color: var(--color-teal);
+  background-color: #f0fdfa;
+}
+
+.milestone-chip-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-full);
+  background-color: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: var(--color-teal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.milestone-chip-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.milestone-date {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #0f766e;
+  letter-spacing: 0.04em;
+}
+
+.milestone-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #0d3824;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 3. Story Content Section */
+.story-content-section {
+  padding: 3.5rem 0 4rem;
+}
+
+.story-container {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+/* Individual Story Chapter / Block */
+.story-block {
+  display: flex;
+  gap: 2rem;
+  padding: 2.25rem;
+  background-color: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  transition: all var(--transition-fast);
+}
+
+.story-block:hover {
+  border-color: #a7f3d0;
+  box-shadow: var(--shadow-md);
+}
+
+.story-block-num {
+  font-size: 2.25rem;
+  font-weight: 900;
+  color: #cbd5e1;
+  font-family: monospace;
+  line-height: 1;
+  flex-shrink: 0;
+  width: 50px;
+}
+
+.story-block-body {
+  flex: 1;
+}
+
+.story-block-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #0f766e;
+  margin-bottom: 0.35rem;
+}
+
+.story-block-heading {
+  font-size: clamp(1.35rem, 2.5vw, 1.7rem);
+  font-weight: 800;
+  color: #0d3824;
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+.story-block-body p {
+  font-size: 1.025rem;
+  color: #374151;
+  line-height: 1.75;
+  font-weight: 450;
+  margin-bottom: 1rem;
+}
+
+.story-block-body p:last-child {
+  margin-bottom: 0;
+}
+
+/* Featured GET Pin Milestone Highlight */
+.story-block.featured-milestone {
+  background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+  border: 2px solid #86efac;
+}
+
+.story-block.featured-milestone .story-block-num {
+  color: #10b981;
+}
+
+/* Gratitude List */
+.story-gratitude-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-top: 1.25rem;
+}
+
+.gratitude-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  background-color: var(--color-surface-alt);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1rem;
+  font-size: 0.95rem;
+  color: #374151;
+  line-height: 1.6;
+}
+
+.gratitude-icon {
+  color: #059669;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.gratitude-item strong {
+  color: #0d3824;
+}
+
+/* 4. Ethical Disclaimer Card */
+.story-disclaimer-card {
+  background-color: #fefce8;
+  border: 1px solid #fef08a;
+  border-radius: var(--radius-md);
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 2.5rem;
+}
+
+.disclaimer-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  color: #854d0e;
+  margin-bottom: 0.65rem;
+}
+
+.disclaimer-icon {
+  color: #ca8a04;
+  flex-shrink: 0;
+}
+
+.story-disclaimer-card p {
+  font-size: 0.875rem;
+  color: #713f12;
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* 5. Bottom Call to Action */
+.story-cta-box {
+  background: linear-gradient(135deg, #f0f7f3 0%, #e6f4ec 100%);
+  border: 1px solid #bbf7d0;
+  border-radius: var(--radius-lg);
+  padding: 3rem 2.5rem;
+  text-align: center;
+}
+
+.story-cta-box h2 {
+  font-size: clamp(1.65rem, 3.2vw, 2.2rem);
+  font-weight: 800;
+  color: #0d3824;
+  margin: 0.5rem 0 0.85rem;
+  line-height: 1.3;
+}
+
+.story-cta-box p {
+  font-size: 1.05rem;
+  color: #374151;
+  line-height: 1.65;
+  margin: 0 auto 2rem;
+  max-width: 620px;
+}
+
+.story-cta-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+/* ==============================================================================
+   RESPONSIVE DESIGN (320px - 1024px)
+   ============================================================================== */
+@media (max-width: 1024px) {
+  .milestones-track {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .story-header-section {
+    padding: 2.5rem 0 2rem;
+  }
+  .story-block {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.75rem 1.25rem;
+  }
+  .story-block-num {
+    width: auto;
+    font-size: 1.75rem;
+  }
+  .milestones-track {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  .story-cta-box {
+    padding: 2.25rem 1.25rem;
+  }
+  .story-cta-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .story-cta-actions .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .story-content-section {
+    padding: 2rem 0 3rem;
+  }
+  .story-block {
+    padding: 1.5rem 1rem;
+  }
+  .story-block-heading {
+    font-size: 1.3rem;
+  }
+  .story-block-body p {
+    font-size: 0.95rem;
+    line-height: 1.68;
+  }
+  .gratitude-item {
+    font-size: 0.875rem;
+    padding: 0.75rem;
+  }
+  .story-disclaimer-card {
+    padding: 1.25rem 1rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .story-main-title {
+    font-size: 1.65rem;
+  }
+  .story-subtitle-lead {
+    font-size: 0.95rem;
+  }
+  .story-block {
+    padding: 1.25rem 0.85rem;
+  }
+  .story-block-heading {
+    font-size: 1.2rem;
+  }
+  .story-cta-box {
+    padding: 1.75rem 1rem;
+  }
+}

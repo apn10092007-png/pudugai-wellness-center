@@ -206,6 +206,22 @@ export const INITIAL_COACH = {
   address_ta: 'கிழக்கு முதன்மை சாலை, டி நகர், புவனேஸ்வரி நகர், புதுக்கோட்டை, தமிழ்நாடு 622001'
 };
 
+export const INITIAL_COACHES = [
+  INITIAL_COACH,
+  {
+    id: 'c0a00000-0000-0000-0000-000000000002',
+    coach_name: 'Thenmozhi',
+    title: 'Nutrition Coach',
+    biography: 'Thenmozhi is dedicated to guiding individuals and families with supportive, personalized nutrition coaching. Working closely alongside Coach Thangapandian S, she helps clients build wholesome daily nutrition habits and active lifestyle routines.',
+    image_path: '/assets/avatar-thenmozhi.svg',
+    phone: '94434 43261',
+    instagram_url: '',
+    maps_url: 'https://maps.app.goo.gl/JAdNVeq53M3PdrW1A',
+    address_en: 'E Main Rd, T Nagar, Buvaneswari Nagar, Pudukkottai, Tamil Nadu 622001',
+    address_ta: 'கிழக்கு முதன்மை சாலை, டி நகர், புவனேஸ்வரி நகர், புதுக்கோட்டை, தமிழ்நாடு 622001'
+  }
+];
+
 export const INITIAL_SITE_CONTENT = {
   mission: 'To empower people of all ages to achieve their highest vitality through personalized nutrition plans, body composition analysis, and consistent, supportive coaching.',
   vision: "To become Pudukkottai's most trusted and compassionate wellness community, where healthy living is accessible, sustainable, and joyful.",
@@ -294,6 +310,7 @@ const STORAGE_KEYS = {
   SERVICES: 'pwc_services_v1',
   STORIES: 'pwc_stories_v1',
   COACH: 'pwc_coach_v1',
+  COACHES: 'pwc_coaches_v2',
   CONTENT: 'pwc_content_v1',
   HERO_CONTENT: 'pwc_hero_content_v1',
   ENQUIRIES: 'pwc_enquiries_v1'
@@ -551,52 +568,86 @@ export const dataService = {
   },
 
   // ==========================================
-  // 3. COACH PROFILE API (DYNAMIC PHOTO & BIO)
+  // 3. COACH PROFILE API (DYNAMIC PHOTO & BIO FOR BOTH COACHES)
   // ==========================================
-  async getCoachProfile() {
+  async getAllCoaches() {
     if (isSupabaseConfigured()) {
       try {
         const { data, error } = await supabase
           .from('coach_profile')
           .select('*')
-          .limit(1)
-          .single();
-        if (!error && data) return data;
+          .order('id', { ascending: true });
+        if (!error && data && data.length > 0) {
+          // If only 1 coach exists in Supabase (legacy single-coach database), seamlessly include Thenmozhi
+          if (data.length === 1 && (data[0].coach_name || '').includes('Thangapandian')) {
+            const merged = [data[0], INITIAL_COACHES[1]];
+            setLocal(STORAGE_KEYS.COACHES, merged);
+            return merged;
+          }
+          setLocal(STORAGE_KEYS.COACHES, data);
+          return data;
+        }
       } catch (err) {
-        console.warn('Supabase fetch coach failed, using local profile:', err);
+        console.warn('Supabase fetch coaches failed, using local profile:', err);
       }
     }
-    return getLocal(STORAGE_KEYS.COACH, INITIAL_COACH);
+    return getLocal(STORAGE_KEYS.COACHES, INITIAL_COACHES);
+  },
+
+  async getCoachProfile() {
+    const coaches = await this.getAllCoaches();
+    return coaches[0] || INITIAL_COACH;
   },
 
   async updateCoachProfile(profile) {
+    const targetId = profile.id || INITIAL_COACH.id;
     if (isSupabaseConfigured()) {
       try {
+        // Upsert to handle both existing records and new second coach insertion
         const { data, error } = await supabase
           .from('coach_profile')
-          .update({
+          .upsert({
+            id: targetId,
             coach_name: profile.coach_name,
             title: profile.title,
             biography: profile.biography,
             image_path: profile.image_path,
-            phone: profile.phone,
-            instagram_url: profile.instagram_url,
-            maps_url: profile.maps_url,
-            address_en: profile.address_en,
-            address_ta: profile.address_ta,
+            phone: profile.phone || '94434 43261',
+            instagram_url: profile.instagram_url || '',
+            maps_url: profile.maps_url || 'https://maps.app.goo.gl/JAdNVeq53M3PdrW1A',
+            address_en: profile.address_en || 'E Main Rd, T Nagar, Buvaneswari Nagar, Pudukkottai, Tamil Nadu 622001',
+            address_ta: profile.address_ta || 'கிழக்கு முதன்மை சாலை, டி நகர், புவனேஸ்வரி நகர், புதுக்கோட்டை, தமிழ்நாடு 622001',
             updated_at: new Date().toISOString()
           })
-          .eq('id', profile.id || INITIAL_COACH.id)
           .select()
           .single();
-        if (!error && data) return data;
+
+        if (!error && data) {
+          const currentList = getLocal(STORAGE_KEYS.COACHES, INITIAL_COACHES);
+          const idx = currentList.findIndex((c) => c.id === targetId);
+          if (idx !== -1) currentList[idx] = data;
+          else currentList.push(data);
+          setLocal(STORAGE_KEYS.COACHES, currentList);
+          if (idx === 0) setLocal(STORAGE_KEYS.COACH, data);
+          return data;
+        }
       } catch (err) {
         console.error('Supabase updateCoachProfile error:', err);
       }
     }
-    const current = getLocal(STORAGE_KEYS.COACH, INITIAL_COACH);
-    const updated = { ...current, ...profile, updated_at: new Date().toISOString() };
-    setLocal(STORAGE_KEYS.COACH, updated);
+
+    const currentList = getLocal(STORAGE_KEYS.COACHES, INITIAL_COACHES);
+    const idx = currentList.findIndex((c) => c.id === targetId);
+    let updated;
+    if (idx !== -1) {
+      currentList[idx] = { ...currentList[idx], ...profile, updated_at: new Date().toISOString() };
+      updated = currentList[idx];
+    } else {
+      updated = { ...profile, id: targetId, updated_at: new Date().toISOString() };
+      currentList.push(updated);
+    }
+    setLocal(STORAGE_KEYS.COACHES, currentList);
+    if (idx === 0) setLocal(STORAGE_KEYS.COACH, updated);
     return updated;
   },
 

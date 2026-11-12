@@ -33,35 +33,47 @@
   background-color: var(--color-surface);
 }
 
-.about-coach-grid {
+.about-coaches-grid {
   display: grid;
-  grid-template-columns: 0.85fr 1.15fr;
-  gap: 3.5rem;
-  align-items: center;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-bottom: 2.5rem;
 }
 
-.about-coach-media {
+.about-coach-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.about-coach-card .about-coach-media {
+  width: 100%;
   display: flex;
   justify-content: center;
 }
 
-.about-coach-img {
+.about-coach-card .about-coach-img {
   width: 100%;
-  max-width: 360px;
-  height: 420px;
+  height: 340px;
+  max-width: 100%;
   object-fit: cover;
-  border-radius: var(--radius-lg);
+  object-position: center 20%;
+  border-radius: var(--radius-md);
   border: 1px solid var(--color-border);
-  box-shadow: var(--shadow-sm);
 }
 
-.about-coach-info {
+.about-coach-card .about-coach-info {
   display: flex;
   flex-direction: column;
+  flex: 1;
 }
 
 .about-coach-name {
-  font-size: clamp(1.75rem, 3.5vw, 2.35rem);
+  font-size: clamp(1.5rem, 3vw, 1.9rem);
   color: #0d3824;
   font-weight: 800;
   letter-spacing: -0.02em;
@@ -69,28 +81,82 @@
 }
 
 .about-coach-role {
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 700;
   color: #0f766e;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
 }
 
 .about-coach-bio {
   display: flex;
   flex-direction: column;
   gap: 0.85rem;
-  font-size: 1.025rem;
+  font-size: 0.975rem;
   color: #374151;
-  line-height: 1.7;
+  line-height: 1.65;
   font-weight: 450;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
+  flex: 1;
 }
 
 .about-coach-contact {
   display: flex;
   flex-wrap: wrap;
   gap: 0.65rem;
-  margin-bottom: 1.75rem;
+}
+
+.about-story-banner {
+  background: linear-gradient(135deg, #f0f7f3 0%, #e6f4ec 100%);
+  border: 1px solid #bbf7d0;
+  border-radius: var(--radius-lg);
+  padding: 2.25rem 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+.about-story-text {
+  max-width: 680px;
+}
+
+.about-story-text h3 {
+  font-size: 1.35rem;
+  color: #0d3824;
+  margin-bottom: 0.4rem;
+}
+
+.about-story-text p {
+  font-size: 0.975rem;
+  color: #374151;
+  line-height: 1.6;
+}
+
+@media (max-width: 860px) {
+  .about-coaches-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .about-coach-card {
+    padding: 1.5rem 1.25rem;
+  }
+  .about-coach-card .about-coach-img {
+    height: 300px;
+  }
+  .about-story-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.75rem 1.25rem;
+  }
+  .about-story-banner .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 360px) {
+  .about-coach-card .about-coach-img {
+    height: 250px;
+  }
 }
 
 .about-pill {

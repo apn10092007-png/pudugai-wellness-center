@@ -14,7 +14,8 @@ import { dataService } from '../../services/dataService';
 import './AdminAboutPage.css';
 
 export default function AdminAboutPage() {
-  const [coach, setCoach] = useState(null);
+  const [coaches, setCoaches] = useState([]);
+  const [selectedCoachId, setSelectedCoachId] = useState('');
   const [content, setContent] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -41,27 +42,36 @@ export default function AdminAboutPage() {
   const [contentSuccessMsg, setContentSuccessMsg] = useState('');
   const [deletePhotoModal, setDeletePhotoModal] = useState(false);
 
+  const populateCoachForm = (c) => {
+    if (!c) return;
+    setCoachName(c.coach_name || '');
+    setCoachTitle(c.title || '');
+    setCoachBio(c.biography || '');
+    setCoachPhone(c.phone || '94434 43261');
+    setCoachInstagram(c.instagram_url || '');
+    setCoachAddressEn(c.address_en || 'E Main Rd, T Nagar, Buvaneswari Nagar, Pudukkottai, Tamil Nadu 622001');
+    setCoachAddressTa(c.address_ta || 'கிழக்கு முதன்மை சாலை, டி நகர், புவனேஸ்வரி நகர், புதுக்கோட்டை, தமிழ்நாடு 622001');
+    setCoachImagePath(c.image_path || '');
+    setCoachSuccessMsg('');
+  };
+
   useEffect(() => {
     let mounted = true;
     async function loadData() {
       try {
-        const [c, cnt] = await Promise.all([
-          dataService.getCoachProfile(),
+        const [coachesList, cnt] = await Promise.all([
+          dataService.getAllCoaches(),
           dataService.getSiteContent('about_page')
         ]);
         if (mounted) {
-          setCoach(c);
+          const list = coachesList && coachesList.length > 0 ? coachesList : [];
+          setCoaches(list);
           setContent(cnt);
 
-          // Populate coach fields
-          setCoachName(c.coach_name || 'Thangapandian S');
-          setCoachTitle(c.title || 'Wellness Coach & Founder');
-          setCoachBio(c.biography || '');
-          setCoachPhone(c.phone || '94434 43261');
-          setCoachInstagram(c.instagram_url || 'https://www.instagram.com/coach_pandian?exln=YmNsbjZkeXQ1dnc3');
-          setCoachAddressEn(c.address_en || 'E Main Rd, T Nagar, Buvaneswari Nagar, Pudukkottai, Tamil Nadu 622001');
-          setCoachAddressTa(c.address_ta || 'கிழக்கு முதன்மை சாலை, டி நகர், புவனேஸ்வரி நகர், புதுக்கோட்டை, தமிழ்நாடு 622001');
-          setCoachImagePath(c.image_path || '');
+          if (list.length > 0) {
+            setSelectedCoachId(list[0].id);
+            populateCoachForm(list[0]);
+          }
 
           // Populate content fields
           setMission(cnt?.mission || '');
@@ -78,6 +88,15 @@ export default function AdminAboutPage() {
     return () => { mounted = false; };
   }, []);
 
+  // Switch between Coach 1 and Coach 2
+  const handleSelectCoach = (coachId) => {
+    setSelectedCoachId(coachId);
+    const target = coaches.find((c) => c.id === coachId);
+    if (target) {
+      populateCoachForm(target);
+    }
+  };
+
   // Upload or Replace Coach Photo
   const handlePhotoUpload = async (e) => {
     const file = e.target.files?.[0];
@@ -88,7 +107,7 @@ export default function AdminAboutPage() {
     try {
       const publicUrl = await dataService.uploadImage('coach-images', file);
       setCoachImagePath(publicUrl);
-      setCoachSuccessMsg('New photo selected. Click "Save Coach Profile" to publish.');
+      setCoachSuccessMsg(`New photo uploaded for ${coachName}. Click "Save Coach Profile" to publish.`);
     } catch (err) {
       alert(err.message || 'Failed to upload image.');
     } finally {
@@ -98,7 +117,10 @@ export default function AdminAboutPage() {
 
   // Delete Coach Photo with confirmation
   const handleConfirmPhotoDelete = () => {
-    setCoachImagePath('');
+    const defaultPlaceholder = coachName.includes('Thenmozhi')
+      ? '/assets/avatar-thenmozhi.svg'
+      : '';
+    setCoachImagePath(defaultPlaceholder);
     setDeletePhotoModal(false);
     setCoachSuccessMsg('Photo removed. Remember to click "Save Coach Profile" to update.');
   };
@@ -115,7 +137,7 @@ export default function AdminAboutPage() {
     setCoachSuccessMsg('');
     try {
       const updated = await dataService.updateCoachProfile({
-        ...(coach?.id ? { id: coach.id } : {}),
+        id: selectedCoachId,
         coach_name: coachName.trim(),
         title: coachTitle.trim(),
         biography: coachBio.trim(),
@@ -125,8 +147,10 @@ export default function AdminAboutPage() {
         address_en: coachAddressEn.trim(),
         address_ta: coachAddressTa.trim()
       });
-      setCoach(updated);
-      setCoachSuccessMsg('Coach profile and photo saved successfully! Live website updated.');
+
+      const updatedList = coaches.map((c) => (c.id === selectedCoachId ? updated : c));
+      setCoaches(updatedList);
+      setCoachSuccessMsg(`${updated.coach_name}'s profile and photo saved successfully! Live website updated.`);
     } catch (err) {
       alert(err.message || 'Failed to update coach profile.');
     } finally {
@@ -160,18 +184,21 @@ export default function AdminAboutPage() {
     return (
       <div className="admin-page-loading">
         <div className="spinner"></div>
-        <p>Loading coach profile and site content...</p>
+        <p>Loading coach profiles and site content...</p>
       </div>
     );
   }
+
+  const isThenmozhiSelected = coachName.includes('Thenmozhi') || selectedCoachId?.includes('0002');
+  const fallbackPreview = isThenmozhiSelected ? '/assets/avatar-thenmozhi.svg' : '/assets/coach-pandian.png';
 
   return (
     <div className="admin-about-management-page">
       <div className="admin-page-header">
         <div>
-          <h1 className="admin-page-title">Coach Profile & Site Content</h1>
+          <h1 className="admin-page-title">Coaches & Site Content</h1>
           <p className="admin-page-subtitle">
-            Manage Coach Thangapandian's verified photo, biography, and center mission/vision.
+            Manage Coaches Thangapandian S and Thenmozhi's verified photos, biographies, and center mission/vision.
           </p>
         </div>
         <div className="admin-header-actions">
@@ -188,10 +215,32 @@ export default function AdminAboutPage() {
           <div className="card-header-strip">
             <User size={20} className="strip-icon" />
             <div>
-              <h2>Coach Profile & Dynamic Photograph</h2>
-              <span>Uploaded photo dynamically displays on the About Us page</span>
+              <h2>Coach Profiles & Photographs</h2>
+              <span>Switch between coaches to update their information or photos</span>
             </div>
           </div>
+
+          {/* Coach Switcher Tabs */}
+          {coaches.length > 1 && (
+            <div className="coach-selector-tabs">
+              {coaches.map((c) => {
+                const isSelected = c.id === selectedCoachId;
+                const isThenmozhi = (c.coach_name || '').includes('Thenmozhi');
+                return (
+                  <button
+                    key={c.id}
+                    type="button"
+                    className={`coach-tab-btn ${isSelected ? 'active' : ''}`}
+                    onClick={() => handleSelectCoach(c.id)}
+                  >
+                    <User size={16} />
+                    <span>{c.coach_name || (isThenmozhi ? 'Thenmozhi' : 'Thangapandian S')}</span>
+                    {isThenmozhi && <span className="coach-tag-pill">Coach</span>}
+                  </button>
+                );
+              })}
+            </div>
+          )}
 
           {coachSuccessMsg && (
             <div className="save-alert-success">
@@ -203,16 +252,16 @@ export default function AdminAboutPage() {
           <form onSubmit={handleSaveCoachProfile}>
             {/* Photo preview, replace, delete controls */}
             <div className="coach-photo-management-block">
-              <label className="form-label">Coach Official Photo</label>
+              <label className="form-label">{coachName} Official Photo</label>
               <div className="photo-editor-row">
                 <div className="coach-photo-preview-box">
                   {coachImagePath ? (
                     <img
                       src={coachImagePath}
-                      alt="Coach Pandian Preview"
+                      alt={`${coachName} Preview`}
                       className="coach-img-preview"
                       onError={(e) => {
-                        e.currentTarget.src = '/assets/coach-pandian.png';
+                        e.currentTarget.src = fallbackPreview;
                       }}
                     />
                   ) : (
@@ -225,12 +274,14 @@ export default function AdminAboutPage() {
 
                 <div className="photo-actions-col">
                   <span className="photo-guidance">
-                    Upload an official photograph of Coach Thangapandian S. Max 5MB (JPG, PNG, WebP).
+                    {isThenmozhiSelected
+                      ? 'Upload an official photograph of Coach Thenmozhi to replace the temporary avatar. Max 5MB (JPG, PNG, WebP).'
+                      : 'Upload an official photograph of Coach Thangapandian S. Max 5MB (JPG, PNG, WebP).'}
                   </span>
                   <div className="photo-buttons-group">
                     <label className="btn btn-primary btn-sm photo-upload-btn">
                       <Upload size={14} />
-                      <span>{uploadingImage ? 'Uploading...' : coachImagePath ? 'Replace Photo' : 'Upload Photo'}</span>
+                      <span>{uploadingImage ? 'Uploading...' : coachImagePath && !coachImagePath.endsWith('.svg') ? 'Replace Photo' : 'Upload Photo'}</span>
                       <input
                         type="file"
                         accept="image/*"
@@ -240,7 +291,7 @@ export default function AdminAboutPage() {
                       />
                     </label>
 
-                    {coachImagePath && (
+                    {coachImagePath && !coachImagePath.endsWith('.svg') && (
                       <button
                         type="button"
                         onClick={() => setDeletePhotoModal(true)}
@@ -268,7 +319,7 @@ export default function AdminAboutPage() {
               </div>
 
               <div className="form-group">
-                <label className="form-label">Professional Title</label>
+                <label className="form-label">Professional Role / Title *</label>
                 <input
                   type="text"
                   value={coachTitle}
@@ -307,6 +358,7 @@ export default function AdminAboutPage() {
                   type="url"
                   value={coachInstagram}
                   onChange={(e) => setCoachInstagram(e.target.value)}
+                  placeholder="https://www.instagram.com/..."
                   className="form-input"
                 />
               </div>
@@ -340,7 +392,7 @@ export default function AdminAboutPage() {
               style={{ marginTop: '0.5rem' }}
             >
               <Save size={16} />
-              <span>{savingCoach ? 'Saving Profile...' : 'Save Coach Profile'}</span>
+              <span>{savingCoach ? 'Saving Profile...' : `Save ${coachName} Profile`}</span>
             </button>
           </form>
         </div>

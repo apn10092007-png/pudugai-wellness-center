@@ -20,24 +20,24 @@ export default function AdminDashboardPage() {
   const [services, setServices] = useState([]);
   const [stories, setStories] = useState([]);
   const [enquiries, setEnquiries] = useState([]);
-  const [coach, setCoach] = useState(null);
+  const [coaches, setCoaches] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     let mounted = true;
     async function fetchStats() {
       try {
-        const [serv, stor, enq, c] = await Promise.all([
+        const [serv, stor, enq, coachesList] = await Promise.all([
           dataService.getAllServices(),
           dataService.getAllSuccessStories(),
           dataService.getAllEnquiries(),
-          dataService.getCoachProfile()
+          dataService.getAllCoaches()
         ]);
         if (mounted) {
           setServices(serv);
           setStories(stor);
           setEnquiries(enq);
-          setCoach(c);
+          setCoaches(coachesList || []);
           setLoading(false);
         }
       } catch (err) {
@@ -225,33 +225,43 @@ export default function AdminDashboardPage() {
             </Link>
           </div>
 
-          <div className="coach-quick-card">
-            <div className="coach-quick-img-wrap">
-              {coach?.image_path ? (
+          <div className="coach-quick-card" style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+            {coaches.map((c) => (
+              <div
+                key={c.id}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.85rem',
+                  paddingBottom: '0.65rem',
+                  borderBottom: '1px solid var(--color-border-subtle)'
+                }}
+              >
                 <img
-                  src={coach.image_path}
-                  alt={coach.coach_name}
-                  className="coach-quick-img"
+                  src={c.image_path || (c.coach_name?.includes('Thenmozhi') ? '/assets/avatar-thenmozhi.svg' : '/assets/coach-pandian.png')}
+                  alt={c.coach_name}
+                  style={{
+                    width: '46px',
+                    height: '46px',
+                    borderRadius: '50%',
+                    objectFit: 'cover',
+                    border: '1px solid var(--color-border)',
+                    backgroundColor: 'var(--color-surface-alt)'
+                  }}
                   onError={(e) => {
-                    e.currentTarget.src = '/assets/coach-pandian.png';
+                    e.currentTarget.src = c.coach_name?.includes('Thenmozhi') ? '/assets/avatar-thenmozhi.svg' : '/assets/coach-pandian.png';
                   }}
                 />
-              ) : (
-                <div className="coach-quick-placeholder">No Photo</div>
-              )}
-            </div>
-            <div className="coach-quick-info">
-              <h3>{coach?.coach_name || 'Thangapandian S'}</h3>
-              <p className="coach-quick-role">{coach?.title || 'Wellness Coach & Founder'}</p>
-              <p className="coach-quick-phone">
-                <Phone size={14} />
-                <span>{coach?.phone || '94434 43261'}</span>
-              </p>
-              <div className="coach-quick-actions">
-                <Link to="/admin/about" className="btn btn-primary btn-sm">
-                  Update Photo / Bio
-                </Link>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <h4 style={{ margin: 0, fontSize: '0.95rem', color: 'var(--color-primary)' }}>{c.coach_name}</h4>
+                  <span style={{ fontSize: '0.8rem', color: 'var(--color-teal)', fontWeight: 600 }}>{c.title}</span>
+                </div>
               </div>
+            ))}
+            <div style={{ marginTop: '0.25rem' }}>
+              <Link to="/admin/about" className="btn btn-outline btn-sm" style={{ width: '100%', justifyContent: 'center' }}>
+                Manage Coaches & Bios
+              </Link>
             </div>
           </div>
 

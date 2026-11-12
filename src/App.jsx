@@ -11,6 +11,7 @@ import AboutPage from './pages/AboutPage';
 import ServicesPage from './pages/ServicesPage';
 import SuccessStoriesPage from './pages/SuccessStoriesPage';
 import ContactPage from './pages/ContactPage';
+import OurStoryPage from './pages/OurStoryPage';
 
 // Admin Pages
 import AdminLoginPage from './pages/admin/AdminLoginPage';
@@ -47,6 +48,8 @@ export default function App() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/services" element={<ServicesPage />} />
         <Route path="/stories" element={<SuccessStoriesPage />} />
+        <Route path="/our-story" element={<OurStoryPage />} />
+        <Route path="/story" element={<Navigate to="/our-story" replace />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>

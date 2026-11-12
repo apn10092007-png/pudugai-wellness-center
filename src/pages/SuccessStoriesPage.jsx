@@ -63,6 +63,39 @@ export default function SuccessStoriesPage() {
         </div>
       </section>
 
+      {/* Featured Coaches' Journey Card */}
+      <section style={{ padding: '0.5rem 0 1.5rem' }}>
+        <div className="container">
+          <div
+            style={{
+              backgroundColor: '#f0f7f3',
+              border: '1px solid #bbf7d0',
+              borderRadius: 'var(--radius-lg)',
+              padding: '1.5rem 1.75rem',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              gap: '1.25rem',
+              flexWrap: 'wrap'
+            }}
+          >
+            <div>
+              <span className="section-tag" style={{ marginBottom: '0.25rem' }}>Coaches' Personal Journey</span>
+              <h3 style={{ fontSize: '1.2rem', color: '#0d3824', margin: '0.2rem 0' }}>
+                Our Story – Thangapandian & Thenmozhi
+              </h3>
+              <p style={{ fontSize: '0.925rem', color: '#374151', margin: 0 }}>
+                From part-time beginnings in December 2019 to qualifying for the Global Expansion Team (GET) Pin in September 2026.
+              </p>
+            </div>
+            <Link to="/our-story" className="btn btn-primary btn-sm">
+              <span>Read Coaches' Story</span>
+              <ArrowRight size={15} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Stories Listing */}
       <section className="section stories-main-section">
         <div className="container">

@@ -4,7 +4,6 @@ import {
   Phone,
   ArrowRight,
   CheckCircle2,
-  Activity,
   Heart,
   Scale,
   Users,
@@ -18,24 +17,24 @@ import { BUSINESS_CONFIG } from '../config/business';
 import './HomePage.css';
 
 export default function HomePage() {
-  const [coach, setCoach] = useState(null);
+  const [coaches, setCoaches] = useState([]);
   const [services, setServices] = useState([]);
   const [stories, setStories] = useState([]);
   const [heroContent, setHeroContent] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [_loading, setLoading] = useState(true);
 
   useEffect(() => {
     let mounted = true;
     async function loadData() {
       try {
-        const [coachData, servicesData, storiesData, heroData] = await Promise.all([
-          dataService.getCoachProfile(),
+        const [coachesData, servicesData, storiesData, heroData] = await Promise.all([
+          dataService.getAllCoaches(),
           dataService.getPublishedServices(),
           dataService.getPublishedSuccessStories(),
           dataService.getHomeHero()
         ]);
         if (mounted) {
-          setCoach(coachData);
+          setCoaches(coachesData || []);
           setServices(servicesData);
           setStories(storiesData);
           setHeroContent(heroData || INITIAL_HERO_CONTENT);
@@ -200,60 +199,91 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 4. MEET THE COACH */}
-      <section className="section coach-section">
+      {/* 4. MEET YOUR COACHES */}
+      <section className="section coaches-section">
         <div className="container">
-          <div className="coach-clean-layout">
-            <div className="coach-image-col">
-              <img
-                src={coach?.image_path || '/assets/coach-pandian.png'}
-                alt={coach?.coach_name || 'Coach Thangapandian S'}
-                className="coach-clean-img"
-                onError={(e) => {
-                  e.currentTarget.src = '/assets/coach-pandian.png';
-                }}
-              />
-            </div>
+          <div className="section-header-compact">
+            <span className="section-tag">Dedicated Wellness Coaches</span>
+            <h2 className="section-title">Meet Your Personal Coaches</h2>
+            <p className="section-subtitle">
+              Guided by sustainable daily habits, wholesome nutrition, and individual care in Pudukkottai.
+            </p>
+          </div>
 
-            <div className="coach-details-col">
-              <span className="section-tag">Dedicated Wellness Coach</span>
-              <h2 className="coach-title-name">{coach?.coach_name || 'Thangapandian S'}</h2>
-              <span className="coach-subtitle-role">{coach?.title || 'Wellness Coach & Founder'}</span>
+          <div className="coaches-grid">
+            {coaches.map((c) => (
+              <div key={c.id || c.coach_name} className="coach-clean-card">
+                <div className="coach-card-image-wrap">
+                  <img
+                    src={c.image_path || (c.coach_name.includes('Thenmozhi') ? '/assets/avatar-thenmozhi.svg' : '/assets/coach-pandian.png')}
+                    alt={c.coach_name}
+                    className="coach-card-img"
+                    onError={(e) => {
+                      e.currentTarget.src = c.coach_name.includes('Thenmozhi') ? '/assets/avatar-thenmozhi.svg' : '/assets/coach-pandian.png';
+                    }}
+                  />
+                </div>
 
-              <p className="coach-description-text">
-                {coach?.biography ||
-                  'Coach Thangapandian S is dedicated to empowering individuals and families in Pudukkottai toward vibrant health through personalized nutrition and steady, sustainable habits.'}
-              </p>
+                <div className="coach-card-body">
+                  <span className="coach-card-role">{c.title || 'Wellness Coach'}</span>
+                  <h3 className="coach-card-name">{c.coach_name}</h3>
 
-              <div className="coach-contact-pills">
-                <a href={`tel:${BUSINESS_CONFIG.phoneRaw}`} className="coach-contact-pill">
-                  <Phone size={14} />
-                  <span>{BUSINESS_CONFIG.phoneDisplay}</span>
-                </a>
-                <a
-                  href={BUSINESS_CONFIG.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="coach-contact-pill"
-                >
-                  <Instagram size={14} />
-                  <span>@coach_pandian</span>
-                </a>
-                <div className="coach-contact-pill location">
-                  <MapPin size={14} />
-                  <span>Pudukkottai Center</span>
+                  <p className="coach-card-bio">{c.biography}</p>
+
+                  <div className="coach-card-pills">
+                    <a href={`tel:${BUSINESS_CONFIG.phoneRaw}`} className="coach-contact-pill">
+                      <Phone size={14} />
+                      <span>{BUSINESS_CONFIG.phoneDisplay}</span>
+                    </a>
+                    {c.instagram_url && (
+                      <a
+                        href={c.instagram_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="coach-contact-pill"
+                      >
+                        <Instagram size={14} />
+                        <span>Instagram</span>
+                      </a>
+                    )}
+                    <div className="coach-contact-pill location">
+                      <MapPin size={14} />
+                      <span>Pudukkottai Center</span>
+                    </div>
+                  </div>
                 </div>
               </div>
+            ))}
+          </div>
 
-              <div className="coach-buttons-row">
-                <Link to="/about" className="btn btn-primary">
-                  <span>About Coach & Center</span>
-                  <ArrowRight size={15} />
-                </Link>
-                <Link to="/contact" className="btn btn-secondary">
-                  <span>Book Initial Assessment</span>
-                </Link>
-              </div>
+          <div className="coaches-action-row">
+            <Link to="/about" className="btn btn-outline btn-lg">
+              <span>Learn More About Our Center</span>
+              <ArrowRight size={16} />
+            </Link>
+            <Link to="/contact" className="btn btn-primary btn-lg">
+              <span>Book Initial Assessment</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. OUR JOURNEY SECTION */}
+      <section className="section our-journey-section">
+        <div className="container">
+          <div className="our-journey-card">
+            <div className="our-journey-header">
+              <span className="section-tag">Our Journey</span>
+              <h2 className="our-journey-title">A Journey of Transformation and Growth</h2>
+            </div>
+            <p className="our-journey-intro">
+              Thangapandian and Thenmozhi's journey began with a personal interest in nutrition and wellness. What started as a part-time business in December 2019 gradually grew into a full-time coaching journey. Through continuous learning, teamwork and dedication, they built their own nutrition club and continue to support their community.
+            </p>
+            <div className="our-journey-action">
+              <Link to="/our-story" className="btn btn-primary btn-lg">
+                <span>Read Our Full Story</span>
+                <ArrowRight size={17} />
+              </Link>
             </div>
           </div>
         </div>
