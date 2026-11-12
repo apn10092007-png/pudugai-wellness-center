@@ -232,39 +232,45 @@ export default function ContactPage() {
                   </a>
                 </div>
 
-                {/* Center Location Cards */}
-                <div className="center-address-card">
-                  <div className="address-header">
-                    <MapPin size={20} className="address-pin-icon" />
-                    <h3>Pudukkottai Center Address</h3>
+                {/* Center Location Cards: Pudugai & Peravurani */}
+                <div className="contact-locations-section">
+                  <div className="locations-header">
+                    <MapPin size={20} className="locations-pin-icon" />
+                    <h3 className="locations-main-title">Our Locations</h3>
                   </div>
 
-                  <div className="address-body">
-                    <div className="address-lang-block">
-                      <span className="address-lang-label">English:</span>
-                      <p className="address-text en">
-                        {BUSINESS_CONFIG.name}<br />
-                        {BUSINESS_CONFIG.addressEn}
-                      </p>
+                  <div className="locations-cards-grid">
+                    {/* Location 1 – Pudugai */}
+                    <div className="location-card">
+                      <div className="location-card-header">
+                        <h4 className="location-name">Pudugai</h4>
+                      </div>
+                      <a
+                        href="https://maps.app.goo.gl/JAdNVeq53M3PdrW1A"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn btn-outline btn-sm location-maps-btn"
+                      >
+                        <span>View on Google Maps</span>
+                        <ExternalLink size={14} />
+                      </a>
                     </div>
 
-                    <div className="address-lang-block">
-                      <span className="address-lang-label">தமிழ்:</span>
-                      <p className="address-text ta">
-                        புடுகை வெல்னஸ் சென்டர்<br />
-                        {BUSINESS_CONFIG.addressTa}
-                      </p>
+                    {/* Location 2 – Peravurani */}
+                    <div className="location-card">
+                      <div className="location-card-header">
+                        <h4 className="location-name">Peravurani</h4>
+                      </div>
+                      <a
+                        href="https://maps.app.goo.gl/DFpxMGuHuTudNYFb6"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn btn-outline btn-sm location-maps-btn"
+                      >
+                        <span>View on Google Maps</span>
+                        <ExternalLink size={14} />
+                      </a>
                     </div>
-
-                    <a
-                      href={BUSINESS_CONFIG.googleMaps}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn btn-outline btn-sm maps-nav-btn"
-                    >
-                      <span>Open in Google Maps / Directions</span>
-                      <ExternalLink size={14} />
-                    </a>
                   </div>
                 </div>
               </div>
