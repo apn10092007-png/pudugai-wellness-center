@@ -61,12 +61,12 @@ export default function HomePage() {
             <span className="hero-badge">Nutrition • Fitness • Wellness</span>
             
             <h1 className="hero-title">
-              {heroContent?.headline || 'Real Wellness for Your Real Everyday Life.'}
+              {heroContent?.headline || 'Simple, Healthy Living for Everyday Life.'}
             </h1>
             
             <p className="hero-description">
               {heroContent?.subheadline ||
-                'Personalized health, nutrition, and lifestyle coaching in Pudukkottai guided by Coach Thangapandian S. Build sustainable daily habits that last.'}
+                'Personal health and nutrition coaching in Pudukkottai with Coach Thangapandian S. Build simple, healthy habits that last.'}
             </p>
 
             <div className="hero-cta-group">
@@ -77,7 +77,7 @@ export default function HomePage() {
                 className="btn btn-whatsapp btn-lg hero-whatsapp-btn"
               >
                 <WhatsAppIcon size={18} />
-                <span>Continue to WhatsApp ↗</span>
+                <span>Chat on WhatsApp</span>
               </a>
 
               <a href={`tel:${BUSINESS_CONFIG.phoneRaw}`} className="btn btn-secondary btn-lg">
@@ -89,15 +89,15 @@ export default function HomePage() {
             <div className="hero-features-strip">
               <div className="feature-item">
                 <CheckCircle2 size={16} className="feature-icon" />
-                <span>Personalized Nutrition Plans</span>
+                <span>Personal Meal Plans</span>
               </div>
               <div className="feature-item">
                 <CheckCircle2 size={16} className="feature-icon" />
-                <span>Scientific Body Composition Screenings</span>
+                <span>Simple Body Health Checks</span>
               </div>
               <div className="feature-item">
                 <CheckCircle2 size={16} className="feature-icon" />
-                <span>Direct 1-on-1 Guidance with Coach</span>
+                <span>One-on-One Coach Support</span>
               </div>
             </div>
           </div>
@@ -115,12 +115,11 @@ export default function HomePage() {
       <section className="section intro-section">
         <div className="container">
           <div className="section-header-compact">
-            <span className="section-tag">About Pudugai Wellness Center</span>
-            <h2 className="section-title">A Thoughtful Approach to Lasting Health</h2>
+            <span className="section-tag">About Our Center</span>
+            <h2 className="section-title">A Simple Way to Lasting Health</h2>
             <p className="section-subtitle">
-              We do not promote extreme diets or unsustainable workout routines. True progress
-              comes from understanding your body, balancing everyday nourishment, and receiving
-              consistent personal encouragement.
+              We do not believe in strict diets or heavy workouts. Real health comes from
+              knowing your body, eating good food, and having a coach to guide you every day.
             </p>
           </div>
 
@@ -129,10 +128,9 @@ export default function HomePage() {
               <div className="pillar-icon-box">
                 <Scale size={22} />
               </div>
-              <h3>Body Analysis</h3>
+              <h3>Body Checkup</h3>
               <p>
-                Baseline assessments of BMI, BMR, visceral fat, and muscle mass to understand your
-                unique metabolic profile.
+                We check your BMI, body fat, and muscle to understand what your body needs.
               </p>
             </div>
 
@@ -140,10 +138,9 @@ export default function HomePage() {
               <div className="pillar-icon-box">
                 <Heart size={22} />
               </div>
-              <h3>Practical Nutrition</h3>
+              <h3>Healthy Eating</h3>
               <p>
-                Simple, wholesome meal guidance designed around your everyday food preferences and
-                schedule.
+                Simple meal plans made to match your daily routine and the foods you like.
               </p>
             </div>
 
@@ -151,10 +148,9 @@ export default function HomePage() {
               <div className="pillar-icon-box">
                 <Users size={22} />
               </div>
-              <h3>Direct Coach Support</h3>
+              <h3>Personal Coaching</h3>
               <p>
-                Ongoing personal accountability with Coach Thangapandian S to build habits that fit
-                your daily life.
+                Friendly, one-on-one coaching to help you build healthy habits and stay on track.
               </p>
             </div>
           </div>
@@ -166,10 +162,9 @@ export default function HomePage() {
         <div className="container">
           <div className="section-header-compact">
             <span className="section-tag">Wellness Programs</span>
-            <h2 className="section-title">Programs Designed For Your Health Goals</h2>
+            <h2 className="section-title">Programs for Your Health Goals</h2>
             <p className="section-subtitle">
-              From gradual weight management and comprehensive screenings to targeted family and
-              lifestyle programs.
+              From healthy weight loss and body checks to nutrition plans for the whole family.
             </p>
           </div>
 
@@ -183,7 +178,7 @@ export default function HomePage() {
                   to={`/contact?service=${encodeURIComponent(service.title)}`}
                   className="service-learn-link"
                 >
-                  <span>Enquire About This</span>
+                  <span>Ask About This</span>
                   <ArrowRight size={14} />
                 </Link>
               </div>
@@ -192,7 +187,7 @@ export default function HomePage() {
 
           <div className="section-center-action">
             <Link to="/services" className="btn btn-outline btn-lg">
-              <span>View All 18+ Programs & Screenings</span>
+              <span>View All Programs & Checks</span>
               <ArrowRight size={17} />
             </Link>
           </div>
@@ -203,10 +198,10 @@ export default function HomePage() {
       <section className="section coaches-section">
         <div className="container">
           <div className="section-header-compact">
-            <span className="section-tag">Dedicated Wellness Coaches</span>
-            <h2 className="section-title">Meet Your Personal Coaches</h2>
+            <span className="section-tag">Our Coaches</span>
+            <h2 className="section-title">Meet Your Wellness Coaches</h2>
             <p className="section-subtitle">
-              Guided by sustainable daily habits, wholesome nutrition, and individual care in Pudukkottai.
+              Personal guidance to help you build healthy eating habits and an active lifestyle.
             </p>
           </div>
 
@@ -258,11 +253,11 @@ export default function HomePage() {
 
           <div className="coaches-action-row">
             <Link to="/about" className="btn btn-outline btn-lg">
-              <span>Learn More About Our Center</span>
+              <span>Learn More About Us</span>
               <ArrowRight size={16} />
             </Link>
             <Link to="/contact" className="btn btn-primary btn-lg">
-              <span>Book Initial Assessment</span>
+              <span>Book a Consultation</span>
             </Link>
           </div>
         </div>
@@ -274,10 +269,10 @@ export default function HomePage() {
           <div className="our-journey-card">
             <div className="our-journey-header">
               <span className="section-tag">Our Journey</span>
-              <h2 className="our-journey-title">A Journey of Transformation and Growth</h2>
+              <h2 className="our-journey-title">Our Story of Growth and Service</h2>
             </div>
             <p className="our-journey-intro">
-              Thangapandian and Thenmozhi's journey began with a personal interest in nutrition and wellness. What started as a part-time business in December 2019 gradually grew into a full-time coaching journey. Through continuous learning, teamwork and dedication, they built their own nutrition club and continue to support their community.
+              Thangapandian and Thenmozhi started with a simple passion for good health. They began part-time in December 2019, and with hard work and teamwork, it grew into full-time coaching. Today, they run their own wellness club and help people in the community live healthier lives.
             </p>
             <div className="our-journey-action">
               <Link to="/our-story" className="btn btn-primary btn-lg">
@@ -294,11 +289,10 @@ export default function HomePage() {
         <section className="section stories-preview-section">
           <div className="container">
             <div className="section-header-compact">
-              <span className="section-tag">Client Progress</span>
-              <h2 className="section-title">Genuine Client Experiences</h2>
+              <span className="section-tag">Client Stories</span>
+              <h2 className="section-title">Real Stories from Real People</h2>
               <p className="section-subtitle">
-                Stories from community members who revitalized their wellness through consistent
-                habits.
+                Read how people in our community improved their health with simple daily habits.
               </p>
             </div>
 
@@ -335,9 +329,8 @@ export default function HomePage() {
 
             <div className="disclaimer-banner" style={{ marginTop: '2rem' }}>
               <p>
-                <strong>Individual Notice:</strong> Weight-loss and health outcomes are individual
-                experiences that depend on personal dedication, lifestyle, and adherence. Results
-                are never guaranteed.
+                <strong>Notice:</strong> Weight loss and health results differ for each person. Results
+                depend on your body, routine, and effort, and are not guaranteed.
               </p>
             </div>
           </div>
@@ -348,11 +341,10 @@ export default function HomePage() {
       <section className="section home-contact-cta">
         <div className="container">
           <div className="home-cta-inner">
-            <span className="section-tag">Take the First Step</span>
-            <h2>Ready to improve your health and nutrition?</h2>
+            <span className="section-tag">Get Started</span>
+            <h2>Ready to feel healthier and more active?</h2>
             <p>
-              Connect directly with Coach Thangapandian S today for your personalized body composition
-              screening and healthy lifestyle roadmap.
+              Contact our team today for a simple body checkup and an easy health plan. We also have a wellness centre in Peravurani. Visit either of our locations to connect with our team.
             </p>
             <div className="home-cta-actions">
               <a
@@ -365,7 +357,7 @@ export default function HomePage() {
                 <span>Chat on WhatsApp</span>
               </a>
               <Link to="/contact" className="btn btn-primary btn-lg">
-                <span>Send Web Enquiry</span>
+                <span>Send a Message</span>
                 <ArrowRight size={17} />
               </Link>
               <a href={`tel:${BUSINESS_CONFIG.phoneRaw}`} className="btn btn-secondary btn-lg">

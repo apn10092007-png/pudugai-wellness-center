@@ -182,11 +182,10 @@ export default function ContactPage() {
       {/* Header */}
       <section className="contact-header-section">
         <div className="container">
-          <span className="section-tag">Direct Connect</span>
-          <h1 className="contact-page-title">Contact & Location</h1>
+          <span className="section-tag">Get in Touch</span>
+          <h1 className="contact-page-title">Contact Us</h1>
           <p className="contact-page-lead">
-            Reach out to Wellness Coach Thangapandian S for program details, personalized body
-            composition screenings, and consultation timings.
+            Contact our team for program details, body checkups, and center timings.
           </p>
         </div>
       </section>
@@ -198,17 +197,16 @@ export default function ContactPage() {
             {/* Left: Contact Info & Action Buttons */}
             <div className="contact-info-column">
               <div className="contact-card-box">
-                <h2 className="info-box-title">Get in Touch Directly</h2>
+                <h2 className="info-box-title">Reach Us Directly</h2>
                 <p className="info-box-sub">
-                  Coach Thangapandian is available for direct calls, WhatsApp chats, and in-person
-                  visits at our Pudukkottai center.
+                  Reach us by phone, WhatsApp, or by visiting either of our locations.
                 </p>
 
                 {/* Direct Action Buttons */}
                 <div className="action-buttons-stack">
                   <a href={`tel:${BUSINESS_CONFIG.phoneRaw}`} className="btn btn-primary btn-lg action-btn">
                     <Phone size={18} />
-                    <span>Call Coach: {BUSINESS_CONFIG.phoneDisplay}</span>
+                    <span>Call: {BUSINESS_CONFIG.phoneDisplay}</span>
                   </a>
 
                   <a
@@ -280,10 +278,10 @@ export default function ContactPage() {
             <div className="contact-form-column">
               <div className="form-card-box">
                 <div className="form-card-header">
-                  <h2>Send an Assessment Enquiry</h2>
+                  <h2>Send Us a Message</h2>
                   <p>
-                    Share your goals below. You can send your enquiry directly to Coach Thangapandian
-                    via WhatsApp or submit through our web form.
+                    Fill in your details below. You can send your message directly on WhatsApp
+                    or submit this form.
                   </p>
                 </div>
 
@@ -292,10 +290,10 @@ export default function ContactPage() {
                     <div className="success-icon-wrap">
                       <CheckCircle size={40} />
                     </div>
-                    <h3>Enquiry Submitted Successfully!</h3>
+                    <h3>Message Sent Successfully!</h3>
                     <p>
-                      Thank you for contacting Pudugai Wellness Center. Your enquiry has been saved and Coach Thangapandian S will
-                      review your details and get in touch with you shortly.
+                      Thank you for reaching out to Pudugai Wellness Center. Coach Thangapandian S will
+                      get in touch with you soon.
                     </p>
 
                     <div className="enquiry-success-actions">
@@ -304,7 +302,7 @@ export default function ContactPage() {
                         className="btn btn-primary"
                         onClick={() => setSuccess(false)}
                       >
-                        <span>Submit Another Enquiry</span>
+                        <span>Send Another Message</span>
                       </button>
                     </div>
                   </div>
@@ -356,7 +354,7 @@ export default function ContactPage() {
                         <span className="field-error-text">{fieldErrors.phone}</span>
                       ) : (
                         <span className="form-help">
-                          Coach Thangapandian will reach out via call or WhatsApp.
+                          Our team will contact you by call or WhatsApp.
                         </span>
                       )}
                     </div>
@@ -374,7 +372,7 @@ export default function ContactPage() {
                         className={`form-select ${fieldErrors.service ? 'input-error' : ''}`}
                         required
                       >
-                        <option value="">Select a wellness program or screening</option>
+                        <option value="">Select a program or checkup</option>
                         <option value="General Wellness & Nutrition Consultation">
                           General Wellness & Nutrition Consultation
                         </option>
@@ -396,19 +394,19 @@ export default function ContactPage() {
                     {/* 4. Message / Enquiry Details */}
                     <div className="form-group">
                       <label htmlFor="message" className="form-label">
-                        Message / Enquiry Details
+                        Your Message
                       </label>
                       <textarea
                         id="message"
                         name="message"
                         value={formData.message}
                         onChange={handleChange}
-                        placeholder="Describe your goals (e.g., target weight loss, energy recovery, body fat screening, diet plan)..."
+                        placeholder="Tell us your goals (e.g., weight loss, more energy, body checkup, meal plan)..."
                         className="form-textarea"
                         rows={3}
                       />
                       <span className="form-help">
-                        Optional. If left blank, it will show as "Not provided" in WhatsApp.
+                        Optional. Leave blank if you prefer.
                       </span>
                     </div>
 
@@ -422,7 +420,7 @@ export default function ContactPage() {
                         title="Continue directly to WhatsApp with prefilled message"
                       >
                         <MessageSquare size={18} />
-                        <span>Continue to WhatsApp ↗</span>
+                        <span>Chat on WhatsApp ↗</span>
                       </button>
 
                       {/* Web Form Submit Button */}
@@ -434,11 +432,11 @@ export default function ContactPage() {
                         {submitting ? (
                           <>
                             <div className="btn-spinner"></div>
-                            <span>Recording Web Enquiry...</span>
+                            <span>Sending Message...</span>
                           </>
                         ) : (
                           <>
-                            <span>Submit Web Enquiry</span>
+                            <span>Send Message</span>
                             <Send size={16} />
                           </>
                         )}
@@ -448,8 +446,8 @@ export default function ContactPage() {
                     <div className="form-privacy-note">
                       <ShieldCheck size={16} className="privacy-icon" />
                       <span>
-                        <strong>Privacy Notice:</strong> Your contact information is kept strictly
-                        confidential. We never share customer phone numbers or send spam.
+                        <strong>Privacy Note:</strong> Your phone number and details are safe with
+                        us. We never share your information or send spam.
                       </span>
                     </div>
                   </form>
@@ -464,8 +462,8 @@ export default function ContactPage() {
       <section className="section map-embed-section">
         <div className="container">
           <div className="map-header">
-            <span className="section-tag">Interactive Map</span>
-            <h2>Locate Pudugai Wellness Center</h2>
+            <span className="section-tag">Find Us</span>
+            <h2>Visit Our Center in Pudukkottai</h2>
             <p>
               Located on East Main Road, T Nagar, Buvaneswari Nagar, Pudukkottai.
             </p>

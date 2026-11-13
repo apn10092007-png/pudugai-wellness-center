@@ -37,11 +37,11 @@ export default function SuccessStoriesPage() {
       {/* Header */}
       <section className="stories-header-section">
         <div className="container">
-          <span className="section-tag">Client Transformations</span>
+          <span className="section-tag">Client Stories</span>
           <h1 className="stories-page-title">Client Success Stories</h1>
           <p className="stories-page-lead">
-            Real experiences and journeys from individuals who built sustainable nutrition and
-            lifestyle habits with Pudugai Wellness Center.
+            Real stories from people who built healthy eating and lifestyle habits with Pudugai
+            Wellness Center.
           </p>
         </div>
       </section>
@@ -53,10 +53,9 @@ export default function SuccessStoriesPage() {
             <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
               <ShieldAlert size={20} style={{ color: 'var(--color-primary)', flexShrink: 0 }} />
               <div>
-                <strong>Individual Results Notice:</strong> Stories and testimonials shared here
-                reflect unique personal journeys and individual dedication. Weight-loss and
-                wellness outcomes vary from person to person depending on consistency, metabolic
-                profile, and adherence, and are never guaranteed.
+                <strong>Notice on Results:</strong> The stories shared here show real individual
+                experiences. Health and weight loss results vary for each person based on their body,
+                routine, and effort, and are never guaranteed.
               </div>
             </div>
           </div>
@@ -80,12 +79,12 @@ export default function SuccessStoriesPage() {
             }}
           >
             <div>
-              <span className="section-tag" style={{ marginBottom: '0.25rem' }}>Coaches' Personal Journey</span>
+              <span className="section-tag" style={{ marginBottom: '0.25rem' }}>Our Coaches' Story</span>
               <h3 style={{ fontSize: '1.2rem', color: '#0d3824', margin: '0.2rem 0' }}>
                 Our Story – Thangapandian & Thenmozhi
               </h3>
               <p style={{ fontSize: '0.925rem', color: '#374151', margin: 0 }}>
-                From part-time beginnings in December 2019 to qualifying for the Global Expansion Team (GET) Pin in September 2026.
+                From starting part-time in December 2019 to achieving the Global Expansion Team (GET) Pin in September 2026.
               </p>
             </div>
             <Link to="/our-story" className="btn btn-primary btn-sm">
@@ -159,19 +158,19 @@ export default function SuccessStoriesPage() {
               <div className="empty-state-icon">
                 <Users size={48} />
               </div>
-              <h2 className="empty-state-title">Client Stories are Being Prepared</h2>
+              <h2 className="empty-state-title">Client Stories Coming Soon</h2>
               <p className="empty-state-desc">
-                At Pudugai Wellness Center, we uphold strict ethical standards: we never create
-                fictional reviews or use unverified stock testimonials. As clients complete their
-                verified milestones and grant consent, their authentic journeys will be shared here.
+                At Pudugai Wellness Center, we only share real reviews from real people with their
+                permission. We never use fake testimonials. New stories will be shared here as
+                clients reach their health goals.
               </p>
               <div className="empty-state-actions">
                 <Link to="/contact" className="btn btn-primary btn-lg">
-                  <span>Start Your Personal Wellness Story</span>
+                  <span>Start Your Health Journey</span>
                   <ArrowRight size={18} />
                 </Link>
                 <Link to="/services" className="btn btn-secondary btn-lg">
-                  <span>Explore Screening & Nutrition Plans</span>
+                  <span>View Our Programs</span>
                 </Link>
               </div>
             </div>
@@ -186,13 +185,12 @@ export default function SuccessStoriesPage() {
             <div className="encourage-icon">
               <Sparkles size={24} />
             </div>
-            <h2>Your Journey Starts with One Step</h2>
+            <h2>Start Your Journey Today</h2>
             <p>
-              Whether your goal is safe fat loss, healthy muscle gain, hormonal vitality, or higher
-              daily energy, Coach Thangapandian S is ready to guide you.
+              Whether you want to lose weight, build strength, or feel more active, our coaches are here to help you.
             </p>
             <Link to="/contact" className="btn btn-primary btn-lg">
-              <span>Book Your First Session</span>
+              <span>Contact Us Today</span>
               <ArrowRight size={18} />
             </Link>
           </div>

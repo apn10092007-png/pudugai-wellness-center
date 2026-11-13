@@ -6,7 +6,7 @@ export const INITIAL_SERVICES = [
   {
     id: 's-wm-1',
     title: 'Weight Loss',
-    description: 'Customized nutrition and gradual calorie management plans designed to achieve steady, healthy fat reduction while maintaining energy and muscle tone.',
+    description: 'Personal food plans to help you lose fat steadily, keep your energy high, and protect your muscle strength.',
     category: 'Weight Management',
     image_path: '/assets/about-wellness.jpg',
     published: true,
@@ -15,7 +15,7 @@ export const INITIAL_SERVICES = [
   {
     id: 's-wm-2',
     title: 'Weight Gain',
-    description: 'Nutrient-rich, calorie-dense meal guidance combined with muscle-supportive nutrition to help you gain healthy lean mass safely.',
+    description: 'Healthy, high-nutrient meal plans to help you gain good weight and build lean muscle safely.',
     category: 'Weight Management',
     image_path: null,
     published: true,
@@ -26,7 +26,7 @@ export const INITIAL_SERVICES = [
   {
     id: 's-hs-1',
     title: 'BMI (Body Mass Index)',
-    description: 'Baseline assessment of your body mass relative to height to establish accurate health risk tiers and program targets.',
+    description: 'A simple check comparing your weight and height to find your healthy weight range.',
     category: 'Health Screening',
     image_path: null,
     published: true,
@@ -35,7 +35,7 @@ export const INITIAL_SERVICES = [
   {
     id: 's-hs-2',
     title: 'BMR (Basal Metabolic Rate)',
-    description: 'Scientific measurement of the minimum calories your body requires at rest to design tailored nutritional intake.',
+    description: 'A check of the calories your body burns at rest, helping us design the right food plan for you.',
     category: 'Health Screening',
     image_path: null,
     published: true,
@@ -44,7 +44,7 @@ export const INITIAL_SERVICES = [
   {
     id: 's-hs-3',
     title: 'Body Fat Analysis',
-    description: 'Detailed evaluation of subcutaneous and visceral fat percentages to target fat loss while protecting vital organ health.',
+    description: 'A check of your body fat percentage to help you reduce extra fat safely.',
     category: 'Health Screening',
     image_path: null,
     published: true,
@@ -53,7 +53,7 @@ export const INITIAL_SERVICES = [
   {
     id: 's-hs-4',
     title: 'Metabolic Age',
-    description: 'Insightful evaluation comparing your physiological metabolic rate with biological chronological age.',
+    description: "A check that compares your body's fitness age with your actual age.",
     category: 'Health Screening',
     image_path: null,
     published: true,
@@ -62,7 +62,7 @@ export const INITIAL_SERVICES = [
   {
     id: 's-hs-5',
     title: 'Skeletal Muscle Evaluation',
-    description: 'Assessment of functional muscle mass across your body to ensure adequate strength, posture, and metabolic resilience.',
+    description: 'A check of your muscle strength to make sure your body stays strong and active.',
     category: 'Health Screening',
     image_path: null,
     published: true,
@@ -73,7 +73,7 @@ export const INITIAL_SERVICES = [
   {
     id: 's-sp-1',
     title: "Children's Health",
-    description: 'Gentle, balanced nutritional support and wholesome habit development to support physical growth, focus, and immunity in growing kids.',
+    description: 'Simple nutrition and healthy eating habits to help kids grow strong, stay active, and build good immunity.',
     category: 'Special Programs',
     image_path: null,
     published: true,
@@ -82,7 +82,7 @@ export const INITIAL_SERVICES = [
   {
     id: 's-sp-2',
     title: "Women's Health",
-    description: "Targeted nutritional guidance tailored for hormonal harmony, bone density, energy restoration, and life-stage transitions.",
+    description: 'Food and wellness guidance for women to boost daily energy, strengthen bones, and support overall health.',
     category: 'Special Programs',
     image_path: null,
     published: true,
@@ -91,7 +91,7 @@ export const INITIAL_SERVICES = [
   {
     id: 's-sp-3',
     title: "Men's Health",
-    description: 'Focused nutrition and lifestyle coaching supporting metabolic stamina, vitality, cardiovascular wellness, and lean muscle retention.',
+    description: 'Food and fitness coaching for men to increase stamina, stay active, and keep muscles strong.',
     category: 'Special Programs',
     image_path: null,
     published: true,
@@ -100,7 +100,7 @@ export const INITIAL_SERVICES = [
   {
     id: 's-sp-4',
     title: 'Energy & Fitness',
-    description: 'Nutritional protocols that eliminate daily afternoon fatigue, stabilize blood sugar, and enhance natural physical stamina.',
+    description: 'Daily food tips to avoid tiredness, keep your blood sugar steady, and stay energetic all day.',
     category: 'Special Programs',
     image_path: null,
     published: true,
@@ -109,7 +109,7 @@ export const INITIAL_SERVICES = [
   {
     id: 's-sp-5',
     title: 'Eyes Health',
-    description: 'Dietary guidance incorporating essential micronutrients, lutein, and antioxidants to support eye comfort and visual wellness.',
+    description: 'Healthy food choices rich in vitamins and nutrients to care for your eye health.',
     category: 'Special Programs',
     image_path: null,
     published: true,
@@ -120,7 +120,7 @@ export const INITIAL_SERVICES = [
   {
     id: 's-ng-1',
     title: 'Personalized Diet Plans',
-    description: 'Everyday meal plans crafted around your specific food preferences, daily schedule, and body composition data.',
+    description: 'Custom daily meal plans made around your favorite foods, work schedule, and body checkup results.',
     category: 'Nutrition Guidance',
     image_path: null,
     published: true,
@@ -129,7 +129,7 @@ export const INITIAL_SERVICES = [
   {
     id: 's-ng-2',
     title: 'Healthy Habits',
-    description: 'Practical behavior coaching to overcome emotional eating, irregular timing, late-night snacking, and hydration neglect.',
+    description: 'Step-by-step coaching to stop late-night snacking, drink enough water, and eat meals on time.',
     category: 'Nutrition Guidance',
     image_path: null,
     published: true,
@@ -140,7 +140,7 @@ export const INITIAL_SERVICES = [
   {
     id: 's-ws-1',
     title: 'Heart Health',
-    description: 'Nutrition strategies focusing on cardiovascular wellness, healthy cholesterol balance, and blood pressure support.',
+    description: 'Heart-friendly food plans to support healthy cholesterol, steady blood pressure, and overall fitness.',
     category: 'Wellness Solutions',
     image_path: null,
     published: true,
@@ -149,7 +149,7 @@ export const INITIAL_SERVICES = [
   {
     id: 's-ws-2',
     title: 'Digestive Health',
-    description: 'Gut-supportive dietary plans focusing on prebiotic fiber, hydration, and digestive comfort to alleviate bloating and sluggish digestion.',
+    description: 'Diet advice with fiber and good hydration to ease stomach bloating and support smooth digestion.',
     category: 'Wellness Solutions',
     image_path: null,
     published: true,
@@ -158,7 +158,7 @@ export const INITIAL_SERVICES = [
   {
     id: 's-ws-3',
     title: 'Bone & Joints',
-    description: 'Nutritional protocols enriched with calcium, vitamin D, and anti-inflammatory nutrients to support joint ease and mobility.',
+    description: 'Nutrient-rich food plans with calcium and vitamin D to keep your bones strong and joints comfortable.',
     category: 'Wellness Solutions',
     image_path: null,
     published: true,
@@ -167,7 +167,7 @@ export const INITIAL_SERVICES = [
   {
     id: 's-ws-4',
     title: 'Skin & Hair',
-    description: 'Nourishing dietary advice emphasizing essential fatty acids, hydration, and collagen support for radiant skin and hair strength.',
+    description: 'Healthy foods and hydration tips to nourish your skin and keep your hair strong.',
     category: 'Wellness Solutions',
     image_path: null,
     published: true,
@@ -176,7 +176,7 @@ export const INITIAL_SERVICES = [
   {
     id: 's-ws-5',
     title: 'Immunity',
-    description: 'Antioxidant and micronutrient-dense dietary strategies designed to build resilience against seasonal illness.',
+    description: "Nutrient-packed foods with vitamins to strengthen your body's natural defense against sickness.",
     category: 'Wellness Solutions',
     image_path: null,
     published: true,
@@ -185,7 +185,7 @@ export const INITIAL_SERVICES = [
   {
     id: 's-ws-6',
     title: 'Brain & Sleep',
-    description: 'Nutritional guidance that supports evening relaxation, deeper sleep cycles, and daytime cognitive clarity.',
+    description: 'Food and evening routine tips to help you sleep deeply and stay clear-headed throughout the day.',
     category: 'Wellness Solutions',
     image_path: null,
     published: true,
@@ -197,7 +197,7 @@ export const INITIAL_COACH = {
   id: 'c0a00000-0000-0000-0000-000000000001',
   coach_name: 'Thangapandian S',
   title: 'Wellness Coach & Founder',
-  biography: 'Thangapandian S is dedicated to guiding individuals and families toward healthier, more active, and balanced lifestyles. At Pudugai Wellness Center, the coaching philosophy is rooted in sustainable daily habits, wholesome nutrition, and gradual, realistic progress without extreme or unsustainable restrictions.',
+  biography: 'Thangapandian S helps individuals and families build healthier, more active lifestyles. At Pudugai Wellness Center, he focuses on good daily food, simple habits, and steady progress without strict diets or extreme routines.',
   image_path: '/assets/coach-pandian.png',
   phone: '94434 43261',
   instagram_url: 'https://www.instagram.com/coach_pandian?exln=YmNsbjZkeXQ1dnc3',
@@ -212,7 +212,7 @@ export const INITIAL_COACHES = [
     id: 'c0a00000-0000-0000-0000-000000000002',
     coach_name: 'Thenmozhi',
     title: 'Nutrition Coach',
-    biography: 'Thenmozhi is dedicated to guiding individuals and families with supportive, personalized nutrition coaching. Working closely alongside Coach Thangapandian S, she helps clients build wholesome daily nutrition habits and active lifestyle routines.',
+    biography: 'Thenmozhi provides friendly, personal nutrition coaching for individuals and families. Working closely with Coach Thangapandian S, she helps clients build healthy daily food habits and active routines.',
     image_path: '/assets/avatar-thenmozhi.svg',
     phone: '94434 43261',
     instagram_url: '',
@@ -223,24 +223,24 @@ export const INITIAL_COACHES = [
 ];
 
 export const INITIAL_SITE_CONTENT = {
-  mission: 'To empower people of all ages to achieve their highest vitality through personalized nutrition plans, body composition analysis, and consistent, supportive coaching.',
-  vision: "To become Pudukkottai's most trusted and compassionate wellness community, where healthy living is accessible, sustainable, and joyful.",
-  approach_intro: 'We do not believe in quick-fix crash diets or exhausting extremes. Our wellness model focuses on balanced daily nutrition, hydration, restorative sleep, gentle active movement, and habit accountability.',
+  mission: 'To help people and families live healthier, more active lives through simple food plans, body checkups, and friendly coaching.',
+  vision: "To be Pudukkottai's most trusted and welcoming wellness center, where healthy living is simple, sustainable, and enjoyable.",
+  approach_intro: 'We do not believe in strict diets or tiring workouts. We focus on good everyday food, plenty of water, proper sleep, light activity, and steady support.',
   journey_milestones: [
     {
       year: 'Foundation',
       title: 'Wellness Mission Established',
-      description: 'Founded in Pudukkottai to provide structured, supportive health and nutrition guidance to individuals and families.'
+      description: 'Founded in Pudukkottai to give clear, supportive health and nutrition guidance to individuals and families.'
     },
     {
       year: 'Growth',
       title: 'Community Health Screenings',
-      description: 'Introduced comprehensive body composition assessments (BMI, BMR, visceral fat, muscle mass) for personalized coaching.'
+      description: 'Introduced simple body composition checks (BMI, body fat, muscle mass) to help people understand their health.'
     },
     {
       year: 'Holistic Reach',
       title: 'Comprehensive Programs',
-      description: "Expanded specialized programs spanning children's nutrition, women's vital health, energy restoration, and joint wellness."
+      description: "Added specialized programs for children's nutrition, women's health, daily energy, and joint comfort."
     }
   ]
 };
@@ -251,8 +251,8 @@ export const INITIAL_HERO_GALLERY = [
     media_type: 'image',
     media_url: '/assets/hero-wellness.jpg',
     image_path: '/assets/hero-wellness.jpg',
-    title: 'Personalized Health & Nutrition Guidance',
-    description: 'Sustainable everyday wellness coaching in Pudukkottai',
+    title: 'Simple Health & Nutrition Guidance',
+    description: 'Practical daily wellness coaching in Pudukkottai',
     display_order: 1,
     active: true
   },
@@ -261,8 +261,8 @@ export const INITIAL_HERO_GALLERY = [
     media_type: 'image',
     media_url: '/assets/about-wellness.jpg',
     image_path: '/assets/about-wellness.jpg',
-    title: 'Body Composition & Metabolic Screenings',
-    description: 'Comprehensive BMI, BMR, and body fat analysis',
+    title: 'Body Composition & Health Checks',
+    description: 'Simple checks for BMI, body fat, and muscle',
     display_order: 2,
     active: true
   },
@@ -271,8 +271,8 @@ export const INITIAL_HERO_GALLERY = [
     media_type: 'image',
     media_url: '/assets/coach-pandian.png',
     image_path: '/assets/coach-pandian.png',
-    title: '1-on-1 Guidance with Coach Thangapandian',
-    description: 'Practical habit building without extreme restrictions',
+    title: 'One-on-One Support with Coach Thangapandian',
+    description: 'Build healthy daily habits without strict diets',
     display_order: 3,
     active: true
   }
@@ -299,8 +299,8 @@ export const getMediaUrl = (item, fallback = '/assets/hero-wellness.jpg') => {
 
 export const INITIAL_HERO_CONTENT = {
   tagline: 'Nutrition • Fitness • Wellness',
-  headline: 'Real Wellness for Your Real Everyday Life',
-  subheadline: 'Personal health & nutrition coaching in Pudukkottai guided by Coach Thangapandian S. Build sustainable habits that last a lifetime.',
+  headline: 'Simple, Healthy Living for Everyday Life',
+  subheadline: 'Personal health and nutrition coaching in Pudukkottai with Coach Thangapandian S. Build simple, healthy habits that last.',
   hero_image_path: '/assets/hero-wellness.jpg',
   gallery: INITIAL_HERO_GALLERY
 };

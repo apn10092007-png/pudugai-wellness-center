@@ -78,11 +78,10 @@ export default function ServicesPage() {
       {/* Header */}
       <section className="services-header-section">
         <div className="container">
-          <span className="section-tag">Holistic Wellness Services</span>
-          <h1 className="services-main-title">Programs & Body Screenings</h1>
+          <span className="section-tag">What We Offer</span>
+          <h1 className="services-main-title">Wellness Programs & Body Checks</h1>
           <p className="services-main-lead">
-            Personalized coaching protocols, scientific body composition scans, and sustainable
-            nutrition plans calibrated to your lifestyle.
+            Personal food plans, simple body checkups, and daily habit coaching to fit your life.
           </p>
         </div>
       </section>
@@ -94,10 +93,9 @@ export default function ServicesPage() {
             <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
               <ShieldAlert size={20} style={{ color: 'var(--color-primary)', flexShrink: 0 }} />
               <div>
-                <strong>Important Notice:</strong> Pudugai Wellness Center provides nutritional,
-                lifestyle, and fitness coaching. Our programs and screenings are for educational and
-                general wellness purposes and do not replace professional medical diagnosis,
-                clinical prescription, or disease treatment.
+                <strong>Important Note:</strong> Pudugai Wellness Center offers food, lifestyle, and
+                wellness coaching. Our programs and body checks are for general health and education.
+                They do not replace medical advice, prescriptions, or hospital treatments.
               </div>
             </div>
           </div>
@@ -129,7 +127,7 @@ export default function ServicesPage() {
               <Search size={16} className="search-icon" />
               <input
                 type="text"
-                placeholder="Search services or screenings..."
+                placeholder="Search programs or checks..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="search-input"
@@ -166,7 +164,7 @@ export default function ServicesPage() {
                       to={`/contact?service=${encodeURIComponent(service.title)}`}
                       className="btn btn-outline btn-sm"
                     >
-                      <span>Enquire About This</span>
+                      <span>Ask About This</span>
                       <ArrowRight size={14} />
                     </Link>
                   </div>
@@ -175,8 +173,8 @@ export default function ServicesPage() {
             </div>
           ) : (
             <div className="services-empty-state">
-              <h3>No matching services found</h3>
-              <p>Try clearing your search query or choosing another category.</p>
+              <h3>No programs found</h3>
+              <p>Try a different search word or select another category.</p>
               <button
                 className="btn btn-secondary btn-sm"
                 onClick={() => {
@@ -196,15 +194,14 @@ export default function ServicesPage() {
         <div className="container">
           <div className="services-consultation-banner">
             <div>
-              <h2>Unsure which program fits your body goals?</h2>
+              <h2>Not sure which program is right for you?</h2>
               <p>
-                Visit our center in Pudukkottai or speak with Coach Thangapandian S for an initial
-                body composition screening.
+                Visit either of our centers in Pudukkottai or Peravurani, or contact our team for a simple body checkup.
               </p>
             </div>
             <div className="consult-buttons">
               <Link to="/contact" className="btn btn-primary btn-lg">
-                <span>Book Initial Assessment</span>
+                <span>Book a Consultation</span>
               </Link>
               <a href="tel:9443443261" className="btn btn-secondary btn-lg">
                 <Phone size={18} />

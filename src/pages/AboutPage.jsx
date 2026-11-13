@@ -44,11 +44,10 @@ export default function AboutPage() {
       {/* 1. Header Banner */}
       <section className="about-header-section">
         <div className="container">
-          <span className="section-tag">About Our Center</span>
+          <span className="section-tag">About Us</span>
           <h1 className="about-page-title">Pudugai Wellness Center</h1>
           <p className="about-page-lead">
-            Dedicated health, nutrition, and lifestyle guidance in Pudukkottai, led by
-            Wellness Coaches Thangapandian S and Thenmozhi.
+            Simple health, nutrition, and lifestyle guidance across our Pudukkottai and Peravurani locations, led by Coaches Thangapandian S and Thenmozhi.
           </p>
         </div>
       </section>
@@ -57,10 +56,10 @@ export default function AboutPage() {
       <section className="section about-coach-section">
         <div className="container">
           <div className="section-header-compact">
-            <span className="section-tag">Leadership & Guidance</span>
-            <h2 className="section-title">Our Dedicated Wellness Coaches</h2>
+            <span className="section-tag">Our Team</span>
+            <h2 className="section-title">Meet Your Wellness Coaches</h2>
             <p className="section-subtitle">
-              Personalized health, nutrition, and lifestyle mentoring led by Coach Thangapandian S & Coach Thenmozhi.
+              Helping you build healthy eating habits and active daily routines.
             </p>
           </div>
 
@@ -81,7 +80,6 @@ export default function AboutPage() {
                 <div className="about-coach-info">
                   <span className="section-tag">{c.title || 'Wellness Coach'}</span>
                   <h3 className="about-coach-name">{c.coach_name}</h3>
-                  <p className="about-coach-role">{c.title}</p>
 
                   <div className="about-coach-bio">
                     <p>{c.biography}</p>
@@ -116,10 +114,10 @@ export default function AboutPage() {
           {/* Dedicated Coaches' Story Banner */}
           <div className="about-story-banner">
             <div className="about-story-text">
-              <span className="section-tag">Coaches' Journey</span>
-              <h3>Our Journey of Transformation and Growth</h3>
+              <span className="section-tag">Our Journey</span>
+              <h3>How We Started and Grew</h3>
               <p>
-                From starting part-time in December 2019 to opening their Nutrition Club and achieving the Global Expansion Team (GET) Pin in September 2026.
+                We started part-time in December 2019, opened our own Nutrition Club, and achieved the Global Expansion Team (GET) Pin in September 2026.
               </p>
             </div>
             <Link to="/our-story" className="btn btn-primary btn-lg">
@@ -138,10 +136,10 @@ export default function AboutPage() {
               <div className="value-icon">
                 <Target size={22} />
               </div>
-              <h3>Our Center Mission</h3>
+              <h3>Our Mission</h3>
               <p>
                 {content?.mission ||
-                  'To empower individuals and families to achieve better vitality through personalized nutrition plans, body composition analysis, and consistent, supportive coaching.'}
+                  'To help people and families live healthier, more active lives through simple food plans, body checkups, and friendly coaching.'}
               </p>
             </div>
 
@@ -149,10 +147,10 @@ export default function AboutPage() {
               <div className="value-icon">
                 <Compass size={22} />
               </div>
-              <h3>Our Philosophy</h3>
+              <h3>How We Help You</h3>
               <p>
                 {content?.approach_intro ||
-                  'We do not believe in quick-fix crash diets or extreme workouts. Our model emphasizes balanced daily nutrition, restorative sleep, gentle movement, and sustainable habit accountability.'}
+                  'We do not believe in strict diets or tiring workouts. We focus on good everyday food, plenty of water, proper sleep, light activity, and steady support.'}
               </p>
             </div>
           </div>

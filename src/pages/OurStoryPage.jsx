@@ -33,8 +33,7 @@ export default function OurStoryPage() {
           <span className="section-tag">Coaches' Success Story</span>
           <h1 className="story-main-title">Our Story – Thangapandian & Thenmozhi</h1>
           <p className="story-subtitle-lead">
-            From personal vitality transformation to building Pudukkottai's trusted wellness
-            community and achieving the Global Expansion Team (GET) milestone.
+            How Thangapandian and Thenmozhi started with simple nutrition habits, grew into full-time coaches, and built a healthy community.
           </p>
         </div>
       </section>
@@ -71,17 +70,10 @@ export default function OurStoryPage() {
               <span className="story-block-tag">The Beginning</span>
               <h2 className="story-block-heading">1. Their Early Challenges</h2>
               <p>
-                Before discovering the power of balanced daily nutrition, Thangapandian and
-                Thenmozhi led demanding, fast-paced everyday lives. Like many couples working hard
-                to build their future, long work hours, unpredictable routines, and everyday
-                financial pressures left little time to prioritize physical health.
+                Before learning about good nutrition, Thangapandian and Thenmozhi had busy, stressful work routines. Long hours and irregular meals left them with little time to take care of their health.
               </p>
               <p>
-                Skipping regular meals, relying on convenient but nutrient-deficient food choices,
-                and neglecting basic hydration gradually resulted in declining daily energy and
-                physical fatigue. They recognized that while they were working hard for their family,
-                their vitality was being compromised—motivating them to seek a healthier, more
-                purposeful path.
+                Skipping meals and eating on the go led to low energy and daily tiredness. They realized they needed a healthier, simpler way of living for their family.
               </p>
             </div>
           </article>
@@ -93,18 +85,10 @@ export default function OurStoryPage() {
               <span className="story-block-tag">The Turning Point</span>
               <h2 className="story-block-heading">2. Discovering Nutrition and Personal Transformation</h2>
               <p>
-                Their journey changed fundamentally when they were introduced to structured, balanced
-                cellular nutrition and simple lifestyle fundamentals. Rather than following extreme
-                crash diets or exhausting restrictions, they adopted an approach rooted in consistent
-                daily habits: quality morning nutrition, adequate hydration, gentle movement, and
-                restorative sleep.
+                Their lives changed when they started focusing on balanced nutrition and simple daily habits. Instead of strict diets, they focused on a healthy breakfast, drinking enough water, daily movement, and good sleep.
               </p>
               <p>
-                Through this personal commitment, both Thangapandian and Thenmozhi experienced a
-                profound renewal in their everyday stamina, digestive comfort, and general sense of
-                well-being. Experiencing these positive, tangible results in their own daily lives
-                convinced them of the value of balanced nutrition and sparked a genuine desire to
-                share this knowledge with others.
+                With these changes, they felt more energetic, lighter, and healthier. Experiencing these positive results inspired them to help others do the same.
               </p>
             </div>
           </article>
@@ -116,16 +100,10 @@ export default function OurStoryPage() {
               <span className="story-block-tag">Milestone • December 2019</span>
               <h2 className="story-block-heading">3. Starting Their Coaching Journey – December 2019</h2>
               <p>
-                Energized by their own personal wellness progress, Thangapandian and Thenmozhi decided
-                to begin mentoring others. In December 2019, they officially launched their wellness
-                endeavor as part-time coaches.
+                After seeing their own health improve, Thangapandian and Thenmozhi began guiding others. In December 2019, they started coaching part-time alongside their regular work.
               </p>
               <p>
-                Balancing their existing daily responsibilities, they began by reaching out to family
-                members, friends, and neighbors in Pudukkottai. They conducted initial wellness
-                screenings, shared practical meal advice, and provided regular habit accountability.
-                Seeing their earliest clients gain confidence and improve their daily energy affirmed
-                that coaching was their true calling.
+                They started by helping family, friends, and neighbors in Pudukkottai with simple meal plans and body checks. Seeing their clients feel healthier and more confident confirmed that coaching was the right path.
               </p>
             </div>
           </article>
@@ -137,16 +115,10 @@ export default function OurStoryPage() {
               <span className="story-block-tag">Milestone • December 2021</span>
               <h2 className="story-block-heading">4. Becoming Full-Time Coaches – December 2021</h2>
               <p>
-                Over the next two years, word of their compassionate, results-focused coaching spread
-                throughout the local community. The growing number of individuals seeking their
-                guidance made it clear that coaching deserved their undivided attention.
+                Over the next two years, more people in the community asked for their help. Guiding clients became their main focus.
               </p>
               <p>
-                In December 2021, Thangapandian and Thenmozhi took the definitive step to transition
-                into full-time wellness coaching. Dedicating themselves completely enabled them to
-                offer deep, personalized support—conducting scientific body composition evaluations,
-                designing custom lifestyle roadmaps, and providing continuous daily encouragement for
-                their clients.
+                In December 2021, they stepped into full-time wellness coaching. This allowed them to spend every day guiding people with body checkups, custom food plans, and steady personal support.
               </p>
             </div>
           </article>
@@ -158,15 +130,10 @@ export default function OurStoryPage() {
               <span className="story-block-tag">Community Hub</span>
               <h2 className="story-block-heading">5. Opening Their Nutrition Club</h2>
               <p>
-                To provide a warm, physical gathering space for their wellness family, Thangapandian
-                and Thenmozhi established their dedicated Nutrition Club—Pudugai Wellness Center—in
-                Pudukkottai.
+                To give clients a friendly place to meet and learn, they opened Pudugai Wellness Center in Pudukkottai.
               </p>
               <p>
-                The nutrition club was envisioned not merely as an assessment office, but as a vibrant
-                social hub where people start their mornings with wholesome nutrition, track their
-                body composition metrics (BMI, BMR, visceral fat, muscle mass), exchange encouragement,
-                and learn lifelong healthy eating practices in a positive atmosphere.
+                The center is a welcoming space where people start their mornings with healthy nutrition, check their progress, and encourage each other to stay active and healthy.
               </p>
             </div>
           </article>
@@ -175,20 +142,15 @@ export default function OurStoryPage() {
           <article className="story-block featured-milestone">
             <div className="story-block-num">06</div>
             <div className="story-block-body">
-              <span className="story-block-tag">International Achievement</span>
+              <span className="story-block-tag">Milestone • September 2026</span>
               <h2 className="story-block-heading">
                 6. Achieving Global Expansion Team (GET) Pin – September 2026
               </h2>
               <p>
-                Through relentless dedication, teamwork, professional leadership, and hundreds of
-                positive client milestones across Pudukkottai, Thangapandian and Thenmozhi reached a
-                landmark organizational achievement in September 2026: qualifying for the prestigious
-                <strong> Global Expansion Team (GET) Pin</strong>.
+                Through teamwork, continuous learning, and helping many clients improve their health, they achieved the Global Expansion Team (GET) Pin in September 2026.
               </p>
               <p>
-                This achievement reflects years of continuous personal learning, high ethical
-                coaching standards, and the flourishing associate coaching team they have trained,
-                mentored, and supported across the region.
+                This milestone represents years of hard work, honest guidance, and building a supportive team of coaches.
               </p>
             </div>
           </article>
@@ -197,34 +159,28 @@ export default function OurStoryPage() {
           <article className="story-block">
             <div className="story-block-num">07</div>
             <div className="story-block-body">
-              <span className="story-block-tag">Heartfelt Appreciation</span>
-              <h2 className="story-block-heading">7. Gratitude to Their Mentors, Team and Community</h2>
+              <span className="story-block-tag">Gratitude</span>
+              <h2 className="story-block-heading">7. Gratitude to Mentors, Team and Community</h2>
               <p>
-                Looking back from their humble beginnings in December 2019 to qualifying for the Global
-                Expansion Team Pin in September 2026, Thangapandian and Thenmozhi extend their heartfelt
-                gratitude:
+                Looking back from December 2019 to their GET Pin milestone in September 2026, Thangapandian and Thenmozhi share their gratitude:
               </p>
               <div className="story-gratitude-list">
                 <div className="gratitude-item">
                   <CheckCircle2 size={18} className="gratitude-icon" />
                   <div>
-                    <strong>To Their Respected Mentors & Leaders:</strong> For their patient guidance,
-                    invaluable leadership training, and constant inspiration that guided their path.
+                    <strong>To Mentors & Leaders:</strong> For the guidance, training, and encouragement along the way.
                   </div>
                 </div>
                 <div className="gratitude-item">
                   <CheckCircle2 size={18} className="gratitude-icon" />
                   <div>
-                    <strong>To Their Associate Coaches & Team:</strong> For their shared passion, hard
-                    work, and commitment to touching lives with genuine care every day.
+                    <strong>To Associate Coaches & Team:</strong> For working together with care and dedication every day.
                   </div>
                 </div>
                 <div className="gratitude-item">
                   <CheckCircle2 size={18} className="gratitude-icon" />
                   <div>
-                    <strong>To the Pudukkottai Community & Clients:</strong> For trusting them with
-                    their health, embracing wholesome daily habits, and inspiring everyone with their
-                    personal milestones.
+                    <strong>To Clients & the Community:</strong> For trusting our coaches and building healthy habits with us.
                   </div>
                 </div>
               </div>
@@ -235,25 +191,19 @@ export default function OurStoryPage() {
           <div className="story-disclaimer-card">
             <div className="disclaimer-header">
               <ShieldAlert size={20} className="disclaimer-icon" />
-              <strong>Ethical Notice & Wellness Disclaimer</strong>
+              <strong>Notice & Wellness Disclaimer</strong>
             </div>
             <p>
-              The health, vitality, and organizational milestones described in this story represent the
-              personal experiences and individual effort of Coach Thangapandian S and Coach Thenmozhi.
-              Nutritional plans, lifestyle modifications, and wellness coaching work in harmony with
-              personal consistency, balanced diet, and active living. Results are individual and not
-              guaranteed. Nutrition products, programs, and coaching do not diagnose, treat, prevent,
-              or cure any medical condition.
+              The experiences and milestones shared here reflect the personal journey and dedication of Coach Thangapandian S and Coach Thenmozhi. Health and wellness results differ for each person and are not guaranteed. Our coaching and programs support general wellness and do not replace medical advice or treatments.
             </p>
           </div>
 
           {/* Bottom Action CTA */}
           <div className="story-cta-box">
-            <span className="section-tag">Begin Your Wellness Story</span>
-            <h2>Ready to start your personal journey with Coach Thangapandian & Coach Thenmozhi?</h2>
+            <span className="section-tag">Start Today</span>
+            <h2>Ready to start your personal wellness journey?</h2>
             <p>
-              Visit our Pudukkottai center for a comprehensive body composition screening and a
-              tailored everyday nutrition roadmap.
+              Visit our center or contact our team for a simple body checkup and personal food plan.
             </p>
             <div className="story-cta-actions">
               <a
@@ -266,7 +216,7 @@ export default function OurStoryPage() {
                 <span>Chat on WhatsApp</span>
               </a>
               <Link to="/contact" className="btn btn-primary btn-lg">
-                <span>Book Initial Screening</span>
+                <span>Book a Consultation</span>
                 <ArrowRight size={17} />
               </Link>
               <a href={`tel:${BUSINESS_CONFIG.phoneRaw}`} className="btn btn-secondary btn-lg">
