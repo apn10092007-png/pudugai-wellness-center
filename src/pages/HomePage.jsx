@@ -12,32 +12,40 @@ import {
 } from 'lucide-react';
 import { InstagramIcon as Instagram, WhatsAppIcon } from '../components/Icons';
 import HeroCarousel from '../components/HeroCarousel';
-import { dataService, INITIAL_HERO_CONTENT } from '../services/dataService';
+import { dataService, INITIAL_HERO_GALLERY } from '../services/dataService';
 import { BUSINESS_CONFIG } from '../config/business';
 import './HomePage.css';
+
+// Static frontend content for hero headlines – easy to edit directly here
+const HERO_HEADLINES = {
+  badge: 'Nutrition • Fitness • Wellness',
+  headline: 'Simple, Healthy Living for Everyday Life.',
+  subheadline:
+    'Personal health and nutrition coaching in Pudukkottai with Coach Thangapandian S. Build simple, healthy habits that last.'
+};
 
 export default function HomePage() {
   const [coaches, setCoaches] = useState([]);
   const [services, setServices] = useState([]);
   const [stories, setStories] = useState([]);
-  const [heroContent, setHeroContent] = useState(null);
+  const [heroGallery, setHeroGallery] = useState(INITIAL_HERO_GALLERY);
   const [_loading, setLoading] = useState(true);
 
   useEffect(() => {
     let mounted = true;
     async function loadData() {
       try {
-        const [coachesData, servicesData, storiesData, heroData] = await Promise.all([
+        const [coachesData, servicesData, storiesData, galleryData] = await Promise.all([
           dataService.getAllCoaches(),
           dataService.getPublishedServices(),
           dataService.getPublishedSuccessStories(),
-          dataService.getHomeHero()
+          dataService.getHeroGallery()
         ]);
         if (mounted) {
           setCoaches(coachesData || []);
           setServices(servicesData);
           setStories(storiesData);
-          setHeroContent(heroData || INITIAL_HERO_CONTENT);
+          setHeroGallery(galleryData || INITIAL_HERO_GALLERY);
           setLoading(false);
         }
       } catch (err) {
@@ -58,15 +66,14 @@ export default function HomePage() {
       <section className="hero-section">
         <div className="container hero-container">
           <div className="hero-content">
-            <span className="hero-badge">Nutrition • Fitness • Wellness</span>
+            <span className="hero-badge">{HERO_HEADLINES.badge}</span>
             
             <h1 className="hero-title">
-              {heroContent?.headline || 'Simple, Healthy Living for Everyday Life.'}
+              {HERO_HEADLINES.headline}
             </h1>
             
             <p className="hero-description">
-              {heroContent?.subheadline ||
-                'Personal health and nutrition coaching in Pudukkottai with Coach Thangapandian S. Build simple, healthy habits that last.'}
+              {HERO_HEADLINES.subheadline}
             </p>
 
             <div className="hero-cta-group">
@@ -104,8 +111,8 @@ export default function HomePage() {
 
           <div className="hero-visual">
             <HeroCarousel
-              items={heroContent?.gallery}
-              fallbackImage={heroContent?.hero_image_path || '/assets/hero-wellness.jpg'}
+              items={heroGallery}
+              fallbackImage="/assets/hero-wellness.jpg"
             />
           </div>
         </div>

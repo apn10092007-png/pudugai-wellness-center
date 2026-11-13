@@ -12,17 +12,14 @@ import {
   ArrowUp,
   ArrowDown,
   RefreshCw,
-  Sparkles,
   Edit2,
   X,
   Eye,
-  EyeOff,
-  RotateCcw
+  EyeOff
 } from 'lucide-react';
 import HeroCarousel from '../../components/HeroCarousel';
 import {
   dataService,
-  INITIAL_HERO_CONTENT,
   INITIAL_HERO_GALLERY,
   getMediaType,
   getMediaUrl
@@ -30,14 +27,8 @@ import {
 import './AdminHomeSettingsPage.css';
 
 export default function AdminHomeSettingsPage() {
-  const [heroData, setHeroData] = useState(null);
   const [gallery, setGallery] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  // Editable text fields
-  const [tagline, setTagline] = useState('');
-  const [headline, setHeadline] = useState('');
-  const [subheadline, setSubheadline] = useState('');
 
   // Upload staging state
   const [selectedFile, setSelectedFile] = useState(null);
@@ -62,7 +53,6 @@ export default function AdminHomeSettingsPage() {
   // Feedback alerts
   const [successMsg, setSuccessMsg] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
-  const [savingText, setSavingText] = useState(false);
 
   const imageInputRef = useRef(null);
   const videoInputRef = useRef(null);
@@ -77,24 +67,18 @@ export default function AdminHomeSettingsPage() {
     let mounted = true;
     async function loadData() {
       try {
-        const hero = await dataService.getHomeHero();
+        const rawGallery = await dataService.getAllHeroGallery();
         if (mounted) {
-          const resolved = { ...INITIAL_HERO_CONTENT, ...hero };
-          setHeroData(resolved);
-          setTagline(resolved.tagline || '');
-          setHeadline(resolved.headline || '');
-          setSubheadline(resolved.subheadline || '');
-
-          const rawGallery = Array.isArray(resolved.gallery) && resolved.gallery.length > 0
-            ? resolved.gallery
+          const list = Array.isArray(rawGallery) && rawGallery.length > 0
+            ? rawGallery
             : INITIAL_HERO_GALLERY;
-          setGallery(rawGallery.slice().sort((a, b) => (a.display_order || 0) - (b.display_order || 0)));
+          setGallery(list.slice().sort((a, b) => (a.display_order || 0) - (b.display_order || 0)));
           setLoading(false);
         }
       } catch (err) {
-        console.error('Failed to load hero settings:', err);
+        console.error('Failed to load hero slideshow settings:', err);
         if (mounted) {
-          setErrorMsg('Could not load current hero settings. Showing default configuration.');
+          setErrorMsg('Could not load current hero slideshow settings. Showing default configuration.');
           setLoading(false);
         }
       }
@@ -327,31 +311,6 @@ export default function AdminHomeSettingsPage() {
     }
   };
 
-  // 8. Save Headlines Text
-  const handleSaveHeadlines = async (e) => {
-    e.preventDefault();
-    setSavingText(true);
-    setErrorMsg('');
-    setSuccessMsg('');
-    try {
-      const updated = {
-        ...heroData,
-        tagline: tagline.trim() || INITIAL_HERO_CONTENT.tagline,
-        headline: headline.trim() || INITIAL_HERO_CONTENT.headline,
-        subheadline: subheadline.trim() || INITIAL_HERO_CONTENT.subheadline,
-        gallery
-      };
-      await dataService.updateHomeHero(updated);
-      setHeroData(updated);
-      setSuccessMsg('Hero headlines saved successfully! Public Home Page updated.');
-    } catch (err) {
-      console.error('Error saving headlines:', err);
-      setErrorMsg(err.message || 'Failed to save hero headlines.');
-    } finally {
-      setSavingText(false);
-    }
-  };
-
   const activeCount = gallery.filter((g) => g.active !== false).length;
   const imageCount = gallery.filter((g) => getMediaType(g) === 'image').length;
   const videoCount = gallery.filter((g) => getMediaType(g) === 'video').length;
@@ -397,7 +356,7 @@ export default function AdminHomeSettingsPage() {
         <div>
           <h1 className="admin-page-title">Home Page Settings & Hero Slideshow</h1>
           <p className="admin-page-subtitle">
-            Manage your Home Page media slideshow (Images & Videos), slide order, captions, and marketing headlines.
+            Manage your Home Page media slideshow (Images & Videos), slide order, and captions.
           </p>
         </div>
         <div className="admin-header-actions">
@@ -718,79 +677,6 @@ export default function AdminHomeSettingsPage() {
             <p className="carousel-preview-note">
               Plays active photos and videos in saved order. Videos autoplay muted with interactive audio and play controls.
             </p>
-          </div>
-
-          {/* HEADLINES EDITOR CARD */}
-          <div className="management-card" style={{ padding: '1.5rem' }}>
-            <div className="card-header-strip" style={{ marginBottom: '1rem', paddingBottom: '0.75rem' }}>
-              <Sparkles size={18} className="strip-icon" />
-              <div>
-                <h3 style={{ fontSize: '1.1rem', margin: 0, color: 'var(--color-primary)' }}>Hero Headlines</h3>
-                <span style={{ fontSize: '0.775rem' }}>Text alongside slideshow on Home Page</span>
-              </div>
-            </div>
-
-            <form onSubmit={handleSaveHeadlines}>
-              <div className="form-group" style={{ marginBottom: '0.85rem' }}>
-                <label className="form-label" style={{ fontSize: '0.825rem' }}>Tagline Badge</label>
-                <input
-                  type="text"
-                  value={tagline}
-                  onChange={(e) => setTagline(e.target.value)}
-                  className="form-input"
-                  style={{ padding: '0.55rem 0.75rem', fontSize: '0.85rem' }}
-                />
-              </div>
-
-              <div className="form-group" style={{ marginBottom: '0.85rem' }}>
-                <label className="form-label" style={{ fontSize: '0.825rem' }}>Main Headline</label>
-                <input
-                  type="text"
-                  value={headline}
-                  onChange={(e) => setHeadline(e.target.value)}
-                  className="form-input"
-                  style={{ padding: '0.55rem 0.75rem', fontSize: '0.85rem' }}
-                  required
-                />
-              </div>
-
-              <div className="form-group" style={{ marginBottom: '1rem' }}>
-                <label className="form-label" style={{ fontSize: '0.825rem' }}>Supporting Description</label>
-                <textarea
-                  value={subheadline}
-                  onChange={(e) => setSubheadline(e.target.value)}
-                  rows={3}
-                  className="form-textarea"
-                  style={{ padding: '0.55rem 0.75rem', fontSize: '0.85rem' }}
-                  required
-                />
-              </div>
-
-              <div style={{ display: 'flex', gap: '0.65rem' }}>
-                <button
-                  type="submit"
-                  disabled={savingText}
-                  className="btn btn-primary btn-sm"
-                  style={{ flex: 1 }}
-                >
-                  <Save size={14} />
-                  <span>{savingText ? 'Saving...' : 'Save Headlines'}</span>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => {
-                    setTagline(INITIAL_HERO_CONTENT.tagline);
-                    setHeadline(INITIAL_HERO_CONTENT.headline);
-                    setSubheadline(INITIAL_HERO_CONTENT.subheadline);
-                  }}
-                  className="btn btn-outline btn-sm"
-                  title="Reset to Defaults"
-                >
-                  <RotateCcw size={14} />
-                </button>
-              </div>
-            </form>
           </div>
         </div>
       </div>
