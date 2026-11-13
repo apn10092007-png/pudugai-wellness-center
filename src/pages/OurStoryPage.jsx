@@ -30,7 +30,7 @@ export default function OurStoryPage() {
           <Link to="/" className="story-back-link">
             ← Return to Home
           </Link>
-          <span className="section-tag">Coaches' Success Story</span>
+          <span className="section-tag">Coaches' Story</span>
           <h1 className="story-main-title">Our Story – Thangapandian & Thenmozhi</h1>
           <p className="story-subtitle-lead">
             How Thangapandian and Thenmozhi started with simple nutrition habits, grew into full-time coaches, and built a healthy community.
@@ -70,10 +70,7 @@ export default function OurStoryPage() {
               <span className="story-block-tag">The Beginning</span>
               <h2 className="story-block-heading">1. Their Early Challenges</h2>
               <p>
-                Before learning about good nutrition, Thangapandian and Thenmozhi had busy, stressful work routines. Long hours and irregular meals left them with little time to take care of their health.
-              </p>
-              <p>
-                Skipping meals and eating on the go led to low energy and daily tiredness. They realized they needed a healthier, simpler way of living for their family.
+                Long work hours, irregular meals, and daily stress left Thangapandian and Thenmozhi feeling tired and low on energy. They realized they needed to make their family's health a priority.
               </p>
             </div>
           </article>
@@ -85,10 +82,7 @@ export default function OurStoryPage() {
               <span className="story-block-tag">The Turning Point</span>
               <h2 className="story-block-heading">2. Discovering Nutrition and Personal Transformation</h2>
               <p>
-                Their lives changed when they started focusing on balanced nutrition and simple daily habits. Instead of strict diets, they focused on a healthy breakfast, drinking enough water, daily movement, and good sleep.
-              </p>
-              <p>
-                With these changes, they felt more energetic, lighter, and healthier. Experiencing these positive results inspired them to help others do the same.
+                They focused on simple daily habits: a healthy breakfast, proper hydration, light activity, and good sleep. Feeling more energetic and healthier inspired them to share these habits with others.
               </p>
             </div>
           </article>
@@ -100,10 +94,7 @@ export default function OurStoryPage() {
               <span className="story-block-tag">Milestone • December 2019</span>
               <h2 className="story-block-heading">3. Starting Their Coaching Journey – December 2019</h2>
               <p>
-                After seeing their own health improve, Thangapandian and Thenmozhi began guiding others. In December 2019, they started coaching part-time alongside their regular work.
-              </p>
-              <p>
-                They started by helping family, friends, and neighbors in Pudukkottai with simple meal plans and body checks. Seeing their clients feel healthier and more confident confirmed that coaching was the right path.
+                In December 2019, they began part-time coaching for family, friends, and neighbors in Pudukkottai. Helping people eat better and gain energy showed them the true value of personal coaching.
               </p>
             </div>
           </article>
@@ -115,10 +106,7 @@ export default function OurStoryPage() {
               <span className="story-block-tag">Milestone • December 2021</span>
               <h2 className="story-block-heading">4. Becoming Full-Time Coaches – December 2021</h2>
               <p>
-                Over the next two years, more people in the community asked for their help. Guiding clients became their main focus.
-              </p>
-              <p>
-                In December 2021, they stepped into full-time wellness coaching. This allowed them to spend every day guiding people with body checkups, custom food plans, and steady personal support.
+                As more people asked for guidance, coaching became their full-time focus. In December 2021, they dedicated themselves completely to guiding clients with body checkups and personal meal plans.
               </p>
             </div>
           </article>
@@ -130,10 +118,7 @@ export default function OurStoryPage() {
               <span className="story-block-tag">Community Hub</span>
               <h2 className="story-block-heading">5. Opening Their Nutrition Club</h2>
               <p>
-                To give clients a friendly place to meet and learn, they opened Pudugai Wellness Center in Pudukkottai.
-              </p>
-              <p>
-                The center is a welcoming space where people start their mornings with healthy nutrition, check their progress, and encourage each other to stay active and healthy.
+                They opened Pudugai Wellness Center in Pudukkottai as a welcoming space for the community. Here, members start their mornings with good nutrition, check their progress, and encourage each other.
               </p>
             </div>
           </article>
@@ -147,10 +132,7 @@ export default function OurStoryPage() {
                 6. Achieving Global Expansion Team (GET) Pin – September 2026
               </h2>
               <p>
-                Through teamwork, continuous learning, and helping many clients improve their health, they achieved the Global Expansion Team (GET) Pin in September 2026.
-              </p>
-              <p>
-                This milestone represents years of hard work, honest guidance, and building a supportive team of coaches.
+                In September 2026, they achieved the Global Expansion Team (GET) Pin. This milestone reflects years of teamwork, continuous learning, and dedicated service to the community.
               </p>
             </div>
           </article>
@@ -162,25 +144,25 @@ export default function OurStoryPage() {
               <span className="story-block-tag">Gratitude</span>
               <h2 className="story-block-heading">7. Gratitude to Mentors, Team and Community</h2>
               <p>
-                Looking back from December 2019 to their GET Pin milestone in September 2026, Thangapandian and Thenmozhi share their gratitude:
+                Thangapandian and Thenmozhi are deeply grateful to everyone who supported their journey:
               </p>
               <div className="story-gratitude-list">
                 <div className="gratitude-item">
                   <CheckCircle2 size={18} className="gratitude-icon" />
                   <div>
-                    <strong>To Mentors & Leaders:</strong> For the guidance, training, and encouragement along the way.
+                    <strong>Mentors & Leaders:</strong> For guidance and encouragement from day one.
                   </div>
                 </div>
                 <div className="gratitude-item">
                   <CheckCircle2 size={18} className="gratitude-icon" />
                   <div>
-                    <strong>To Associate Coaches & Team:</strong> For working together with care and dedication every day.
+                    <strong>Associate Coaches:</strong> For working together every day with care and dedication.
                   </div>
                 </div>
                 <div className="gratitude-item">
                   <CheckCircle2 size={18} className="gratitude-icon" />
                   <div>
-                    <strong>To Clients & the Community:</strong> For trusting our coaches and building healthy habits with us.
+                    <strong>Clients & Community:</strong> For trusting our coaches and building healthy habits with us.
                   </div>
                 </div>
               </div>
@@ -191,10 +173,10 @@ export default function OurStoryPage() {
           <div className="story-disclaimer-card">
             <div className="disclaimer-header">
               <ShieldAlert size={20} className="disclaimer-icon" />
-              <strong>Notice & Wellness Disclaimer</strong>
+              <strong>Notice & Disclaimer</strong>
             </div>
             <p>
-              The experiences and milestones shared here reflect the personal journey and dedication of Coach Thangapandian S and Coach Thenmozhi. Health and wellness results differ for each person and are not guaranteed. Our coaching and programs support general wellness and do not replace medical advice or treatments.
+              These milestones reflect the personal journey of Coach Thangapandian S and Coach Thenmozhi. Individual wellness results differ and are not guaranteed. Our coaching supports general health and does not replace medical advice.
             </p>
           </div>
 
