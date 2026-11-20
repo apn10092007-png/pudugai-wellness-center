@@ -67,8 +67,8 @@ export default function SuccessStoriesPage() {
         <div className="container">
           <div
             style={{
-              backgroundColor: '#f0f7f3',
-              border: '1px solid #bbf7d0',
+              backgroundColor: 'var(--color-primary-subtle)',
+              border: '1px solid var(--color-border-subtle)',
               borderRadius: 'var(--radius-lg)',
               padding: '1.5rem 1.75rem',
               display: 'flex',
@@ -80,10 +80,10 @@ export default function SuccessStoriesPage() {
           >
             <div>
               <span className="section-tag" style={{ marginBottom: '0.25rem' }}>Our Coaches' Story</span>
-              <h3 style={{ fontSize: '1.2rem', color: '#0d3824', margin: '0.2rem 0' }}>
+              <h3 style={{ fontSize: '1.2rem', color: 'var(--color-primary-dark)', margin: '0.2rem 0' }}>
                 Our Story – Thangapandian & Thenmozhi
               </h3>
-              <p style={{ fontSize: '0.925rem', color: '#374151', margin: 0 }}>
+              <p style={{ fontSize: '0.925rem', color: 'var(--color-text-body)', margin: 0 }}>
                 From starting part-time in December 2019 to achieving the Global Expansion Team (GET) Pin in September 2026.
               </p>
             </div>

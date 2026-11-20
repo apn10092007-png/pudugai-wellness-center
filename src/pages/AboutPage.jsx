@@ -64,51 +64,58 @@ export default function AboutPage() {
           </div>
 
           <div className="about-coaches-grid">
-            {coaches.map((c) => (
-              <div key={c.id || c.coach_name} className="about-coach-card">
-                <div className="about-coach-media">
-                  <img
-                    src={c.image_path || (c.coach_name.includes('Thenmozhi') ? '/assets/avatar-thenmozhi.svg' : '/assets/coach-pandian.png')}
-                    alt={c.coach_name}
-                    className="about-coach-img"
-                    onError={(e) => {
-                      e.currentTarget.src = c.coach_name.includes('Thenmozhi') ? '/assets/avatar-thenmozhi.svg' : '/assets/coach-pandian.png';
-                    }}
-                  />
-                </div>
+            {coaches.map((c) => {
+              const isPeravuraniCoach =
+                c.maps_url?.includes('DFpxMGuHuTudNYFb6') ||
+                c.id === 'c0a00000-0000-0000-0000-000000000002';
+              const coachLocation = isPeravuraniCoach ? 'Peravurani Center' : 'Pudukkottai Center';
 
-                <div className="about-coach-info">
-                  <span className="section-tag">{c.title || 'Wellness Coach'}</span>
-                  <h3 className="about-coach-name">{c.coach_name}</h3>
-
-                  <div className="about-coach-bio">
-                    <p>{c.biography}</p>
+              return (
+                <div key={c.id || c.coach_name} className="about-coach-card">
+                  <div className="about-coach-media">
+                    <img
+                      src={c.image_path || (isPeravuraniCoach ? '/assets/avatar-thenmozhi.svg' : '/assets/coach-pandian.png')}
+                      alt={c.coach_name}
+                      className="about-coach-img"
+                      onError={(e) => {
+                        e.currentTarget.src = isPeravuraniCoach ? '/assets/avatar-thenmozhi.svg' : '/assets/coach-pandian.png';
+                      }}
+                    />
                   </div>
 
-                  <div className="about-coach-contact">
-                    <a href={`tel:${BUSINESS_CONFIG.phoneRaw}`} className="about-pill">
-                      <Phone size={14} />
-                      <span>{BUSINESS_CONFIG.phoneDisplay}</span>
-                    </a>
-                    {c.instagram_url ? (
-                      <a
-                        href={c.instagram_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="about-pill"
-                      >
-                        <Instagram size={14} />
-                        <span>Instagram</span>
+                  <div className="about-coach-info">
+                    <span className="section-tag">{c.title || 'Wellness Coach'}</span>
+                    <h3 className="about-coach-name">{c.coach_name}</h3>
+
+                    <div className="about-coach-bio">
+                      <p>{c.biography}</p>
+                    </div>
+
+                    <div className="about-coach-contact">
+                      <a href={`tel:${BUSINESS_CONFIG.phoneRaw}`} className="about-pill">
+                        <Phone size={14} />
+                        <span>{BUSINESS_CONFIG.phoneDisplay}</span>
                       </a>
-                    ) : null}
-                    <div className="about-pill location">
-                      <MapPin size={14} />
-                      <span>Pudukkottai Center</span>
+                      {c.instagram_url ? (
+                        <a
+                          href={c.instagram_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="about-pill"
+                        >
+                          <Instagram size={14} />
+                          <span>Instagram</span>
+                        </a>
+                      ) : null}
+                      <div className="about-pill location">
+                        <MapPin size={14} />
+                        <span>{coachLocation}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           {/* Dedicated Coaches' Story Banner */}

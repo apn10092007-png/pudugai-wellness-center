@@ -213,49 +213,56 @@ export default function HomePage() {
           </div>
 
           <div className="coaches-grid">
-            {coaches.map((c) => (
-              <div key={c.id || c.coach_name} className="coach-clean-card">
-                <div className="coach-card-image-wrap">
-                  <img
-                    src={c.image_path || (c.coach_name.includes('Thenmozhi') ? '/assets/avatar-thenmozhi.svg' : '/assets/coach-pandian.png')}
-                    alt={c.coach_name}
-                    className="coach-card-img"
-                    onError={(e) => {
-                      e.currentTarget.src = c.coach_name.includes('Thenmozhi') ? '/assets/avatar-thenmozhi.svg' : '/assets/coach-pandian.png';
-                    }}
-                  />
-                </div>
+            {coaches.map((c) => {
+              const isPeravuraniCoach =
+                c.maps_url?.includes('DFpxMGuHuTudNYFb6') ||
+                c.id === 'c0a00000-0000-0000-0000-000000000002';
+              const coachLocation = isPeravuraniCoach ? 'Peravurani Center' : 'Pudukkottai Center';
 
-                <div className="coach-card-body">
-                  <span className="coach-card-role">{c.title || 'Wellness Coach'}</span>
-                  <h3 className="coach-card-name">{c.coach_name}</h3>
+              return (
+                <div key={c.id || c.coach_name} className="coach-clean-card">
+                  <div className="coach-card-image-wrap">
+                    <img
+                      src={c.image_path || (isPeravuraniCoach ? '/assets/avatar-thenmozhi.svg' : '/assets/coach-pandian.png')}
+                      alt={c.coach_name}
+                      className="coach-card-img"
+                      onError={(e) => {
+                        e.currentTarget.src = isPeravuraniCoach ? '/assets/avatar-thenmozhi.svg' : '/assets/coach-pandian.png';
+                      }}
+                    />
+                  </div>
 
-                  <p className="coach-card-bio">{c.biography}</p>
+                  <div className="coach-card-body">
+                    <span className="coach-card-role">{c.title || 'Wellness Coach'}</span>
+                    <h3 className="coach-card-name">{c.coach_name}</h3>
 
-                  <div className="coach-card-pills">
-                    <a href={`tel:${BUSINESS_CONFIG.phoneRaw}`} className="coach-contact-pill">
-                      <Phone size={14} />
-                      <span>{BUSINESS_CONFIG.phoneDisplay}</span>
-                    </a>
-                    {c.instagram_url && (
-                      <a
-                        href={c.instagram_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="coach-contact-pill"
-                      >
-                        <Instagram size={14} />
-                        <span>Instagram</span>
+                    <p className="coach-card-bio">{c.biography}</p>
+
+                    <div className="coach-card-pills">
+                      <a href={`tel:${BUSINESS_CONFIG.phoneRaw}`} className="coach-contact-pill">
+                        <Phone size={14} />
+                        <span>{BUSINESS_CONFIG.phoneDisplay}</span>
                       </a>
-                    )}
-                    <div className="coach-contact-pill location">
-                      <MapPin size={14} />
-                      <span>Pudukkottai Center</span>
+                      {c.instagram_url && (
+                        <a
+                          href={c.instagram_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="coach-contact-pill"
+                        >
+                          <Instagram size={14} />
+                          <span>Instagram</span>
+                        </a>
+                      )}
+                      <div className="coach-contact-pill location">
+                        <MapPin size={14} />
+                        <span>{coachLocation}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           <div className="coaches-action-row">

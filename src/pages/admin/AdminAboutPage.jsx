@@ -39,7 +39,9 @@ export default function AdminAboutPage() {
   const [savingContent, setSavingContent] = useState(false);
   const [uploadingImage, setUploadingImage] = useState(false);
   const [coachSuccessMsg, setCoachSuccessMsg] = useState('');
+  const [coachErrorMsg, setCoachErrorMsg] = useState('');
   const [contentSuccessMsg, setContentSuccessMsg] = useState('');
+  const [contentErrorMsg, setContentErrorMsg] = useState('');
   const [deletePhotoModal, setDeletePhotoModal] = useState(false);
 
   const populateCoachForm = (c) => {
@@ -53,6 +55,7 @@ export default function AdminAboutPage() {
     setCoachAddressTa(c.address_ta || 'கிழக்கு முதன்மை சாலை, டி நகர், புவனேஸ்வரி நகர், புதுக்கோட்டை, தமிழ்நாடு 622001');
     setCoachImagePath(c.image_path || '');
     setCoachSuccessMsg('');
+    setCoachErrorMsg('');
   };
 
   useEffect(() => {
@@ -104,12 +107,13 @@ export default function AdminAboutPage() {
 
     setUploadingImage(true);
     setCoachSuccessMsg('');
+    setCoachErrorMsg('');
     try {
       const publicUrl = await dataService.uploadImage('coach-images', file);
       setCoachImagePath(publicUrl);
       setCoachSuccessMsg(`New photo uploaded for ${coachName}. Click "Save Coach Profile" to publish.`);
     } catch (err) {
-      alert(err.message || 'Failed to upload image.');
+      setCoachErrorMsg(err.message || 'Failed to upload image.');
     } finally {
       setUploadingImage(false);
     }
@@ -123,18 +127,20 @@ export default function AdminAboutPage() {
     setCoachImagePath(defaultPlaceholder);
     setDeletePhotoModal(false);
     setCoachSuccessMsg('Photo removed. Remember to click "Save Coach Profile" to update.');
+    setCoachErrorMsg('');
   };
 
   // Save Coach Profile
   const handleSaveCoachProfile = async (e) => {
     e.preventDefault();
     if (!coachName.trim() || !coachBio.trim()) {
-      alert('Please fill in both coach name and biography.');
+      setCoachErrorMsg('Please fill in both coach name and biography.');
       return;
     }
 
     setSavingCoach(true);
     setCoachSuccessMsg('');
+    setCoachErrorMsg('');
     try {
       const updated = await dataService.updateCoachProfile({
         id: selectedCoachId,
@@ -152,7 +158,7 @@ export default function AdminAboutPage() {
       setCoaches(updatedList);
       setCoachSuccessMsg(`${updated.coach_name}'s profile and photo saved successfully! Live website updated.`);
     } catch (err) {
-      alert(err.message || 'Failed to update coach profile.');
+      setCoachErrorMsg(err.message || 'Failed to update coach profile.');
     } finally {
       setSavingCoach(false);
     }
@@ -163,6 +169,7 @@ export default function AdminAboutPage() {
     e.preventDefault();
     setSavingContent(true);
     setContentSuccessMsg('');
+    setContentErrorMsg('');
     try {
       const updatedContent = {
         ...content,
@@ -174,7 +181,7 @@ export default function AdminAboutPage() {
       setContent(updatedContent);
       setContentSuccessMsg('Mission, vision, and wellness approach updated successfully!');
     } catch (err) {
-      alert(err.message || 'Failed to update site content.');
+      setContentErrorMsg(err.message || 'Failed to update site content.');
     } finally {
       setSavingContent(false);
     }
@@ -243,9 +250,16 @@ export default function AdminAboutPage() {
           )}
 
           {coachSuccessMsg && (
-            <div className="save-alert-success">
+            <div className="save-alert-success" role="status">
               <CheckCircle2 size={16} />
               <span>{coachSuccessMsg}</span>
+            </div>
+          )}
+
+          {coachErrorMsg && (
+            <div className="save-alert-error" role="alert">
+              <AlertTriangle size={16} />
+              <span>{coachErrorMsg}</span>
             </div>
           )}
 
@@ -408,9 +422,16 @@ export default function AdminAboutPage() {
           </div>
 
           {contentSuccessMsg && (
-            <div className="save-alert-success">
+            <div className="save-alert-success" role="status">
               <CheckCircle2 size={16} />
               <span>{contentSuccessMsg}</span>
+            </div>
+          )}
+
+          {contentErrorMsg && (
+            <div className="save-alert-error" role="alert">
+              <AlertTriangle size={16} />
+              <span>{contentErrorMsg}</span>
             </div>
           )}
 

@@ -5,7 +5,7 @@
   top: 0;
   z-index: 900;
   width: 100%;
-  background-color: #ffffff;
+  background-color: var(--color-surface);
   border-bottom: 1px solid var(--color-border);
   box-shadow: none;
   transition: box-shadow 0.25s ease, border-color 0.25s ease;
@@ -214,7 +214,7 @@
   left: 0;
   right: 0;
   width: 100%;
-  background-color: #ffffff;
+  background-color: var(--color-surface);
   border-top: 1px solid var(--color-border);
   box-shadow: 0 14px 28px -4px rgba(13, 56, 36, 0.14), 0 4px 10px -2px rgba(13, 56, 36, 0.08);
   max-height: 0;
@@ -251,7 +251,7 @@
 .mobile-nav-link {
   font-size: 1.05rem;
   font-weight: 600;
-  color: #374151;
+  color: var(--color-text-body);
   padding: 0.75rem 1rem;
   border-radius: var(--radius-md);
   display: flex;
@@ -403,7 +403,7 @@
   .header-call-btn:hover,
   .header-call-btn:active {
     background-color: var(--color-primary);
-    color: #ffffff;
+    color: var(--color-surface);
     border-color: var(--color-primary);
     transform: scale(1.04);
   }
@@ -611,4 +611,33 @@
     min-width: 34px;
     min-height: 34px;
   }
+}
+
+/* ==============================================================================
+   KEYBOARD FOCUS ACCESSIBILITY
+   ============================================================================== */
+.brand-logo:focus-visible,
+.topbar-call:focus-visible,
+.topbar-link:focus-visible,
+.header-call-btn:focus-visible,
+.mobile-toggle:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+.desktop-nav .nav-link:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+.mobile-nav-link:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: -2px;
+}
+
+.mobile-drawer-footer .btn:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
 }

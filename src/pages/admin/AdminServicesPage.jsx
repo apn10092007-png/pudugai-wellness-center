@@ -8,7 +8,8 @@ import {
   EyeOff,
   X,
   AlertTriangle,
-  Upload
+  Upload,
+  CheckCircle2
 } from 'lucide-react';
 import { dataService } from '../../services/dataService';
 import './AdminServicesPage.css';
@@ -26,6 +27,11 @@ export default function AdminServicesPage() {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [filterCat, setFilterCat] = useState('All');
+
+  // Feedback state
+  const [successMsg, setSuccessMsg] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
+  const [modalErrorMsg, setModalErrorMsg] = useState('');
 
   // Modal states
   const [editModalOpen, setEditModalOpen] = useState(false);
@@ -61,6 +67,7 @@ export default function AdminServicesPage() {
 
   const openAddModal = () => {
     setCurrentService(null);
+    setModalErrorMsg('');
     setFormData({
       title: '',
       description: '',
@@ -74,6 +81,7 @@ export default function AdminServicesPage() {
 
   const openEditModal = (service) => {
     setCurrentService(service);
+    setModalErrorMsg('');
     setFormData({
       title: service.title,
       description: service.description,
@@ -95,11 +103,12 @@ export default function AdminServicesPage() {
     if (!file) return;
 
     setUploadingImg(true);
+    setModalErrorMsg('');
     try {
       const url = await dataService.uploadImage('service-images', file);
       setFormData((prev) => ({ ...prev, image_path: url }));
     } catch (err) {
-      alert(err.message || 'Image upload failed.');
+      setModalErrorMsg(err.message || 'Image upload failed.');
     } finally {
       setUploadingImg(false);
     }
@@ -108,11 +117,12 @@ export default function AdminServicesPage() {
   const handleSave = async (e) => {
     e.preventDefault();
     if (!formData.title.trim() || !formData.description.trim()) {
-      alert('Please fill in both service title and description.');
+      setModalErrorMsg('Please fill in both service title and description.');
       return;
     }
 
     setSaving(true);
+    setModalErrorMsg('');
     try {
       await dataService.saveService({
         ...(currentService ? { id: currentService.id } : {}),
@@ -124,9 +134,11 @@ export default function AdminServicesPage() {
         display_order: Number(formData.display_order) || 0
       });
       setEditModalOpen(false);
+      setSuccessMsg(currentService ? `Service "${formData.title}" updated successfully!` : `New service "${formData.title}" added successfully!`);
+      setErrorMsg('');
       await loadServices();
     } catch (err) {
-      alert(err.message || 'Failed to save service.');
+      setModalErrorMsg(err.message || 'Failed to save service.');
     } finally {
       setSaving(false);
     }
@@ -136,11 +148,14 @@ export default function AdminServicesPage() {
     if (!currentService) return;
     setSaving(true);
     try {
+      const title = currentService.title;
       await dataService.deleteService(currentService.id);
       setDeleteModalOpen(false);
+      setSuccessMsg(`Service "${title}" deleted successfully.`);
+      setErrorMsg('');
       await loadServices();
     } catch (err) {
-      alert(err.message || 'Failed to delete service.');
+      setErrorMsg(err.message || 'Failed to delete service.');
     } finally {
       setSaving(false);
     }
@@ -152,9 +167,11 @@ export default function AdminServicesPage() {
         ...service,
         published: !service.published
       });
+      setSuccessMsg(`Service "${service.title}" ${service.published ? 'hidden' : 'published'} successfully.`);
+      setErrorMsg('');
       await loadServices();
     } catch (err) {
-      alert(err.message || 'Failed to update status.');
+      setErrorMsg(err.message || 'Failed to update status.');
     }
   };
 
@@ -180,6 +197,20 @@ export default function AdminServicesPage() {
           <span>Add New Service</span>
         </button>
       </div>
+
+      {successMsg && (
+        <div className="save-alert-success" role="status">
+          <CheckCircle2 size={16} />
+          <span>{successMsg}</span>
+        </div>
+      )}
+
+      {errorMsg && (
+        <div className="save-alert-error" role="alert">
+          <AlertTriangle size={16} />
+          <span>{errorMsg}</span>
+        </div>
+      )}
 
       {/* Control Bar: Filter and Search */}
       <div className="admin-controls-card">
@@ -311,6 +342,13 @@ export default function AdminServicesPage() {
             </div>
 
             <form onSubmit={handleSave}>
+              {modalErrorMsg && (
+                <div className="modal-alert-error" role="alert">
+                  <AlertTriangle size={15} />
+                  <span>{modalErrorMsg}</span>
+                </div>
+              )}
+
               <div className="form-group">
                 <label className="form-label">Service Title *</label>
                 <input

@@ -67,7 +67,7 @@
 }
 
 .lang-select-btn {
-  background-color: #ffffff;
+  background-color: var(--color-surface);
   border: 2px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: 0.75rem;

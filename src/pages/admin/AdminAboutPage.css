@@ -161,7 +161,7 @@
 }
 
 .coach-tab-btn.active {
-  background-color: #ffffff;
+  background-color: var(--color-surface);
   color: var(--color-primary-dark);
   border-color: var(--color-border);
   box-shadow: var(--shadow-sm);
@@ -171,8 +171,8 @@
 .coach-tag-pill {
   font-size: 0.7rem;
   padding: 0.15rem 0.45rem;
-  background-color: #ccfbf1;
-  color: #0f766e;
+  background-color: var(--color-teal-light);
+  color: var(--color-teal);
   border-radius: var(--radius-full);
   font-weight: 700;
 }

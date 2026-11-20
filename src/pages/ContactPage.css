@@ -9,7 +9,7 @@
 
 .contact-page-title {
   font-size: clamp(2.25rem, 4vw, 3rem);
-  color: #0d3824;
+  color: var(--color-primary-dark);
   font-weight: 800;
   letter-spacing: -0.02em;
   margin-bottom: 0.85rem;
@@ -17,7 +17,7 @@
 
 .contact-page-lead {
   font-size: 1.15rem;
-  color: #374151;
+  color: var(--color-text-body);
   font-weight: 500;
   max-width: 660px;
   margin: 0 auto;
@@ -42,7 +42,7 @@
 
 .info-box-title {
   font-size: 1.6rem;
-  color: #0d3824;
+  color: var(--color-primary-dark);
   font-weight: 800;
   letter-spacing: -0.01em;
   margin-bottom: 0.5rem;
@@ -50,7 +50,7 @@
 
 .info-box-sub {
   font-size: 1rem;
-  color: #374151;
+  color: var(--color-text-body);
   font-weight: 450;
   line-height: 1.65;
   margin-bottom: 1.75rem;
@@ -85,13 +85,13 @@
 }
 
 .locations-pin-icon {
-  color: #0f766e;
+  color: var(--color-teal);
 }
 
 .locations-main-title {
   font-size: 1.2rem;
   font-weight: 750;
-  color: #0d3824;
+  color: var(--color-primary-dark);
   margin: 0;
 }
 
@@ -102,7 +102,7 @@
 }
 
 .location-card {
-  background-color: #ffffff;
+  background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: 1.25rem 1rem;
@@ -115,7 +115,7 @@
 }
 
 .location-card:hover {
-  border-color: #cbd5e1;
+  border-color: var(--color-border);
   box-shadow: var(--shadow-sm);
 }
 
@@ -128,7 +128,7 @@
 .location-name {
   font-size: 1.15rem;
   font-weight: 750;
-  color: #0d3824;
+  color: var(--color-primary-dark);
   margin: 0;
   letter-spacing: -0.01em;
 }
@@ -157,13 +157,13 @@
 }
 
 .address-pin-icon {
-  color: #0f766e;
+  color: var(--color-teal);
 }
 
 .address-header h3 {
   font-size: 1.2rem;
   font-weight: 750;
-  color: #0d3824;
+  color: var(--color-primary-dark);
 }
 
 .address-body {
@@ -173,8 +173,10 @@
 }
 
 .address-lang-block {
-  padding-left: 0.5rem;
-  border-left: 3px solid var(--color-primary-light);
+  padding: 0.75rem 1rem;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-sm);
 }
 
 .address-lang-label {
@@ -182,21 +184,21 @@
   font-size: 0.75rem;
   font-weight: 750;
   text-transform: uppercase;
-  color: #0f766e;
+  color: var(--color-teal);
   letter-spacing: 0.05em;
   margin-bottom: 0.25rem;
 }
 
 .address-text {
   font-size: 0.975rem;
-  color: #111827;
+  color: var(--color-text-main);
   font-weight: 500;
   line-height: 1.6;
 }
 
 .address-text.ta {
   font-family: 'Noto Sans Tamil', var(--font-family);
-  color: #1f2937;
+  color: var(--color-text-main);
   font-weight: 500;
   font-size: 1rem;
   line-height: 1.65;
@@ -214,11 +216,12 @@
   border-radius: var(--radius-lg);
   padding: 2.5rem;
   box-shadow: var(--shadow-sm);
+  scroll-margin-top: 5rem;
 }
 
 .form-card-header h2 {
   font-size: 1.6rem;
-  color: #0d3824;
+  color: var(--color-primary-dark);
   font-weight: 800;
   letter-spacing: -0.01em;
   margin-bottom: 0.5rem;
@@ -226,7 +229,7 @@
 
 .form-card-header p {
   font-size: 1rem;
-  color: #374151;
+  color: var(--color-text-body);
   font-weight: 450;
   line-height: 1.6;
   margin-bottom: 2rem;
@@ -282,9 +285,15 @@
   transition: all var(--transition-fast);
 }
 
-.whatsapp-enquiry-btn:hover {
+.whatsapp-enquiry-btn:hover:not(:disabled) {
   transform: translateY(-1px);
   box-shadow: var(--shadow-md);
+}
+
+.whatsapp-enquiry-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
 }
 
 .submit-btn {
@@ -306,13 +315,13 @@
   gap: 0.6rem;
   margin-top: 1.5rem;
   font-size: 0.85rem;
-  color: #374151;
+  color: var(--color-text-body);
   font-weight: 450;
   line-height: 1.5;
 }
 
 .privacy-icon {
-  color: #0f766e;
+  color: var(--color-teal);
   flex-shrink: 0;
   margin-top: 2px;
 }
@@ -337,14 +346,14 @@
 
 .enquiry-success-state h3 {
   font-size: 1.45rem;
-  color: #0d3824;
+  color: var(--color-primary-dark);
   font-weight: 750;
   margin-bottom: 0.75rem;
 }
 
 .enquiry-success-state p {
   font-size: 1rem;
-  color: #374151;
+  color: var(--color-text-body);
   font-weight: 450;
   line-height: 1.6;
   max-width: 480px;

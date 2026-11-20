@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Outlet, Link, useLocation, useNavigate, Navigate } from 'react-router-dom';
 import {
   LayoutDashboard,
@@ -21,6 +21,20 @@ export default function AdminLayout() {
   const location = useLocation();
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const mobileToggleRef = useRef(null);
+
+  // Close sidebar on Escape key when open
+  useEffect(() => {
+    if (!sidebarOpen) return;
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setSidebarOpen(false);
+        mobileToggleRef.current?.focus();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [sidebarOpen]);
 
   if (loading) {
     return (
@@ -54,16 +68,35 @@ export default function AdminLayout() {
   return (
     <div className="admin-root">
       {/* Sidebar */}
-      <aside className={`admin-sidebar ${sidebarOpen ? 'open' : ''}`}>
+      <aside
+        id="admin-sidebar"
+        className={`admin-sidebar ${sidebarOpen ? 'open' : ''}`}
+        aria-label="Admin Navigation Sidebar"
+      >
         <div className="admin-sidebar-header">
-          <Link to="/" className="admin-brand">
-            <img src="/assets/pwc-logo.jpeg" alt="PWC" className="admin-brand-logo" />
+          <Link to="/" className="admin-brand" aria-label="Go to PWC Homepage">
+            <img
+              src="https://ggcsfegymkgrvwnexxay.supabase.co/storage/v1/object/public/pwc-public-assets/pwc-logo-transparent%20(1).png"
+              alt="Pudugai Wellness Center Logo"
+              className="admin-brand-logo"
+              onError={(e) => {
+                e.currentTarget.onerror = null;
+                e.currentTarget.src = '/assets/pwc-logo.jpeg';
+              }}
+            />
             <div className="admin-brand-info">
               <span className="admin-brand-name">PWC Portal</span>
               <span className="admin-brand-badge">Management</span>
             </div>
           </Link>
-          <button className="admin-sidebar-close" onClick={closeSidebar}>
+          <button
+            className="admin-sidebar-close"
+            onClick={() => {
+              setSidebarOpen(false);
+              mobileToggleRef.current?.focus();
+            }}
+            aria-label="Close admin navigation sidebar"
+          >
             <X size={20} />
           </button>
         </div>
@@ -76,7 +109,7 @@ export default function AdminLayout() {
           </div>
         )}
 
-        <nav className="admin-nav-menu">
+        <nav className="admin-nav-menu" aria-label="Admin Navigation Menu">
           {navItems.map((item) => {
             const active = location.pathname === item.path;
             return (
@@ -84,9 +117,10 @@ export default function AdminLayout() {
                 key={item.path}
                 to={item.path}
                 className={`admin-nav-link ${active ? 'active' : ''}`}
+                aria-current={active ? 'page' : undefined}
                 onClick={closeSidebar}
               >
-                <span className="admin-nav-icon">{item.icon}</span>
+                <span className="admin-nav-icon" aria-hidden="true">{item.icon}</span>
                 <span>{item.label}</span>
               </Link>
             );
@@ -107,12 +141,22 @@ export default function AdminLayout() {
           </div>
 
           <div className="admin-sidebar-actions">
-            <Link to="/" target="_blank" className="admin-action-btn view-site">
-              <ExternalLink size={15} />
+            <a
+              href="/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="admin-action-btn view-site"
+              aria-label="View Public Site (opens in a new tab)"
+            >
+              <ExternalLink size={15} aria-hidden="true" />
               <span>View Public Site</span>
-            </Link>
-            <button onClick={handleLogout} className="admin-action-btn logout">
-              <LogOut size={15} />
+            </a>
+            <button
+              onClick={handleLogout}
+              className="admin-action-btn logout"
+              aria-label="Log Out of Admin Portal"
+            >
+              <LogOut size={15} aria-hidden="true" />
               <span>Log Out</span>
             </button>
           </div>
@@ -123,9 +167,12 @@ export default function AdminLayout() {
       <div className="admin-main-wrap">
         <header className="admin-topbar">
           <button
+            ref={mobileToggleRef}
             className="admin-mobile-toggle"
             onClick={() => setSidebarOpen(true)}
-            aria-label="Open sidebar"
+            aria-label="Open admin sidebar"
+            aria-expanded={sidebarOpen}
+            aria-controls="admin-sidebar"
           >
             <Menu size={22} />
           </button>
@@ -135,10 +182,16 @@ export default function AdminLayout() {
           </div>
 
           <div className="admin-topbar-right">
-            <Link to="/" target="_blank" className="btn btn-outline btn-sm">
-              <ExternalLink size={14} />
+            <a
+              href="/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-outline btn-sm"
+              aria-label="Open Live Website in a new tab"
+            >
+              <ExternalLink size={14} aria-hidden="true" />
               <span>Live Website</span>
-            </Link>
+            </a>
           </div>
         </header>
 
@@ -147,7 +200,13 @@ export default function AdminLayout() {
         </main>
       </div>
 
-      {sidebarOpen && <div className="admin-overlay" onClick={closeSidebar}></div>}
+      {sidebarOpen && (
+        <div
+          className="admin-overlay"
+          onClick={closeSidebar}
+          aria-hidden="true"
+        />
+      )}
     </div>
   );
 }

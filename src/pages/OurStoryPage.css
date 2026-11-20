@@ -7,7 +7,7 @@
 
 /* 1. Header Section */
 .story-header-section {
-  background: linear-gradient(180deg, #f0f7f3 0%, #f7faf8 100%);
+  background: linear-gradient(180deg, var(--color-primary-subtle) 0%, var(--color-bg) 100%);
   border-bottom: 1px solid var(--color-border);
   padding: 3.5rem 0 2.5rem;
   text-align: center;
@@ -30,7 +30,7 @@
 
 .story-main-title {
   font-size: clamp(2rem, 4vw, 3rem);
-  color: #0d3824;
+  color: var(--color-primary-dark);
   font-weight: 800;
   letter-spacing: -0.02em;
   margin-bottom: 0.75rem;
@@ -39,7 +39,7 @@
 
 .story-subtitle-lead {
   font-size: 1.1rem;
-  color: #374151;
+  color: var(--color-text-body);
   font-weight: 450;
   max-width: 680px;
   margin: 0 auto;
@@ -48,7 +48,7 @@
 
 /* 2. Milestones Summary Track */
 .story-milestones-bar {
-  background-color: #ffffff;
+  background-color: var(--color-surface);
   border-bottom: 1px solid var(--color-border);
   padding: 1.25rem 0;
 }
@@ -72,15 +72,15 @@
 
 .milestone-chip:hover {
   border-color: var(--color-teal);
-  background-color: #f0fdfa;
+  background-color: var(--color-teal-light);
 }
 
 .milestone-chip-icon {
   width: 38px;
   height: 38px;
   border-radius: var(--radius-full);
-  background-color: #ffffff;
-  border: 1px solid #cbd5e1;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
   color: var(--color-teal);
   display: flex;
   align-items: center;
@@ -98,14 +98,14 @@
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
-  color: #0f766e;
+  color: var(--color-teal);
   letter-spacing: 0.04em;
 }
 
 .milestone-label {
   font-size: 0.85rem;
   font-weight: 700;
-  color: #0d3824;
+  color: var(--color-primary-dark);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -126,7 +126,7 @@
   display: flex;
   gap: 2rem;
   padding: 2.25rem;
-  background-color: #ffffff;
+  background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   margin-bottom: 2rem;
@@ -143,7 +143,7 @@
 .story-block-num {
   font-size: 2.25rem;
   font-weight: 900;
-  color: #cbd5e1;
+  color: var(--color-border);
   font-family: monospace;
   line-height: 1;
   flex-shrink: 0;
@@ -160,21 +160,21 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: #0f766e;
+  color: var(--color-teal);
   margin-bottom: 0.35rem;
 }
 
 .story-block-heading {
   font-size: clamp(1.35rem, 2.5vw, 1.7rem);
   font-weight: 800;
-  color: #0d3824;
+  color: var(--color-primary-dark);
   margin-bottom: 1rem;
   line-height: 1.3;
 }
 
 .story-block-body p {
   font-size: 1.025rem;
-  color: #374151;
+  color: var(--color-text-body);
   line-height: 1.75;
   font-weight: 450;
   margin-bottom: 1rem;
@@ -186,7 +186,7 @@
 
 /* Featured GET Pin Milestone Highlight */
 .story-block.featured-milestone {
-  background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+  background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-primary-subtle) 100%);
   border: 2px solid #86efac;
 }
 
@@ -211,7 +211,7 @@
   border-radius: var(--radius-md);
   padding: 0.85rem 1rem;
   font-size: 0.95rem;
-  color: #374151;
+  color: var(--color-text-body);
   line-height: 1.6;
 }
 
@@ -222,14 +222,14 @@
 }
 
 .gratitude-item strong {
-  color: #0d3824;
+  color: var(--color-primary-dark);
 }
 
 /* 4. Ethical Disclaimer Card */
 .story-disclaimer-card {
   background-color: #fefce8;
   border: 1px solid #fef08a;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   padding: 1.5rem 1.75rem;
   margin-bottom: 2.5rem;
 }
@@ -257,8 +257,8 @@
 
 /* 5. Bottom Call to Action */
 .story-cta-box {
-  background: linear-gradient(135deg, #f0f7f3 0%, #e6f4ec 100%);
-  border: 1px solid #bbf7d0;
+  background: linear-gradient(135deg, var(--color-primary-subtle) 0%, var(--color-primary-light) 100%);
+  border: 1px solid var(--color-border-subtle);
   border-radius: var(--radius-lg);
   padding: 3rem 2.5rem;
   text-align: center;
@@ -267,14 +267,14 @@
 .story-cta-box h2 {
   font-size: clamp(1.65rem, 3.2vw, 2.2rem);
   font-weight: 800;
-  color: #0d3824;
+  color: var(--color-primary-dark);
   margin: 0.5rem 0 0.85rem;
   line-height: 1.3;
 }
 
 .story-cta-box p {
   font-size: 1.05rem;
-  color: #374151;
+  color: var(--color-text-body);
   line-height: 1.65;
   margin: 0 auto 2rem;
   max-width: 620px;

@@ -1,0 +1,155 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-13T09:54:30.000Z",
+  "title": "Design System: Pudugai Wellness Center",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "Dark Forest Green",
+        "canonical": "#134e32",
+        "tonalRamp": ["#061a10", "#0d3824", "#134e32", "#1e6b46", "#2a8a5b", "#68b790", "#a8dac0", "#e8f3ed"]
+      },
+      "primary-dark": {
+        "role": "primary",
+        "displayName": "Deepest Forest Green",
+        "canonical": "#0d3824",
+        "tonalRamp": ["#040f09", "#082115", "#0d3824", "#165236", "#22704b", "#4a9c74", "#92ccae", "#e2f2e9"]
+      },
+      "teal": {
+        "role": "secondary",
+        "displayName": "Deep Teal",
+        "canonical": "#0f766e",
+        "tonalRamp": ["#04201e", "#094a45", "#0f766e", "#14998e", "#1bbcb0", "#5eead4", "#99f6e4", "#ccfbf1"]
+      },
+      "bg": {
+        "role": "neutral",
+        "displayName": "Warm Off-White Canvas",
+        "canonical": "#f8faf8",
+        "tonalRamp": ["#1e241f", "#3c473e", "#617064", "#8e9e92", "#c0ccc3", "#e0e8e2", "#f0f5f1", "#f8faf8"]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Card Surface White",
+        "canonical": "#ffffff",
+        "tonalRamp": ["#1f2421", "#3b443e", "#5c6961", "#839389", "#b1bfb7", "#d8e1db", "#eff3f0", "#ffffff"]
+      },
+      "border": {
+        "role": "neutral",
+        "displayName": "Crisp Border Slate",
+        "canonical": "#cbd5e1",
+        "tonalRamp": ["#0f172a", "#1e293b", "#334155", "#64748b", "#94a3b8", "#cbd5e1", "#e2e8f0", "#f1f5f9"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display / Hero H1", "purpose": "Hero headlines and main page titles." },
+      "headline": { "displayName": "Headline H2", "purpose": "Section headings across all public pages." },
+      "title": { "displayName": "Title H3", "purpose": "Cards, coach names, and feature headers." },
+      "body": { "displayName": "Body", "purpose": "All descriptive text, narratives, and testimonials." },
+      "label": { "displayName": "Section Tag / Overline", "purpose": "Small uppercase category tags above titles." }
+    },
+    "shadows": [
+      { "name": "ambient-sm", "value": "0 1px 2px 0 rgba(19, 78, 50, 0.05)", "purpose": "Rest state for cards and containers." },
+      { "name": "ambient-md", "value": "0 4px 12px -2px rgba(19, 78, 50, 0.08)", "purpose": "Hover state for cards and buttons." },
+      { "name": "ambient-lg", "value": "0 10px 25px -3px rgba(19, 78, 50, 0.1)", "purpose": "Drawers, popovers, and login modal surfaces." }
+    ],
+    "motion": [
+      { "name": "transition-fast", "value": "150ms cubic-bezier(0.4, 0, 0.2, 1)", "purpose": "Button and link hover state changes." },
+      { "name": "transition-normal", "value": "250ms cubic-bezier(0.4, 0, 0.2, 1)", "purpose": "Card elevation and drawer animations." }
+    ],
+    "breakpoints": [
+      { "name": "xs", "value": "330px" },
+      { "name": "sm", "value": "360px" },
+      { "name": "mobile", "value": "480px" },
+      { "name": "tablet-sm", "value": "640px" },
+      { "name": "tablet", "value": "768px" },
+      { "name": "nav", "value": "860px" },
+      { "name": "desktop", "value": "1024px" },
+      { "name": "max", "value": "1200px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Primary action button for key consultation and contact flows.",
+      "html": "<button class=\"ds-btn-primary\">Book a Consultation</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; background-color: #134e32; color: #ffffff; padding: 0.75rem 1.35rem; font-family: inherit; font-size: 0.95rem; font-weight: 600; border-radius: 10px; border: 1px solid transparent; min-height: 44px; cursor: pointer; text-decoration: none; transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1); } .ds-btn-primary:hover { background-color: #0d3824; transform: translateY(-1px); box-shadow: 0 4px 12px -2px rgba(19, 78, 50, 0.08); }"
+    },
+    {
+      "name": "WhatsApp Button",
+      "kind": "button",
+      "refersTo": "button-whatsapp",
+      "description": "Direct communication button linking to prefilled WhatsApp chat.",
+      "html": "<button class=\"ds-btn-whatsapp\"><span>Chat on WhatsApp</span></button>",
+      "css": ".ds-btn-whatsapp { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; background-color: #15803d; color: #ffffff; padding: 0.75rem 1.35rem; font-family: inherit; font-size: 0.95rem; font-weight: 650; border-radius: 10px; border: 1px solid transparent; min-height: 44px; cursor: pointer; text-decoration: none; transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1); } .ds-btn-whatsapp:hover { background-color: #0f622d; box-shadow: 0 4px 12px -2px rgba(19, 78, 50, 0.08); }"
+    },
+    {
+      "name": "Category Tag",
+      "kind": "chip",
+      "refersTo": "badge-teal",
+      "description": "Small pill tag used for service categorization and section indicators.",
+      "html": "<span class=\"ds-category-tag\">Health Screening</span>",
+      "css": ".ds-category-tag { display: inline-block; font-size: 0.75rem; font-weight: 750; text-transform: uppercase; letter-spacing: 0.05em; color: #0f766e; background-color: #ccfbf1; padding: 0.25rem 0.6rem; border-radius: 6px; font-family: inherit; }"
+    },
+    {
+      "name": "Base Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Standard content card container with tactile border and ambient shadow.",
+      "html": "<div class=\"ds-card\"><h3 class=\"ds-card-title\">Body Checkup</h3><p class=\"ds-card-desc\">We check your BMI, body fat, and muscle to understand what your body needs.</p></div>",
+      "css": ".ds-card { background-color: #ffffff; border: 1px solid #cbd5e1; border-radius: 16px; padding: 1.5rem; box-shadow: 0 1px 2px 0 rgba(19, 78, 50, 0.05); transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1); font-family: inherit; } .ds-card:hover { border-color: #94a3b8; box-shadow: 0 4px 12px -2px rgba(19, 78, 50, 0.08); } .ds-card-title { font-size: 1.2rem; font-weight: 700; color: #0d3824; margin: 0 0 0.5rem; } .ds-card-desc { font-size: 0.975rem; color: #374151; line-height: 1.62; margin: 0; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Natural Village Apothecary",
+    "overview": "The Pudugai Wellness Center design language conveys gentle, grounded health guidance rooted in community trust. Rather than adopting the cold, sterile clinical whites of a diagnostic hospital or the neon-infused aggressive gradients of a commercial fitness gym, PWC feels warm, organic, and approachable. Deep forest green anchors the identity, paired with warm off-white surfaces, generous breathing room, and crisp typography with native Tamil script fallbacks.",
+    "keyCharacteristics": [
+      "Organic Restraint: Dominant dark green brand voice with neutral off-white surfaces; zero gratuitous animations or sensory overload.",
+      "Human-Scale Density: Generous line heights (1.65–1.75) and spacious card padding (1.5rem–2.5rem) that welcome older adults and families.",
+      "Frictionless Action: Primary actions lead directly to authentic communication channels (clickable tel: links, WhatsApp chats with prefilled messages, and Google Maps location buttons)."
+    ],
+    "rules": [
+      {
+        "name": "The Forest Anchor Rule",
+        "body": "The dark green primary (#134e32) and deepest green (#0d3824) are reserved for brand signifiers, titles, and key CTAs. Backgrounds remain light (#ffffff or #f8faf8) to maintain high legibility and openness.",
+        "section": "colors"
+      },
+      {
+        "name": "The WhatsApp Distinctiveness Rule",
+        "body": "#15803d is exclusively reserved for WhatsApp actions and genuine success indicators. It is never used for general decorative borders.",
+        "section": "colors"
+      },
+      {
+        "name": "The High Contrast Body Rule",
+        "body": "Body text never uses washed-out grays. Text defaults to dark charcoal (#374151) on light backgrounds, exceeding WCAG 2.1 AA requirements.",
+        "section": "typography"
+      },
+      {
+        "name": "The iOS Input Rule",
+        "body": "Form inputs and selects strictly enforce font-size: 16px minimum to prevent mobile Safari auto-zooming the viewport upon focus.",
+        "section": "typography"
+      },
+      {
+        "name": "The Tinted Ambient Rule",
+        "body": "Shadows are never neutral black (rgba(0,0,0,...)). They incorporate brand forest green (rgba(19, 78, 50, ...)) to harmonize with the organic canvas.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do use var(--color-primary) (#134e32) or var(--color-primary-dark) (#0d3824) for prominent headlines and primary buttons.",
+      "Do enforce a minimum touch target of 44px on all clickable interactive elements.",
+      "Do maintain bilingual cultural compatibility (Tamil text fallbacks and Tamil language badges on success stories).",
+      "Do include clear, prominent medical disclaimers on all pages discussing body composition or weight loss.",
+      "Do ensure phone numbers are clickable tel: links and WhatsApp links use prefilled messages."
+    ],
+    "donts": [
+      "Don't use black drop shadows; always use forest-green tinted shadows (rgba(19, 78, 50, ...)).",
+      "Don't use input font sizes smaller than 16px, which trigger automatic iOS viewport zoom.",
+      "Don't make clinical diagnoses or medical promises; keep tone educational, supportive, and non-prescriptive.",
+      "Don't introduce heavy gradients, floating neon accents, or aggressive commercial gym aesthetics.",
+      "Don't create separate desktop and mobile button links with conflicting destinations."
+    ]
+  }
+}

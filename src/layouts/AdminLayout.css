@@ -3,7 +3,7 @@
 .admin-root {
   display: flex;
   min-height: 100vh;
-  background-color: #f1f5f2;
+  background-color: var(--color-surface-alt);
 }
 
 .admin-loading-screen {
@@ -18,7 +18,7 @@
 /* Sidebar */
 .admin-sidebar {
   width: 260px;
-  background-color: #10291e; /* Deep forest */
+  background-color: var(--color-primary-dark); /* Deep forest */
   color: #e2e8f0;
   display: flex;
   flex-direction: column;
@@ -48,7 +48,7 @@
 .admin-brand-logo {
   width: 36px;
   height: 36px;
-  background-color: #ffffff;
+  background-color: var(--color-surface);
   border-radius: var(--radius-sm);
   padding: 2px;
   object-fit: contain;
@@ -218,7 +218,7 @@
 }
 
 .admin-topbar {
-  background-color: #ffffff;
+  background-color: var(--color-surface);
   border-bottom: 1px solid var(--color-border);
   padding: 0.85rem 2rem;
   display: flex;
@@ -286,4 +286,66 @@
   .admin-topbar-title {
     font-size: 0.85rem;
   }
+}
+
+/* ==============================================================================
+   KEYBOARD FOCUS ACCESSIBILITY
+   ============================================================================== */
+.admin-brand:focus-visible,
+.admin-sidebar-close:focus-visible,
+.admin-nav-link:focus-visible,
+.admin-action-btn:focus-visible {
+  outline: 2px solid var(--color-teal-light);
+  outline-offset: 2px;
+}
+
+.admin-mobile-toggle:focus-visible,
+.admin-topbar-right .btn:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* ==============================================================================
+   SHARED ADMIN ALERT & NOTIFICATION STYLES
+   ============================================================================== */
+.save-alert-success {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  background-color: var(--color-success-bg, #f0fdf4);
+  border: 1px solid #86efac;
+  color: #166534;
+  padding: 0.85rem 1.15rem;
+  border-radius: var(--radius-md);
+  margin-bottom: 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.save-alert-error {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  background-color: #fef2f2;
+  border: 1px solid #fca5a5;
+  color: #991b1b;
+  padding: 0.85rem 1.15rem;
+  border-radius: var(--radius-md);
+  margin-bottom: 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.modal-alert-error {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #fef2f2;
+  border: 1px solid #fca5a5;
+  color: #991b1b;
+  padding: 0.65rem 0.95rem;
+  border-radius: var(--radius-md);
+  margin-bottom: 1.25rem;
+  font-size: 0.85rem;
+  font-weight: 500;
 }

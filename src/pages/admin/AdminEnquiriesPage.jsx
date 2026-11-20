@@ -6,7 +6,8 @@ import {
   MessageSquare,
   Eye,
   X,
-  AlertTriangle
+  AlertTriangle,
+  CheckCircle2
 } from 'lucide-react';
 import { dataService } from '../../services/dataService';
 import './AdminEnquiriesPage.css';
@@ -16,6 +17,10 @@ export default function AdminEnquiriesPage() {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
+
+  // Feedback states
+  const [successMsg, setSuccessMsg] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
 
   // Modals
   const [detailModalOpen, setDetailModalOpen] = useState(false);
@@ -55,9 +60,11 @@ export default function AdminEnquiriesPage() {
       if (selectedEnquiry && selectedEnquiry.id === enquiryId) {
         setSelectedEnquiry((prev) => ({ ...prev, status: newStatus }));
       }
+      setSuccessMsg(`Enquiry marked as "${newStatus}".`);
+      setErrorMsg('');
       await loadEnquiries();
     } catch (err) {
-      alert(err.message || 'Failed to update enquiry status.');
+      setErrorMsg(err.message || 'Failed to update enquiry status.');
     } finally {
       setActionLoading(false);
     }
@@ -67,12 +74,15 @@ export default function AdminEnquiriesPage() {
     if (!selectedEnquiry) return;
     setActionLoading(true);
     try {
+      const customer = selectedEnquiry.customer_name;
       await dataService.deleteEnquiry(selectedEnquiry.id);
       setDeleteModalOpen(false);
       setDetailModalOpen(false);
+      setSuccessMsg(`Enquiry from "${customer}" deleted successfully.`);
+      setErrorMsg('');
       await loadEnquiries();
     } catch (err) {
-      alert(err.message || 'Failed to delete enquiry.');
+      setErrorMsg(err.message || 'Failed to delete enquiry.');
     } finally {
       setActionLoading(false);
     }
@@ -97,6 +107,20 @@ export default function AdminEnquiriesPage() {
           </p>
         </div>
       </div>
+
+      {successMsg && (
+        <div className="save-alert-success" role="status">
+          <CheckCircle2 size={16} />
+          <span>{successMsg}</span>
+        </div>
+      )}
+
+      {errorMsg && (
+        <div className="save-alert-error" role="alert">
+          <AlertTriangle size={16} />
+          <span>{errorMsg}</span>
+        </div>
+      )}
 
       {/* Control Strip */}
       <div className="admin-controls-card">

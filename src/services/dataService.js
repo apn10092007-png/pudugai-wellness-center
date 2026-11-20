@@ -216,7 +216,7 @@ export const INITIAL_COACHES = [
     image_path: '/assets/avatar-thenmozhi.svg',
     phone: '94434 43261',
     instagram_url: '',
-    maps_url: 'https://maps.app.goo.gl/JAdNVeq53M3PdrW1A',
+    maps_url: 'https://maps.app.goo.gl/DFpxMGuHuTudNYFb6',
     address_en: 'E Main Rd, T Nagar, Buvaneswari Nagar, Pudukkottai, Tamil Nadu 622001',
     address_ta: 'கிழக்கு முதன்மை சாலை, டி நகர், புவனேஸ்வரி நகர், புதுக்கோட்டை, தமிழ்நாடு 622001'
   }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import {
   Phone,
@@ -74,6 +74,8 @@ export default function ContactPage() {
   const [success, setSuccess] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
 
+  const formCardRef = useRef(null);
+
   // Sync service if search params change
   useEffect(() => {
     if (initialService) {
@@ -98,8 +100,12 @@ export default function ContactPage() {
     }
 
     const cleanPhone = formData.phone.replace(/\D/g, '');
-    if (!cleanPhone || cleanPhone.length < 10) {
+    if (!cleanPhone) {
+      errors.phone = 'Please enter your phone number.';
+    } else if (cleanPhone.length < 10) {
       errors.phone = 'Please enter a valid 10-digit phone number.';
+    } else if (cleanPhone.length > 13) {
+      errors.phone = 'Phone number is too long. Please enter a valid 10-digit number.';
     }
 
     if (!formData.service.trim()) {
@@ -112,6 +118,7 @@ export default function ContactPage() {
 
   // 1. WhatsApp Submission Flow (Opens prefilled WhatsApp message in a new tab)
   const handleContinueToWhatsApp = async () => {
+    if (submitting) return;
     setErrorMsg('');
     if (!validateForm()) {
       setErrorMsg('Please complete all required fields before continuing to WhatsApp.');
@@ -147,6 +154,7 @@ export default function ContactPage() {
   // 2. Standard Web Submission Flow (Saves to Supabase with verification)
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (submitting) return; // Prevent duplicate submissions while in progress
     setErrorMsg('');
 
     if (!validateForm()) {
@@ -170,6 +178,13 @@ export default function ContactPage() {
       setSuccess(true);
       setFormData({ customer_name: '', phone: '', service: '', message: '' });
       setFieldErrors({});
+
+      // Smoothly bring success confirmation into view without abrupt page jump
+      if (typeof window !== 'undefined') {
+        setTimeout(() => {
+          formCardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 100);
+      }
     } catch (err) {
       setErrorMsg(err.message || 'Unable to record enquiry. Please contact us directly via phone call.');
     } finally {
@@ -230,7 +245,7 @@ export default function ContactPage() {
                   </a>
                 </div>
 
-                {/* Center Location Cards: Pudugai & Peravurani */}
+                {/* Center Location Cards: Pudukkottai & Peravurani */}
                 <div className="contact-locations-section">
                   <div className="locations-header">
                     <MapPin size={20} className="locations-pin-icon" />
@@ -238,10 +253,10 @@ export default function ContactPage() {
                   </div>
 
                   <div className="locations-cards-grid">
-                    {/* Location 1 – Pudugai */}
+                    {/* Location 1 – Pudukkottai */}
                     <div className="location-card">
                       <div className="location-card-header">
-                        <h4 className="location-name">Pudugai</h4>
+                        <h4 className="location-name">Pudukkottai</h4>
                       </div>
                       <a
                         href="https://maps.app.goo.gl/JAdNVeq53M3PdrW1A"
@@ -276,17 +291,19 @@ export default function ContactPage() {
 
             {/* Right: Enquiry Form with WhatsApp flow */}
             <div className="contact-form-column">
-              <div className="form-card-box">
-                <div className="form-card-header">
-                  <h2>Send Us a Message</h2>
-                  <p>
-                    Fill in your details below. You can send your message directly on WhatsApp
-                    or submit this form.
-                  </p>
-                </div>
+              <div className="form-card-box" ref={formCardRef}>
+                {!success && (
+                  <div className="form-card-header">
+                    <h2>Send Us a Message</h2>
+                    <p>
+                      Fill in your details below. You can send your message directly on WhatsApp
+                      or submit this form.
+                    </p>
+                  </div>
+                )}
 
                 {success ? (
-                  <div className="enquiry-success-state">
+                  <div className="enquiry-success-state" role="status" aria-live="polite">
                     <div className="success-icon-wrap">
                       <CheckCircle size={40} />
                     </div>
@@ -309,7 +326,7 @@ export default function ContactPage() {
                 ) : (
                   <form onSubmit={handleSubmit} className="enquiry-form" noValidate>
                     {errorMsg && (
-                      <div className="form-alert-error">
+                      <div className="form-alert-error" role="alert">
                         <AlertCircle size={16} />
                         <span>{errorMsg}</span>
                       </div>
@@ -329,9 +346,15 @@ export default function ContactPage() {
                         placeholder="e.g. Ramesh Kumar"
                         className={`form-input ${fieldErrors.customer_name ? 'input-error' : ''}`}
                         required
+                        autoComplete="name"
+                        aria-required="true"
+                        aria-invalid={!!fieldErrors.customer_name}
+                        aria-describedby={fieldErrors.customer_name ? 'customer_name-error' : undefined}
                       />
                       {fieldErrors.customer_name && (
-                        <span className="field-error-text">{fieldErrors.customer_name}</span>
+                        <span id="customer_name-error" className="field-error-text" role="alert">
+                          {fieldErrors.customer_name}
+                        </span>
                       )}
                     </div>
 
@@ -349,11 +372,19 @@ export default function ContactPage() {
                         placeholder="e.g. 94434 43261 or 98765 43210"
                         className={`form-input ${fieldErrors.phone ? 'input-error' : ''}`}
                         required
+                        inputMode="tel"
+                        autoComplete="tel"
+                        maxLength={16}
+                        aria-required="true"
+                        aria-invalid={!!fieldErrors.phone}
+                        aria-describedby={fieldErrors.phone ? 'phone-error' : 'phone-help'}
                       />
                       {fieldErrors.phone ? (
-                        <span className="field-error-text">{fieldErrors.phone}</span>
+                        <span id="phone-error" className="field-error-text" role="alert">
+                          {fieldErrors.phone}
+                        </span>
                       ) : (
-                        <span className="form-help">
+                        <span id="phone-help" className="form-help">
                           Our team will contact you by call or WhatsApp.
                         </span>
                       )}
@@ -371,6 +402,9 @@ export default function ContactPage() {
                         onChange={handleChange}
                         className={`form-select ${fieldErrors.service ? 'input-error' : ''}`}
                         required
+                        aria-required="true"
+                        aria-invalid={!!fieldErrors.service}
+                        aria-describedby={fieldErrors.service ? 'service-error' : undefined}
                       >
                         <option value="">Select a program or checkup</option>
                         <option value="General Wellness & Nutrition Consultation">
@@ -387,7 +421,9 @@ export default function ContactPage() {
                         ))}
                       </select>
                       {fieldErrors.service && (
-                        <span className="field-error-text">{fieldErrors.service}</span>
+                        <span id="service-error" className="field-error-text" role="alert">
+                          {fieldErrors.service}
+                        </span>
                       )}
                     </div>
 
@@ -416,6 +452,7 @@ export default function ContactPage() {
                       <button
                         type="button"
                         onClick={handleContinueToWhatsApp}
+                        disabled={submitting}
                         className="btn btn-whatsapp btn-lg whatsapp-enquiry-btn"
                         title="Continue directly to WhatsApp with prefilled message"
                       >

@@ -10,6 +10,7 @@ export default function Header() {
 
   const headerRef = useRef(null);
   const toggleBtnRef = useRef(null);
+  const drawerRef = useRef(null);
 
   const navLinks = [
     { label: 'Home', path: '/' },
@@ -24,8 +25,11 @@ export default function Header() {
     return location.pathname.startsWith(path);
   };
 
-  const closeMobile = useCallback(() => {
+  const closeMobile = useCallback((restoreFocus = false) => {
     setMobileOpen(false);
+    if (restoreFocus) {
+      toggleBtnRef.current?.focus();
+    }
   }, []);
 
   // 1. Sticky Navbar: Track scroll position to apply subtle shadow only when scrolling
@@ -47,19 +51,63 @@ export default function Header() {
     }
   }, [location.pathname]);
 
-  // 3. Mobile Menu: Close when pressing Escape key
+  // 3. Mobile Menu: Keyboard focus management, Escape key, and Focus Trap
   useEffect(() => {
     if (!mobileOpen) return;
 
+    // Focus first link inside drawer when opened
+    const focusTimer = setTimeout(() => {
+      if (drawerRef.current) {
+        const focusables = drawerRef.current.querySelectorAll(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusables.length > 0) {
+          focusables[0].focus();
+        }
+      }
+    }, 60);
+
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') {
-        closeMobile();
-        toggleBtnRef.current?.focus();
+        e.preventDefault();
+        closeMobile(true);
+        return;
+      }
+
+      // Trap Tab key inside the open drawer
+      if (e.key === 'Tab') {
+        if (!drawerRef.current) return;
+        const focusables = Array.from(
+          drawerRef.current.querySelectorAll(
+            'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+          )
+        );
+        if (focusables.length === 0) return;
+
+        const firstElement = focusables[0];
+        const lastElement = focusables[focusables.length - 1];
+
+        if (e.shiftKey) {
+          // Shift + Tab: wrap from first to last
+          if (document.activeElement === firstElement) {
+            e.preventDefault();
+            lastElement.focus();
+          }
+        } else {
+          // Tab: wrap from last to first
+          if (document.activeElement === lastElement) {
+            e.preventDefault();
+            firstElement.focus();
+          }
+        }
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    return () => {
+      clearTimeout(focusTimer);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
   }, [mobileOpen, closeMobile]);
 
   // 4. Mobile Menu: Close when clicking outside header
@@ -68,7 +116,7 @@ export default function Header() {
 
     const handlePointerDown = (e) => {
       if (headerRef.current && !headerRef.current.contains(e.target)) {
-        closeMobile();
+        closeMobile(false);
       }
     };
 
@@ -108,9 +156,7 @@ export default function Header() {
       <div className="header-topbar">
         <div className="container header-topbar-inner">
           <div className="topbar-info">
-            <span>Pudukkottai, Tamil Nadu</span>
-            <span className="dot-divider">•</span>
-            <span>Coach Thangapandian S</span>
+            <span>Pudukkottai & Peravurani, Tamil Nadu</span>
           </div>
           <div className="topbar-actions">
             <a href="tel:9443443261" className="topbar-call" title="Call: 94434 43261">
@@ -194,15 +240,18 @@ export default function Header() {
       {/* Backdrop overlay for clicking outside & dimming background */}
       <div
         className={`mobile-backdrop ${mobileOpen ? 'open' : ''}`}
-        onClick={closeMobile}
+        onClick={() => closeMobile(true)}
         aria-hidden="true"
       />
 
       {/* Mobile Nav Drawer with smooth CSS slide/fade */}
       <div
         id="mobile-navigation-drawer"
+        ref={drawerRef}
+        role="dialog"
+        aria-modal={mobileOpen}
+        aria-label="Mobile Navigation Menu"
         className={`mobile-drawer ${mobileOpen ? 'open' : ''}`}
-        aria-label="Mobile Navigation"
         aria-hidden={!mobileOpen}
       >
         <div className="container mobile-drawer-inner">

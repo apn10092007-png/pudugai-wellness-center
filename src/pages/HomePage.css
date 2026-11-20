@@ -7,7 +7,7 @@
 /* 1. Hero Section */
 .hero-section {
   padding: 3.5rem 0 3rem;
-  background-color: #f7faf8;
+  background-color: var(--color-bg);
   border-bottom: 1px solid var(--color-border);
 }
 
@@ -42,7 +42,7 @@
   font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 800;
   line-height: 1.2;
-  color: #0d3824;
+  color: var(--color-primary-dark);
   letter-spacing: -0.02em;
   margin-bottom: 1rem;
 }
@@ -50,7 +50,7 @@
 .hero-description {
   font-size: clamp(1.05rem, 2.2vw, 1.15rem);
   line-height: 1.7;
-  color: #374151;
+  color: var(--color-text-body);
   font-weight: 450;
   margin-bottom: 1.75rem;
   max-width: 540px;
@@ -77,12 +77,12 @@
   align-items: center;
   gap: 0.65rem;
   font-size: 0.975rem;
-  color: #111827;
+  color: var(--color-text-main);
   font-weight: 600;
 }
 
 .feature-icon {
-  color: #0f766e;
+  color: var(--color-teal);
   flex-shrink: 0;
 }
 
@@ -103,7 +103,7 @@
   display: inline-block;
   font-size: 0.825rem;
   font-weight: 750;
-  color: #0f766e;
+  color: var(--color-teal);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   margin-bottom: 0.5rem;
@@ -112,14 +112,14 @@
 .section-title {
   font-size: clamp(1.65rem, 3.2vw, 2.3rem);
   font-weight: 800;
-  color: #0d3824;
+  color: var(--color-primary-dark);
   margin-bottom: 0.75rem;
   line-height: 1.25;
 }
 
 .section-subtitle {
   font-size: 1.05rem;
-  color: #374151;
+  color: var(--color-text-body);
   line-height: 1.65;
   font-weight: 450;
 }
@@ -134,7 +134,7 @@
 .pillar-item {
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   padding: 1.75rem 1.5rem;
   display: flex;
   flex-direction: column;
@@ -146,7 +146,7 @@
   height: 44px;
   border-radius: var(--radius-md);
   background-color: var(--color-primary-light);
-  color: #0d3824;
+  color: var(--color-primary-dark);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -155,12 +155,12 @@
 .pillar-item h3 {
   font-size: 1.2rem;
   font-weight: 700;
-  color: #0d3824;
+  color: var(--color-primary-dark);
 }
 
 .pillar-item p {
   font-size: 0.975rem;
-  color: #374151;
+  color: var(--color-text-body);
   line-height: 1.62;
   font-weight: 450;
   margin: 0;
@@ -168,7 +168,7 @@
 
 /* 4. Services Grid */
 .services-overview-section {
-  background-color: #fafcfb;
+  background-color: var(--color-bg);
   border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
 }
@@ -183,7 +183,7 @@
 .service-card {
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -192,7 +192,7 @@
 }
 
 .service-card:hover {
-  border-color: #0f766e;
+  border-color: var(--color-teal);
 }
 
 .service-category-tag {
@@ -201,8 +201,8 @@
   font-weight: 750;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #0f766e;
-  background-color: #ccfbf1;
+  color: var(--color-teal);
+  background-color: var(--color-teal-light);
   padding: 0.25rem 0.6rem;
   border-radius: var(--radius-sm);
 }
@@ -210,13 +210,13 @@
 .service-card-title {
   font-size: 1.2rem;
   font-weight: 750;
-  color: #0d3824;
+  color: var(--color-primary-dark);
   margin: 0;
 }
 
 .service-card-desc {
   font-size: 0.975rem;
-  color: #374151;
+  color: var(--color-text-body);
   line-height: 1.62;
   font-weight: 450;
   margin: 0;
@@ -229,12 +229,12 @@
   gap: 0.35rem;
   font-size: 0.9rem;
   font-weight: 700;
-  color: #0d3824;
+  color: var(--color-primary-dark);
   margin-top: 0.5rem;
 }
 
 .service-learn-link:hover {
-  color: #0f766e;
+  color: var(--color-teal);
 }
 
 .section-center-action {
@@ -255,7 +255,7 @@
 }
 
 .coach-clean-card {
-  background-color: #ffffff;
+  background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: 1.75rem;
@@ -301,7 +301,7 @@
   display: inline-block;
   font-size: 0.85rem;
   font-weight: 700;
-  color: #0f766e;
+  color: var(--color-teal);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: 0.25rem;
@@ -310,13 +310,13 @@
 .coach-card-name {
   font-size: clamp(1.4rem, 2.5vw, 1.85rem);
   font-weight: 800;
-  color: #0d3824;
+  color: var(--color-primary-dark);
   margin-bottom: 0.75rem;
 }
 
 .coach-card-bio {
   font-size: 0.975rem;
-  color: #374151;
+  color: var(--color-text-body);
   line-height: 1.65;
   font-weight: 450;
   margin-bottom: 1.25rem;
@@ -335,17 +335,17 @@
   gap: 0.45rem;
   padding: 0.4rem 0.8rem;
   background-color: var(--color-surface-alt);
-  border: 1px solid #cbd5e1;
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-full);
   font-size: 0.85rem;
   font-weight: 600;
-  color: #111827;
+  color: var(--color-text-main);
 }
 
 .coach-contact-pill:hover {
   background-color: var(--color-primary-light);
-  color: #0d3824;
-  border-color: #0d3824;
+  color: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
 }
 
 .coaches-action-row {
@@ -358,13 +358,13 @@
 
 /* 6. Our Journey Section */
 .our-journey-section {
-  background-color: #f7faf8;
+  background-color: var(--color-bg);
   border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
 }
 
 .our-journey-card {
-  background-color: #ffffff;
+  background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: 3rem 2.5rem;
@@ -381,14 +381,14 @@
 .our-journey-title {
   font-size: clamp(1.65rem, 3.2vw, 2.3rem);
   font-weight: 800;
-  color: #0d3824;
+  color: var(--color-primary-dark);
   margin-top: 0.35rem;
   letter-spacing: -0.02em;
 }
 
 .our-journey-intro {
   font-size: clamp(1.025rem, 2vw, 1.125rem);
-  color: #374151;
+  color: var(--color-text-body);
   line-height: 1.75;
   font-weight: 450;
   margin-bottom: 2rem;
@@ -412,7 +412,7 @@
 .story-card {
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -420,8 +420,12 @@
 
 .story-card-img {
   width: 100%;
-  height: 200px;
+  aspect-ratio: 16 / 10;
+  max-height: 220px;
   object-fit: cover;
+  object-position: center 20%;
+  display: block;
+  background-color: var(--color-surface-alt);
 }
 
 .story-card-body {
@@ -441,14 +445,14 @@
 .story-client-name {
   font-size: 1.05rem;
   font-weight: 750;
-  color: #0d3824;
+  color: var(--color-primary-dark);
 }
 
 .story-lang-badge {
   font-size: 0.72rem;
   font-weight: 700;
-  color: #0f766e;
-  background-color: #ccfbf1;
+  color: var(--color-teal);
+  background-color: var(--color-teal-light);
   padding: 0.15rem 0.45rem;
   border-radius: var(--radius-sm);
 }
@@ -459,19 +463,19 @@
   gap: 0.35rem;
   font-size: 0.825rem;
   font-weight: 600;
-  color: #4b5563;
+  color: var(--color-text-secondary);
 }
 
 .story-title {
   font-size: 1rem;
   font-weight: 700;
-  color: #111827;
+  color: var(--color-text-main);
   margin-top: 0.25rem;
 }
 
 .story-text {
   font-size: 0.95rem;
-  color: #374151;
+  color: var(--color-text-body);
   line-height: 1.65;
   font-weight: 450;
   margin: 0;
@@ -479,7 +483,7 @@
 
 /* 7. Home Bottom CTA Section */
 .home-contact-cta {
-  background-color: #f2f7f4;
+  background-color: var(--color-primary-subtle);
   border-top: 1px solid var(--color-border);
 }
 
@@ -492,13 +496,13 @@
 .home-cta-inner h2 {
   font-size: clamp(1.7rem, 3.2vw, 2.25rem);
   font-weight: 800;
-  color: #0d3824;
+  color: var(--color-primary-dark);
   margin-bottom: 0.75rem;
 }
 
 .home-cta-inner p {
   font-size: 1.05rem;
-  color: #374151;
+  color: var(--color-text-body);
   line-height: 1.65;
   font-weight: 450;
   margin-bottom: 1.75rem;
@@ -584,6 +588,9 @@
   .stories-grid {
     grid-template-columns: 1fr;
   }
+  .story-card-img {
+    max-height: 260px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -596,6 +603,9 @@
   }
   .coach-card-image-wrap {
     height: 270px;
+  }
+  .story-card-img {
+    max-height: 210px;
   }
   .home-cta-actions {
     flex-direction: column;
@@ -615,8 +625,11 @@
     line-height: 1.2;
   }
   .hero-description {
-    font-size: 0.925rem;
     margin-bottom: 1.25rem;
+    font-size: 0.925rem;
+  }
+  .story-card-img {
+    max-height: 180px;
   }
   .hero-features-strip {
     align-items: flex-start;

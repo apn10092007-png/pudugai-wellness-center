@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  Search,
   Scale,
   Activity,
   HeartPulse,
@@ -12,21 +11,11 @@ import {
   Phone
 } from 'lucide-react';
 import { dataService } from '../services/dataService';
+import { BUSINESS_CONFIG } from '../config/business';
 import './ServicesPage.css';
-
-const CATEGORIES = [
-  'All Programs',
-  'Weight Management',
-  'Health Screening',
-  'Special Programs',
-  'Nutrition Guidance',
-  'Wellness Solutions'
-];
 
 export default function ServicesPage() {
   const [services, setServices] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState('All Programs');
-  const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -46,15 +35,6 @@ export default function ServicesPage() {
     load();
     return () => { mounted = false; };
   }, []);
-
-  const filteredServices = services.filter((item) => {
-    const matchesCategory =
-      selectedCategory === 'All Programs' || item.category === selectedCategory;
-    const matchesSearch =
-      item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.description.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
 
   const getCategoryIcon = (category) => {
     switch (category) {
@@ -79,7 +59,7 @@ export default function ServicesPage() {
       <section className="services-header-section">
         <div className="container">
           <span className="section-tag">What We Offer</span>
-          <h1 className="services-main-title">Wellness Programs & Body Checks</h1>
+          <h1 className="services-main-title">Wellness Programs &amp; Body Checks</h1>
           <p className="services-main-lead">
             Personal food plans, simple body checkups, and daily habit coaching to fit your life.
           </p>
@@ -102,52 +82,17 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Filter and Search Bar */}
-      <section className="services-control-section">
-        <div className="container">
-          <div className="control-bar-inner">
-            {/* Category tabs */}
-            <div className="category-tabs-scroll">
-              {CATEGORIES.map((cat) => (
-                <button
-                  key={cat}
-                  className={`cat-tab-btn ${selectedCategory === cat ? 'active' : ''}`}
-                  onClick={() => setSelectedCategory(cat)}
-                >
-                  {cat !== 'All Programs' && (
-                    <span className="cat-icon">{getCategoryIcon(cat)}</span>
-                  )}
-                  <span>{cat}</span>
-                </button>
-              ))}
-            </div>
-
-            {/* Search Box */}
-            <div className="search-box-wrap">
-              <Search size={16} className="search-icon" />
-              <input
-                type="text"
-                placeholder="Search programs or checks..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="search-input"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Services Grid */}
-      <section className="section services-grid-section">
+      <section className="services-grid-section">
         <div className="container">
           {loading ? (
             <div className="services-loading-state">
               <div className="spinner"></div>
               <p>Loading wellness services...</p>
             </div>
-          ) : filteredServices.length > 0 ? (
+          ) : services.length > 0 ? (
             <div className="services-cards-grid">
-              {filteredServices.map((service) => (
+              {services.map((service) => (
                 <div key={service.id} className="service-detail-card">
                   <div className="service-card-top">
                     <span className="card-category-badge">
@@ -173,17 +118,11 @@ export default function ServicesPage() {
             </div>
           ) : (
             <div className="services-empty-state">
-              <h3>No programs found</h3>
-              <p>Try a different search word or select another category.</p>
-              <button
-                className="btn btn-secondary btn-sm"
-                onClick={() => {
-                  setSelectedCategory('All Programs');
-                  setSearchQuery('');
-                }}
-              >
-                Reset Filters
-              </button>
+              <h3>No wellness programs currently available</h3>
+              <p>Please check back soon or contact our center directly.</p>
+              <Link to="/contact" className="btn btn-primary btn-sm">
+                <span>Contact Our Center</span>
+              </Link>
             </div>
           )}
         </div>
@@ -203,9 +142,9 @@ export default function ServicesPage() {
               <Link to="/contact" className="btn btn-primary btn-lg">
                 <span>Book a Consultation</span>
               </Link>
-              <a href="tel:9443443261" className="btn btn-secondary btn-lg">
+              <a href={`tel:${BUSINESS_CONFIG.phoneRaw}`} className="btn btn-secondary btn-lg">
                 <Phone size={18} />
-                <span>94434 43261</span>
+                <span>{BUSINESS_CONFIG.phoneDisplay}</span>
               </a>
             </div>
           </div>

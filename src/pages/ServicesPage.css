@@ -3,116 +3,38 @@
 .services-header-section {
   background-color: var(--color-primary-subtle);
   border-bottom: 1px solid var(--color-border);
-  padding: 4rem 0 3rem;
+  padding: 3.5rem 0 2.5rem;
   text-align: center;
 }
 
 .services-main-title {
-  font-size: clamp(2.25rem, 4vw, 3rem);
-  color: #0d3824;
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  color: var(--color-primary-dark);
   font-weight: 800;
   letter-spacing: -0.02em;
-  margin-bottom: 0.85rem;
+  margin-bottom: 0.75rem;
 }
 
 .services-main-lead {
-  font-size: 1.15rem;
-  color: #374151;
+  font-size: 1.1rem;
+  color: var(--color-text-body);
   font-weight: 500;
-  max-width: 650px;
+  max-width: 620px;
   margin: 0 auto;
-  line-height: 1.65;
+  line-height: 1.6;
 }
 
 /* Disclaimer section */
 .services-disclaimer-section {
-  padding: 1.5rem 0 0;
+  padding: 1.75rem 0 0;
 }
 
-/* Control section (Filter & Search) */
-.services-control-section {
-  padding: 2rem 0 1rem;
+/* Services Cards Grid Section */
+.services-grid-section {
+  padding-top: 1.75rem;
+  padding-bottom: 3.5rem;
 }
 
-.control-bar-inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-}
-
-.category-tabs-scroll {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  overflow-x: auto;
-  padding-bottom: 0.5rem;
-  scrollbar-width: thin;
-}
-
-.cat-tab-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.55rem 1rem;
-  font-size: 0.9rem;
-  font-weight: 600;
-  border-radius: var(--radius-full);
-  background-color: #ffffff;
-  border: 1px solid #cbd5e1;
-  color: #374151;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: all var(--transition-fast);
-}
-
-.cat-tab-btn:hover {
-  border-color: #0d3824;
-  color: #0d3824;
-}
-
-.cat-tab-btn.active {
-  background-color: #0d3824;
-  color: #ffffff;
-  border-color: #0d3824;
-}
-
-.cat-icon {
-  display: flex;
-  align-items: center;
-}
-
-.search-box-wrap {
-  position: relative;
-  min-width: 280px;
-}
-
-.search-icon {
-  position: absolute;
-  left: 0.85rem;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--color-text-light);
-}
-
-.search-input {
-  width: 100%;
-  padding: 0.55rem 1rem 0.55rem 2.4rem;
-  font-size: 0.875rem;
-  border-radius: var(--radius-full);
-  border: 1px solid var(--color-border);
-  background-color: #ffffff;
-  outline: none;
-  transition: all var(--transition-fast);
-}
-
-.search-input:focus {
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(19, 78, 50, 0.1);
-}
-
-/* Services Cards Grid */
 .services-cards-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -122,7 +44,7 @@
 .service-detail-card {
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   padding: 1.85rem;
   display: flex;
   flex-direction: column;
@@ -131,7 +53,7 @@
 
 .service-detail-card:hover {
   transform: translateY(-3px);
-  border-color: #cbd5e1;
+  border-color: var(--color-border);
   box-shadow: var(--shadow-md);
 }
 
@@ -144,8 +66,8 @@
   align-items: center;
   gap: 0.35rem;
   padding: 0.35rem 0.75rem;
-  background-color: #ccfbf1;
-  color: #0f766e;
+  background-color: var(--color-teal-light);
+  color: var(--color-teal);
   border-radius: var(--radius-full);
   font-size: 0.75rem;
   font-weight: 750;
@@ -155,7 +77,7 @@
 .card-service-title {
   font-size: 1.25rem;
   font-weight: 750;
-  color: #0d3824;
+  color: var(--color-primary-dark);
   letter-spacing: -0.01em;
   margin-bottom: 0.75rem;
 }
@@ -163,7 +85,7 @@
 .card-service-desc {
   font-size: 0.975rem;
   line-height: 1.65;
-  color: #374151;
+  color: var(--color-text-body);
   font-weight: 450;
   flex: 1;
   margin-bottom: 1.5rem;
@@ -180,7 +102,7 @@
   padding: 4rem 1rem;
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
 }
 
 .spinner {
@@ -199,6 +121,7 @@
 
 .services-empty-state h3 {
   margin-bottom: 0.5rem;
+  color: var(--color-primary-dark);
 }
 
 .services-empty-state p {
@@ -207,7 +130,7 @@
 
 /* CTA Section */
 .services-cta-section {
-  padding-top: 1rem;
+  padding-top: 0.5rem;
   padding-bottom: 4rem;
 }
 
@@ -225,7 +148,7 @@
 
 .services-consultation-banner h2 {
   font-size: 1.75rem;
-  color: #0d3824;
+  color: var(--color-primary-dark);
   font-weight: 800;
   letter-spacing: -0.01em;
   margin-bottom: 0.5rem;
@@ -233,7 +156,7 @@
 
 .services-consultation-banner p {
   font-size: 1.05rem;
-  color: #374151;
+  color: var(--color-text-body);
   font-weight: 450;
   line-height: 1.65;
   max-width: 580px;
@@ -249,24 +172,14 @@
 @media (max-width: 992px) {
   .services-cards-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
   }
 }
 
 @media (max-width: 640px) {
   .services-cards-grid {
     grid-template-columns: 1fr;
-  }
-  .control-bar-inner {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .search-box-wrap {
-    min-width: 0;
-    width: 100%;
-  }
-  .category-tabs-scroll {
-    width: 100%;
-    -webkit-overflow-scrolling: touch;
+    gap: 1.25rem;
   }
   .services-consultation-banner {
     padding: 1.75rem 1.25rem;
@@ -275,7 +188,11 @@
 
 @media (max-width: 480px) {
   .services-header-section {
-    padding: 2.5rem 0 2rem;
+    padding: 2.25rem 0 1.75rem;
+  }
+  .services-grid-section {
+    padding-top: 1.25rem;
+    padding-bottom: 2.5rem;
   }
   .consult-buttons {
     flex-direction: column;
@@ -285,7 +202,7 @@
     width: 100%;
   }
   .service-detail-card {
-    padding: 1.25rem 1rem;
+    padding: 1.35rem 1.15rem;
   }
 }
 
@@ -294,15 +211,10 @@
     padding: 1.75rem 0 1.25rem;
   }
   .services-main-title {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
   }
   .services-main-lead {
-    font-size: 0.95rem;
-  }
-  .cat-tab-btn {
-    padding: 0.45rem 0.75rem;
-    font-size: 0.825rem;
-    font-weight: 600;
+    font-size: 0.925rem;
   }
   .service-detail-card {
     padding: 1.1rem 0.85rem;
@@ -318,6 +230,6 @@
     padding: 1.25rem 0.85rem;
   }
   .services-consultation-banner h2 {
-    font-size: 1.4rem;
+    font-size: 1.35rem;
   }
 }

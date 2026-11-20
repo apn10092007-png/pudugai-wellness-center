@@ -216,6 +216,7 @@ export default function HeroCarousel({ items = [], fallbackImage = '/assets/hero
           return (
             <div
               key={item.id || idx}
+              id={`hero-slide-${idx}`}
               className={`hero-carousel-slide ${isActive ? 'active' : ''} slide-type-${mediaType}`}
               role="group"
               aria-roledescription="slide"
@@ -304,19 +305,33 @@ export default function HeroCarousel({ items = [], fallbackImage = '/assets/hero
           </div>
         </div>
 
-        {/* Subtle Pagination Dots (only if more than 1 slide) */}
+        {/* Slide Indicators / Navigation Dots */}
         {activeItems.length > 1 && (
-          <div className="hero-carousel-dots" role="tablist" aria-label="Slides">
+          <div className="hero-carousel-dots" role="tablist" aria-label="Slide navigation">
             {activeItems.map((item, idx) => {
               const isItemVideo = getMediaType(item) === 'video';
+              const isCurrent = idx === currentIndex;
               return (
                 <button
-                  key={idx}
+                  key={item.id || idx}
                   type="button"
-                  className={`hero-carousel-dot ${idx === currentIndex ? 'active' : ''} ${isItemVideo ? 'is-video' : ''}`}
+                  role="tab"
+                  id={`hero-dot-${idx}`}
+                  aria-selected={isCurrent}
+                  aria-controls={`hero-slide-${idx}`}
+                  tabIndex={isCurrent ? 0 : -1}
+                  className={`hero-carousel-dot ${isCurrent ? 'active' : ''} ${isItemVideo ? 'is-video' : ''}`}
                   onClick={() => goToIndex(idx)}
-                  aria-label={`Go to slide ${idx + 1}${isItemVideo ? ' (Video)' : ''}`}
-                  aria-current={idx === currentIndex ? 'true' : 'false'}
+                  onKeyDown={(e) => {
+                    if (e.key === 'ArrowRight') {
+                      e.preventDefault();
+                      goToNext();
+                    } else if (e.key === 'ArrowLeft') {
+                      e.preventDefault();
+                      goToPrev();
+                    }
+                  }}
+                  aria-label={`Slide ${idx + 1} of ${activeItems.length}${item.title ? `: ${item.title}` : ''}${isItemVideo ? ' (Video)' : ''}`}
                 />
               );
             })}

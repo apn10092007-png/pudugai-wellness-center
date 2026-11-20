@@ -8,7 +8,8 @@ import {
   Upload,
   X,
   AlertTriangle,
-  Languages
+  Languages,
+  CheckCircle2
 } from 'lucide-react';
 import { dataService } from '../../services/dataService';
 import './AdminSuccessStoriesPage.css';
@@ -16,6 +17,11 @@ import './AdminSuccessStoriesPage.css';
 export default function AdminSuccessStoriesPage() {
   const [stories, setStories] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  // Feedback states
+  const [successMsg, setSuccessMsg] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
+  const [modalErrorMsg, setModalErrorMsg] = useState('');
 
   // Modal states
   const [editModalOpen, setEditModalOpen] = useState(false);
@@ -52,6 +58,7 @@ export default function AdminSuccessStoriesPage() {
 
   const openAddModal = (initialLang = 'ta') => {
     setCurrentStory(null);
+    setModalErrorMsg('');
     setFormData({
       client_name: '',
       language: initialLang,
@@ -66,6 +73,7 @@ export default function AdminSuccessStoriesPage() {
 
   const openEditModal = (story) => {
     setCurrentStory(story);
+    setModalErrorMsg('');
     setFormData({
       client_name: story.client_name,
       language: story.language || 'en',
@@ -88,11 +96,12 @@ export default function AdminSuccessStoriesPage() {
     if (!file) return;
 
     setUploadingImg(true);
+    setModalErrorMsg('');
     try {
       const url = await dataService.uploadImage('story-images', file);
       setFormData((prev) => ({ ...prev, image_path: url }));
     } catch (err) {
-      alert(err.message || 'Image upload failed.');
+      setModalErrorMsg(err.message || 'Image upload failed.');
     } finally {
       setUploadingImg(false);
     }
@@ -101,7 +110,7 @@ export default function AdminSuccessStoriesPage() {
   const handleSave = async (e) => {
     e.preventDefault();
     if (!formData.client_name.trim() || !formData.story.trim()) {
-      alert(
+      setModalErrorMsg(
         formData.language === 'ta'
           ? 'தயவுசெய்து வாடிக்கையாளர் பெயர் மற்றும் பயண விவரத்தை நிரப்பவும்.'
           : 'Please enter both client name and journey description.'
@@ -110,6 +119,7 @@ export default function AdminSuccessStoriesPage() {
     }
 
     setSaving(true);
+    setModalErrorMsg('');
     try {
       await dataService.saveSuccessStory({
         ...(currentStory ? { id: currentStory.id } : {}),
@@ -122,9 +132,11 @@ export default function AdminSuccessStoriesPage() {
         published: formData.published
       });
       setEditModalOpen(false);
+      setSuccessMsg(currentStory ? `Story for "${formData.client_name}" updated successfully!` : `New story for "${formData.client_name}" added successfully!`);
+      setErrorMsg('');
       await loadStories();
     } catch (err) {
-      alert(err.message || 'Failed to save story.');
+      setModalErrorMsg(err.message || 'Failed to save story.');
     } finally {
       setSaving(false);
     }
@@ -134,11 +146,14 @@ export default function AdminSuccessStoriesPage() {
     if (!currentStory) return;
     setSaving(true);
     try {
+      const name = currentStory.client_name;
       await dataService.deleteSuccessStory(currentStory.id);
       setDeleteModalOpen(false);
+      setSuccessMsg(`Story record for "${name}" deleted successfully.`);
+      setErrorMsg('');
       await loadStories();
     } catch (err) {
-      alert(err.message || 'Failed to delete story.');
+      setErrorMsg(err.message || 'Failed to delete story.');
     } finally {
       setSaving(false);
     }
@@ -150,9 +165,11 @@ export default function AdminSuccessStoriesPage() {
         ...story,
         published: !story.published
       });
+      setSuccessMsg(`Story for "${story.client_name}" ${story.published ? 'hidden' : 'published'} successfully.`);
+      setErrorMsg('');
       await loadStories();
     } catch (err) {
-      alert(err.message || 'Failed to update story status.');
+      setErrorMsg(err.message || 'Failed to update story status.');
     }
   };
 
@@ -179,6 +196,20 @@ export default function AdminSuccessStoriesPage() {
           </button>
         </div>
       </div>
+
+      {successMsg && (
+        <div className="save-alert-success" role="status">
+          <CheckCircle2 size={16} />
+          <span>{successMsg}</span>
+        </div>
+      )}
+
+      {errorMsg && (
+        <div className="save-alert-error" role="alert">
+          <AlertTriangle size={16} />
+          <span>{errorMsg}</span>
+        </div>
+      )}
 
       {/* Stories Listing Table */}
       <div className="table-wrap">
@@ -313,6 +344,13 @@ export default function AdminSuccessStoriesPage() {
             </div>
 
             <form onSubmit={handleSave}>
+              {modalErrorMsg && (
+                <div className="modal-alert-error" role="alert">
+                  <AlertTriangle size={15} />
+                  <span>{modalErrorMsg}</span>
+                </div>
+              )}
+
               {/* SPECIAL REQUIREMENT: Language selector appears ONLY inside this form */}
               <div className="form-language-selector-box">
                 <label className="selector-box-label">

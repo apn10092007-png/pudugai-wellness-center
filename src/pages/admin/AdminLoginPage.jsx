@@ -41,7 +41,15 @@ export default function AdminLoginPage() {
       <div className="login-card-wrapper">
         <div className="login-header">
           <Link to="/" className="login-brand">
-            <img src="/assets/pwc-logo.jpeg" alt="PWC Logo" className="login-logo-img" />
+            <img
+              src="https://ggcsfegymkgrvwnexxay.supabase.co/storage/v1/object/public/pwc-public-assets/pwc-logo-transparent%20(1).png"
+              alt="Pudugai Wellness Center Logo"
+              className="login-logo-img"
+              onError={(e) => {
+                e.currentTarget.onerror = null;
+                e.currentTarget.src = '/assets/pwc-logo.jpeg';
+              }}
+            />
             <div>
               <span className="login-brand-title">Pudugai Wellness Center</span>
               <span className="login-brand-sub">Management Portal</span>
