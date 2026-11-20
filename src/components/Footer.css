@@ -1,7 +1,7 @@
 /* ==========================================================================
    Site Footer Styles – Pudugai Wellness Center (PWC)
-   Desktop (> 768px): Full 4-column layout + disclaimer + copyright.
-   Mobile (<= 768px): Clean, dedicated professional vertical mobile footer.
+   Desktop (> 860px): Full 4-column layout + disclaimer + copyright.
+   Mobile (<= 860px): Clean, dedicated professional vertical mobile footer.
    ========================================================================== */
 
 .site-footer {
@@ -22,7 +22,7 @@
 }
 
 /* ==========================================================================
-   1. DESKTOP FOOTER STYLES (> 768px) - Clean 4-column layout
+   1. DESKTOP FOOTER STYLES (> 860px) - Clean 4-column layout
    ========================================================================== */
 .footer-main {
   display: grid;
@@ -249,8 +249,8 @@
   color: var(--color-teal);
 }
 
-/* Intermediate screen width responsiveness (between 769px and 1024px) */
-@media (min-width: 769px) and (max-width: 1024px) {
+/* Intermediate screen width responsiveness (between 861px and 1024px) */
+@media (min-width: 861px) and (max-width: 1024px) {
   .footer-main {
     grid-template-columns: 1fr 1fr;
     gap: 2.25rem;
@@ -260,9 +260,9 @@
 }
 
 /* ==========================================================================
-   2. DEDICATED PROFESSIONAL MOBILE FOOTER (Screens <= 768px)
+   2. DEDICATED PROFESSIONAL MOBILE FOOTER (Screens <= 860px)
    ========================================================================== */
-@media (max-width: 768px) {
+@media (max-width: 860px) {
   /* Ensure site-footer is displayed on mobile! */
   .site-footer {
     display: block !important;

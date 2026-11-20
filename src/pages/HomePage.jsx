@@ -21,7 +21,7 @@ const HERO_HEADLINES = {
   badge: 'Nutrition • Fitness • Wellness',
   headline: 'Simple, Healthy Living for Everyday Life.',
   subheadline:
-    'Personal health and nutrition coaching in Pudukkottai with Coach Thangapandian S. Build simple, healthy habits that last.'
+    'Personal wellness and nutrition guidance across Pudukkottai and Peravurani, with Coach Thangapandian S and Coach Thenmozhi.'
 };
 
 export default function HomePage() {
@@ -216,7 +216,8 @@ export default function HomePage() {
             {coaches.map((c) => {
               const isPeravuraniCoach =
                 c.maps_url?.includes('DFpxMGuHuTudNYFb6') ||
-                c.id === 'c0a00000-0000-0000-0000-000000000002';
+                c.id === 'c0a00000-0000-0000-0000-000000000002' ||
+                c.coach_name?.toLowerCase().includes('thenmozhi');
               const coachLocation = isPeravuraniCoach ? 'Peravurani Center' : 'Pudukkottai Center';
 
               return (

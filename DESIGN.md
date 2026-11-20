@@ -255,8 +255,8 @@ PWC uses a **tactile, border-first elevation model**. Depth is primarily establi
 - **Mobile Menu Drawer:** Full-width slide/fade drawer below header with backdrop overlay, Escape key listener, and body scroll lock.
 
 ### Footer
-- **Desktop Footer (> 768px):** 4-column layout (Brand bio, Quick links, Wellness programs, Center contact details with Tamil address), disclaimer bar, and copyright row.
-- **Mobile Footer (<= 768px):** Streamlined vertical stack with compact logo, direct phone link, location map link, Instagram link, and copyright.
+- **Desktop Footer (> 860px):** 4-column layout (Brand bio, Quick links, Wellness programs, Center contact details with Tamil address), disclaimer bar, and copyright row.
+- **Mobile Footer (<= 860px):** Streamlined vertical stack with compact logo, direct phone link, location map link, Instagram link, and copyright.
 
 ### Hero Carousel
 - Slideshow wrapper (`max-width: 480px`, height `440px`, radius `16px`).

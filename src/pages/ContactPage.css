@@ -383,17 +383,95 @@
   margin-bottom: 2rem;
 }
 
-.map-frame-wrapper {
+.maps-embed-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  align-items: stretch;
+}
+
+.map-card-wrapper {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  box-shadow: var(--shadow-sm);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.map-card-wrapper:hover {
+  border-color: var(--color-teal);
+  box-shadow: var(--shadow-md);
+}
+
+.map-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.map-card-title-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.map-pin-icon {
+  color: var(--color-teal);
+  flex-shrink: 0;
+}
+
+.map-location-title {
+  font-size: 1.25rem;
+  font-weight: 750;
+  color: var(--color-primary-dark);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.map-directions-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 0.45rem 0.85rem;
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.map-directions-link:hover {
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
+
+.map-frame-wrapper {
+  border-radius: var(--radius-md);
   overflow: hidden;
   border: 1px solid var(--color-border);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-sm);
+  background-color: var(--color-surface-alt);
+}
+
+.map-frame-wrapper iframe {
+  width: 100%;
+  height: 360px;
+  display: block;
 }
 
 @media (max-width: 992px) {
   .contact-grid {
     grid-template-columns: 1fr;
     gap: 2.5rem;
+  }
+  .maps-embed-grid {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
   }
 }
 
@@ -434,6 +512,15 @@
     width: 100%;
     white-space: normal;
   }
+  .map-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  .map-directions-link {
+    width: 100%;
+    justify-content: center;
+  }
   .map-frame-wrapper iframe {
     height: 280px;
   }
@@ -461,13 +548,15 @@
     gap: 0.5rem;
   }
   .center-address-card,
-  .contact-locations-section {
+  .contact-locations-section,
+  .map-card-wrapper {
     padding: 1rem 0.75rem;
   }
   .location-card {
     padding: 1rem 0.85rem;
   }
-  .location-name {
+  .location-name,
+  .map-location-title {
     font-size: 1.05rem;
   }
   .location-maps-btn {

@@ -11,7 +11,7 @@ export default function Footer() {
   return (
     <footer className="site-footer">
       {/* ============================================================== */}
-      {/* 1. COMPACT PROFESSIONAL MOBILE FOOTER (Screens <= 768px)       */}
+      {/* 1. COMPACT PROFESSIONAL MOBILE FOOTER (Screens <= 860px)       */}
       {/* ============================================================== */}
       <div className="mobile-footer">
         <div className="container mobile-footer-inner">
@@ -97,7 +97,7 @@ export default function Footer() {
       </div>
 
       {/* ============================================================== */}
-      {/* 2. CLEAN MINIMAL DESKTOP FOOTER (Screens > 768px)             */}
+      {/* 2. CLEAN MINIMAL DESKTOP FOOTER (Screens > 860px)             */}
       {/* ============================================================== */}
       <div className="desktop-footer">
         <div className="container footer-main">
