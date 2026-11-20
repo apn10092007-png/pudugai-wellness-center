@@ -8,6 +8,21 @@
   user-select: none;
 }
 
+/* On desktop (> 860px), align carousel flush to the right edge of its column to match Header CTA */
+@media (min-width: 861px) {
+  .hero-carousel-wrapper {
+    margin-right: 0;
+    margin-left: auto;
+  }
+}
+
+/* On wide desktop (>= 1440px), proportionally scale carousel max-width to complement wider container */
+@media (min-width: 1440px) {
+  .hero-carousel-wrapper {
+    max-width: 510px;
+  }
+}
+
 .hero-carousel-container {
   position: relative;
   width: 100%;
@@ -320,6 +335,15 @@
   .hero-carousel-icon {
     width: 24px;
     height: 24px;
+  }
+}
+
+/* HOM-01: Short laptop – reduce carousel height to free up first-fold space.
+   Applies on 1025px–∞ width + max-height 800px (1366×768, 1280×720).
+   Normal-height laptops (≥801px viewport height) are unaffected. */
+@media (min-width: 1025px) and (max-height: 800px) {
+  .hero-carousel-container {
+    height: 360px;
   }
 }
 

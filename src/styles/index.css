@@ -149,6 +149,25 @@ button, input, textarea, select {
   padding-right: 1.5rem;
 }
 
+/* Progressive expansion on wider laptop & desktop displays (prevents excessive empty side gutters) */
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1260px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .container {
+    max-width: 1360px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .container {
+    max-width: 1440px;
+  }
+}
+
 @media (max-width: 768px) {
   .container {
     padding-left: 1.25rem;

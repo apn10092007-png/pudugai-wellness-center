@@ -464,7 +464,9 @@
   display: block;
 }
 
-@media (max-width: 992px) {
+/* Stack contact and maps grids below 920px to match header desktop breakpoint (860px).
+   At 921px+ the header is in desktop mode, so two-column contact layout is appropriate. */
+@media (max-width: 920px) {
   .contact-grid {
     grid-template-columns: 1fr;
     gap: 2.5rem;

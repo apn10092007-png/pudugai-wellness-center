@@ -92,6 +92,12 @@
   width: 100%;
 }
 
+@media (min-width: 861px) {
+  .hero-visual {
+    justify-content: flex-end;
+  }
+}
+
 /* 2. Compact Section Headers */
 .section-header-compact {
   text-align: center;
@@ -681,5 +687,33 @@
   }
   .pillar-item, .service-card {
     padding: 1rem 0.75rem;
+  }
+}
+
+/* HOM-01: Short laptop optimisation (1366×768, 1280×720)
+   Reduces hero vertical padding and content margins so the Three Pillars
+   section begins to appear near the bottom of the first viewport.
+   Does NOT fire on normal-height laptops (≥ 801px) or mobile. */
+@media (min-width: 1025px) and (max-height: 800px) {
+  .hero-section {
+    padding: 2rem 0 1.75rem;
+  }
+  .hero-description {
+    margin-bottom: 1.25rem;
+  }
+  .hero-cta-group {
+    margin-bottom: 1.25rem;
+  }
+  /* Pull Three Pillars section closer on short screens */
+  .intro-section {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+}
+
+/* Wide desktop: maintain optimal reading measure (65–75ch) for hero description */
+@media (min-width: 1440px) {
+  .hero-description {
+    max-width: 580px;
   }
 }

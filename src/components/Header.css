@@ -299,6 +299,16 @@
   }
 }
 
+/* Narrow desktop: tighten nav spacing to prevent logo/nav crowding (861px–1040px) */
+@media (min-width: 861px) and (max-width: 1040px) {
+  .desktop-nav {
+    gap: 1rem;
+  }
+  .nav-link {
+    font-size: 0.875rem;
+  }
+}
+
 /* ==========================================================================
    Mobile Header Layout (<= 860px)
    Redesigned for optimal horizontal space, alignment, and readable brand typography
