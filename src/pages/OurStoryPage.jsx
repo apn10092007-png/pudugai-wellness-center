@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
+import { seoConfig } from '../components/seo/seoConfig';
 import {
   Award,
   Compass,
@@ -24,6 +26,7 @@ export default function OurStoryPage() {
 
   return (
     <div className="our-story-page">
+      <SEO {...seoConfig.ourStory} />
       {/* 1. Header Banner */}
       <section className="story-header-section">
         <div className="container">

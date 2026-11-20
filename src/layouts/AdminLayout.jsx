@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Outlet, Link, useLocation, useNavigate, Navigate } from 'react-router-dom';
+import SEO from '../components/SEO';
+import { seoConfig } from '../components/seo/seoConfig';
 import {
   LayoutDashboard,
   Layers,
@@ -67,6 +69,7 @@ export default function AdminLayout() {
 
   return (
     <div className="admin-root">
+      <SEO {...seoConfig.admin} />
       {/* Sidebar */}
       <aside
         id="admin-sidebar"

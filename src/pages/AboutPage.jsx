@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
+import { seoConfig } from '../components/seo/seoConfig';
 import {
   Phone,
   MapPin,
@@ -41,6 +43,7 @@ export default function AboutPage() {
 
   return (
     <div className="about-page">
+      <SEO {...seoConfig.about} />
       {/* 1. Header Banner */}
       <section className="about-header-section">
         <div className="container">
@@ -75,8 +78,9 @@ export default function AboutPage() {
                   <div className="about-coach-media">
                     <img
                       src={c.image_path || (isPeravuraniCoach ? '/assets/avatar-thenmozhi.svg' : '/assets/coach-pandian.png')}
-                      alt={c.coach_name}
+                      alt={`${c.coach_name || 'Wellness Coach'} - Pudugai Wellness Center ${coachLocation}`}
                       className="about-coach-img"
+                      loading="lazy"
                       onError={(e) => {
                         e.currentTarget.src = isPeravuraniCoach ? '/assets/avatar-thenmozhi.svg' : '/assets/coach-pandian.png';
                       }}

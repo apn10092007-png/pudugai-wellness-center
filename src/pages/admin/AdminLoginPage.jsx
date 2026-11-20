@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
+import SEO from '../../components/SEO';
+import { seoConfig } from '../../components/seo/seoConfig';
 import { Lock, Mail, ArrowRight, AlertCircle } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
 import './AdminLoginPage.css';
@@ -38,6 +40,7 @@ export default function AdminLoginPage() {
 
   return (
     <div className="admin-login-page">
+      <SEO {...seoConfig.adminLogin} />
       <div className="login-card-wrapper">
         <div className="login-header">
           <Link to="/" className="login-brand">

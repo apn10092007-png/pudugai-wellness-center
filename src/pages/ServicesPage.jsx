@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
+import { seoConfig } from '../components/seo/seoConfig';
 import {
   Scale,
   Activity,
@@ -55,6 +57,7 @@ export default function ServicesPage() {
 
   return (
     <div className="services-page">
+      <SEO {...seoConfig.services} />
       {/* Header */}
       <section className="services-header-section">
         <div className="container">

@@ -256,6 +256,8 @@ export default function HeroCarousel({ items = [], fallbackImage = '/assets/hero
                   alt={item.title || 'Pudugai Wellness Center'}
                   className="hero-carousel-img"
                   loading={idx === 0 ? 'eager' : 'lazy'}
+                  fetchPriority={idx === 0 ? 'high' : 'auto'}
+                  decoding="async"
                   onError={(e) => {
                     e.currentTarget.src = fallbackImage;
                   }}

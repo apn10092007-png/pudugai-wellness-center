@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+
+import SEO from '../components/SEO';
+import { seoConfig } from '../components/seo/seoConfig';
+
+
 import {
   Phone,
   ArrowRight,
@@ -25,6 +30,8 @@ const HERO_HEADLINES = {
 };
 
 export default function HomePage() {
+
+   
   const [coaches, setCoaches] = useState([]);
   const [services, setServices] = useState([]);
   const [stories, setStories] = useState([]);
@@ -63,6 +70,7 @@ export default function HomePage() {
   return (
     <div className="home-page">
       {/* 1. HERO SECTION WITH DYNAMIC CAROUSEL */}
+      <SEO {...seoConfig.home} />
       <section className="hero-section">
         <div className="container hero-container">
           <div className="hero-content">
@@ -225,8 +233,9 @@ export default function HomePage() {
                   <div className="coach-card-image-wrap">
                     <img
                       src={c.image_path || (isPeravuraniCoach ? '/assets/avatar-thenmozhi.svg' : '/assets/coach-pandian.png')}
-                      alt={c.coach_name}
+                      alt={`${c.coach_name || 'Wellness Coach'} - Pudugai Wellness Center ${isPeravuraniCoach ? 'Peravurani' : 'Pudukkottai'}`}
                       className="coach-card-img"
+                      loading="lazy"
                       onError={(e) => {
                         e.currentTarget.src = isPeravuraniCoach ? '/assets/avatar-thenmozhi.svg' : '/assets/coach-pandian.png';
                       }}

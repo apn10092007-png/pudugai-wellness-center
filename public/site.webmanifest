@@ -1,0 +1,19 @@
+{
+  "id": "/",
+  "name": "Pudugai Wellness Center",
+  "short_name": "PWC",
+  "description": "Personalized health, nutrition, and lifestyle wellness coaching in Pudukkottai and Peravurani.",
+  "lang": "en-IN",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#134e32",
+  "icons": [
+    {
+      "src": "/assets/pwc-logo.jpeg",
+      "sizes": "192x192 512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}

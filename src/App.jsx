@@ -22,9 +22,14 @@ import AdminSuccessStoriesPage from './pages/admin/AdminSuccessStoriesPage';
 import AdminAboutPage from './pages/admin/AdminAboutPage';
 import AdminEnquiriesPage from './pages/admin/AdminEnquiriesPage';
 
+// SEO
+import SEO from './components/SEO';
+import { seoConfig } from './components/seo/seoConfig';
+
 function NotFoundPage() {
   return (
     <div className="container" style={{ padding: '6rem 1.5rem', textAlign: 'center' }}>
+      <SEO {...seoConfig.notFound} />
       <span className="section-tag">404 Error</span>
       <h1 style={{ fontSize: '2.5rem', margin: '0.5rem 0 1rem' }}>Page Not Found</h1>
       <p style={{ maxWidth: '480px', margin: '0 auto 2rem' }}>

@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import SEO from '../components/SEO';
+import { seoConfig } from '../components/seo/seoConfig';
 import {
   Phone,
   MessageSquare,
@@ -194,6 +196,7 @@ export default function ContactPage() {
 
   return (
     <div className="contact-page">
+      <SEO {...seoConfig.contact} />
       {/* Header */}
       <section className="contact-header-section">
         <div className="container">

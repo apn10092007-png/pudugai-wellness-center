@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
+import { seoConfig } from '../components/seo/seoConfig';
 import {
   Calendar,
   Sparkles,
@@ -34,6 +36,7 @@ export default function SuccessStoriesPage() {
 
   return (
     <div className="stories-page">
+      <SEO {...seoConfig.stories} />
       {/* Header */}
       <section className="stories-header-section">
         <div className="container">
