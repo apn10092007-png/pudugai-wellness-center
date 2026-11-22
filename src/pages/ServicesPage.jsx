@@ -64,7 +64,7 @@ export default function ServicesPage() {
           <span className="section-tag">What We Offer</span>
           <h1 className="services-main-title">Wellness Programs &amp; Body Checks</h1>
           <p className="services-main-lead">
-            Personal food plans, simple body checkups, and daily habit coaching to fit your life.
+            Personal weight loss and weight management plans, 5-point body composition screening, and daily nutrition habit coaching in Pudukkottai and Peravurani.
           </p>
         </div>
       </section>
@@ -138,7 +138,7 @@ export default function ServicesPage() {
             <div>
               <h2>Not sure which program is right for you?</h2>
               <p>
-                Visit either of our centers in Pudukkottai or Peravurani, or contact our team for a simple body checkup.
+                Visit either of our centers in Pudukkottai or Peravurani, or contact our team for a simple 5-point body composition checkup. You can also see real community results on our <Link to="/stories" style={{ color: 'var(--color-primary)', textDecoration: 'underline' }}>success stories page</Link>.
               </p>
             </div>
             <div className="consult-buttons">

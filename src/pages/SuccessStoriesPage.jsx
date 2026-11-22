@@ -43,8 +43,7 @@ export default function SuccessStoriesPage() {
           <span className="section-tag">Client Stories</span>
           <h1 className="stories-page-title">Client Success Stories</h1>
           <p className="stories-page-lead">
-            Real stories from people who built healthy eating and lifestyle habits with Pudugai
-            Wellness Center.
+            Real weight loss journeys and wellness transformations from clients who built healthy daily habits with Pudugai Wellness Center in Pudukkottai and Peravurani.
           </p>
         </div>
       </section>
@@ -117,7 +116,7 @@ export default function SuccessStoriesPage() {
                     <div className="story-photo-box">
                       <img
                         src={story.image_path}
-                        alt={`${story.client_name}'s journey`}
+                        alt={`${story.client_name} - Weight Loss & Wellness Journey with Pudugai Wellness Center`}
                         className="story-portrait"
                         loading="lazy"
                       />

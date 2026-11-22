@@ -26,7 +26,7 @@ const HERO_HEADLINES = {
   badge: 'Nutrition • Fitness • Wellness',
   headline: 'Simple, Healthy Living for Everyday Life.',
   subheadline:
-    'Personal wellness and nutrition guidance across Pudukkottai and Peravurani, with Coach Thangapandian S and Coach Thenmozhi.'
+    'Personalized weight loss, healthy weight management, and nutrition guidance across Pudukkottai and Peravurani, with Coach Pandian (Thangapandian S) and Coach Thenmozhi.'
 };
 
 export default function HomePage() {
@@ -134,7 +134,7 @@ export default function HomePage() {
             <h2 className="section-title">A Simple Way to Lasting Health</h2>
             <p className="section-subtitle">
               We do not believe in strict diets or heavy workouts. Real health comes from
-              knowing your body, eating good food, and having a coach to guide you every day.
+              knowing your body, eating balanced food, and having dedicated guidance from our wellness coaches in Pudukkottai and Peravurani.
             </p>
           </div>
 
@@ -179,7 +179,7 @@ export default function HomePage() {
             <span className="section-tag">Wellness Programs</span>
             <h2 className="section-title">Programs for Your Health Goals</h2>
             <p className="section-subtitle">
-              From healthy weight loss and body checks to nutrition plans for the whole family.
+              From healthy weight loss and 5-point body composition checks to personalized nutrition plans for the whole family in Pudukkottai and Peravurani.
             </p>
           </div>
 
@@ -216,7 +216,7 @@ export default function HomePage() {
             <span className="section-tag">Our Coaches</span>
             <h2 className="section-title">Meet Your Wellness Coaches</h2>
             <p className="section-subtitle">
-              Personal guidance to help you build healthy eating habits and an active lifestyle.
+              Personal guidance with Coach Pandian (Thangapandian S) in Pudukkottai and Coach Thenmozhi in Peravurani to help you build healthy eating habits and an active lifestyle.
             </p>
           </div>
 
@@ -233,7 +233,7 @@ export default function HomePage() {
                   <div className="coach-card-image-wrap">
                     <img
                       src={c.image_path || (isPeravuraniCoach ? '/assets/avatar-thenmozhi.svg' : '/assets/coach-pandian.png')}
-                      alt={`${c.coach_name || 'Wellness Coach'} - Pudugai Wellness Center ${isPeravuraniCoach ? 'Peravurani' : 'Pudukkottai'}`}
+                      alt={`${c.coach_name || 'Wellness Coach'} - ${isPeravuraniCoach ? 'Coach Thenmozhi at Peravurani Center' : 'Coach Pandian at Pudukkottai Center'} - Pudugai Wellness Center`}
                       className="coach-card-img"
                       loading="lazy"
                       onError={(e) => {
@@ -326,7 +326,7 @@ export default function HomePage() {
                   {item.image_path && (
                     <img
                       src={item.image_path}
-                      alt={item.client_name}
+                      alt={`${item.client_name} - Weight Loss & Wellness Journey at Pudugai Wellness Center`}
                       className="story-card-img"
                       loading="lazy"
                     />
@@ -368,7 +368,7 @@ export default function HomePage() {
             <span className="section-tag">Get Started</span>
             <h2>Ready to feel healthier and more active?</h2>
             <p>
-              Contact our team today for a simple body checkup and an easy health plan. We also have a wellness centre in Peravurani. Visit either of our locations to connect with our team.
+              Contact our team today for a 5-point body composition screening and personalized nutrition plan. Visit our Pudukkottai wellness center or our Peravurani center for in-person consultations with our coaches.
             </p>
             <div className="home-cta-actions">
               <a

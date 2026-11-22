@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pudugai Wellness Center (PWC) | Nutrition & Weight Loss in Pudukkottai & Peravurani</title>
-    <meta name="description" content="Pudugai Wellness Center (PWC) offers personalized weight loss, weight gain, 5-point body composition screening, and nutrition guidance in Pudukkottai and Peravurani." />
+    <title>Pudugai Wellness Center (PWC) | Weight Loss &amp; Nutrition Center in Pudukkottai &amp; Peravurani</title>
+    <meta name="description" content="Pudugai Wellness Center (PWC) offers personalized weight loss, weight gain, 5-point body composition screening, and nutrition guidance in Pudukkottai and Peravurani with Coach Pandian and Coach Thenmozhi." />
     <meta name="theme-color" content="#134e32" />
     <meta name="author" content="Pudugai Wellness Center" />
     <meta name="application-name" content="PWC" />
@@ -23,14 +23,14 @@
     <meta property="og:site_name" content="Pudugai Wellness Center" />
     <meta property="og:locale" content="en_IN" />
     <meta property="og:url" content="https://pwconline.site/" />
-    <meta property="og:title" content="Pudugai Wellness Center (PWC) | Nutrition & Weight Loss in Pudukkottai & Peravurani" />
-    <meta property="og:description" content="Pudugai Wellness Center (PWC) offers personalized weight loss, weight gain, 5-point body composition screening, and nutrition guidance in Pudukkottai and Peravurani." />
+    <meta property="og:title" content="Pudugai Wellness Center (PWC) | Weight Loss &amp; Nutrition Center in Pudukkottai &amp; Peravurani" />
+    <meta property="og:description" content="Pudugai Wellness Center (PWC) offers personalized weight loss, weight gain, 5-point body composition screening, and nutrition guidance in Pudukkottai and Peravurani with Coach Pandian and Coach Thenmozhi." />
     <meta property="og:image" content="https://pwconline.site/pwc-og-image.jpg" />
 
     <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Pudugai Wellness Center (PWC) | Nutrition & Weight Loss in Pudukkottai & Peravurani" />
-    <meta name="twitter:description" content="Pudugai Wellness Center (PWC) offers personalized weight loss, weight gain, 5-point body composition screening, and nutrition guidance in Pudukkottai and Peravurani." />
+    <meta name="twitter:title" content="Pudugai Wellness Center (PWC) | Weight Loss &amp; Nutrition Center in Pudukkottai &amp; Peravurani" />
+    <meta name="twitter:description" content="Pudugai Wellness Center (PWC) offers personalized weight loss, weight gain, 5-point body composition screening, and nutrition guidance in Pudukkottai and Peravurani with Coach Pandian and Coach Thenmozhi." />
     <meta name="twitter:image" content="https://pwconline.site/pwc-og-image.jpg" />
 
     <!-- Initial Structured Data (JSON-LD) -->
@@ -39,14 +39,15 @@
       "@context": "https://schema.org",
       "@graph": [
         {
-          "@type": "HealthAndBeautyBusiness",
-          "@id": "https://pwconline.site/#localbusiness",
+          "@type": ["HealthAndBeautyBusiness", "Organization"],
+          "@id": "https://pwconline.site/#organization",
           "name": "Pudugai Wellness Center",
-          "alternateName": "PWC",
+          "alternateName": ["PWC", "Pudugai Wellness Centre", "PWC Wellness Center"],
           "url": "https://pwconline.site",
           "logo": "https://pwconline.site/assets/pwc-logo.jpeg",
           "image": "https://pwconline.site/pwc-og-image.jpg",
           "telephone": "+919443443261",
+          "priceRange": "$$",
           "address": {
             "@type": "PostalAddress",
             "streetAddress": "E Main Rd, T Nagar, Buvaneswari Nagar",
@@ -55,6 +56,51 @@
             "postalCode": "622001",
             "addressCountry": "IN"
           },
+          "founder": {
+            "@type": "Person",
+            "@id": "https://pwconline.site/#coach-pandian",
+            "name": "Thangapandian S"
+          },
+          "employee": [
+            {
+              "@type": "Person",
+              "@id": "https://pwconline.site/#coach-pandian"
+            },
+            {
+              "@type": "Person",
+              "@id": "https://pwconline.site/#coach-thenmozhi"
+            }
+          ],
+          "location": [
+            {
+              "@type": "Place",
+              "name": "Pudugai Wellness Center – Pudukkottai Center",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "E Main Rd, T Nagar, Buvaneswari Nagar",
+                "addressLocality": "Pudukkottai",
+                "addressRegion": "Tamil Nadu",
+                "postalCode": "622001",
+                "addressCountry": "IN"
+              },
+              "hasMap": "https://maps.app.goo.gl/JAdNVeq53M3PdrW1A",
+              "telephone": "+919443443261"
+            },
+            {
+              "@type": "Place",
+              "name": "Pudugai Wellness Center – Peravurani Center",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Lifestyle Wellness Center",
+                "addressLocality": "Peravurani",
+                "addressRegion": "Tamil Nadu",
+                "postalCode": "614804",
+                "addressCountry": "IN"
+              },
+              "hasMap": "https://maps.app.goo.gl/DFpxMGuHuTudNYFb6",
+              "telephone": "+919443443261"
+            }
+          ],
           "sameAs": [
             "https://www.instagram.com/coach_pandian?exln=YmNsbjZkeXQ1dnc3",
             "https://maps.app.goo.gl/JAdNVeq53M3PdrW1A",
@@ -62,11 +108,56 @@
           ]
         },
         {
+          "@type": "Person",
+          "@id": "https://pwconline.site/#coach-pandian",
+          "name": "Thangapandian S",
+          "alternateName": ["Coach Pandian", "Coach Thangapandian"],
+          "jobTitle": "Wellness Coach & Founder",
+          "worksFor": {
+            "@type": "Organization",
+            "@id": "https://pwconline.site/#organization",
+            "name": "Pudugai Wellness Center"
+          },
+          "image": "https://pwconline.site/assets/coach-pandian.png",
+          "telephone": "+919443443261",
+          "sameAs": ["https://www.instagram.com/coach_pandian?exln=YmNsbjZkeXQ1dnc3"]
+        },
+        {
+          "@type": "Person",
+          "@id": "https://pwconline.site/#coach-thenmozhi",
+          "name": "Thenmozhi",
+          "alternateName": "Coach Thenmozhi",
+          "jobTitle": "Nutrition Coach",
+          "worksFor": {
+            "@type": "Organization",
+            "@id": "https://pwconline.site/#organization",
+            "name": "Pudugai Wellness Center"
+          },
+          "image": "https://pwconline.site/assets/avatar-thenmozhi.svg",
+          "telephone": "+919443443261"
+        },
+        {
           "@type": "WebSite",
           "@id": "https://pwconline.site/#website",
           "url": "https://pwconline.site",
           "name": "Pudugai Wellness Center",
-          "description": "Personalized health, nutrition, and lifestyle wellness coaching across Pudukkottai and Peravurani."
+          "alternateName": "PWC",
+          "description": "Personalized health, nutrition, and lifestyle wellness coaching in Pudukkottai and Peravurani.",
+          "publisher": {
+            "@id": "https://pwconline.site/#organization"
+          },
+          "inLanguage": ["en-IN", "ta-IN"]
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://pwconline.site/#webpage",
+          "url": "https://pwconline.site/",
+          "name": "Pudugai Wellness Center (PWC) | Weight Loss & Nutrition Center in Pudukkottai & Peravurani",
+          "description": "Pudugai Wellness Center (PWC) offers personalized weight loss, weight gain, 5-point body composition screening, and nutrition guidance in Pudukkottai and Peravurani with Coach Pandian and Coach Thenmozhi.",
+          "isPartOf": {
+            "@id": "https://pwconline.site/#website"
+          },
+          "inLanguage": "en-IN"
         }
       ]
     }

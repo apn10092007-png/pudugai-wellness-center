@@ -50,7 +50,7 @@ export default function AboutPage() {
           <span className="section-tag">About Us</span>
           <h1 className="about-page-title">Pudugai Wellness Center</h1>
           <p className="about-page-lead">
-            Simple health, nutrition, and lifestyle guidance across our Pudukkottai and Peravurani locations, led by Coaches Thangapandian S and Thenmozhi.
+            Dedicated health, nutrition, and healthy lifestyle guidance across our Pudukkottai and Peravurani wellness centers, led by Coach Pandian (Thangapandian S) and Coach Thenmozhi.
           </p>
         </div>
       </section>
@@ -62,7 +62,7 @@ export default function AboutPage() {
             <span className="section-tag">Our Team</span>
             <h2 className="section-title">Meet Your Wellness Coaches</h2>
             <p className="section-subtitle">
-              Helping you build healthy eating habits and active daily routines.
+              Friendly one-on-one coaching to help you build healthy eating habits, steady weight management, and active daily routines in Pudukkottai and Peravurani.
             </p>
           </div>
 
@@ -78,7 +78,7 @@ export default function AboutPage() {
                   <div className="about-coach-media">
                     <img
                       src={c.image_path || (isPeravuraniCoach ? '/assets/avatar-thenmozhi.svg' : '/assets/coach-pandian.png')}
-                      alt={`${c.coach_name || 'Wellness Coach'} - Pudugai Wellness Center ${coachLocation}`}
+                      alt={`${c.coach_name || 'Wellness Coach'} - ${isPeravuraniCoach ? 'Coach Thenmozhi at Peravurani Center' : 'Coach Pandian at Pudukkottai Center'} - Pudugai Wellness Center`}
                       className="about-coach-img"
                       loading="lazy"
                       onError={(e) => {
@@ -164,6 +164,16 @@ export default function AboutPage() {
                   'We do not believe in strict diets or tiring workouts. We focus on good everyday food, plenty of water, proper sleep, light activity, and steady support.'}
               </p>
             </div>
+          </div>
+
+          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', marginTop: '2.5rem', flexWrap: 'wrap' }}>
+            <Link to="/services" className="btn btn-primary btn-lg">
+              <span>View Wellness Programs &amp; Body Checks</span>
+              <ArrowRight size={17} />
+            </Link>
+            <Link to="/contact" className="btn btn-outline btn-lg">
+              <span>Contact Pudukkottai or Peravurani Center</span>
+            </Link>
           </div>
         </div>
       </section>

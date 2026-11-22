@@ -253,7 +253,7 @@ export default function HeroCarousel({ items = [], fallbackImage = '/assets/hero
               ) : (
                 <img
                   src={mediaUrl}
-                  alt={item.title || 'Pudugai Wellness Center'}
+                  alt={item.title ? `${item.title} - Pudugai Wellness Center` : 'Pudugai Wellness Center - Weight Loss & Nutrition Guidance in Pudukkottai'}
                   className="hero-carousel-img"
                   loading={idx === 0 ? 'eager' : 'lazy'}
                   fetchPriority={idx === 0 ? 'high' : 'auto'}

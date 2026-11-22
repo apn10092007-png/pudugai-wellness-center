@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 import { seoConfig } from '../components/seo/seoConfig';
 import {
@@ -203,7 +203,7 @@ export default function ContactPage() {
           <span className="section-tag">Get in Touch</span>
           <h1 className="contact-page-title">Contact Us</h1>
           <p className="contact-page-lead">
-            Contact our team for program details, body checkups, and center timings.
+            Visit Pudugai Wellness Center in Pudukkottai or Peravurani. Contact Coach Pandian and Coach Thenmozhi for program details, 5-point body checkups, and center timings.
           </p>
         </div>
       </section>
@@ -259,7 +259,10 @@ export default function ContactPage() {
                     {/* Location 1 – Pudukkottai */}
                     <div className="location-card">
                       <div className="location-card-header">
-                        <h4 className="location-name">Pudukkottai</h4>
+                        <h4 className="location-name">Pudukkottai Center</h4>
+                        <p style={{ fontSize: '0.85rem', color: 'var(--color-text-secondary)', margin: '0.25rem 0 0.5rem' }}>
+                          E Main Rd, T Nagar, Buvaneswari Nagar, Pudukkottai 622001
+                        </p>
                       </div>
                       <a
                         href="https://maps.app.goo.gl/JAdNVeq53M3PdrW1A"
@@ -275,7 +278,10 @@ export default function ContactPage() {
                     {/* Location 2 – Peravurani */}
                     <div className="location-card">
                       <div className="location-card-header">
-                        <h4 className="location-name">Peravurani</h4>
+                        <h4 className="location-name">Peravurani Center</h4>
+                        <p style={{ fontSize: '0.85rem', color: 'var(--color-text-secondary)', margin: '0.25rem 0 0.5rem' }}>
+                          Lifestyle Wellness Center, Peravurani 614804
+                        </p>
                       </div>
                       <a
                         href="https://maps.app.goo.gl/DFpxMGuHuTudNYFb6"
@@ -287,6 +293,10 @@ export default function ContactPage() {
                         <ExternalLink size={14} />
                       </a>
                     </div>
+                  </div>
+
+                  <div style={{ marginTop: '1.25rem', paddingTop: '1rem', borderTop: '1px solid var(--color-border-subtle)', fontSize: '0.9rem' }}>
+                    Looking for specific programs? <Link to="/services" style={{ color: 'var(--color-primary)', fontWeight: 600, textDecoration: 'underline' }}>Explore our wellness services &amp; body checks &rarr;</Link>
                   </div>
                 </div>
               </div>

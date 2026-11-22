@@ -5,8 +5,8 @@ const SITE_URL = 'https://pwconline.site';
 const DEFAULT_IMAGE = '/pwc-og-image.jpg';
 
 export default function SEO({
-  title = 'Pudugai Wellness Center (PWC) | Nutrition & Weight Loss in Pudukkottai & Peravurani',
-  description = 'Personalized health, nutrition, and lifestyle wellness coaching across Pudukkottai and Peravurani with Coach Thangapandian S and Coach Thenmozhi.',
+  title = 'Pudugai Wellness Center (PWC) | Weight Loss & Nutrition Center in Pudukkottai & Peravurani',
+  description = 'Personalized health, nutrition, and lifestyle wellness coaching across Pudukkottai and Peravurani with Coach Pandian (Thangapandian S) and Coach Thenmozhi.',
   path = '/',
   image = DEFAULT_IMAGE,
   noIndex = false,
@@ -61,15 +61,17 @@ export default function SEO({
     // 6. JSON-LD Structured Data
     if (!noIndex) {
       const graph = [
+        // 1. Organization & Health/Wellness Business
         {
-          '@type': 'HealthAndBeautyBusiness',
-          '@id': `${SITE_URL}/#localbusiness`,
+          '@type': ['HealthAndBeautyBusiness', 'Organization'],
+          '@id': `${SITE_URL}/#organization`,
           name: BUSINESS_CONFIG.name,
-          alternateName: BUSINESS_CONFIG.shortName,
+          alternateName: ['PWC', 'Pudugai Wellness Centre', 'PWC Wellness Center'],
           url: SITE_URL,
           logo: `${SITE_URL}/assets/pwc-logo.jpeg`,
           image: imageUrl,
           telephone: `+91${BUSINESS_CONFIG.phoneRaw}`,
+          priceRange: '$$',
           address: {
             '@type': 'PostalAddress',
             streetAddress: 'E Main Rd, T Nagar, Buvaneswari Nagar',
@@ -78,18 +80,115 @@ export default function SEO({
             postalCode: '622001',
             addressCountry: 'IN',
           },
+          founder: {
+            '@type': 'Person',
+            '@id': `${SITE_URL}/#coach-pandian`,
+            name: 'Thangapandian S',
+          },
+          employee: [
+            {
+              '@type': 'Person',
+              '@id': `${SITE_URL}/#coach-pandian`,
+            },
+            {
+              '@type': 'Person',
+              '@id': `${SITE_URL}/#coach-thenmozhi`,
+            },
+          ],
+          location: [
+            {
+              '@type': 'Place',
+              name: 'Pudugai Wellness Center – Pudukkottai Center',
+              address: {
+                '@type': 'PostalAddress',
+                streetAddress: 'E Main Rd, T Nagar, Buvaneswari Nagar',
+                addressLocality: 'Pudukkottai',
+                addressRegion: 'Tamil Nadu',
+                postalCode: '622001',
+                addressCountry: 'IN',
+              },
+              hasMap: 'https://maps.app.goo.gl/JAdNVeq53M3PdrW1A',
+              telephone: `+91${BUSINESS_CONFIG.phoneRaw}`,
+            },
+            {
+              '@type': 'Place',
+              name: 'Pudugai Wellness Center – Peravurani Center',
+              address: {
+                '@type': 'PostalAddress',
+                streetAddress: 'Lifestyle Wellness Center',
+                addressLocality: 'Peravurani',
+                addressRegion: 'Tamil Nadu',
+                postalCode: '614804',
+                addressCountry: 'IN',
+              },
+              hasMap: 'https://maps.app.goo.gl/DFpxMGuHuTudNYFb6',
+              telephone: `+91${BUSINESS_CONFIG.phoneRaw}`,
+            },
+          ],
           sameAs: [
             BUSINESS_CONFIG.instagram,
             BUSINESS_CONFIG.googleMaps,
             'https://maps.app.goo.gl/DFpxMGuHuTudNYFb6',
           ],
         },
+
+        // 2. Person: Coach Pandian (Thangapandian S)
+        {
+          '@type': 'Person',
+          '@id': `${SITE_URL}/#coach-pandian`,
+          name: 'Thangapandian S',
+          alternateName: ['Coach Pandian', 'Coach Thangapandian'],
+          jobTitle: 'Wellness Coach & Founder',
+          worksFor: {
+            '@type': 'Organization',
+            '@id': `${SITE_URL}/#organization`,
+            name: BUSINESS_CONFIG.name,
+          },
+          image: `${SITE_URL}/assets/coach-pandian.png`,
+          telephone: `+91${BUSINESS_CONFIG.phoneRaw}`,
+          sameAs: [BUSINESS_CONFIG.instagram],
+        },
+
+        // 3. Person: Coach Thenmozhi
+        {
+          '@type': 'Person',
+          '@id': `${SITE_URL}/#coach-thenmozhi`,
+          name: 'Thenmozhi',
+          alternateName: 'Coach Thenmozhi',
+          jobTitle: 'Nutrition Coach',
+          worksFor: {
+            '@type': 'Organization',
+            '@id': `${SITE_URL}/#organization`,
+            name: BUSINESS_CONFIG.name,
+          },
+          image: `${SITE_URL}/assets/avatar-thenmozhi.svg`,
+          telephone: `+91${BUSINESS_CONFIG.phoneRaw}`,
+        },
+
+        // 4. WebSite
         {
           '@type': 'WebSite',
           '@id': `${SITE_URL}/#website`,
           url: SITE_URL,
           name: BUSINESS_CONFIG.name,
+          alternateName: 'PWC',
           description: description,
+          publisher: {
+            '@id': `${SITE_URL}/#organization`,
+          },
+          inLanguage: ['en-IN', 'ta-IN'],
+        },
+
+        // 5. WebPage
+        {
+          '@type': 'WebPage',
+          '@id': `${canonical}#webpage`,
+          url: canonical,
+          name: title,
+          description: description,
+          isPartOf: {
+            '@id': `${SITE_URL}/#website`,
+          },
           inLanguage: 'en-IN',
         },
       ];
@@ -98,6 +197,7 @@ export default function SEO({
       if (breadcrumbs && breadcrumbs.length > 1) {
         graph.push({
           '@type': 'BreadcrumbList',
+          '@id': `${canonical}#breadcrumb`,
           itemListElement: breadcrumbs.map((b, idx) => ({
             '@type': 'ListItem',
             position: idx + 1,

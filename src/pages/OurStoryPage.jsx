@@ -34,9 +34,9 @@ export default function OurStoryPage() {
             ← Return to Home
           </Link>
           <span className="section-tag">Coaches' Story</span>
-          <h1 className="story-main-title">Our Story – Thangapandian & Thenmozhi</h1>
+          <h1 className="story-main-title">Our Story – Coach Pandian (Thangapandian) &amp; Coach Thenmozhi</h1>
           <p className="story-subtitle-lead">
-            How Thangapandian and Thenmozhi started with simple nutrition habits, grew into full-time coaches, and built a healthy community.
+            How Coach Pandian (Thangapandian S) and Coach Thenmozhi started with simple nutrition habits, grew into full-time wellness coaches, and established Pudugai Wellness Center in Pudukkottai and Peravurani.
           </p>
         </div>
       </section>
@@ -188,7 +188,7 @@ export default function OurStoryPage() {
             <span className="section-tag">Start Today</span>
             <h2>Ready to start your personal wellness journey?</h2>
             <p>
-              Visit our center or contact our team for a simple body checkup and personal food plan.
+              Visit our Pudukkottai or Peravurani wellness center, or contact our team for a 5-point body composition checkup and personal nutrition plan. You can also explore our <Link to="/services" style={{ color: 'var(--color-primary-dark)', textDecoration: 'underline' }}>wellness programs</Link> or meet our coaches on the <Link to="/about" style={{ color: 'var(--color-primary-dark)', textDecoration: 'underline' }}>about page</Link>.
             </p>
             <div className="story-cta-actions">
               <a

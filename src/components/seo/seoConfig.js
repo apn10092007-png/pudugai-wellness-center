@@ -1,8 +1,8 @@
 export const seoConfig = {
   home: {
-    title: 'Pudugai Wellness Center (PWC) | Nutrition & Weight Loss in Pudukkottai & Peravurani',
+    title: 'Pudugai Wellness Center (PWC) | Weight Loss & Nutrition Center in Pudukkottai & Peravurani',
     description:
-      'Pudugai Wellness Center (PWC) offers personalized weight loss, weight gain, 5-point body composition screening, and nutrition guidance in Pudukkottai and Peravurani.',
+      'Pudugai Wellness Center (PWC) offers personalized weight loss, weight gain, 5-point body composition screening, and nutrition guidance in Pudukkottai and Peravurani with Coach Pandian and Coach Thenmozhi.',
     path: '/',
     breadcrumbs: [{ name: 'Home', path: '/' }],
   },
@@ -10,7 +10,7 @@ export const seoConfig = {
   about: {
     title: 'About Us | Coach Pandian & Coach Thenmozhi | Pudugai Wellness Center',
     description:
-      'Meet Coach Thangapandian S and Coach Thenmozhi at Pudugai Wellness Center. Dedicated personal coaching and healthy lifestyle guidance in Pudukkottai and Peravurani.',
+      'Meet Coach Thangapandian S (Coach Pandian) and Coach Thenmozhi at Pudugai Wellness Center. Dedicated personal coaching, nutrition plans, and healthy lifestyle guidance in Pudukkottai and Peravurani.',
     path: '/about',
     breadcrumbs: [
       { name: 'Home', path: '/' },
@@ -19,9 +19,9 @@ export const seoConfig = {
   },
 
   services: {
-    title: 'Wellness & Nutrition Programs | Pudugai Wellness Center Peravurani & Pudukkottai',
+    title: 'Weight Loss & Nutrition Programs | Pudugai Wellness Center Pudukkottai & Peravurani',
     description:
-      'Explore holistic nutrition plans, healthy weight management, 5-point body composition screening, and lifestyle programs at Pudugai Wellness Center.',
+      'Explore personalized weight loss guidance, weight gain, 5-point body composition screening, and family nutrition programs at Pudugai Wellness Center in Pudukkottai and Peravurani.',
     path: '/services',
     breadcrumbs: [
       { name: 'Home', path: '/' },
@@ -30,9 +30,9 @@ export const seoConfig = {
   },
 
   stories: {
-    title: 'Weight Loss Success Stories & Client Reviews | Pudugai Wellness Center',
+    title: 'Client Success Stories & Weight Loss Journeys | Pudugai Wellness Center',
     description:
-      'Read real healthy weight loss and wellness transformation journeys from clients at Pudugai Wellness Center across Pudukkottai and Peravurani.',
+      'Read real healthy weight loss and wellness transformation journeys from clients at Pudugai Wellness Center across Pudukkottai and Peravurani. Verified lifestyle milestones.',
     path: '/stories',
     breadcrumbs: [
       { name: 'Home', path: '/' },
@@ -41,9 +41,9 @@ export const seoConfig = {
   },
 
   ourStory: {
-    title: 'Our Journey & Wellness Mission | Pudugai Wellness Center',
+    title: 'Our Journey – Coach Pandian & Coach Thenmozhi | Pudugai Wellness Center',
     description:
-      'The story of Pudugai Wellness Center: from a personal passion in 2019 to trusted community wellness centers serving Pudukkottai and Peravurani.',
+      'Discover the journey of Coach Thangapandian S (Coach Pandian) and Coach Thenmozhi: from part-time coaching in 2019 to trusted community wellness centers in Pudukkottai and Peravurani.',
     path: '/our-story',
     breadcrumbs: [
       { name: 'Home', path: '/' },
@@ -52,9 +52,9 @@ export const seoConfig = {
   },
 
   contact: {
-    title: 'Contact PWC | Pudukkottai & Peravurani Centers | Call 94434 43261',
+    title: 'Contact Pudugai Wellness Center | Pudukkottai & Peravurani Centers | Call 94434 43261',
     description:
-      'Visit Pudugai Wellness Center in Pudukkottai or Peravurani. Call or WhatsApp Coach at 94434 43261 for body checkups, weight loss advice, and meal plans.',
+      'Visit Pudugai Wellness Center at our Pudukkottai or Peravurani locations. Call or WhatsApp Coach Pandian at 94434 43261 for body checkups, weight loss advice, and meal plans.',
     path: '/contact',
     breadcrumbs: [
       { name: 'Home', path: '/' },
