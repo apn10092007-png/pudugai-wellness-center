@@ -3,7 +3,7 @@ import { Activity, Play, Pause, Volume2, VolumeX, Video as VideoIcon } from 'luc
 import { getMediaType, getMediaUrl } from '../services/dataService';
 import './HeroCarousel.css';
 
-export default function HeroCarousel({ items = [], fallbackImage = '/assets/hero-wellness.jpg' }) {
+export default function HeroCarousel({ items = [], isLoading = false, fallbackImage = '/assets/hero-wellness.jpg' }) {
   // Filter only active items and sort by display_order
   const activeItems = (Array.isArray(items) ? items : [])
     .filter((item) => item.active !== false)
@@ -13,6 +13,13 @@ export default function HeroCarousel({ items = [], fallbackImage = '/assets/hero
   const [isPaused, setIsPaused] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const [isPlaying, setIsPlaying] = useState(true);
+
+  // Keep currentIndex in bounds when activeItems change dynamically
+  useEffect(() => {
+    if (currentIndex >= activeItems.length && activeItems.length > 0) {
+      setCurrentIndex(0);
+    }
+  }, [activeItems.length, currentIndex]);
 
   const videoRefs = useRef({});
   const touchStartXRef = useRef(null);
@@ -170,7 +177,19 @@ export default function HeroCarousel({ items = [], fallbackImage = '/assets/hero
     setTimeout(() => setIsPaused(false), 2000);
   };
 
-  // If no items are configured, render default single image fallback
+  // 1. Loading state (e.g. first-time visitors with empty cache):
+  // Render matching container dimensions with neutral background to avoid stock-media flash and layout shifts
+  if (activeItems.length === 0 && isLoading) {
+    return (
+      <div className="hero-carousel-wrapper" aria-busy="true" aria-label="Loading hero media">
+        <div className="hero-carousel-container hero-carousel-loading">
+          <div className="hero-carousel-placeholder-bg" />
+        </div>
+      </div>
+    );
+  }
+
+  // 2. If no items are configured after loading completes, render default single image fallback
   if (activeItems.length === 0) {
     return (
       <div className="hero-carousel-wrapper">
@@ -235,7 +254,7 @@ export default function HeroCarousel({ items = [], fallbackImage = '/assets/hero
                     playsInline
                     muted={isMuted}
                     loop={false}
-                    preload="metadata"
+                    preload={idx === 0 ? 'auto' : 'metadata'}
                     onEnded={() => {
                       if (isActive) goToNext();
                     }}

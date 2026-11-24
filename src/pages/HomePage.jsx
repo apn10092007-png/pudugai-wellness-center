@@ -35,33 +35,67 @@ export default function HomePage() {
   const [coaches, setCoaches] = useState([]);
   const [services, setServices] = useState([]);
   const [stories, setStories] = useState([]);
-  const [heroGallery, setHeroGallery] = useState(INITIAL_HERO_GALLERY);
+  // Eager synchronous cache reader for instant 0ms render (returning visitors)
+  const [heroGallery, setHeroGallery] = useState(() => {
+    const cached = dataService.getCachedHeroGallery();
+    return Array.isArray(cached) && cached.length > 0 ? cached : [];
+  });
+  const [heroLoading, setHeroLoading] = useState(() => {
+    const cached = dataService.getCachedHeroGallery();
+    return !cached || cached.length === 0;
+  });
   const [_loading, setLoading] = useState(true);
 
   useEffect(() => {
     let mounted = true;
-    async function loadData() {
+
+    // 1. Independent & immediate fetch for Hero Media Slideshow (does not wait for coaches/services/stories)
+    dataService.getHeroGallery()
+      .then((galleryData) => {
+        if (mounted) {
+          if (Array.isArray(galleryData) && galleryData.length > 0) {
+            setHeroGallery(galleryData);
+          } else if (!heroGallery || heroGallery.length === 0) {
+            // Only fall back to default assets if database has no media at all
+            setHeroGallery(INITIAL_HERO_GALLERY);
+          }
+          setHeroLoading(false);
+        }
+      })
+      .catch((err) => {
+        console.warn('Error loading hero media gallery:', err);
+        if (mounted) {
+          if (!heroGallery || heroGallery.length === 0) {
+            setHeroGallery(INITIAL_HERO_GALLERY);
+          }
+          setHeroLoading(false);
+        }
+      });
+
+    // 2. Fetch other sections (coaches, services, stories) concurrently without blocking hero
+    async function loadSectionData() {
       try {
-        const [coachesData, servicesData, storiesData, galleryData] = await Promise.all([
+        const [coachesData, servicesData, storiesData] = await Promise.all([
           dataService.getAllCoaches(),
           dataService.getPublishedServices(),
-          dataService.getPublishedSuccessStories(),
-          dataService.getHeroGallery()
+          dataService.getPublishedSuccessStories()
         ]);
         if (mounted) {
           setCoaches(coachesData || []);
-          setServices(servicesData);
-          setStories(storiesData);
-          setHeroGallery(galleryData || INITIAL_HERO_GALLERY);
+          setServices(servicesData || []);
+          setStories(storiesData || []);
           setLoading(false);
         }
       } catch (err) {
-        console.error('Error loading home data:', err);
+        console.error('Error loading home section data:', err);
         if (mounted) setLoading(false);
       }
     }
-    loadData();
-    return () => { mounted = false; };
+    loadSectionData();
+
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   // Filter 6 featured services for homepage preview
@@ -120,6 +154,7 @@ export default function HomePage() {
           <div className="hero-visual">
             <HeroCarousel
               items={heroGallery}
+              isLoading={heroLoading}
               fallbackImage="/assets/hero-wellness.jpg"
             />
           </div>

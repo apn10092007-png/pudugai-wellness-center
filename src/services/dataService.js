@@ -782,6 +782,20 @@ export const dataService = {
   // ==========================================
   // HERO GALLERY / MEDIA SLIDESHOW CRUD & ORDERING API
   // ==========================================
+  // Synchronous cache reader for instant hero media display on mount (returning visitors)
+  getCachedHeroGallery(onlyActive = true) {
+    const cachedHero = getLocal(STORAGE_KEYS.HERO_CONTENT, null);
+    if (!cachedHero || !Array.isArray(cachedHero.gallery) || cachedHero.gallery.length === 0) {
+      return null;
+    }
+    let gallery = cachedHero.gallery;
+    if (onlyActive) {
+      gallery = gallery.filter((item) => item.active !== false);
+    }
+    if (gallery.length === 0) return null;
+    return gallery.slice().sort((a, b) => (a.display_order || 0) - (b.display_order || 0));
+  },
+
   async getHeroGallery(onlyActive = true) {
     const hero = await this.getHomeHero();
     let gallery = Array.isArray(hero?.gallery) && hero.gallery.length > 0
